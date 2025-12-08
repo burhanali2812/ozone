@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="90" fill="#4A90E2"/>
+  <text x="50%" y="50%" text-anchor="middle" stroke="#ffffff" stroke-width="1px" dy=".3em" font-size="24" font-family="Arial" fill="#ffffff">OZONE</text>
+  <text x="50%" y="60%" text-anchor="middle" stroke="#ffffff" stroke-width="1px" dy=".3em" font-size="16" font-family="Arial" fill="#ffffff">MINER WATER</text>
+</svg>

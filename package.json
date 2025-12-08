@@ -1,0 +1,33 @@
+{
+  "name": "ozone-water",
+  "version": "1.0.0",
+  "description": "OZONE MINER WATER - Sip the Good Life",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "nextjs",
+    "react",
+    "tailwindcss",
+    "water",
+    "ecommerce"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^10.4.2",
+    "next": "^16.0.7",
+    "postcss": "^8.4.5",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "tailwindcss": "^2.2.19"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^12.0.7"
+  }
+}
