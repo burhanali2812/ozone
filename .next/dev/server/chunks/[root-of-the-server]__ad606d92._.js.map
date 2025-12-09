@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///E:/React%20Projects/NEXTJS%20PROJECTS/OZONE/ozone-water-1/src/app/api/orders/route.js"],"sourcesContent":["import { NextResponse } from \"next/server\";\r\n\r\nexport async function POST(request) {\r\n    const data = await request.json();\r\n    console.log(data);\r\n  return NextResponse.json({ message: \"Order API is working\" });\r\n}"],"names":[],"mappings":";;;;AAAA;;AAEO,eAAe,KAAK,OAAO;IAC9B,MAAM,OAAO,MAAM,QAAQ,IAAI;IAC/B,QAAQ,GAAG,CAAC;IACd,OAAO,gLAAY,CAAC,IAAI,CAAC;QAAE,SAAS;IAAuB;AAC7D"}}]
+}

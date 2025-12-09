@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 const products = [
   {
     id: 1,
@@ -18,6 +18,10 @@ const products = [
 ];
 
 export default function ProductSection() {
+  const router = useRouter();
+  const gotoOrderPage = () => {
+  router.push("./order")
+  }
   return (
     <section id="products" className="w-full py-20 bg-white">
       <div className="container mx-auto px-6">
@@ -59,7 +63,7 @@ export default function ProductSection() {
                   pH Balanced
                 </li>
               </ul>
-              <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors">
+              <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors" onClick={gotoOrderPage}>
                 Order 500ml
               </button>
             </div>
@@ -95,7 +99,7 @@ export default function ProductSection() {
                   Value Pack
                 </li>
               </ul>
-              <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors">
+              <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors" onClick={gotoOrderPage}>
                 Order 1500ml
               </button>
             </div>

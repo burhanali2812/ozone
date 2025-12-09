@@ -20,6 +20,10 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^10.4.2",
+    "axios": "^1.13.2",
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.1",
     "next": "^16.0.7",
     "postcss": "^8.4.5",
     "react": "^19.2.1",

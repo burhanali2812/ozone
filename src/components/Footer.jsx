@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 
 export default function Footer() {
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-6">
@@ -57,7 +59,7 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="font-semibold mb-4">Products</h4>
+            <h4 className="font-semibold mb-4" >Products</h4>
             <ul className="space-y-2 text-gray-400">
               <li className="hover:text-blue-400 transition-colors">
                 500ml Bottle
