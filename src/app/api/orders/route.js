@@ -10,15 +10,16 @@ export async function POST(request) {
       shopName,
       shopAddress,
       shopContact,
-      orderItems, // ⬅ ARRAY
+      orderItems, 
+        paidAmount,
       totalPrice,
       paymentStatus,
       remainingAmount,
       status,
     } = await request.json();
 
-    // --- VALIDATION ---
-    if (!shopName || !shopAddress || !shopContact) {
+
+    if (!shopName || !shopAddress || !shopContact ) {
       return NextResponse.json(
         { message: "Shop details are required" },
         { status: 400 }
@@ -34,7 +35,7 @@ export async function POST(request) {
 
     // Validate each item
     for (let item of orderItems) {
-      if (!item.size || !item.price || !item.quantity) {
+      if (!item.size || !item.price || !item.quantity ) {
         return NextResponse.json(
           { message: "Each order item must include size, price, and quantity" },
           { status: 400 }
@@ -49,13 +50,13 @@ export async function POST(request) {
       );
     }
 
-    // --- CREATE ORDER ---
     const newOrder = new Order({
       shopName,
       shopAddress,
       shopContact,
       orderItems,
       totalPrice,
+      paidAmount,
       paymentStatus,
       remainingAmount,
       status,
@@ -76,3 +77,43 @@ export async function POST(request) {
   }
 }
 
+export async function GET(request) {
+  try {
+    await connectDB();
+    const orders = await Order.find().sort({ createdAt: -1 });  
+    return NextResponse.json({ success : true, message: "Orders fetched successfully", data:orders }, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return NextResponse.json(
+      { message: "Server error", error: error.message },
+      { status: 500 }
+    );
+  }
+}
+export async function PUT(request) {
+  try {
+    await connectDB();
+    const { orderId, updateData } = await request.json();
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { $set: updateData },
+      { new: true }
+    );
+    if (!updatedOrder) {
+      return NextResponse.json(
+        { message: "Order not found" },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json(
+      { message: "Order updated successfully", order: updatedOrder , success: true},
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error updating order:", error);
+    return NextResponse.json(
+      { message: "Server error", error: error.message },
+      { status: 500 }
+    );
+  } 
+}

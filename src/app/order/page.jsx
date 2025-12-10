@@ -1,8 +1,11 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Order() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
     shopName: "",
     shopAddress: "",
@@ -15,11 +18,22 @@ export default function Order() {
     quantity: 1,
   });
 
+  const [paymentStatus, setPaymentStatus] = useState("unpaid");
+  const [paidAmount, setPaidAmount] = useState(0);
+
   const productPrices = {
     "500ml": 260,
     "1500ml": 300,
     "6liter": 120,
   };
+
+  // Check for user in localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,46 +75,71 @@ export default function Order() {
     }, 0);
   };
 
-  const handleSubmit = async(e) => {
+  const calculateRemaining = () => {
+    return calculateTotal() - paidAmount;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   const orderPayload = {
-  shopName: formData.shopName,
-  shopAddress: formData.shopAddress,
-  shopContact: formData.whatsappContact,
 
-  orderItems: orders.map((order) => ({
-    size: order.type,
-    quantity: order.quantity,
-    price: productPrices[order.type],
-  })),
+    const total = calculateTotal();
+    let finalPaymentStatus = paymentStatus;
+    let finalPaidAmount = paidAmount;
+    let finalRemainingAmount = total;
 
-  totalPrice: calculateTotal(),
-  paymentStatus: "unpaid",
-  remainingAmount: calculateTotal(),
-  status: "pending",
-};
-    console.log("Order Submitted:", orderPayload);
-    try {
-        const res = await axios.post("/api/orders", orderPayload);
-        if (res.data.message) {
-            alert(res.data.message || "Order placed successfully!");
-            setFormData({
-                shopName: "",
-                shopAddress: "",
-                whatsappContact: "",
-            });
-            setOrders([]);
-        }
-
-
-    } catch (error) {
-        alert("Order placement failed. Please try again.");
-        console.error("Order submission error:", error);
+    // Calculate remaining amount based on payment status
+    if (paymentStatus === "paid") {
+      finalPaidAmount = total;
+      finalRemainingAmount = 0;
+    } else if (paymentStatus === "partially-paid") {
+      finalRemainingAmount = total - paidAmount;
+    } else {
+      finalPaidAmount = 0;
+      finalRemainingAmount = total;
     }
 
+    const orderPayload = {
+      shopName: formData.shopName,
+      shopAddress: formData.shopAddress,
+      shopContact: formData.whatsappContact,
+      orderItems: orders.map((order) => ({
+        size: order.type,
+        quantity: order.quantity,
+        price: productPrices[order.type],
+      })),
+      totalPrice: total,
+      paymentStatus: finalPaymentStatus,
+      paidAmount: finalPaidAmount,
+      remainingAmount: finalRemainingAmount,
+      status: "pending",
+    };
+
+    console.log("Order Submitted:", orderPayload);
+
+    try {
+      const res = await axios.post("/api/orders", orderPayload);
+      if (res.data.message) {
+        alert(res.data.message || "Order placed successfully!");
+        setFormData({
+          shopName: "",
+          shopAddress: "",
+          whatsappContact: "",
+        });
+        setOrders([]);
+        setPaymentStatus("unpaid");
+        setPaidAmount(0);
+
+        // Redirect to dashboard after successful order
+        router.push("/orderDashboard");
+      }
+    } catch (error) {
+      alert("Order placement failed. Please try again.");
+      console.error("Order submission error:", error);
+    }
   };
 
   const total = calculateTotal();
+  const remaining = calculateRemaining();
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-12">
@@ -110,6 +149,11 @@ export default function Order() {
             Place Your Order
           </h1>
           <p className="text-xl text-gray-600">OZONE Mineral Water</p>
+          {user && (
+            <p className="text-sm text-gray-500 mt-2">
+              Logged in as: {user.name} ({user.role})
+            </p>
+          )}
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -192,7 +236,7 @@ export default function Order() {
                       <option value="6liter">6 Liter Bottle - Rs. 120/-</option>
                     </select>
                   </div>
-                 
+
                   <div className="w-full sm:w-32">
                     <label className="block text-gray-700 font-medium mb-2">
                       Pet Quantity
@@ -239,7 +283,8 @@ export default function Order() {
                             {order.type === "6liter" && "6 Liter Bottle"}
                           </p>
                           <p className="text-sm text-gray-600">
-                            Rs. {productPrices[order.type]}/- × {order.quantity} = Rs. 
+                            Rs. {productPrices[order.type]}/- × {order.quantity}{" "}
+                            = Rs.
                             {productPrices[order.type] * order.quantity}/-
                           </p>
                         </div>
@@ -266,6 +311,62 @@ export default function Order() {
                   </div>
                 )}
               </div>
+
+              {/* Payment Details Card - Only show if user is logged in */}
+              {user && (
+                <div className="bg-white rounded-3xl shadow-xl p-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    Payment Details
+                  </h2>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-gray-700 font-medium mb-2">
+                        Payment Status
+                      </label>
+                      <select
+                        value={paymentStatus}
+                        onChange={(e) => {
+                          setPaymentStatus(e.target.value);
+                          if (e.target.value === "paid") {
+                            setPaidAmount(total);
+                          } else if (e.target.value === "unpaid") {
+                            setPaidAmount(0);
+                          }
+                        }}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                      >
+                        <option value="unpaid">Unpaid</option>
+                        <option value="partially-paid">Partially Paid</option>
+                        <option value="paid">Paid</option>
+                      </select>
+                    </div>
+
+                    {paymentStatus === "partially-paid" && (
+                      <div>
+                        <label className="block text-gray-700 font-medium mb-2">
+                          Paid Amount
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          max={total}
+                          value={paidAmount}
+                          onChange={(e) =>
+                            setPaidAmount(
+                              Math.min(parseFloat(e.target.value) || 0, total)
+                            )
+                          }
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                          placeholder="Enter paid amount"
+                        />
+                        <p className="text-sm text-red-600 mt-2 font-medium">
+                          Remaining: Rs. {remaining}/-
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Order Summary Sidebar */}
@@ -303,9 +404,35 @@ export default function Order() {
                     <span className="text-blue-600">Rs. {total}/-</span>
                   </div>
 
+                  {user && paymentStatus !== "unpaid" && (
+                    <>
+                      <div className="flex justify-between text-green-600">
+                        <span>Paid:</span>
+                        <span>Rs. {paidAmount}/-</span>
+                      </div>
+                      <div className="flex justify-between text-red-600 font-semibold">
+                        <span>Remaining:</span>
+                        <span>Rs. {remaining}/-</span>
+                      </div>
+                    </>
+                  )}
+
                   <div className="pt-4">
-                    <div className="px-4 py-2 rounded-lg text-center font-medium bg-red-100 text-red-700">
-                      Payment: Unpaid
+                    <div
+                      className={`px-4 py-2 rounded-lg text-center font-medium ${
+                        user && paymentStatus === "paid"
+                          ? "bg-green-100 text-green-700"
+                          : user && paymentStatus === "partially-paid"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {user && paymentStatus === "paid" && "Fully Paid"}
+                      {user &&
+                        paymentStatus === "partially-paid" &&
+                        "Partially Paid"}
+                      {(!user || paymentStatus === "unpaid") &&
+                        "Payment: Unpaid"}
                     </div>
                   </div>
                 </div>

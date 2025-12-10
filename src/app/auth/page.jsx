@@ -28,8 +28,9 @@ export default function Auth() {
 
       if (response.data.success) {
         alert("Login successful!");
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         console.log("User data:", response.data.user);
-        router.push("/");
+        router.push("/orderDashboard");
       }
     } catch (error) {
       console.error("Login error:", error);

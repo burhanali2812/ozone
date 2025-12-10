@@ -1,9 +1,376 @@
-[00:00:01.944] Server  LOG      ✓ Ready in 1215ms
-[00:00:05.027] Server  LOG      ○ Compiling /auth ...
-[00:00:21.333] Server  LOG     MongoDB connected successfully
-[00:00:25.975] Browser ERROR   Login error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"phone\":\"03125110579\",\"password\":\"Burhan@123\"}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/auth","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (http://localhost:3000/_next/static/chunks/6552f_a3bc924d._.js:3483:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_a3bc924d._.js:3998:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_a3bc924d._.js:4802:49)\n    at async handleSubmit (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_auth_page_jsx_c9ece642._.js:38:30)","status":400}
-[00:00:37.629] Server  LOG     MongoDB already connected
-[00:00:41.008] Browser ERROR   Login error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"phone\":\"03070452812\",\"password\":\"Burhan@1235555\"}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/auth","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (http://localhost:3000/_next/static/chunks/6552f_a3bc924d._.js:3483:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_a3bc924d._.js:3998:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_a3bc924d._.js:4802:49)\n    at async handleSubmit (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_auth_page_jsx_c9ece642._.js:38:30)","status":400}
-[00:00:51.259] Server  LOG     MongoDB already connected
-[00:00:53.497] Browser LOG     User data: {"name":"Burhan Ali","phone":"03070452812","role":"customer"}
-[00:00:54.308] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:00:01.389] Server  LOG      ✓ Ready in 839ms
+[00:00:04.528] Server  LOG      ○ Compiling /orderDashboard ...
+[00:00:11.558] Server  LOG     MongoDB connected successfully
+[00:00:12.535] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":360,"paymentStatus":"partially-paid","remainingAmount":3240,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"pending","totalPrice":3600,"updatedAt":"2025-12-10T20:20:26.084Z"}]
+[00:00:58.089] Server  LOG     MongoDB already connected
+[00:01:00.060] Browser ERROR   Error updating order: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"updateData\":{\"paymentStatus\":\"partially-paid\",\"paidAmount\":1360,\"remainingAmount\":2240,\"status\":\"completed\"}}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"put","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/orders","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3994:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:4798:49)\n    at async handleUpdateOrder (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_orderDashboard_page_jsx_31ff63cc._.js:93:30)","status":404}
+[00:03:51.987] Server  LOG     MongoDB already connected
+[00:03:52.208] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":360,"paymentStatus":"partially-paid","remainingAmount":3240,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"pending","totalPrice":3600,"updatedAt":"2025-12-10T20:20:26.084Z"}]
+[00:04:06.354] Server  LOG     MongoDB already connected
+[00:04:08.145] Browser ERROR   Error updating order: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"updateData\":{\"paymentStatus\":\"partially-paid\",\"paidAmount\":1360,\"remainingAmount\":2240,\"status\":\"completed\"}}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"put","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/orders","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3994:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:4798:49)\n    at async handleUpdateOrder (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_orderDashboard_page_jsx_31ff63cc._.js:93:30)","status":404}
+[00:05:14.240] Server  LOG      ✓ Compiled in 76ms
+[00:05:18.251] Server  LOG     MongoDB already connected
+[00:05:20.194] Browser ERROR   Error updating order: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"updatePayload\":{\"updateData\":{\"paymentStatus\":\"partially-paid\",\"paidAmount\":1360,\"remainingAmount\":2240,\"status\":\"completed\"}}}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"put","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/orders","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3994:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:4798:49)\n    at async handleUpdateOrder (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_orderDashboard_page_jsx_31ff63cc._.js?id=%255Bproject%255D%252FOZONE%252Fozone-water-1%252Fsrc%252Fapp%252ForderDashboard%252Fpage.jsx+%255Bapp-client%255D+%2528ecmascript%2529:92:30)","status":404}
+[00:07:37.430] Server  LOG      ✓ Compiled in 14ms
+[00:07:43.103] Server  LOG      ✓ Compiled in 13ms
+[00:07:49.241] Server  LOG      ✓ Compiled in 16ms
+[00:07:55.370] Server  LOG     MongoDB already connected
+[00:07:57.346] Browser ERROR   Error updating order: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"updatePayload\":{\"orderId\":\"6939d60aad6693d00ee74b04\",\"updateData\":{\"paymentStatus\":\"partially-paid\",\"paidAmount\":1360,\"remainingAmount\":2240,\"status\":\"completed\"}}}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"put","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/orders","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:3994:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_f6c98447._.js:4798:49)\n    at async handleUpdateOrder (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_orderDashboard_page_jsx_31ff63cc._.js?id=%255Bproject%255D%252FOZONE%252Fozone-water-1%252Fsrc%252Fapp%252ForderDashboard%252Fpage.jsx+%255Bapp-client%255D+%2528ecmascript%2529:92:30)","status":404}
+[00:08:36.503] Server  LOG      ✓ Compiled in 43ms
+[00:08:36.666] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:93:68
+Parsing ecmascript source code failed
+  91 |     };
+  92 |     try {
+> 93 |       const response = await axios.put("/api/orders", updatePayload});
+     |                                                                    ^
+  94 |       if (response.data.success) {
+  95 |         console.log("Order updated on server:", response.data.order);
+  96 |         setShowModal(false);
+
+Expected ',', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:08:37.690] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:93:68
+Parsing ecmascript source code failed
+  91 |     };
+  92 |     try {
+> 93 |       const response = await axios.put("/api/orders", updatePayload});
+     |                                                                    ^
+  94 |       if (response.data.success) {
+  95 |         console.log("Order updated on server:", response.data.order);
+  96 |         setShowModal(false);
+
+Expected ',', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:08:42.449] Server  LOG     MongoDB already connected
+[00:09:43.253] Server  LOG      ✓ Compiled in 12ms
+[00:09:46.158] Server  LOG      ✓ Compiled in 13ms
+[00:11:04.718] Server  LOG      ✓ Compiled in 82ms
+[00:11:05.663] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:74:15
+Parsing ecmascript source code failed
+  72 |               paymentStatus: modalData.paymentStatus,
+  73 |               p
+> 74 |               remainingAmount: modalData.remainingAmount,
+     |               ^^^^^^^^^^^^^^^
+  75 |               status: modalData.status,
+  76 |             }
+  77 |           : order
+
+Unexpected token `remainingAmount`. Expected ... , *,  (, [, :, , ?, = or an identifier
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:11:06.674] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:74:15
+Parsing ecmascript source code failed
+  72 |               paymentStatus: modalData.paymentStatus,
+  73 |               paidAmount
+> 74 |               remainingAmount: modalData.remainingAmount,
+     |               ^^^^^^^^^^^^^^^
+  75 |               status: modalData.status,
+  76 |             }
+  77 |           : order
+
+Unexpected token `remainingAmount`. Expected ... , *,  (, [, :, , ?, = or an identifier
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:11:07.614] Server  LOG      ✓ Compiled in 12ms
+[00:11:08.669] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:74:30
+Parsing ecmascript source code failed
+  72 |               paymentStatus: modalData.paymentStatus,
+  73 |               paidAmount:
+> 74 |               remainingAmount: modalData.remainingAmount,
+     |                              ^
+  75 |               status: modalData.status,
+  76 |             }
+  77 |           : order
+
+Expected ',', got ':'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:11:22.266] Server  LOG      ✓ Compiled in 19ms
+[00:11:29.722] Server  LOG     MongoDB already connected
+[00:11:29.982] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":1360,"paymentStatus":"partially-paid","remainingAmount":2240,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:05:36.188Z"}]
+[00:11:41.241] Server  LOG     MongoDB already connected
+[00:13:27.873] Server  LOG      ✓ Compiled in 12ms
+[00:13:28.676] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:79:23
+Parsing ecmascript source code failed
+  77 |              remainingAmount:
+  78 |           selectedOrder.remainingAmount - modalData.remainingAmount,
+> 79 |               status: ,
+     |                       ^
+  80 |             }
+  81 |           : order
+  82 |       )
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:13:29.887] Server  LOG      ✓ Compiled in 52ms
+[00:13:31.546] Server  LOG      ✓ Compiled in 13ms
+[00:13:31.669] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:79:84
+Parsing ecmascript source code failed
+  77 |              remainingAmount:
+  78 |           selectedOrder.remainingAmount - modalData.remainingAmount,
+> 79 |               status:  selectedOrder.remainingAmount - modalData.remainingAmount ==,
+     |                                                                                    ^
+  80 |             }
+  81 |           : order
+  82 |       )
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:13:37.674] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:79:85
+Parsing ecmascript source code failed
+  77 |              remainingAmount:
+  78 |           selectedOrder.remainingAmount - modalData.remainingAmount,
+> 79 |               status:  selectedOrder.remainingAmount - modalData.remainingAmount ===,
+     |                                                                                     ^
+  80 |             }
+  81 |           : order
+  82 |       )
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:13:41.912] Server  LOG      ✓ Compiled in 14ms
+[00:13:42.667] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:79:90
+Parsing ecmascript source code failed
+  77 |              remainingAmount:
+  78 |           selectedOrder.remainingAmount - modalData.remainingAmount,
+> 79 |               status:  selectedOrder.remainingAmount - modalData.remainingAmount === 0 ? ,
+     |                                                                                          ^
+  80 |             }
+  81 |           : order
+  82 |       )
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:13:49.902] Server  LOG     MongoDB already connected
+[00:14:08.871] Server  LOG      ✓ Compiled in 15ms
+[00:14:09.667] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:95:7
+Parsing ecmascript source code failed
+  93 |           selectedOrder.remainingAmount - modalData.remainingAmount,
+  94 |         status: 
+> 95 |       },
+     |       ^
+  96 |     };
+  97 |     try {
+  98 |       const response = await axios.put("/api/orders", updatePayload);
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:14:18.873] Server  LOG     MongoDB already connected
+[00:14:19.098] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"partially-paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:10:43.640Z"}]
+[00:14:28.582] Server  LOG     MongoDB already connected
+[00:15:04.046] Server  LOG      ✓ Compiled in 14ms
+[00:15:04.671] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:79:90
+Parsing ecmascript source code failed
+  77 |              remainingAmount:
+  78 |           selectedOrder.remainingAmount - modalData.remainingAmount,
+> 79 |               status:  selectedOrder.remainingAmount - modalData.remainingAmount === 0 ? ,
+     |                                                                                          ^
+  80 |             }
+  81 |           : order
+  82 |       )
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:15:18.144] Server  LOG      ✓ Compiled in 14ms
+[00:15:18.664] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:72:88
+Parsing ecmascript source code failed
+  70 |           ? {
+  71 |               ...order,
+> 72 |               paymentStatus: selectedOrder.remainingAmount - modalData.remainingAmount,,
+     |                                                                                        ^
+  73 |               paidAmount:
+  74 |                 modalData.paymentStatus === "paid"
+  75 |                   ? selectedOrder.totalPrice
+
+Unexpected token `,`. Expected identifier, string literal, numeric literal or [ for the computed key
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:15:20.826] Server  LOG      ✓ Compiled in 76ms
+[00:15:21.662] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:73:15
+Parsing ecmascript source code failed
+  71 |               ...order,
+  72 |               paymentStatus: selectedOrder.remainingAmount - modalData.remainingAmount
+> 73 |               paidAmount:
+     |               ^^^^^^^^^^
+  74 |                 modalData.paymentStatus === "paid"
+  75 |                   ? selectedOrder.totalPrice
+  76 |                   : selectedOrder.paidAmount + modalData.remainingAmount,
+
+Expected ',', got 'paidAmount'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:15:22.674] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:73:15
+Parsing ecmascript source code failed
+  71 |               ...order,
+  72 |               paymentStatus: selectedOrder.remainingAmount - modalData.remainingAmount === 0
+> 73 |               paidAmount:
+     |               ^^^^^^^^^^
+  74 |                 modalData.paymentStatus === "paid"
+  75 |                   ? selectedOrder.totalPrice
+  76 |                   : selectedOrder.paidAmount + modalData.remainingAmount,
+
+Expected ',', got 'paidAmount'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:15:30.173] Server  LOG      ✓ Compiled in 13ms
+[00:15:30.672] Browser ERROR   ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx:90:9
+Parsing ecmascript source code failed
+  88 |       updateData: {
+  89 |         paymentStatus: selectedOrder.remainingAmount - modalData.remainingAmount === 0
+> 90 |         paidAmount:
+     |         ^^^^^^^^^^
+  91 |           modalData.paymentStatus === "paid"
+  92 |             ? selectedOrder.totalPrice
+  93 |             : selectedOrder.paidAmount + modalData.remainingAmount,
+
+Expected ',', got 'paidAmount'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/orderDashboard/page.jsx [Server Component]
+[00:15:42.085] Server  LOG     MongoDB already connected
+[00:20:14.598] Server  LOG      ✓ Compiled in 39ms
+[00:20:14.623] Server  LOG     MongoDB already connected
+[00:20:15.671] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:21:20.012] Server  LOG      ✓ Compiled in 17ms
+[00:21:36.786] Server  LOG      ✓ Compiled in 45ms
+[00:21:48.614] Server  LOG      ✓ Compiled in 16ms
+[00:22:01.925] Server  LOG      ✓ Compiled in 20ms
+[00:25:45.972] Server  LOG      ✓ Compiled in 27ms
+[00:26:24.484] Server  LOG      ✓ Compiled in 85ms
+[00:26:25.695] Server  LOG      ✓ Compiled in 15ms
+[00:26:50.586] Server  LOG      ✓ Compiled in 16ms
+[00:26:56.573] Server  LOG     MongoDB already connected
+[00:26:56.792] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:28:25.604] Server  LOG      ✓ Compiled in 16ms
+[00:29:06.984] Server  LOG      ✓ Compiled in 17ms
+[00:29:10.903] Server  LOG      ✓ Compiled in 23ms
+[00:29:13.893] Server  LOG      ✓ Compiled in 21ms
+[00:29:20.610] Server  LOG      ✓ Compiled in 105ms
+[00:29:22.385] Server  LOG      ✓ Compiled in 19ms
+[00:29:25.412] Server  LOG      ✓ Compiled in 33ms
+[00:29:35.087] Server  LOG      ✓ Compiled in 19ms
+[00:29:38.544] Server  LOG      ✓ Compiled in 17ms
+[00:29:41.491] Server  LOG      ✓ Compiled in 16ms
+[00:29:43.250] Server  LOG      ✓ Compiled in 14ms
+[00:29:45.028] Server  LOG      ✓ Compiled in 14ms
+[00:29:48.110] Server  LOG      ✓ Compiled in 14ms
+[00:29:50.163] Server  LOG      ✓ Compiled in 13ms
+[00:29:52.267] Server  LOG      ✓ Compiled in 21ms
+[00:30:02.302] Server  LOG      ✓ Compiled in 14ms
+[00:30:05.201] Server  LOG      ✓ Compiled in 83ms
+[00:30:16.914] Server  LOG      ✓ Compiled in 17ms
+[00:30:17.974] Server  LOG      ✓ Compiled in 17ms
+[00:30:20.323] Server  LOG      ✓ Compiled in 15ms
+[00:30:21.930] Server  LOG      ✓ Compiled in 15ms

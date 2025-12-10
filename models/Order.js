@@ -61,6 +61,11 @@ const orderSchema = new mongoose.Schema(
       enum: ["unpaid", "paid", "partially-paid"],
       default: "unpaid",
     },
+    paidAmount: {
+      type: Number,
+      min: 0,
+        default: 0,
+    },
 
     remainingAmount: {
       type: Number,

@@ -13,9 +13,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="antialiased">
         <div className="flex flex-col min-h-screen">
-          <Header />
+        
           <main className="flex-grow">{children}</main>
-          <Footer />
+   
         </div>
       </body>
     </html>
