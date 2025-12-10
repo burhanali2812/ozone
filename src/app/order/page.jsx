@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 
 export default function Order() {
@@ -15,8 +16,8 @@ export default function Order() {
   });
 
   const productPrices = {
-    "500ml": 20,
-    "1500ml": 50,
+    "500ml": 260,
+    "1500ml": 300,
     "6liter": 120,
   };
 
@@ -60,17 +61,43 @@ export default function Order() {
     }, 0);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const orderDetails = {
-      ...formData,
-      orders,
-      total: calculateTotal(),
-      paymentStatus: "unpaid",
-      orderDate: new Date().toLocaleDateString(),
-    };
-    console.log("Order Submitted:", orderDetails);
-    alert("Order placed successfully! Check console for details.");
+   const orderPayload = {
+  shopName: formData.shopName,
+  shopAddress: formData.shopAddress,
+  shopContact: formData.whatsappContact,
+
+  orderItems: orders.map((order) => ({
+    size: order.type,
+    quantity: order.quantity,
+    price: productPrices[order.type],
+  })),
+
+  totalPrice: calculateTotal(),
+  paymentStatus: "unpaid",
+  remainingAmount: calculateTotal(),
+  status: "pending",
+};
+    console.log("Order Submitted:", orderPayload);
+    try {
+        const res = await axios.post("/api/orders", orderPayload);
+        if (res.data.message) {
+            alert(res.data.message || "Order placed successfully!");
+            setFormData({
+                shopName: "",
+                shopAddress: "",
+                whatsappContact: "",
+            });
+            setOrders([]);
+        }
+
+
+    } catch (error) {
+        alert("Order placement failed. Please try again.");
+        console.error("Order submission error:", error);
+    }
+
   };
 
   const total = calculateTotal();
