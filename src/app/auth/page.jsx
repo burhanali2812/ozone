@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function Auth() {
   const router = useRouter();
@@ -27,14 +28,16 @@ export default function Auth() {
       });
 
       if (response.data.success) {
-        alert("Login successful!");
+        toast.success("Login successful!");
         localStorage.setItem("user", JSON.stringify(response.data.user));
         console.log("User data:", response.data.user);
-        router.push("/orderDashboard");
+        setTimeout(() => {
+          router.push("/orderDashboard");
+        }, 1500);
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert(error.response?.data?.message || "Login failed. Please try again.");
+      toast.error(error.response?.data?.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -42,6 +45,7 @@ export default function Auth() {
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center py-12 px-4">
+        <Toaster />
       <div className="w-full max-w-md">
         {/* Logo/Brand */}
         <div className="text-center mb-8">

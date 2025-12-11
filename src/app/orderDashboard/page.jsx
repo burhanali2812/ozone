@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function OrderDashboard() {
   const router = useRouter();
@@ -11,6 +12,9 @@ export default function OrderDashboard() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [userName, setUserName] = useState("");
   const [modalData, setModalData] = useState({
     paymentStatus: "",
     remainingAmount: 0,
@@ -20,7 +24,7 @@ export default function OrderDashboard() {
 
   const getOrders = async () => {
     try {
-      const res = await axios.get("/api/orders");
+      const res = await axios.get("/api/orders?action=active");
       if (res.data.success) {
         setOrders(res.data.data);
         console.log("Fetched Orders:", res.data.data);
@@ -34,16 +38,25 @@ export default function OrderDashboard() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("user")) {
+    const user = localStorage.getItem("user");
+    if (!user) {
       router.push("/auth");
       return;
+    }
+    try {
+      const userData = JSON.parse(user);
+      setUserName(userData.name || "User");
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+      setUserName("User");
     }
     getOrders();
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    alert("Logged out successfully!");
+    toast.success("Logged out successfully!");
+    setShowMenu(false);
     router.push("/auth");
   };
 
@@ -68,26 +81,6 @@ export default function OrderDashboard() {
 
   // Update order
   const handleUpdateOrder = async () => {
-    setOrders(
-      orders?.map((order) =>
-        order._id === selectedOrder._id
-          ? {
-              ...order,
-              paymentStatus:
-                selectedOrder.remainingAmount - modalData.remainingAmount === 0
-                  ? "paid"
-                  : modalData.paymentStatus,
-              paidAmount:
-                modalData.paymentStatus === "paid"
-                  ? selectedOrder.totalPrice
-                  : selectedOrder.paidAmount + modalData.remainingAmount,
-              remainingAmount:
-                selectedOrder.remainingAmount - modalData.remainingAmount,
-              status: modalData.status,
-            }
-          : order
-      )
-    );
     const updatePayload = {
       orderId: selectedOrder._id,
       updateData: {
@@ -107,15 +100,52 @@ export default function OrderDashboard() {
     try {
       const response = await axios.put("/api/orders", updatePayload);
       if (response.data.success) {
+        // Update UI immediately
+        setOrders(
+          orders?.map((order) =>
+            order._id === selectedOrder._id
+              ? {
+                  ...order,
+                  paymentStatus: updatePayload.updateData.paymentStatus,
+                  paidAmount: updatePayload.updateData.paidAmount,
+                  remainingAmount: updatePayload.updateData.remainingAmount,
+                  status: updatePayload.updateData.status,
+                }
+              : order
+          )
+        );
         console.log("Order updated on server:", response.data.order);
-        alert("Order updated successfully!");
+        toast.success("Order updated successfully!");
         setShowModal(false);
       }
     } catch (error) {
-      alert("Failed to update order. Please try again.");
+      toast.error("Failed to update order. Please try again.");
       console.error("Error updating order:", error);
     }
   };
+
+  // Delete order
+const handleDeleteOrder = async () => {
+  try {
+    const response = await axios.put("/api/orders", {
+      action: "delete",
+      orderId: selectedOrder._id
+    });
+
+    if (response.data.success) {
+      // Remove from UI
+      setOrders(orders.filter(order => order._id !== selectedOrder._id));
+
+      toast.success("Order marked as deleted!");
+      setShowDeleteConfirm(false);
+      setShowModal(false);
+    }
+  } catch (error) {
+    toast.error("Failed to delete order.");
+    console.error("Delete error:", error);
+  }
+};
+
 
   // Get status badge color
   const getStatusColor = (status) => {
@@ -148,33 +178,36 @@ export default function OrderDashboard() {
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-12">
+      <Toaster />
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Left Heading */}
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              Order Dashboard
-            </h1>
-            <p className="text-gray-600">Manage all your orders</p>
-          </div>
-
-          {/* Right Buttons */}
-          <div className="flex gap-1 justify-end mx-3 md:mx-0">
+          {/* Left - Menu Button & Heading */}
+          <div className="flex items-center gap-4">
             <button
-              onClick={() => router.push("/order")}
-              className="bg-blue-600 text-white px-1 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg hover:shadow-xl flex items-center gap-1 w-40 justify-center"
+              onClick={() => setShowMenu(true)}
+              className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
             >
-              <span className="text-xl">+</span>
-              Add Order
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
             </button>
-
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 text-white px-1 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium shadow-lg hover:shadow-xl flex items-center gap-1 w-40 justify-center"
-            >
-              Logout
-            </button>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                Order Dashboard
+              </h1>
+              <p className="text-gray-600">Manage all your orders</p>
+            </div>
           </div>
         </div>
 
@@ -540,6 +573,191 @@ export default function OrderDashboard() {
         </div>
       </div>
 
+      {/* Left Sidebar Menu (Offcanvas) */}
+      {showMenu && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"
+            onClick={() => setShowMenu(false)}
+          ></div>
+
+          {/* Sidebar */}
+          <div className="fixed top-0 left-0 h-full w-80  bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-white">Menu</h2>
+                  <button
+                    onClick={() => setShowMenu(false)}
+                    className="text-black hover:text-gray-200"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                {/* User Info */}
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-blue-600"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">{userName}</p>
+                    <p className="text-blue-100 text-sm">Administrator</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Menu Items */}
+              <nav className="flex-1 p-4 space-y-2">
+                <button
+                  onClick={() => {
+                    router.push("/orderDashboard");
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-500 group-hover:text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    />
+                  </svg>
+                  <span className="font-medium">Manage Orders</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    router.push("/stocks");
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-500 group-hover:text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                    />
+                  </svg>
+                  <span className="font-medium">Manage Stocks</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    router.push("/rawItems");
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-500 group-hover:text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H5a2 2 0 01-2-2v2m0 0h10"
+                    />
+                  </svg>
+                  <span className="font-medium">Manage Raw Materials</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    router.push("/rawItems");
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5 text-gray-500 group-hover:text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H5a2 2 0 01-2-2v2m0 0h10"
+                    />
+                  </svg>
+                  <span className="font-medium">Deleted Order</span>
+                </button>
+
+                <div className="border-t border-gray-200 my-4"></div>
+
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
+                  <span className="font-medium">Logout</span>
+                </button>
+              </nav>
+
+              {/* Footer */}
+              <div className="p-4 border-t border-gray-200">
+                <p className="text-xs text-gray-500 text-center">
+                  OZONE Mineral Water © 2025
+                </p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
       {/* Modal */}
       {showModal && selectedOrder && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -663,7 +881,7 @@ export default function OrderDashboard() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={handleUpdateOrder}
                   className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
@@ -671,12 +889,79 @@ export default function OrderDashboard() {
                   Update Order
                 </button>
                 <button
-                  onClick={() => setShowModal(false)}
-                  className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+                  onClick={() => {setShowModal(false); setShowDeleteConfirm(true);}}
+                  className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center justify-center gap-2"
                 >
-                  Cancel
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                  Delete Order
                 </button>
               </div>
+
+              <button
+                onClick={() => setShowModal(false)}
+                className="w-full mt-3 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60] p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
+            <div className="text-center mb-6">
+              <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                <svg
+                  className="w-8 h-8 text-red-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                Delete Order?
+              </h3>
+              <p className="text-gray-600">
+                Are you sure you want to delete this order? This action cannot
+                be undone.
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteOrder}
+                className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors font-medium"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

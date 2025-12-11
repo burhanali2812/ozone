@@ -1,9 +1,25 @@
-[00:00:03.594] Server  LOG      ✓ Ready in 2.2s
-[00:00:14.052] Server  LOG      ○ Compiling /auth ...
-[00:00:49.204] Server  LOG     MongoDB connected successfully
-[00:00:54.106] Browser LOG     User data: {"name":"Burhan Ali","phone":"03070452812","role":"customer"}
-[00:00:56.358] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
-[00:00:56.623] Server  LOG     MongoDB already connected
-[00:00:56.829] Server  LOG     MongoDB already connected
-[00:00:56.890] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:00:57.070] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:00:01.301] Server  LOG      ✓ Ready in 819ms
+[00:00:04.382] Server  LOG      ○ Compiling /orderDashboard ...
+[00:00:11.932] Server  LOG     MongoDB connected successfully
+[00:00:13.014] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693a82435abf9d43124fac81","createdAt":"2025-12-11T08:35:15.894Z","isDeleted":false,"orderItems":[{"price":300,"quantity":6,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"unpaid","remainingAmount":-1800,"shopAddress":"Malkabad","shopContact":"03308068176","shopName":"Sk","status":"completed","totalPrice":1800,"updatedAt":"2025-12-11T16:20:40.008Z"},{"__v":0,"_id":"693a82425abf9d43124fac7f","createdAt":"2025-12-11T08:35:14.515Z","isDeleted":false,"orderItems":[{"price":300,"quantity":6,"size":"1500ml"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":1800,"shopAddress":"Malkabad","shopContact":"03308068176","shopName":"Sk","status":"pending","totalPrice":1800,"updatedAt":"2025-12-11T08:35:14.515Z"},{"__v":0,"_id":"693a6d08ab7b40540cad8081","createdAt":"2025-12-11T07:04:40.203Z","isDeleted":false,"orderItems":[{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"},{"price":260,"quantity":10,"size":"500ml"}],"paidAmount":6800,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Sho","shopContact":"03266783441","shopName":"Zee Mart","status":"completed","totalPrice":6800,"updatedAt":"2025-12-11T07:05:20.596Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939e97a8cc9756ae8246af1","createdAt":"2025-12-10T21:43:22.844Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"cancelled","totalPrice":4300,"updatedAt":"2025-12-10T21:44:03.163Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:00:30.515] Server  LOG     MongoDB already connected
+[00:00:42.151] Server  LOG     MongoDB already connected
+[00:00:46.016] Server  LOG     MongoDB already connected
+[00:01:37.917] Server  LOG      ✓ Compiled in 28ms
+[00:01:40.294] Server  LOG      ✓ Compiled in 20ms
+[00:01:42.313] Server  LOG      ✓ Compiled in 22ms
+[00:01:44.619] Server  LOG      ✓ Compiled in 22ms
+[00:03:01.124] Server  LOG      ✓ Compiled in 56ms
+[00:03:06.496] Server  LOG      ✓ Compiled in 36ms
+[00:03:23.855] Server  LOG      ✓ Compiled in 24ms
+[00:03:38.449] Server  LOG      ✓ Compiled in 22ms
+[00:03:44.885] Server  LOG      ✓ Compiled in 41ms
+[00:04:05.313] Server  LOG      ✓ Compiled in 29ms
+[00:04:08.136] Server  LOG      ✓ Compiled in 24ms
+[00:04:18.353] Server  LOG      ✓ Compiled in 20ms
+[00:04:20.176] Server  LOG      ✓ Compiled in 36ms
+[00:04:23.150] Server  LOG      ✓ Compiled in 33ms
+[00:04:43.703] Server  LOG      ✓ Compiled in 35ms
+[00:04:46.219] Server  LOG      ✓ Compiled in 21ms
+[00:05:24.040] Server  LOG      ✓ Compiled in 35ms
+[00:05:39.464] Server  LOG      ✓ Compiled in 24ms

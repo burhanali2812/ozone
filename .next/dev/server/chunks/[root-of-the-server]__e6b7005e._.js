@@ -144,6 +144,10 @@ const orderSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoo
         min: 0,
         default: 0
     },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
     remainingAmount: {
         type: Number,
         min: 0,
@@ -256,9 +260,23 @@ async function POST(request) {
 async function GET(request) {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
-        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find().sort({
-            createdAt: -1
-        });
+        const action = request.nextUrl.searchParams.get("action");
+        let orders;
+        if (action === "deleted") {
+            orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
+                isDeleted: true
+            }).sort({
+                createdAt: -1
+            });
+        } else {
+            orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
+                isDeleted: {
+                    $ne: true
+                }
+            }).sort({
+                createdAt: -1
+            });
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true,
             message: "Orders fetched successfully",
@@ -279,9 +297,25 @@ async function GET(request) {
 async function PUT(request) {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
-        const { orderId, updateData } = await request.json();
+        const { action, orderId, updateData } = await request.json();
+        if (!orderId) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                message: "orderId is required"
+            }, {
+                status: 400
+            });
+        }
+        let finalUpdate = {};
+        //  Soft delete
+        if (action === "delete") {
+            finalUpdate.isDeleted = true;
+        }
+        //  Normal update
+        if (action === "update") {
+            finalUpdate = updateData;
+        }
         const updatedOrder = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findByIdAndUpdate(orderId, {
-            $set: updateData
+            $set: finalUpdate
         }, {
             new: true
         });
@@ -293,15 +327,15 @@ async function PUT(request) {
             });
         }
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Order updated successfully",
-            order: updatedOrder,
-            success: true
+            success: true,
+            message: "Order updated",
+            order: updatedOrder
         }, {
             status: 200
         });
     } catch (error) {
-        console.error("Error updating order:", error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: false,
             message: "Server error",
             error: error.message
         }, {

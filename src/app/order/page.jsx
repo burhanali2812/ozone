@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import{toast, Toaster} from "react-hot-toast";
 
 export default function Order() {
   const router = useRouter();
@@ -119,7 +120,7 @@ export default function Order() {
     try {
       const res = await axios.post("/api/orders", orderPayload);
       if (res.data.message) {
-        alert(res.data.message || "Order placed successfully!");
+        toast.success(res.data.message || "Order placed successfully!");
         setFormData({
           shopName: "",
           shopAddress: "",
@@ -128,12 +129,14 @@ export default function Order() {
         setOrders([]);
         setPaymentStatus("unpaid");
         setPaidAmount(0);
-
-        // Redirect to dashboard after successful order
-        router.push("/orderDashboard");
+        if (user) {
+          router.push("/orderDashboard");
+        }
+      } else {
+        router.push("/");
       }
     } catch (error) {
-      alert("Order placement failed. Please try again.");
+      toast.error("Order placement failed. Please try again.");
       console.error("Order submission error:", error);
     }
   };
@@ -143,6 +146,7 @@ export default function Order() {
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-12">
+        <Toaster/>
       <div className="container mx-auto px-6">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">

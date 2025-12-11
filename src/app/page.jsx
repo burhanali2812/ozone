@@ -6,6 +6,7 @@ import ProductSection from "../components/ProductSection";
 import FeatureSection from "../components/FeatureSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
+import Testimonials from "../components/Testonomials";
 
 export default function Home() {
   const pathname = usePathname();
@@ -23,6 +24,7 @@ export default function Home() {
         <Hero />
         <ProductSection />
         <FeatureSection />
+        <Testimonials/>
         <ContactSection />
       </main>
       {shouldShowLayout && <Footer />}

@@ -80,7 +80,14 @@ export async function POST(request) {
 export async function GET(request) {
   try {
     await connectDB();
-    const orders = await Order.find().sort({ createdAt: -1 });  
+    const action = request.nextUrl.searchParams.get("action");
+    let orders;
+    if (action === "deleted") {
+      orders = await Order.find({ isDeleted: true }).sort({ createdAt: -1 });  
+    } else {
+
+     orders = await Order.find({ isDeleted: { $ne: true } }).sort({ createdAt: -1 });  
+    }
     return NextResponse.json({ success : true, message: "Orders fetched successfully", data:orders }, { status: 200 });
   } catch (error) {
     console.error("Error fetching orders:", error);
@@ -93,27 +100,49 @@ export async function GET(request) {
 export async function PUT(request) {
   try {
     await connectDB();
-    const { orderId, updateData } = await request.json();
+    const { action, orderId, updateData } = await request.json();
+
+    if (!orderId) {
+      return NextResponse.json(
+        { message: "orderId is required" },
+        { status: 400 }
+      );
+    }
+
+    let finalUpdate = {};
+
+    //  Soft delete
+    if (action === "delete") {
+      finalUpdate.isDeleted = true;
+    }
+
+    //  Normal update
+    if (action === "update") {
+      finalUpdate = updateData;
+    }
+
     const updatedOrder = await Order.findByIdAndUpdate(
       orderId,
-      { $set: updateData },
+      { $set: finalUpdate },
       { new: true }
     );
+
     if (!updatedOrder) {
       return NextResponse.json(
         { message: "Order not found" },
         { status: 404 }
       );
     }
+
     return NextResponse.json(
-      { message: "Order updated successfully", order: updatedOrder , success: true},
+      { success: true, message: "Order updated", order: updatedOrder },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error updating order:", error);
     return NextResponse.json(
-      { message: "Server error", error: error.message },
+      { success: false, message: "Server error", error: error.message },
       { status: 500 }
     );
-  } 
+  }
 }
+
