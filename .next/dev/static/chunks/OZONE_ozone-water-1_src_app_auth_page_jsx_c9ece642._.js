@@ -43,7 +43,7 @@ function Auth() {
             });
             if (response.data.success) {
                 __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Login successful!");
-                localStorage.setItem("user", JSON.stringify(response.data.user));
+                localStorage.setItem("user2", JSON.stringify(response.data.user));
                 console.log("User data:", response.data.user);
                 setTimeout(()=>{
                     router.push("/orderDashboard");

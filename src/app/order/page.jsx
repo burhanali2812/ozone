@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import{toast, Toaster} from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function Order() {
   const router = useRouter();
@@ -30,7 +30,7 @@ export default function Order() {
 
   // Check for user in localStorage
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem("user2");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -146,7 +146,7 @@ export default function Order() {
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-12">
-        <Toaster/>
+      <Toaster />
       <div className="container mx-auto px-6">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">

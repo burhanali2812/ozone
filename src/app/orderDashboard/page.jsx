@@ -38,7 +38,7 @@ export default function OrderDashboard() {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem("user2");
     if (!user) {
       router.push("/auth");
       return;
@@ -54,7 +54,7 @@ export default function OrderDashboard() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.clear();
     toast.success("Logged out successfully!");
     setShowMenu(false);
     router.push("/auth");
@@ -125,27 +125,26 @@ export default function OrderDashboard() {
   };
 
   // Delete order
-const handleDeleteOrder = async () => {
-  try {
-    const response = await axios.put("/api/orders", {
-      action: "delete",
-      orderId: selectedOrder._id
-    });
+  const handleDeleteOrder = async () => {
+    try {
+      const response = await axios.put("/api/orders", {
+        action: "delete",
+        orderId: selectedOrder._id,
+      });
 
-    if (response.data.success) {
-      // Remove from UI
-      setOrders(orders.filter(order => order._id !== selectedOrder._id));
+      if (response.data.success) {
+        // Remove from UI
+        setOrders(orders.filter((order) => order._id !== selectedOrder._id));
 
-      toast.success("Order marked as deleted!");
-      setShowDeleteConfirm(false);
-      setShowModal(false);
+        toast.success("Order marked as deleted!");
+        setShowDeleteConfirm(false);
+        setShowModal(false);
+      }
+    } catch (error) {
+      toast.error("Failed to delete order.");
+      console.error("Delete error:", error);
     }
-  } catch (error) {
-    toast.error("Failed to delete order.");
-    console.error("Delete error:", error);
-  }
-};
-
+  };
 
   // Get status badge color
   const getStatusColor = (status) => {
@@ -680,7 +679,7 @@ const handleDeleteOrder = async () => {
 
                 <button
                   onClick={() => {
-                    router.push("/rawItems");
+                    router.push("/rawItems/manageRawItems");
                     setShowMenu(false);
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors group"
@@ -722,6 +721,28 @@ const handleDeleteOrder = async () => {
                     />
                   </svg>
                   <span className="font-medium">Deleted Order</span>
+                </button>
+                <button
+                  onClick={() => {
+                    router.push("/supplierManage");
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-lg transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="font-medium">Manage Suppliers</span>
                 </button>
 
                 <div className="border-t border-gray-200 my-4"></div>
@@ -889,7 +910,10 @@ const handleDeleteOrder = async () => {
                   Update Order
                 </button>
                 <button
-                  onClick={() => {setShowModal(false); setShowDeleteConfirm(true);}}
+                  onClick={() => {
+                    setShowModal(false);
+                    setShowDeleteConfirm(true);
+                  }}
                   className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center justify-center gap-2"
                 >
                   <svg

@@ -1,5 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/route": "app/api/auth/route.js",
+  "/api/items/route": "app/api/items/route.js",
   "/api/orders/route": "app/api/orders/route.js",
-  "/orderDashboard/page": "app/orderDashboard/page.js"
+  "/api/supplier/route": "app/api/supplier/route.js",
+  "/auth/page": "app/auth/page.js",
+  "/orderDashboard/page": "app/orderDashboard/page.js",
+  "/rawItems/manageRawItems/page": "app/rawItems/manageRawItems/page.js",
+  "/supplierManage/page": "app/supplierManage/page.js"
 }

@@ -29,7 +29,7 @@ export default function Auth() {
 
       if (response.data.success) {
         toast.success("Login successful!");
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("user2", JSON.stringify(response.data.user));
         console.log("User data:", response.data.user);
         setTimeout(() => {
           router.push("/orderDashboard");

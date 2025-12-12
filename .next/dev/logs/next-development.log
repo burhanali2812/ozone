@@ -1,25 +1,44 @@
-[00:00:01.301] Server  LOG      ✓ Ready in 819ms
-[00:00:04.382] Server  LOG      ○ Compiling /orderDashboard ...
-[00:00:11.932] Server  LOG     MongoDB connected successfully
-[00:00:13.014] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693a82435abf9d43124fac81","createdAt":"2025-12-11T08:35:15.894Z","isDeleted":false,"orderItems":[{"price":300,"quantity":6,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"unpaid","remainingAmount":-1800,"shopAddress":"Malkabad","shopContact":"03308068176","shopName":"Sk","status":"completed","totalPrice":1800,"updatedAt":"2025-12-11T16:20:40.008Z"},{"__v":0,"_id":"693a82425abf9d43124fac7f","createdAt":"2025-12-11T08:35:14.515Z","isDeleted":false,"orderItems":[{"price":300,"quantity":6,"size":"1500ml"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":1800,"shopAddress":"Malkabad","shopContact":"03308068176","shopName":"Sk","status":"pending","totalPrice":1800,"updatedAt":"2025-12-11T08:35:14.515Z"},{"__v":0,"_id":"693a6d08ab7b40540cad8081","createdAt":"2025-12-11T07:04:40.203Z","isDeleted":false,"orderItems":[{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"},{"price":260,"quantity":10,"size":"500ml"}],"paidAmount":6800,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Sho","shopContact":"03266783441","shopName":"Zee Mart","status":"completed","totalPrice":6800,"updatedAt":"2025-12-11T07:05:20.596Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939e97a8cc9756ae8246af1","createdAt":"2025-12-10T21:43:22.844Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"cancelled","totalPrice":4300,"updatedAt":"2025-12-10T21:44:03.163Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:00:30.515] Server  LOG     MongoDB already connected
-[00:00:42.151] Server  LOG     MongoDB already connected
-[00:00:46.016] Server  LOG     MongoDB already connected
-[00:01:37.917] Server  LOG      ✓ Compiled in 28ms
-[00:01:40.294] Server  LOG      ✓ Compiled in 20ms
-[00:01:42.313] Server  LOG      ✓ Compiled in 22ms
-[00:01:44.619] Server  LOG      ✓ Compiled in 22ms
-[00:03:01.124] Server  LOG      ✓ Compiled in 56ms
-[00:03:06.496] Server  LOG      ✓ Compiled in 36ms
-[00:03:23.855] Server  LOG      ✓ Compiled in 24ms
-[00:03:38.449] Server  LOG      ✓ Compiled in 22ms
-[00:03:44.885] Server  LOG      ✓ Compiled in 41ms
-[00:04:05.313] Server  LOG      ✓ Compiled in 29ms
-[00:04:08.136] Server  LOG      ✓ Compiled in 24ms
-[00:04:18.353] Server  LOG      ✓ Compiled in 20ms
-[00:04:20.176] Server  LOG      ✓ Compiled in 36ms
-[00:04:23.150] Server  LOG      ✓ Compiled in 33ms
-[00:04:43.703] Server  LOG      ✓ Compiled in 35ms
-[00:04:46.219] Server  LOG      ✓ Compiled in 21ms
-[00:05:24.040] Server  LOG      ✓ Compiled in 35ms
-[00:05:39.464] Server  LOG      ✓ Compiled in 24ms
+[00:00:01.422] Server  LOG      ✓ Ready in 932ms
+[00:00:04.525] Server  LOG      ○ Compiling /supplierManage ...
+[00:00:08.829] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__1472ad91._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:08.831] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:00:09.542] Browser ERROR   uncaughtError: ReferenceError: user is not defined
+[00:00:23.150] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:00:23.168] Server  LOG      ✓ Compiled in 26ms
+[00:00:23.433] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__1472ad91._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:23.435] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:00:25.673] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:00:31.766] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:00:39.788] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__1472ad91._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:39.789] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:00:41.299] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:00:58.824] Server  LOG     MongoDB connected successfully
+[00:00:59.945] Browser LOG     User data: {"name":"Burhan Ali","phone":"03070452812","role":"customer"}
+[00:01:01.612] Server  LOG     MongoDB already connected
+[00:01:01.754] Server  LOG     MongoDB already connected
+[00:01:01.848] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:01:01.993] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:01:08.953] Server  LOG     MongoDB already connected
+[00:01:09.083] Server  LOG     MongoDB already connected
+[00:02:56.732] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__1472ad91._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:02:56.734] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:03:24.766] Server  LOG      ✓ Compiled in 27ms
+[00:03:25.856] Browser ERROR   uncaughtError: ReferenceError: lo is not defined
+[00:03:28.712] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:03:28.715] Server  LOG      ✓ Compiled in 31ms
+[00:03:28.799] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__1472ad91._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:03:28.801] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:03:28.850] Server  LOG     MongoDB already connected
+[00:03:30.438] Server  LOG     MongoDB already connected
+[00:03:38.542] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__1472ad91._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:03:38.543] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:03:39.816] Server  LOG     MongoDB already connected
+[00:04:06.717] Server  LOG      ✓ Compiled in 43ms
+[00:04:13.168] Server  LOG      ✓ Compiled in 37ms
+[00:04:46.255] Server  LOG     MongoDB already connected
+[00:04:46.429] Server  LOG     MongoDB already connected
+[00:04:46.519] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:04:46.669] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:05:05.303] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:05:05.358] Server  LOG     MongoDB already connected
+[00:05:05.506] Server  LOG     MongoDB already connected
