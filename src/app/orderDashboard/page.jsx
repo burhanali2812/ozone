@@ -82,6 +82,7 @@ export default function OrderDashboard() {
   // Update order
   const handleUpdateOrder = async () => {
     const updatePayload = {
+      action: "update",
       orderId: selectedOrder._id,
       updateData: {
         paymentStatus:
@@ -93,14 +94,20 @@ export default function OrderDashboard() {
             ? selectedOrder.totalPrice
             : selectedOrder.paidAmount + modalData.remainingAmount,
         remainingAmount:
+         modalData.paymentStatus === "paid"
+            ? 0
+            :
           selectedOrder.remainingAmount - modalData.remainingAmount,
         status: modalData.status,
       },
+     
+
     };
+     console.log("Update Payload:", updatePayload);
     try {
       const response = await axios.put("/api/orders", updatePayload);
       if (response.data.success) {
-        // Update UI immediately
+ 
         setOrders(
           orders?.map((order) =>
             order._id === selectedOrder._id
@@ -115,8 +122,22 @@ export default function OrderDashboard() {
           )
         );
         console.log("Order updated on server:", response.data.order);
+        const getUpdatedOrder = response.data.order;
+        let finalStatus;
+        if (getUpdatedOrder.status === "in-transit"){
+          finalStatus = "order-in-transit";
+        }
+        else if (getUpdatedOrder.status === "completed"){
+          finalStatus = "order-delivered";
+        }
+       else{
+        finalStatus = "pending"
+       }
+       localStorage.setItem("receiptType", finalStatus);
+       localStorage.setItem("currentOrder", JSON.stringify(getUpdatedOrder));
         toast.success("Order updated successfully!");
         setShowModal(false);
+        router.push("/receipt");
       }
     } catch (error) {
       toast.error("Failed to update order. Please try again.");

@@ -121,6 +121,7 @@ export default function Order() {
       const res = await axios.post("/api/orders", orderPayload);
       if (res.data.message) {
         toast.success(res.data.message || "Order placed successfully!");
+        localStorage.setItem("receiptType", "order-placed");
         localStorage.setItem("currentOrder", JSON.stringify(res.data.order));
         setFormData({
           shopName: "",

@@ -50,6 +50,11 @@ export default function Receipt() {
         icon: "📦",
         color: "#a855f7",
       },
+      "pending":{
+        title: "Order Pending",
+        icon: "⚠️",
+        color: "#f59e0b",
+      }
     };
     return configs[type] || configs["order-placed"];
   };
@@ -68,7 +73,7 @@ export default function Receipt() {
 
     try {
       const canvas = await html2canvas(receiptRef.current, {
-        scale: 3,
+        scale: 9,
         useCORS: true,
         allowTaint: true,
         logging: false,
@@ -79,7 +84,7 @@ export default function Receipt() {
         scrollX: 0,
       });
 
-      return canvas.toDataURL("image/png", 1.0);
+      return canvas.toDataURL("image/png", 5.0);
     } catch (error) {
       console.error("Error capturing image:", error);
       return null;
@@ -182,15 +187,15 @@ export default function Receipt() {
         setGenerating(false);
         return;
       }
-
       const base64Response = await fetch(imgData);
       const blob = await base64Response.blob();
       const file = new File([blob], `OZONE_Receipt_${orderData.shopName}.png`, {
         type: "image/png",
       });
 
-      const whatsappNumber = orderData.shopContact.replace(/\D/g, "");
-
+      const whatsappNumber = orderData.shopContact;
+      console.log("WhatsApp Number:", whatsappNumber);
+     
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
           await navigator.share({
@@ -241,7 +246,11 @@ export default function Receipt() {
         `\n📸 Receipt image attached\nThank you! 💧`
     );
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+ 
+
+    const whatsappUrl = `https://wa.me/+92${whatsappNumber.slice(1)}?text=${encodeURIComponent(message)}`;
+    console.log("WhatsApp URL:", whatsappUrl);
+    
     window.open(whatsappUrl, "_blank");
     toast.success("Opening WhatsApp... Please attach the screenshot manually");
   };
@@ -298,7 +307,7 @@ export default function Receipt() {
 
   return (
     <section className="w-full min-h-screen bg-gray-50 py-4">
-      <Toaster position="top-center" />
+      <Toaster  />
 
       <div className="container mx-auto px-4 max-w-xl">
         {/* Action Buttons */}
@@ -340,7 +349,7 @@ export default function Receipt() {
           </button>
 
           <button
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/orderDashboard")}
             className="bg-gray-200 text-gray-700 text-xs px-3 py-2 rounded-lg hover:bg-gray-300 transition-all"
           >
             Home
@@ -348,185 +357,160 @@ export default function Receipt() {
         </div>
 
         {/* Receipt Card - Clean Text Only */}
+      <div
+  ref={receiptRef}
+  className="bg-white p-5 shadow-md rounded-md max-w-[400px] mx-auto font-sans"
+>
+  {/* Header */}
+  <div className="text-center mb-4">
+    <h1 className="text-xl font-bold text-gray-900 tracking-wide">
+      OZONE MINERAL WATER
+    </h1>
+    <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">
+      Sip the Good Life
+    </p>
+  </div>
+
+  {/* Status */}
+  <div className="text-center mb-4">
+    <span
+      className="font-semibold text-sm uppercase"
+      style={{ color: typeConfig.color }}
+    >
+      {typeConfig.title}
+    </span>
+  </div>
+
+  {/* Divider */}
+  <div className="border-t border-gray-300 my-4"></div>
+
+  {/* Shop Details */}
+  <div className="mb-4">
+    <h2 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wide">
+      Shop Details
+    </h2>
+    <div className="space-y-1 text-sm">
+      <div className="flex justify-between">
+        <span className="text-gray-500">Name:</span>
+        <span className="font-medium text-gray-900 text-right max-w-[70%]">
+          {orderData.shopName}
+        </span>
+      </div>
+      <div className="flex justify-between">
+        <span className="text-gray-500">Address:</span>
+        <span className="font-medium text-gray-900 text-right max-w-[70%]">
+          {orderData.shopAddress}
+        </span>
+      </div>
+      <div className="flex justify-between">
+        <span className="text-gray-500">Contact:</span>
+        <span className="font-medium text-gray-900">{orderData.shopContact}</span>
+      </div>
+    </div>
+  </div>
+
+  <div className="border-t border-gray-300 my-4"></div>
+
+  {/* Order Items */}
+  <div className="mb-4">
+    <h2 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wide">
+      Order Details
+    </h2>
+    <div className="space-y-2">
+      {orderData.orderItems.map((item, index) => (
         <div
-          ref={receiptRef}
-          className="bg-white p-4"
-          style={{ maxWidth: "100%", margin: "0 auto" }}
+          key={index}
+          className="flex justify-between items-center text-sm"
         >
-          {/* Header */}
-          <div className="text-center mb-3">
-            <h1 className="text-lg font-bold text-gray-900 leading-tight mb-0.5">
-              OZONE MINERAL WATER
-            </h1>
-            <p className="text-[10px] text-gray-600 leading-tight">
-              Sip the Good Life
-            </p>
+          <div className="flex items-center gap-2">
+            <span className="text-gray-500">{index + 1}.</span>
+            <span className="font-medium text-gray-900">{item.size}</span>
           </div>
-
-          {/* Status */}
-          <div className="text-center mb-3">
-            <p
-              className="font-bold text-sm leading-tight"
-              style={{ color: typeConfig.color }}
-            >
-               {typeConfig.title}
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-300 my-2"></div>
-
-          {/* Shop Details */}
-          <div className="mb-3">
-            <h2 className="text-xs font-bold text-gray-900 mb-2 leading-tight">
-              Shop Details
-            </h2>
-            <div className="space-y-1 text-xs">
-              <div className="flex justify-between leading-tight">
-                <span className="text-gray-600 text-[10px]">Name:</span>
-                <span className="font-semibold text-gray-900 text-right max-w-[70%]">
-                  {orderData.shopName}
-                </span>
-              </div>
-              <div className="flex justify-between leading-tight">
-                <span className="text-gray-600 text-[10px]">Address:</span>
-                <span className="font-semibold text-gray-900 text-right max-w-[70%]">
-                  {orderData.shopAddress}
-                </span>
-              </div>
-              <div className="flex justify-between leading-tight">
-                <span className="text-gray-600 text-[10px]">Contact:</span>
-                <span className="font-semibold text-gray-900">
-                  {orderData.shopContact}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-300 my-3"></div>
-
-          {/* Order Items */}
-          <div className="mb-3">
-            <h2 className="text-xs font-bold text-gray-900 mb-2 leading-tight">
-              Order Details
-            </h2>
-            <div className="space-y-1">
-              {orderData.orderItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center text-xs leading-tight"
-                >
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-gray-600 text-[10px]">
-                      {index + 1}.
-                    </span>
-                    <span className="font-medium text-gray-900">
-                      {item.size}
-                    </span>
-                  </div>
-                  <div className="text-right leading-tight">
-                    <span className="text-[10px] text-gray-600">
-                      {item.quantity} × Rs. {item.price} =
-                    </span>
-                    <span className="font-bold text-xs text-gray-900 ml-1">
-                      Rs. {item.price * item.quantity}/-
-                    </span>
-                  </div>
-                </div>
-              ))}
-           
-              <div className="flex justify-between items-center pt-3">
-                <span className="font-bold text-sm text-gray-900">Total:</span>
-                <span className="text-lg font-black text-gray-900">
-                  Rs. {orderData.totalPrice}/-
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-300 my-3"></div>
-
-          {/* Payment Details */}
-          <div className="mb-3">
-            <h2 className="text-xs font-bold text-gray-900 mb-2 leading-tight">
-              Payment Details
-            </h2>
-            <div className="space-y-1 text-xs">
-              <div className="flex justify-between items-center leading-tight">
-                <span className="text-gray-600 text-[10px]">Status:</span>
-                <span
-                  className="font-bold text-xs"
-                  style={{ color: paymentBadge.color }}
-                >
-                  {paymentBadge.label}
-                </span>
-              </div>
-
-              {orderData.paymentStatus === "paid" && (
-                <div className="flex justify-between items-center leading-tight">
-                  <span className="text-gray-600 text-[10px]">
-                    Paid Amount:
-                  </span>
-                  <span
-                    className="font-bold text-xs"
-                    style={{ color: "#10b981" }}
-                  >
-                    Rs. {orderData.paidAmount}/-
-                  </span>
-                </div>
-              )}
-
-              {orderData.paymentStatus === "partially-paid" && (
-                <>
-                  <div className="flex justify-between items-center leading-tight">
-                    <span className="text-gray-600 text-[10px]">Paid:</span>
-                    <span
-                      className="font-bold text-xs"
-                      style={{ color: "#10b981" }}
-                    >
-                      Rs. {orderData.paidAmount}/-
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center leading-tight">
-                    <span className="text-gray-600 text-[10px]">
-                      Remaining:
-                    </span>
-                    <span
-                      className="font-bold text-xs"
-                      style={{ color: "#ef4444" }}
-                    >
-                      Rs. {orderData.remainingAmount}/-
-                    </span>
-                  </div>
-                </>
-              )}
-
-              {orderData.paymentStatus === "unpaid" && (
-                <div className="flex justify-between items-center leading-tight">
-                  <span className="text-gray-600 text-[10px]">Pending:</span>
-                  <span
-                    className="font-bold text-xs"
-                    style={{ color: "#ef4444" }}
-                  >
-                    Rs. {orderData.totalPrice}/-
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-300 my-2"></div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-[10px] text-gray-600 leading-tight">
-              OZONE © {new Date().toLocaleString()} | Thank you for your order!
-            </p>
+          <div className="text-right">
+            <span className="text-gray-500 text-sm">
+              {item.quantity} × Rs. {item.price} =
+            </span>
+            <span className="font-semibold text-gray-900 ml-1">
+              Rs. {item.price * item.quantity}/-
+            </span>
           </div>
         </div>
+      ))}
+
+      <div className="flex justify-between items-center pt-3 border-t border-gray-200 mt-2">
+        <span className="font-semibold text-gray-900">Total:</span>
+        <span className="text-lg font-bold text-gray-900">
+          Rs. {orderData.totalPrice}/-
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div className="border-t border-gray-300 my-4"></div>
+
+  {/* Payment Details */}
+  <div className="mb-4">
+    <h2 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wide">
+      Payment Details
+    </h2>
+    <div className="space-y-2 text-sm">
+      <div className="flex justify-between">
+        <span className="text-gray-500">Status:</span>
+        <span
+          className="font-semibold"
+          style={{ color: paymentBadge.color }}
+        >
+          {paymentBadge.label}
+        </span>
+      </div>
+
+      {orderData.paymentStatus === "paid" && (
+        <div className="flex justify-between">
+          <span className="text-gray-500">Paid Amount:</span>
+          <span className="font-semibold text-green-500">
+            Rs. {orderData.paidAmount}/-
+          </span>
+        </div>
+      )}
+
+      {orderData.paymentStatus === "partially-paid" && (
+        <>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Paid:</span>
+            <span className="font-semibold text-green-500">
+              Rs. {orderData.paidAmount}/-
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Remaining:</span>
+            <span className="font-semibold text-red-500">
+              Rs. {orderData.remainingAmount}/-
+            </span>
+          </div>
+        </>
+      )}
+
+      {orderData.paymentStatus === "unpaid" && (
+        <div className="flex justify-between">
+          <span className="text-gray-500">Pending:</span>
+          <span className="font-semibold text-red-500">
+            Rs. {orderData.totalPrice}/-
+          </span>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div className="border-t border-gray-300 my-4"></div>
+
+  {/* Footer */}
+  <div className="text-center text-xs text-gray-500">
+    <p>
+      OZONE © {new Date().toLocaleString()} | Thank you for your order!
+    </p>
+  </div>
+</div>
+
       </div>
     </section>
   );
