@@ -34,7 +34,7 @@ export async function POST(request) {
       suppliedItems,
     });
     await newSupplier.save();
-    return NextResponse.json({ message: "Supplier created successfully." }, { status: 201 });
+    return NextResponse.json({ message: "Supplier created successfully." , success: true }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: "Failed to create supplier.", error: error.message }, { status: 500 });
   }

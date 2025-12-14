@@ -45,7 +45,7 @@ function ManageRawItems() {
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ManageRawItems.useEffect": ()=>{
-            const user = localStorage.getItem("user");
+            const user = localStorage.getItem("user2");
             if (!user) {
                 router.push("/auth");
                 return;

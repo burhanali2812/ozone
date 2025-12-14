@@ -121,6 +121,7 @@ export default function Order() {
       const res = await axios.post("/api/orders", orderPayload);
       if (res.data.message) {
         toast.success(res.data.message || "Order placed successfully!");
+        localStorage.setItem("currentOrder", JSON.stringify(res.data.order));
         setFormData({
           shopName: "",
           shopAddress: "",
@@ -130,7 +131,7 @@ export default function Order() {
         setPaymentStatus("unpaid");
         setPaidAmount(0);
         if (user) {
-          router.push("/orderDashboard");
+          router.push("/receipt");
         }
       } else {
         router.push("/");

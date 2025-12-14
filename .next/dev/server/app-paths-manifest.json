@@ -1,14 +1,7 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/auth/route": "app/api/auth/route.js",
-  "/api/items/route": "app/api/items/route.js",
   "/api/orders/route": "app/api/orders/route.js",
-  "/api/supplier/route": "app/api/supplier/route.js",
-  "/api/transaction/route": "app/api/transaction/route.js",
-  "/auth/page": "app/auth/page.js",
+  "/order/page": "app/order/page.js",
   "/orderDashboard/page": "app/orderDashboard/page.js",
-  "/rawItems/manageRawItems/page": "app/rawItems/manageRawItems/page.js",
-  "/rawItems/page": "app/rawItems/page.js",
-  "/supplierManage/page": "app/supplierManage/page.js",
-  "/transaction/page": "app/transaction/page.js"
+  "/receipt/page": "app/receipt/page.js"
 }

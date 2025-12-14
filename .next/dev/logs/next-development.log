@@ -1,81 +1,431 @@
-[00:00:01.388] Server  LOG      ✓ Ready in 913ms
-[00:00:04.511] Server  LOG      ○ Compiling /transaction ...
-[00:00:12.714] Server  LOG     MongoDB connected successfully
-[00:00:24.772] Server  LOG     MongoDB already connected
-[00:01:02.388] Server  LOG     MongoDB already connected
-[00:01:43.902] Server  LOG     MongoDB already connected
-[00:01:55.763] Server  LOG     MongoDB already connected
-[00:03:01.037] Server  LOG     MongoDB already connected
-[00:07:42.139] Server  LOG      ✓ Compiled in 48ms
-[00:07:59.099] Server  LOG      ✓ Compiled in 38ms
-[00:15:41.431] Server  LOG      ✓ Compiled in 105ms
-[00:16:57.834] Server  LOG      ✓ Compiled in 108ms
-[00:17:04.939] Server  LOG     MongoDB connected successfully
-[00:17:22.094] Server  LOG      ✓ Compiled in 39ms
-[00:17:38.435] Server  LOG      ✓ Compiled in 35ms
-[00:20:15.910] Server  LOG     MongoDB already connected
-[00:20:21.097] Server  LOG     MongoDB already connected
-[00:20:23.243] Server  LOG     MongoDB already connected
-[00:20:23.351] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:20:23.505] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:20:29.639] Server  LOG     MongoDB already connected
-[00:20:29.811] Server  LOG     MongoDB already connected
-[00:21:43.145] Server  LOG     MongoDB already connected
-[00:21:43.498] Browser LOG     User data: {"name":"Sharjeel Ahmad Khan","phone":"03308068176","role":"customer"}
-[00:21:45.049] Server  LOG     MongoDB already connected
-[00:21:45.053] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
-[00:21:45.230] Server  LOG     MongoDB already connected
-[00:21:45.316] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:21:45.487] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:21:53.480] Server  LOG     MongoDB already connected
-[00:21:53.615] Server  LOG     MongoDB already connected
-[00:22:33.992] Server  LOG     MongoDB already connected
-[00:22:34.146] Server  LOG     MongoDB already connected
-[00:22:34.237] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:22:34.779] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:22:59.796] Server  LOG     MongoDB already connected
-[00:22:59.945] Server  LOG     MongoDB already connected
-[00:23:00.039] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:23:00.184] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:25:21.269] Server  LOG     MongoDB already connected
-[00:25:21.444] Server  LOG     MongoDB already connected
-[00:25:49.073] Server  LOG     MongoDB already connected
-[00:25:49.228] Server  LOG     MongoDB already connected
-[00:25:49.318] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:25:49.468] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:25:58.438] Server  LOG     MongoDB already connected
-[00:25:58.691] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:26:00.449] Server  LOG     MongoDB already connected
-[00:26:00.452] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
-[00:26:00.578] Server  LOG     MongoDB already connected
-[00:26:14.222] Server  LOG     MongoDB already connected
-[00:26:14.342] Server  LOG     MongoDB already connected
-[00:26:14.437] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:26:14.556] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:28:36.928] Server  LOG     MongoDB already connected
-[00:28:37.081] Server  LOG     MongoDB already connected
-[00:28:39.611] Server  LOG     MongoDB already connected
-[00:28:39.729] Server  LOG     MongoDB already connected
-[00:28:39.837] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:28:39.947] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:28:44.667] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:28:46.723] Server  LOG     MongoDB already connected
-[00:28:46.787] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
-[00:28:46.848] Server  LOG     MongoDB already connected
-[00:30:11.367] Server  LOG      ✓ Compiled in 44ms
-[00:30:15.409] Server  LOG     MongoDB already connected
-[00:30:15.568] Server  LOG     MongoDB already connected
-[00:30:15.650] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:30:15.792] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:30:27.749] Server  LOG     MongoDB already connected
-[00:30:27.867] Server  LOG     MongoDB already connected
-[00:30:31.649] Server  LOG     MongoDB already connected
-[00:30:31.773] Server  LOG     MongoDB already connected
-[00:30:31.866] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:30:32.002] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:31:30.553] Server  LOG      ✓ Compiled in 27ms
-[00:31:40.800] Server  LOG      ✓ Compiled in 30ms
-[00:31:48.274] Server  LOG      ✓ Compiled in 26ms
-[00:31:56.275] Server  LOG      ✓ Compiled in 36ms
-[00:32:28.775] Server  LOG     MongoDB already connected
-[00:32:28.918] Server  LOG     MongoDB already connected
+[00:00:01.969] Server  LOG      ✓ Ready in 1250ms
+[00:00:05.057] Server  LOG      ○ Compiling /orderDashboard ...
+[00:00:13.255] Server  LOG     MongoDB connected successfully
+[00:00:14.258] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:01:38.912] Server  LOG     MongoDB already connected
+[00:01:38.997] Browser LOG     Order Submitted: {"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":2500,"paymentStatus":"partially-paid","remainingAmount":3320,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820}
+[00:01:41.126] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:07:34.804] Server  LOG      ✓ Compiled in 101ms
+[00:07:35.068] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:898:1
+Parsing ecmascript source code failed
+  896 |     </section>
+  897 |   );
+> 898 | }
+      | ^
+  899 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:07:39.075] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:898:1
+Parsing ecmascript source code failed
+  896 |     </section>
+  897 |   );
+> 898 | }
+      | ^
+  899 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:07:50.609] Server  LOG      ✓ Compiled in 22ms
+[00:07:51.078] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:896:15
+Parsing ecmascript source code failed
+  894 |         </div>
+  895 |       </div>
+> 896 |     </section>
+      |               ^
+> 897 |   );
+      | ^^^^
+> 898 |
+      | ^
+
+Expected '</', got 'jsx text (
+  );
+)'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:07:52.429] Server  LOG      ✓ Compiled in 28ms
+[00:07:53.066] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:896:15
+Parsing ecmascript source code failed
+  894 |         </div>
+  895 |       </div>
+> 896 |     </section>
+      |               ^
+> 897 |   );
+      | ^^^^^
+
+Expected '</', got 'jsx text (
+  );)'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:07:54.717] Server  LOG      ✓ Compiled in 24ms
+[00:07:55.083] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:897:3
+Parsing ecmascript source code failed
+  895 |       </div>
+  896 |     </section>
+> 897 |   });
+      |   ^
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:07:56.257] Server  LOG      ✓ Compiled in 22ms
+[00:07:57.079] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:896:15
+Parsing ecmascript source code failed
+  894 |         </div>
+  895 |       </div>
+> 896 |     </section>
+      |               ^
+> 897 |   );
+      | ^^^^^
+
+Expected '</', got 'jsx text (
+  );)'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:08:49.209] Server  LOG      ✓ Compiled in 45ms
+[00:08:50.080] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:402:23
+Parsing ecmascript source code failed
+  400 |                     clipRule="evenodd"
+  401 |                   />
+> 402 |                 </div>
+      |                       ^
+> 403 |                 <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 tracking-tight">
+      | ^^^^^^^^^^^^^^^^^
+  404 |                   OZONE MINERAL WATER
+  405 |                 </h1>
+  406 |                 <p className="text-xl text-cyan-100 font-medium">
+
+Expected '</', got 'jsx text (
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:09:14.079] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:402:23
+Parsing ecmascript source code failed
+  400 |                     clipRule="evenodd"
+  401 |                   />
+> 402 |                 </div>
+      |                       ^
+> 403 |                 <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 tracking-tight">
+      | ^^^^^^^^^^^^^^^^^
+  404 |                   OZONE MINERAL WATER
+  405 |                 </h1>
+  406 |                 <p className="text-xl text-cyan-100 font-medium">
+
+Expected '</', got 'jsx text (
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:10:03.072] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:402:23
+Parsing ecmascript source code failed
+  400 |                     clipRule="evenodd"
+  401 |                   />
+> 402 |                 </div>
+      |                       ^
+> 403 |                 <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 tracking-tight">
+      | ^^^^^^^^^^^^^^^^^
+  404 |                   OZONE MINERAL WATER
+  405 |                 </h1>
+  406 |                 <p className="text-xl text-cyan-100 font-medium">
+
+Expected '</', got 'jsx text (
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:10:11.078] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:402:23
+Parsing ecmascript source code failed
+  400 |                     clipRule="evenodd"
+  401 |                   />
+> 402 |                 </div>
+      |                       ^
+> 403 |                 <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 tracking-tight">
+      | ^^^^^^^^^^^^^^^^^
+  404 |                   OZONE MINERAL WATER
+  405 |                 </h1>
+  406 |                 <p className="text-xl text-cyan-100 font-medium">
+
+Expected '</', got 'jsx text (
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:10:12.079] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:402:23
+Parsing ecmascript source code failed
+  400 |                     clipRule="evenodd"
+  401 |                   />
+> 402 |                 </div>
+      |                       ^
+> 403 |                 <h1 className="text-4xl sm:text-5xl font-extrabold mb-3 tracking-tight">
+      | ^^^^^^^^^^^^^^^^^
+  404 |                   OZONE MINERAL WATER
+  405 |                 </h1>
+  406 |                 <p className="text-xl text-cyan-100 font-medium">
+
+Expected '</', got 'jsx text (
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:10:27.935] Server  LOG      ✓ Compiled in 22ms
+[00:10:28.069] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:664:21
+Parsing ecmascript source code failed
+  662 |                     d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+  663 |                 />
+> 664 |               </div>
+      |                     ^
+> 665 |               <h2 className="text-2xl font-bold text-gray-900">
+      | ^^^^^^^^^^^^^^^
+  666 |                 Payment Summary
+  667 |               </h2>
+  668 |             </div>
+
+Expected '</', got 'jsx text (
+              )'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:10:36.070] Browser ERROR   The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter. path
+[00:15:56.467] Server  LOG      ✓ Compiled in 116ms
+[00:16:26.768] Server  LOG      ✓ Compiled in 22ms
+[00:16:52.464] Server  LOG      ✓ Compiled in 23ms
+[00:17:33.502] Server  LOG      ✓ Compiled in 27ms
+[00:17:36.312] Server  LOG      ✓ Compiled in 29ms
+[00:17:37.070] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:321:13
+Parsing ecmascript source code failed
+  319 |             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+  320 |               <image
+> 321 |             </div>
+      |             ^
+  322 |             <h1 className="text-2xl font-bold mb-1">OZONE MINERAL WATER</h1>
+  323 |             <p className="text-xs text-blue-100">Sip the Good Life</p>
+  324 |           </div>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:17:37.070] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:321:14
+Parsing ecmascript source code failed
+  319 |             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+  320 |               <image
+> 321 |             </div>
+      |              ^^^^^
+  322 |             <h1 className="text-2xl font-bold mb-1">OZONE MINERAL WATER</h1>
+  323 |             <p className="text-xs text-blue-100">Sip the Good Life</p>
+  324 |           </div>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:17:38.110] Browser ERROR   The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter. image
+[00:17:42.425] Server  LOG      ✓ Compiled in 21ms
+[00:17:43.079] Browser ERROR   uncaughtError: TypeError: Failed to construct 'Image': Please use the 'new' operator, this DOM object constructor cannot be called as a function.
+[00:18:19.208] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:18:19.208] Browser ERROR   An empty string ("") was passed to the %s attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to %s instead of an empty string. src src
+[00:18:19.208] Browser ERROR   Image is missing required "src" property: <img>
+[00:18:19.208] Browser ERROR   Image is missing required "alt" property. Please add Alternative Text to describe the image for screen readers and search engines.
+[00:18:19.208] Browser ERROR   Image is missing required "src" property: <img>
+[00:18:19.208] Browser ERROR   Image is missing required "alt" property. Please add Alternative Text to describe the image for screen readers and search engines.
+[00:18:21.079] Browser ERROR   An empty string ("") was passed to the %s attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to %s instead of an empty string. src src
+[00:18:21.079] Browser ERROR   Image is missing required "src" property: <img>
+[00:18:21.079] Browser ERROR   Image is missing required "alt" property. Please add Alternative Text to describe the image for screen readers and search engines.
+[00:18:21.079] Browser ERROR   Image is missing required "src" property: <img>
+[00:18:21.079] Browser ERROR   Image is missing required "alt" property. Please add Alternative Text to describe the image for screen readers and search engines.
+[00:18:37.437] Server  LOG      ✓ Compiled in 17ms
+[00:18:38.072] Browser ERROR   Received `%s` for a non-boolean attribute `%s`.
+
+If you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}. true sr sr true sr
+[00:18:38.769] Server  LOG      ✓ Compiled in 18ms
+[00:18:39.075] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:321:29
+Parsing ecmascript source code failed
+  319 |           <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6 text-center">
+  320 |             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+> 321 |               <Image src={}/>
+      |                             ^
+  322 |             </div>
+  323 |             <h1 className="text-2xl font-bold mb-1">OZONE MINERAL WATER</h1>
+  324 |             <p className="text-xs text-blue-100">Sip the Good Life</p>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:18:43.091] Browser ERROR   uncaughtError: Error: Image with src "/" is missing required "width" property.
+[00:18:43.370] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:18:43.718] Server  LOG      ✓ Compiled in 20ms
+[00:18:45.085] Browser ERROR   uncaughtError: Error: Image with src "/im" is missing required "width" property.
+[00:18:47.462] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:18:47.772] Server  LOG      ✓ Compiled in 14ms
+[00:18:49.082] Browser ERROR   uncaughtError: Error: Image with src "/images/" is missing required "width" property.
+[00:18:54.524] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:18:54.903] Server  LOG      ✓ Compiled in 16ms
+[00:18:55.888] Browser ERROR   uncaughtError: Error: Image with src "/images/logo2.png" is missing required "width" property.
+[00:19:24.138] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:19:24.662] Server  LOG      ✓ Compiled in 18ms
+[00:19:25.989] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+[00:19:42.487] Server  LOG      ✓ Compiled in 14ms
+[00:19:53.163] Server  LOG      ✓ Compiled in 18ms
+[00:19:53.793] Browser ERROR   uncaughtError: Error: Image with src "/images/logo2.png" is missing required "height" property.
+[00:20:00.337] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:20:00.347] Server  LOG      ✓ Compiled in 15ms
+[00:20:03.862] Server  LOG      ✓ Compiled in 20ms
+[00:25:27.014] Server  LOG      ✓ Compiled in 99ms
+[00:25:28.073] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:27:46.776] Server  LOG      ✓ Compiled in 102ms
+[00:28:06.908] Server  LOG      ✓ Compiled in 33ms
+[00:28:24.614] Server  LOG      ✓ Compiled in 61ms
+[00:28:29.695] Server  LOG      ✓ Compiled in 16ms
+[00:28:34.401] Server  LOG      ✓ Compiled in 79ms
+[00:29:09.265] Server  LOG      ✓ Compiled in 26ms
+[00:29:10.080] Browser ERROR   ./OZONE/ozone-water-1/src/app/receipt/page.jsx:485:36
+Parsing ecmascript source code failed
+  483 |           <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-2 text-center">
+  484 |             <p className="text-[10px]">
+> 485 |               OZONE © {new Date().()} | Thank you!
+      |                                    ^
+  486 |             </p>
+  487 |           </div>
+  488 |         </div>
+
+Expected '</', got '('
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/receipt/page.jsx [Server Component]
+[00:29:11.156] Browser ERROR   uncaughtError: TypeError: (intermediate value).to is not a function
+[00:29:13.606] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:29:13.631] Server  LOG      ✓ Compiled in 16ms
+[00:29:15.083] Browser ERROR   uncaughtError: TypeError: (intermediate value).tolo is not a function
+[00:29:16.693] Server  LOG      ✓ Compiled in 26ms
+[00:29:16.708] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:33:03.994] Server  LOG      ✓ Compiled in 131ms
+[00:33:54.231] Server  LOG      ✓ Compiled in 158ms
+[00:36:37.266] Server  LOG      ✓ Compiled in 126ms
+[00:37:36.469] Server  LOG      ✓ Compiled in 113ms
+[00:42:02.199] Server  LOG      ✓ Compiled in 91ms
+[00:42:51.532] Server  LOG      ✓ Compiled in 13ms
+[00:43:01.753] Server  LOG      ✓ Compiled in 14ms
+[00:43:02.081] Browser ERROR   uncaughtError: TypeError: (intermediate value).tolo is not a function
+[00:43:03.320] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:43:03.346] Server  LOG      ✓ Compiled in 25ms
+[00:45:12.922] Server  LOG      ✓ Compiled in 81ms
+[00:45:23.065] Server  LOG      ✓ Compiled in 17ms
+[00:45:42.609] Server  LOG      ✓ Compiled in 13ms
+[00:45:49.624] Server  LOG      ✓ Compiled in 14ms
+[00:46:15.777] Server  LOG      ✓ Compiled in 23ms
+[00:46:29.158] Server  LOG      ✓ Compiled in 17ms
+[00:46:36.425] Server  LOG      ✓ Compiled in 14ms
+[00:46:44.614] Server  LOG      ✓ Compiled in 32ms
+[00:46:50.777] Server  LOG      ✓ Compiled in 13ms
+[00:46:52.718] Server  LOG      ✓ Compiled in 21ms
+[00:47:05.105] Server  LOG      ✓ Compiled in 19ms
+[00:47:24.817] Server  LOG      ✓ Compiled in 17ms
+[00:47:28.185] Server  LOG      ✓ Compiled in 15ms
+[00:47:42.218] Server  LOG      ✓ Compiled in 14ms
+[00:47:52.937] Server  LOG      ✓ Compiled in 16ms

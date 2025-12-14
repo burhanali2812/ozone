@@ -31,7 +31,7 @@ export default function ManageRawItems() {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem("user2");
     if (!user) {
       router.push("/auth");
       return;
