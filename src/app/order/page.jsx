@@ -211,7 +211,7 @@ export default function Order() {
                       value={formData.whatsappContact}
                       onChange={handleFormChange}
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                      placeholder="+91 1234567890"
+                      placeholder="03XX-XXXXXXX"
                     />
                   </div>
                 </div>

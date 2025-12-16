@@ -35,19 +35,10 @@ export default function ContactSection() {
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
-                  <div className="text-2xl">📍</div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Address</h4>
-                    <p className="text-gray-600">
-                      123 Pure Water Lane, Mountain View, State 12345
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
                   <div className="text-2xl">📞</div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <p className="text-gray-600">0326-6783442</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -64,9 +55,9 @@ export default function ContactSection() {
                       Business Hours
                     </h4>
                     <p className="text-gray-600">
-                      Mon - Fri: 9:00 AM - 6:00 PM
+                      Mon - Fri: 9:00 AM - 7:00 PM
                     </p>
-                    <p className="text-gray-600">Sat: 10:00 AM - 4:00 PM</p>
+                    <p className="text-gray-600">Sat: 9:00 AM - 8:00 PM</p>
                   </div>
                 </div>
               </div>
