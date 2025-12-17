@@ -57,7 +57,7 @@ export default function OrderDashboard() {
     localStorage.clear();
     toast.success("Logged out successfully!");
     setShowMenu(false);
-    router.push("/auth");
+    router.push("/");
   };
 
   // Filter orders by both status and payment
@@ -822,170 +822,145 @@ export default function OrderDashboard() {
         </>
       )}
 
-      {/* Modal */}
-      {showModal && selectedOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-8">
-              {/* Modal Header */}
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Manage Order - {selectedOrder.id}
-                </h2>
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
+  {/* Modal */}
+{showModal && selectedOrder && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    
+    {/* Modal Box */}
+    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl h-[350px] flex flex-col">
+      
+      {/* Header (Fixed) */}
+      <div className="p-6 border-b flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-gray-900">
+          Manage Order - {selectedOrder.id}
+        </h2>
+        <button
+          onClick={() => setShowModal(false)}
+          className="text-gray-500 hover:text-gray-700 text-2xl"
+        >
+          ×
+        </button>
+      </div>
 
-              {/* Order Details */}
-              <div className="mb-6 p-4 bg-gray-50 rounded-xl">
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  {selectedOrder.shopName}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {selectedOrder.shopAddress}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {selectedOrder.shopContact}
-                </p>
-                <div className="mt-3">
-                  <p className="text-sm font-medium text-gray-700">Items:</p>
-                  {selectedOrder?.orderItems.map((item, idx) => (
-                    <p key={idx} className="text-sm text-gray-600">
-                      {item.size} × {item.quantity} = Rs.
-                      {item.price * item.quantity}/-
-                    </p>
-                  ))}
-                  <p className="text-lg font-bold text-gray-900 mt-2">
-                    Total: Rs. {selectedOrder.totalPrice}/-
-                  </p>
-                </div>
-              </div>
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto p-6">
+        
+        {/* Order Details */}
+        <div className="mb-6 p-4 bg-gray-50 rounded-xl">
+          <h3 className="font-semibold text-gray-900 mb-2">
+            {selectedOrder.shopName}
+          </h3>
+          <p className="text-sm text-gray-600">{selectedOrder.shopAddress}</p>
+          <p className="text-sm text-gray-600">{selectedOrder.shopContact}</p>
 
-              {/* Payment Status */}
-              <div className="mb-6">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Payment Status
-                </label>
-                <select
-                  value={modalData.paymentStatus}
-                  onChange={(e) =>
-                    setModalData({
-                      ...modalData,
-                      paymentStatus: e.target.value,
-                      remainingAmount:
-                        e.target.value === "paid"
-                          ? 0
-                          : e.target.value === "unpaid"
-                          ? selectedOrder.totalPrice
-                          : modalData.remainingAmount,
-                    })
-                  }
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                >
-                  <option value="unpaid">Unpaid</option>
-                  <option value="partially-paid">Partially Paid</option>
-                  <option value="paid">Paid</option>
-                </select>
-              </div>
-
-              {/* Paid Amount (if partially paid) */}
-              {modalData.paymentStatus === "partially-paid" && (
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">
-                    Remaining Amount
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    max={selectedOrder.totalPrice}
-                    value={modalData.remainingAmount}
-                    onChange={(e) =>
-                      setModalData({
-                        ...modalData,
-                        remainingAmount: Math.min(
-                          parseFloat(e.target.value) || 0,
-                          selectedOrder.totalPrice
-                        ),
-                      })
-                    }
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                  />
-                  <p className="text-sm text-green-600 mt-2 font-medium">
-                    Paid: Rs. {selectedOrder.paidAmount}/-
-                  </p>
-                  <p className="text-sm text-red-600 mt-1 font-medium">
-                    Remaining: Rs.{" "}
-                    {selectedOrder.remainingAmount - modalData.remainingAmount}
-                    /-
-                  </p>
-                </div>
-              )}
-
-              {/* Order Status */}
-              <div className="mb-6">
-                <label className="block text-gray-700 font-medium mb-2">
-                  Order Status
-                </label>
-                <select
-                  value={modalData.status}
-                  onChange={(e) =>
-                    setModalData({ ...modalData, status: e.target.value })
-                  }
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="in-transit">In Transit</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={handleUpdateOrder}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  Update Order
-                </button>
-                <button
-                  onClick={() => {
-                    setShowModal(false);
-                    setShowDeleteConfirm(true);
-                  }}
-                  className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center justify-center gap-2"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    />
-                  </svg>
-                  Delete Order
-                </button>
-              </div>
-
-              <button
-                onClick={() => setShowModal(false)}
-                className="w-full mt-3 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-              >
-                Cancel
-              </button>
-            </div>
+          <div className="mt-3">
+            <p className="text-sm font-medium text-gray-700">Items:</p>
+            {selectedOrder.orderItems.map((item, idx) => (
+              <p key={idx} className="text-sm text-gray-600">
+                {item.size} × {item.quantity} = Rs. {item.price * item.quantity}/-
+              </p>
+            ))}
+            <p className="text-lg font-bold text-gray-900 mt-2">
+              Total: Rs. {selectedOrder.totalPrice}/-
+            </p>
           </div>
         </div>
-      )}
+
+        {/* Payment Status */}
+        <div className="mb-6">
+          <label className="block text-gray-700 font-medium mb-2">
+            Payment Status
+          </label>
+          <select
+            value={modalData.paymentStatus}
+            onChange={(e) =>
+              setModalData({
+                ...modalData,
+                paymentStatus: e.target.value,
+                remainingAmount:
+                  e.target.value === "paid"
+                    ? 0
+                    : e.target.value === "unpaid"
+                    ? selectedOrder.totalPrice
+                    : modalData.remainingAmount,
+              })
+            }
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+          >
+            <option value="unpaid">Unpaid</option>
+            <option value="partially-paid">Partially Paid</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+
+        {/* Partial Payment */}
+        {modalData.paymentStatus === "partially-paid" && (
+          <div className="mb-6">
+            <label className="block text-gray-700 font-medium mb-2">
+              Remaining Amount
+            </label>
+            <input
+              type="number"
+              min="0"
+              max={selectedOrder.totalPrice}
+              value={modalData.remainingAmount}
+              onChange={(e) =>
+                setModalData({
+                  ...modalData,
+                  remainingAmount: Math.min(
+                    parseFloat(e.target.value) || 0,
+                    selectedOrder.totalPrice
+                  ),
+                })
+              }
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+            />
+          </div>
+        )}
+
+        {/* Order Status */}
+        <div className="mb-6">
+          <label className="block text-gray-700 font-medium mb-2">
+            Order Status
+          </label>
+          <select
+            value={modalData.status}
+            onChange={(e) =>
+              setModalData({ ...modalData, status: e.target.value })
+            }
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+          >
+            <option value="pending">Pending</option>
+            <option value="in-transit">In Transit</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Footer (Fixed) */}
+      <div className="p-6 border-t flex flex-col sm:flex-row gap-4">
+        <button
+          onClick={handleUpdateOrder}
+          className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-medium"
+        >
+          Update Order
+        </button>
+
+        <button
+          onClick={() => {
+            setShowModal(false);
+            setShowDeleteConfirm(true);
+          }}
+          className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 font-medium"
+        >
+          Delete Order
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
