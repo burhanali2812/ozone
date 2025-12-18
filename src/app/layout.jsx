@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import SidebarLayout from "../components/SidebarLayout";
 
 export const metadata = {
   title: "Ozone Mineral Water - Sip the Good Life",
@@ -12,11 +13,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased">
-        <div className="flex flex-col min-h-screen">
-        
-          <main className="flex-grow">{children}</main>
-   
-        </div>
+        <SidebarLayout>
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-grow">{children}</main>
+          </div>
+        </SidebarLayout>
       </body>
     </html>
   );

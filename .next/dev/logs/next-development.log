@@ -1,235 +1,425 @@
-[00:00:01.323] Server  LOG      ✓ Ready in 844ms
-[00:00:21.965] Server  LOG      ○ Compiling /auth ...
-[00:01:19.205] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
-[00:01:19.858] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:01:19.858] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:01:19.858] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:01:19.858] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:03:23.681] Server  LOG      ✓ Compiled in 82ms
-[00:03:29.137] Server  LOG      ✓ Compiled in 6ms
-[00:03:30.839] Server  LOG      ✓ Compiled in 12ms
-[00:04:29.999] Server  LOG      ✓ Compiled in 79ms
-[00:05:32.214] Server  LOG      ✓ Compiled in 78ms
-[00:05:35.460] Server  LOG      ✓ Compiled in 7ms
-[00:05:36.760] Server  LOG      ✓ Compiled in 10ms
-[00:05:38.535] Server  LOG      ✓ Compiled in 10ms
-[00:09:25.896] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
-[00:09:34.075] Server  LOG     MongoDB connected successfully
-[00:09:35.135] Browser LOG     User data: {"name":"Burhan Ali","phone":"03070452812","role":"customer"}
-[00:09:37.415] Server  LOG     MongoDB already connected
-[00:09:37.582] Server  LOG     MongoDB already connected
-[00:09:37.675] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6941902659a84919056209e7","createdAt":"2025-12-16T17:00:22.126Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":5040,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Hajab","shopContact":"03070452812","shopName":"Hello","status":"pending","totalPrice":5040,"updatedAt":"2025-12-17T13:32:39.640Z"},{"__v":0,"_id":"69418fca59a84919056209e3","createdAt":"2025-12-16T16:58:50.639Z","isDeleted":false,"orderItems":[{"price":260,"quantity":11,"size":"500ml"},{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":6,"size":"6liter"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":6580,"shopAddress":"Vskama","shopContact":"03070452812","shopName":"Zee mart","status":"pending","totalPrice":6580,"updatedAt":"2025-12-16T16:58:50.639Z"},{"__v":0,"_id":"693f26d46e52cff665b8b191","createdAt":"2025-12-14T21:06:28.618Z","isDeleted":false,"orderItems":[{"price":300,"quantity":10,"size":"1500ml"},{"price":260,"quantity":10,"size":"500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":13600,"paymentStatus":"unpaid","remainingAmount":-6800,"shopAddress":"Bsban","shopContact":"03368615830","shopName":"Mujhy kia malooom","status":"in-transit","totalPrice":6800,"updatedAt":"2025-12-16T16:55:38.611Z"},{"__v":0,"_id":"693f117d557c0ea5cf48d83a","createdAt":"2025-12-14T19:35:25.839Z","isDeleted":false,"orderItems":[{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"},{"price":260,"quantity":11,"size":"500ml"}],"paidAmount":7060,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Near street 21 ghouri town pahse 4 A","shopContact":"03125110579","shopName":"Punjab cash and carry","status":"cancelled","totalPrice":7060,"updatedAt":"2025-12-14T20:38:23.604Z"},{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":2500,"paymentStatus":"partially-paid","remainingAmount":3320,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-14T20:34:00.072Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:09:37.836] Browser LOG     Fetched Orders: [{"__v":0,"_id":"6941902659a84919056209e7","createdAt":"2025-12-16T17:00:22.126Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":5040,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Hajab","shopContact":"03070452812","shopName":"Hello","status":"pending","totalPrice":5040,"updatedAt":"2025-12-17T13:32:39.640Z"},{"__v":0,"_id":"69418fca59a84919056209e3","createdAt":"2025-12-16T16:58:50.639Z","isDeleted":false,"orderItems":[{"price":260,"quantity":11,"size":"500ml"},{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":6,"size":"6liter"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":6580,"shopAddress":"Vskama","shopContact":"03070452812","shopName":"Zee mart","status":"pending","totalPrice":6580,"updatedAt":"2025-12-16T16:58:50.639Z"},{"__v":0,"_id":"693f26d46e52cff665b8b191","createdAt":"2025-12-14T21:06:28.618Z","isDeleted":false,"orderItems":[{"price":300,"quantity":10,"size":"1500ml"},{"price":260,"quantity":10,"size":"500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":13600,"paymentStatus":"unpaid","remainingAmount":-6800,"shopAddress":"Bsban","shopContact":"03368615830","shopName":"Mujhy kia malooom","status":"in-transit","totalPrice":6800,"updatedAt":"2025-12-16T16:55:38.611Z"},{"__v":0,"_id":"693f117d557c0ea5cf48d83a","createdAt":"2025-12-14T19:35:25.839Z","isDeleted":false,"orderItems":[{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"},{"price":260,"quantity":11,"size":"500ml"}],"paidAmount":7060,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Near street 21 ghouri town pahse 4 A","shopContact":"03125110579","shopName":"Punjab cash and carry","status":"cancelled","totalPrice":7060,"updatedAt":"2025-12-14T20:38:23.604Z"},{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":2500,"paymentStatus":"partially-paid","remainingAmount":3320,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-14T20:34:00.072Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
-[00:09:54.574] Server  LOG     MongoDB already connected
-[00:09:54.669] Browser LOG     Update Payload: {"action":"update","orderId":"69418fca59a84919056209e3","updateData":{"paidAmount":6580,"paymentStatus":"paid","remainingAmount":0,"status":"completed"}}
-[00:09:54.812] Browser LOG     Order updated on server: {"__v":0,"_id":"69418fca59a84919056209e3","createdAt":"2025-12-16T16:58:50.639Z","isDeleted":false,"orderItems":[{"price":260,"quantity":11,"size":"500ml"},{"price":300,"quantity":10,"size":"1500ml"},{"price":120,"quantity":6,"size":"6liter"}],"paidAmount":6580,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Vskama","shopContact":"03070452812","shopName":"Zee mart","status":"completed","totalPrice":6580,"updatedAt":"2025-12-17T21:40:12.313Z"}
-[00:10:02.246] Browser LOG     WhatsApp Number: 03070452812
-[00:10:34.630] Browser LOG     WhatsApp Number: 03070452812
-[00:12:28.005] Server  LOG      ✓ Compiled in 11ms
-[00:12:29.475] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+[00:00:02.736] Server  LOG      ✓ Ready in 1906ms
+[00:00:09.231] Server  LOG      ○ Compiling / ...
+[00:00:14.022] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+[00:00:15.167] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:15.167] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:15.167] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:15.167] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:22.561] Server  LOG     MongoDB connected successfully
+[00:00:24.565] Server  LOG     MongoDB already connected
+[00:00:24.605] Server  LOG     MongoDB already connected
+[00:05:06.880] Server  LOG      ✓ Compiled in 29ms
+[00:07:06.738] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:07:06.738] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:07:06.738] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:07:06.738] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:07:16.920] Server  LOG     MongoDB already connected
+[00:07:17.195] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":5820,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T11:25:48.357Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:07:48.724] Server  LOG     MongoDB already connected
+[00:07:48.806] Browser LOG     Update Payload: {"action":"update","orderId":"693f05417cb0f8f1fca1a201","updateData":{"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"status":"pending"}}
+[00:07:48.992] Browser LOG     Order updated on server: {"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"}
+[00:07:50.760] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:08:05.869] Server  LOG     MongoDB already connected
+[00:08:05.880] Server  LOG     MongoDB already connected
+[00:09:56.954] Server  LOG      ✓ Compiled in 25ms
+[00:10:03.569] Server  LOG     MongoDB already connected
+[00:10:03.576] Server  LOG     MongoDB already connected
+[00:12:20.983] Server  LOG      ✓ Compiled in 249ms
+[00:12:21.701] Server  LOG     MongoDB already connected
+[00:12:21.712] Server  LOG     MongoDB already connected
+[00:12:54.816] Server  LOG     MongoDB already connected
+[00:12:54.884] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:12:54.983] Server  LOG     MongoDB already connected
+[00:13:03.291] Server  LOG     MongoDB already connected
+[00:13:03.420] Server  LOG     MongoDB already connected
+[00:13:03.524] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:13:03.662] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:13:11.074] Server  LOG      ✓ Compiled in 8ms
+[00:14:37.925] Server  LOG     MongoDB already connected
+[00:14:38.064] Server  LOG     MongoDB already connected
+[00:14:38.157] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:14:38.295] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:15:26.453] Server  LOG      ✓ Compiled in 5ms
+[00:15:56.848] Server  LOG      ✓ Compiled in 48ms
+[00:16:14.045] Server  LOG      ✓ Compiled in 36ms
+[00:16:54.072] Server  LOG     MongoDB already connected
+[00:16:54.209] Server  LOG     MongoDB already connected
+[00:16:54.318] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:16:54.449] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:18:31.113] Server  LOG      ✓ Compiled in 83ms
+[00:18:58.888] Server  LOG     MongoDB already connected
+[00:18:59.115] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:19:33.569] Server  LOG      ✓ Compiled in 58ms
+[00:20:38.618] Server  LOG      ✓ Compiled in 88ms
+[00:21:51.038] Browser LOG     Overlay clicked
+[00:21:53.082] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:21:53.192] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:21:53.192] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:21:56.846] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:21:56.846] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:22:01.546] Server  LOG     MongoDB already connected
+[00:22:02.383] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:22:19.438] Server  LOG      ✓ Compiled in 8ms
+[00:25:34.393] Server  LOG      ✓ Compiled in 72ms
+[00:25:52.661] Server  LOG      ✓ Compiled in 14ms
+[00:26:06.624] Server  LOG      ✓ Compiled in 34ms
+[00:26:19.729] Server  LOG      ✓ Compiled in 6ms
+[00:26:19.953] Browser ERROR   uncaughtError: ReferenceError: is is not defined
+[00:26:21.171] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:26:21.465] Server  LOG      ✓ Compiled in 6ms
+[00:26:21.479] Server  LOG     MongoDB already connected
+[00:26:22.051] Server  LOG     MongoDB already connected
+[00:26:22.967] Browser LOG     Fetched Orders: [{"__v":0,"_id":"693f05417cb0f8f1fca1a201","createdAt":"2025-12-14T18:43:13.733Z","isDeleted":false,"orderItems":[{"price":260,"quantity":3,"size":"500ml"},{"price":300,"quantity":12,"size":"1500ml"},{"price":120,"quantity":12,"size":"6liter"}],"paidAmount":8820,"paymentStatus":"partially-paid","remainingAmount":-3000,"shopAddress":"Near kb mart phase 4A","shopContact":"03125110579","shopName":"Zee Mart","status":"pending","totalPrice":5820,"updatedAt":"2025-12-18T19:23:07.978Z"},{"__v":0,"_id":"6939e991c8c498a8a38e65d7","createdAt":"2025-12-10T21:43:45.494Z","isDeleted":false,"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":6,"size":"1500ml"},{"price":120,"quantity":10,"size":"6liter"}],"paidAmount":4300,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town phase 4A","shopContact":"03266783442","shopName":"KB mart","status":"completed","totalPrice":4300,"updatedAt":"2025-12-10T21:45:38.329Z"},{"__v":0,"_id":"6939d60aad6693d00ee74b04","createdAt":"2025-12-10T20:20:26.084Z","isDeleted":false,"orderItems":[{"price":300,"quantity":12,"size":"1500ml"}],"paidAmount":3600,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"hello","shopContact":"03070452812","shopName":"Burhan Ali","status":"completed","totalPrice":3600,"updatedAt":"2025-12-10T21:12:35.823Z"}]
+[00:26:24.719] Server  LOG      ✓ Compiled in 145ms
+[00:26:24.966] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:262:4
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  260 |    {
+  261 |     isOpen %
+> 262 |    }
+      |    ^
+  263 |     </>
+  264 |   );
+  265 | }
 
-Expected 'from', got 'export'
+Expected '</', got '}'
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:32.480] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:26:25.666] Server  LOG      ✓ Compiled in 9ms
+[00:26:30.165] Server  LOG      ✓ Compiled in 9ms
+[00:26:30.993] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:264:4
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  262 |         
+  263 |     )
+> 264 |    }
+      |    ^
+  265 |     </>
+  266 |   );
+  267 | }
 
-Expected 'from', got 'export'
+Expected '</', got '}'
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:32.480] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:26:37.717] Server  LOG      ✓ Compiled in 35ms
+[00:27:52.765] Server  LOG      ✓ Compiled in 14ms
+[00:27:52.963] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:317:5
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  315 |     )
+  316 |    }
+> 317 |     </>
+      |     ^
+  318 |   );
+  319 | }
+  320 |
 
-Expected 'from', got 'export'
+Expression expected
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:32.480] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:27:52.963] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:317:6
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  315 |     )
+  316 |    }
+> 317 |     </>
+      |      ^^
+  318 |   );
+  319 | }
+  320 |
 
-Expected 'from', got 'export'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:32.480] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:29:07.555] Server  LOG      ✓ Compiled in 13ms
+[00:30:27.127] Server  LOG      ✓ Compiled in 69ms
+[00:30:30.376] Server  LOG      ✓ Compiled in 10ms
+[00:30:30.959] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:9:9
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+   7 |   const [isOpen, setIsOpen] = useState(true);
+   8 |   const pathname = usePathname();
+>  9 |   const us
+     |         ^^
+  10 |
+  11 |   const menuItems = [
+  12 |     {
 
-Expected 'from', got 'export'
+'const' declarations must be initialized
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:32.480] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:34.000] Server  LOG      ✓ Compiled in 8ms
+[00:30:34.960] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:11:3
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+   9 |   const user = 
+  10 |
+> 11 |   const menuItems = [
+     |   ^^^^^
+  12 |     {
+  13 |       name: "Dashboard",
+  14 |       icon: (
 
-Expected 'from', got 'export'
+Expression expected
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:34.472] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:38.934] Server  LOG      ✓ Compiled in 8ms
+[00:30:41.697] Server  LOG      ✓ Compiled in 10ms
+[00:30:50.972] Server  LOG      ✓ Compiled in 13ms
+[00:30:51.966] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:55
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{L}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{</p>
+      |                                                       ^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
 
-Expected 'from', got 'export'
+Expression expected
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:35.476] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:51.966] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:56
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{Li}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{</p>
+      |                                                        ^^^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
 
-Expected 'from', got 'export'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:37.475] Browser ERROR   ./OZONE/ozone-water-1/src/components/ContactSection.jsx:4:1
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:54.316] Server  LOG      ✓ Compiled in 13ms
+[00:30:54.960] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:59
 Parsing ecmascript source code failed
-  2 | import { useState } from "react";
-  3 | import{Link}
-> 4 | export default function ContactSection() {
-    | ^^^^^^
-  5 |   const [formData, setFormData] = useState({
-  6 |     name: "",
-  7 |     email: "",
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{use</p>
+      |                                                           ^^^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
 
-Expected 'from', got 'export'
+Unterminated regexp literal
 
 Import traces:
   Client Component Browser:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
 
   Client Component SSR:
-    ./OZONE/ozone-water-1/src/components/ContactSection.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/page.jsx [Server Component]
-[00:12:45.636] Server  LOG      ✓ Compiled in 11ms
-[00:15:34.307] Server  LOG      ✓ Compiled in 81ms
-[00:15:55.200] Server  LOG      ✓ Compiled in 100ms
-[00:17:28.176] Server  LOG      ✓ Compiled in 78ms
-[00:17:28.472] Browser ERROR   uncaughtError: ReferenceError: getWhatsAppUrl is not defined
-[00:17:55.954] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:17:55.978] Server  LOG      ✓ Compiled in 37ms
-[00:18:11.104] Browser LOG     WhatsApp Number: 03070452812
-[00:19:32.806] Server  LOG      ✓ Compiled in 116ms
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:57.387] Server  LOG      ✓ Compiled in 9ms
+[00:30:57.967] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:60
+Parsing ecmascript source code failed
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{user.</p>
+      |                                                            ^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:57.967] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:61
+Parsing ecmascript source code failed
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{user.</p>
+      |                                                             ^^^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:30:59.404] Server  LOG      ✓ Compiled in 13ms
+[00:30:59.954] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:65
+Parsing ecmascript source code failed
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{user.name</p>
+      |                                                                 ^^^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:31:02.965] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:311:66
+Parsing ecmascript source code failed
+  309 |               </div>
+  310 |               <div className="flex-1">
+> 311 |                 <p className="text-sm font-semibold">{user?.name</p>
+      |                                                                  ^^^
+  312 |                 <p className="text-xs text-purple-300">Admin</p>
+  313 |               </div>
+  314 |             </div>
+
+Unterminated regexp literal
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:31:21.783] Server  LOG      ✓ Compiled in 13ms
+[00:31:24.234] Server  LOG      ✓ Compiled in 9ms
+[00:31:38.275] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__98424751._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:31:38.279] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:32:11.514] Server  LOG      ✓ Compiled in 13ms
+[00:32:11.953] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /userSignup
+[00:32:17.309] Server  LOG      ✓ Compiled in 11ms
+[00:32:17.967] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /userSignup
+[00:32:20.192] Server  LOG      ✓ Compiled in 9ms
+[00:32:20.954] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /userSignup
+[00:32:22.519] Server  LOG      ✓ Compiled in 8ms
+[00:32:22.963] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /userSignup
+[00:32:23.851] Server  LOG      ✓ Compiled in 10ms
+[00:32:23.960] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /userSignup
+[00:32:26.309] Server  LOG      ✓ Compiled in 9ms
+[00:32:26.967] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /userSignup
+[00:32:45.627] Server  LOG      ✓ Compiled in 11ms
+[00:32:57.572] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__98424751._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:32:57.573] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:34:17.720] Server  LOG      ✓ Compiled in 79ms
+[00:34:26.587] Server  LOG      ✓ Compiled in 27ms
+[00:34:40.572] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:34:50.879] Server  LOG      ✓ Compiled in 9ms
+[00:35:11.733] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__98424751._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:35:11.734] Server  ERROR    ⨯ ReferenceError: localStorage is not defined
+[00:35:20.544] Server  LOG      ✓ Compiled in 0ms
