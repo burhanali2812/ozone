@@ -237,3 +237,8 @@ Import traces:
 [00:17:13.962] Server  LOG      ✓ Compiled in 8ms
 [00:17:17.066] Server  LOG      ✓ Compiled in 59ms
 [00:17:35.187] Server  LOG      ✓ Compiled in 10ms
+[00:18:44.017] Server  LOG     MongoDB already connected
+[00:18:44.037] Server  LOG     MongoDB already connected
+[00:18:44.152] Server  LOG     MongoDB already connected
+[00:18:44.163] Server  LOG     MongoDB already connected
+[00:22:21.461] Server  LOG      ✓ Compiled in 8ms
