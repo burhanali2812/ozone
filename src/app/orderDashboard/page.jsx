@@ -53,14 +53,9 @@ export default function OrderDashboard() {
     getOrders();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    toast.success("Logged out successfully!");
-    setShowMenu(false);
-    router.push("/");
-  };
 
-  // Filter orders by both status and payment
+
+
   const filteredOrders = orders.filter((order) => {
     const statusMatch = filterStatus === "all" || order.status === filterStatus;
     const paymentMatch =

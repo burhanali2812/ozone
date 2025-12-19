@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -7,12 +7,18 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
   const router = useRouter();
-  const user = JSON.parse(localStorage.getItem("user2")) || null;
+    const [user, setUser] = useState(null);
+   useEffect(() => {
+    const storedUser = localStorage.getItem("user2");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
     if (confirmLogout) {
-      localStorage.removeItem("user2");
+      localStorage.clear();
       router.push("/auth");
     }
   };

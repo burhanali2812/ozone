@@ -1,16 +1,5 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/api/orders/route": "app/api/orders/route.js",
-  "/api/supplier/route": "app/api/supplier/route.js",
-  "/api/transaction/route": "app/api/transaction/route.js",
-  "/auth/page": "app/auth/page.js",
-  "/order/page": "app/order/page.js",
-  "/orderDashboard/page": "app/orderDashboard/page.js",
-  "/page": "app/page.js",
-  "/rawItems/page": "app/rawItems/page.js",
-  "/receipt/page": "app/receipt/page.js",
-  "/stock_transactions/page": "app/stock_transactions/page.js",
-  "/supplierManage/page": "app/supplierManage/page.js",
-  "/transaction/page": "app/transaction/page.js",
-  "/userSignup/page": "app/userSignup/page.js"
+  "/orderDashboard/page": "app/orderDashboard/page.js"
 }
