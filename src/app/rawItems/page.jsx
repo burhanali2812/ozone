@@ -114,12 +114,7 @@ export default function RawItems() {
             </h1>
             <p className="text-gray-600">Add supplier and raw items details</p>
           </div>
-          <button
-            onClick={() => router.push("/orderDashboard")}
-            className="bg-gray-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-700 transition-colors font-medium shadow-lg whitespace-nowrap"
-          >
-            ← Back
-          </button>
+      
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">

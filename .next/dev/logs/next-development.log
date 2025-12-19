@@ -2,3 +2,238 @@
 [00:00:05.108] Server  LOG      ○ Compiling /orderDashboard ...
 [00:00:12.978] Server  LOG     MongoDB connected successfully
 [00:00:13.949] Browser LOG     Fetched Orders: []
+[00:09:28.936] Server  LOG      ✓ Compiled in 17ms
+[00:09:30.274] Server  LOG      ✓ Compiled in 57ms
+[00:09:30.599] Browser ERROR   Received `%s` for a non-boolean attribute `%s`.
+
+If you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}. true o o true o
+[00:09:31.508] Server  LOG      ✓ Compiled in 13ms
+[00:09:31.601] Browser ERROR   Received `%s` for a non-boolean attribute `%s`.
+
+If you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}. true on on true on
+[00:09:33.002] Server  LOG      ✓ Compiled in 21ms
+[00:09:33.599] Browser ERROR   Unknown event handler property `%s`. It will be ignored. onC
+[00:09:35.329] Server  LOG      ✓ Compiled in 36ms
+[00:09:35.610] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:307:25
+Parsing ecmascript source code failed
+  305 |                         href={item.path}
+  306 |                         onClick={}
+> 307 |                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+      |                         ^^^^^^^^^
+  308 |                           isActive
+  309 |                             ? "bg-white bg-opacity-20 text-white font-semibold shadow-lg"
+  310 |                             : "text-purple-200 hover:bg-white hover:bg-opacity-10 hover:text-white"
+
+Expected '</', got 'className'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:09:44.598] Browser ERROR   uncaughtError: ReferenceError: handle is not defined
+[00:09:50.194] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:09:50.476] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__d479a00d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:09:50.482] Server  ERROR    ⨯ ReferenceError: handleClicked is not defined
+[00:09:50.505] Server  LOG      ✓ Compiled in 10ms
+[00:09:51.604] Browser ERROR   uncaughtError: ReferenceError: handleClicked is not defined
+[00:09:53.422] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__98424751._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:09:53.424] Server  ERROR    ⨯ ReferenceError: handleClicked is not defined
+[00:10:00.728] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:10:00.925] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__d479a00d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:10:00.926] Server  ERROR    ⨯ ReferenceError: handleClicked is not defined
+[00:10:00.958] Server  LOG      ✓ Compiled in 10ms
+[00:10:01.688] Server  ERROR   E:\React Projects\NEXTJS PROJECTS\OZONE\ozone-water-1\.next\dev\server\chunks\ssr\[root-of-the-server]__98424751._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:10:01.753] Server  ERROR    ⨯ ReferenceError: handleClicked is not defined
+[00:10:01.790] Browser ERROR   uncaughtError: ReferenceError: handleClicked is not defined
+[00:10:02.471] Server  LOG      ✓ Compiled in 7ms
+[00:10:02.611] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:356:2
+Parsing ecmascript source code failed
+  354 |     </>
+  355 |   );
+> 356 | }
+      |  ^
+  357 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:03.598] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:356:2
+Parsing ecmascript source code failed
+  354 |     </>
+  355 |   );
+> 356 | }
+      |  ^
+  357 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:05.610] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:356:2
+Parsing ecmascript source code failed
+  354 |     </>
+  355 |   );
+> 356 | }
+      |  ^
+  357 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:05.610] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:356:2
+Parsing ecmascript source code failed
+  354 |     </>
+  355 |   );
+> 356 | }
+      |  ^
+  357 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:05.610] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:356:2
+Parsing ecmascript source code failed
+  354 |     </>
+  355 |   );
+> 356 | }
+      |  ^
+  357 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:05.610] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:356:2
+Parsing ecmascript source code failed
+  354 |     </>
+  355 |   );
+> 356 | }
+      |  ^
+  357 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:07.611] Browser ERROR   ./OZONE/ozone-water-1/src/components/Sidebar.jsx:360:2
+Parsing ecmascript source code failed
+  358 |     </>
+  359 |   );
+> 360 | }
+      |  ^
+  361 |
+
+Expected '}', got '<eof>'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/components/Sidebar.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/components/SidebarLayout.jsx [Server Component]
+    ./OZONE/ozone-water-1/src/app/layout.jsx [Server Component]
+[00:10:08.336] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:10:08.348] Server  LOG      ✓ Compiled in 12ms
+[00:10:09.107] Server  LOG     MongoDB already connected
+[00:10:09.613] Browser LOG     Fetched Orders: []
+[00:10:09.846] Server  LOG      ✓ Compiled in 8ms
+[00:10:22.589] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:10:22.652] Server  LOG     MongoDB already connected
+[00:10:22.803] Server  LOG     MongoDB already connected
+[00:10:24.785] Server  LOG     MongoDB already connected
+[00:10:24.915] Server  LOG     MongoDB already connected
+[00:10:24.929] Server  LOG     MongoDB already connected
+[00:10:25.897] Server  LOG     MongoDB already connected
+[00:10:26.592] Server  LOG     MongoDB already connected
+[00:10:26.722] Server  LOG     MongoDB already connected
+[00:10:44.292] Server  LOG     MongoDB already connected
+[00:10:44.429] Server  LOG     MongoDB already connected
+[00:12:34.763] Server  LOG      ✓ Compiled in 18ms
+[00:12:58.663] Server  LOG      ✓ Compiled in 34ms
+[00:13:15.284] Server  LOG      ✓ Compiled in 30ms
+[00:14:01.269] Server  LOG      ✓ Compiled in 11ms
+[00:14:06.634] Server  LOG      ✓ Compiled in 8ms
+[00:14:08.410] Server  LOG      ✓ Compiled in 7ms
+[00:15:32.644] Server  LOG      ✓ Compiled in 67ms
+[00:16:04.535] Server  LOG      ✓ Compiled in 9ms
+[00:16:05.940] Server  LOG      ✓ Compiled in 43ms
+[00:16:08.985] Server  LOG      ✓ Compiled in 8ms
+[00:17:13.962] Server  LOG      ✓ Compiled in 8ms
+[00:17:17.066] Server  LOG      ✓ Compiled in 59ms
+[00:17:35.187] Server  LOG      ✓ Compiled in 10ms
