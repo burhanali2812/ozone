@@ -303,8 +303,8 @@ function generateOrderEmailHTML(order) {
       <td style="padding: 12px; text-align: left;">${index + 1}</td>
       <td style="padding: 12px; text-align: left;">${item.size}</td>
       <td style="padding: 12px; text-align: center;">${item.quantity}</td>
-      <td style="padding: 12px; text-align: right;">₹${item.price.toFixed(2)}</td>
-      <td style="padding: 12px; text-align: right; font-weight: 600;">₹${(item.price * item.quantity).toFixed(2)}</td>
+      <td style="padding: 12px; text-align: right;">Rs.${item.price.toFixed(2)}</td>
+      <td style="padding: 12px; text-align: right; font-weight: 600;">Rs.${(item.price * item.quantity).toFixed(2)}</td>
     </tr>
   `).join("");
     return `
@@ -377,15 +377,15 @@ function generateOrderEmailHTML(order) {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Total Amount:</td>
-                <td style="padding: 8px 0; color: #1f2937; font-weight: 600; text-align: right; font-size: 16px;">₹${order.totalPrice.toFixed(2)}</td>
+                <td style="padding: 8px 0; color: #1f2937; font-weight: 600; text-align: right; font-size: 16px;">Rs.${order.totalPrice.toFixed(2)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Paid Amount:</td>
-                <td style="padding: 8px 0; color: #059669; font-weight: 600; text-align: right; font-size: 16px;">₹${(order.paidAmount || 0).toFixed(2)}</td>
+                <td style="padding: 8px 0; color: #059669; font-weight: 600; text-align: right; font-size: 16px;">Rs.${(order.paidAmount || 0).toFixed(2)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">Remaining Amount:</td>
-                <td style="padding: 8px 0; color: #dc2626; font-weight: 600; text-align: right; font-size: 16px;">₹${(order.remainingAmount || 0).toFixed(2)}</td>
+                <td style="padding: 8px 0; color: #dc2626; font-weight: 600; text-align: right; font-size: 16px;">Rs.${(order.remainingAmount || 0).toFixed(2)}</td>
               </tr>
               <tr style="border-top: 2px solid #e5e7eb;">
                 <td style="padding: 12px 0 0 0; color: #374151; font-weight: 600; font-size: 14px;">Payment Status:</td>

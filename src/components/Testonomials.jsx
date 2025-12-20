@@ -5,8 +5,6 @@ const testimonials = [
   {
     id: 1,
     name: "Ahmed Khan",
-    role: "Fitness Enthusiast",
-    image: "👨‍💼",
     rating: 5,
     review:
       "OZONE mineral water has become an essential part of my daily routine. The taste is pure and refreshing, and I love that it's enriched with natural minerals. Highly recommended!",
@@ -15,8 +13,6 @@ const testimonials = [
   {
     id: 2,
     name: "Fatima Ali",
-    role: "Health Blogger",
-    image: "👩‍💻",
     rating: 5,
     review:
       "As someone who writes about health and wellness, I'm very particular about water quality. OZONE delivers consistently pure and mineral-rich water. My family loves it!",
@@ -25,8 +21,6 @@ const testimonials = [
   {
     id: 3,
     name: "Hassan Raza",
-    role: "Restaurant Owner",
-    image: "👨‍🍳",
     rating: 5,
     review:
       "We've been using OZONE for our restaurant for over a year now. Our customers appreciate the quality, and the delivery service is always on time. Great product!",
@@ -35,8 +29,6 @@ const testimonials = [
   {
     id: 4,
     name: "Ayesha Malik",
-    role: "Working Mom",
-    image: "👩‍⚕️",
     rating: 5,
     review:
       "Perfect for my family! The different sizes make it easy to pack for school and work. My kids love the taste, and I love knowing they're drinking pure, healthy water.",
@@ -45,8 +37,6 @@ const testimonials = [
   {
     id: 5,
     name: "Usman Tariq",
-    role: "Gym Trainer",
-    image: "💪",
     rating: 5,
     review:
       "I recommend OZONE to all my clients. Proper hydration is crucial for fitness, and this water provides the minerals needed for optimal performance. Best choice!",
@@ -55,8 +45,6 @@ const testimonials = [
   {
     id: 6,
     name: "Sara Ahmed",
-    role: "Teacher",
-    image: "👩‍🏫",
     rating: 5,
     review:
       "Teaching requires staying hydrated throughout the day. OZONE water keeps me refreshed and energized. The 1.5L bottle is perfect for my classroom.",
@@ -65,8 +53,6 @@ const testimonials = [
   {
     id: 7,
     name: "Ali Hussain",
-    role: "Business Executive",
-    image: "👔",
     rating: 5,
     review:
       "Premium quality water at reasonable prices. We supply OZONE to our entire office. The bulk ordering process is smooth and delivery is always prompt.",
@@ -75,8 +61,6 @@ const testimonials = [
   {
     id: 8,
     name: "Zainab Fatima",
-    role: "Yoga Instructor",
-    image: "🧘‍♀️",
     rating: 5,
     review:
       "Pure, clean, and refreshing! OZONE water complements my healthy lifestyle perfectly. I can taste the difference in quality compared to other brands.",
@@ -86,7 +70,9 @@ const testimonials = [
 
 export default function Testimonials() {
   const [showAll, setShowAll] = useState(false);
-  const displayedTestimonials = showAll ? testimonials : testimonials.slice(0, 5);
+  const displayedTestimonials = showAll
+    ? testimonials
+    : testimonials.slice(0, 5);
 
   return (
     <section className="w-full py-16 sm:py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
@@ -138,16 +124,15 @@ export default function Testimonials() {
 
                   {/* Customer Info */}
                   <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
-                    <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full flex items-center justify-center text-3xl">
-                      {testimonial.image}
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-lg font-bold">
+                        {testimonial.name.charAt(0)}
+                      </span>
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-900">
                         {testimonial.name}
                       </h4>
-                      <p className="text-sm text-gray-600">
-                        {testimonial.role}
-                      </p>
                       <p className="text-xs text-blue-600 flex items-center gap-1 mt-1">
                         <svg
                           className="w-3 h-3"

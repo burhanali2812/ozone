@@ -51,10 +51,16 @@ export default function OrderDashboard() {
       setUserName("User");
     }
     getOrders();
+
+    // Auto-refresh orders every 20 minutes
+    const intervalId = setInterval(() => {
+      getOrders();
+      console.log("Auto-refreshing orders...");
+    }, 20 * 60 * 1000); // 20 minutes in milliseconds
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
-
-
-
 
   const filteredOrders = orders.filter((order) => {
     const statusMatch = filterStatus === "all" || order.status === filterStatus;
@@ -89,20 +95,16 @@ export default function OrderDashboard() {
             ? selectedOrder.totalPrice
             : selectedOrder.paidAmount + modalData.remainingAmount,
         remainingAmount:
-         modalData.paymentStatus === "paid"
+          modalData.paymentStatus === "paid"
             ? 0
-            :
-          selectedOrder.remainingAmount - modalData.remainingAmount,
+            : selectedOrder.remainingAmount - modalData.remainingAmount,
         status: modalData.status,
       },
-     
-
     };
-     console.log("Update Payload:", updatePayload);
+    console.log("Update Payload:", updatePayload);
     try {
       const response = await axios.put("/api/orders", updatePayload);
       if (response.data.success) {
- 
         setOrders(
           orders?.map((order) =>
             order._id === selectedOrder._id
@@ -119,17 +121,15 @@ export default function OrderDashboard() {
         console.log("Order updated on server:", response.data.order);
         const getUpdatedOrder = response.data.order;
         let finalStatus;
-        if (getUpdatedOrder.status === "in-transit"){
+        if (getUpdatedOrder.status === "in-transit") {
           finalStatus = "order-in-transit";
-        }
-        else if (getUpdatedOrder.status === "completed"){
+        } else if (getUpdatedOrder.status === "completed") {
           finalStatus = "order-delivered";
+        } else {
+          finalStatus = "pending";
         }
-       else{
-        finalStatus = "pending"
-       }
-       localStorage.setItem("receiptType", finalStatus);
-       localStorage.setItem("currentOrder", JSON.stringify(getUpdatedOrder));
+        localStorage.setItem("receiptType", finalStatus);
+        localStorage.setItem("currentOrder", JSON.stringify(getUpdatedOrder));
         toast.success("Order updated successfully!");
         setShowModal(false);
         router.push("/receipt");
@@ -199,7 +199,6 @@ export default function OrderDashboard() {
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Left - Menu Button & Heading */}
           <div className="flex items-center gap-4">
-        
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-2">
                 Order Dashboard
@@ -571,147 +570,146 @@ export default function OrderDashboard() {
         </div>
       </div>
 
-  
+      {/* Modal */}
+      {showModal && selectedOrder && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          {/* Modal Box */}
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl h-[350px] flex flex-col">
+            {/* Header (Fixed) */}
+            <div className="p-6 border-b flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Manage Order - {selectedOrder.id}
+              </h2>
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl"
+              >
+                ×
+              </button>
+            </div>
 
-  {/* Modal */}
-{showModal && selectedOrder && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    
-    {/* Modal Box */}
-    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl h-[350px] flex flex-col">
-      
-      {/* Header (Fixed) */}
-      <div className="p-6 border-b flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Manage Order - {selectedOrder.id}
-        </h2>
-        <button
-          onClick={() => setShowModal(false)}
-          className="text-gray-500 hover:text-gray-700 text-2xl"
-        >
-          ×
-        </button>
-      </div>
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto p-6">
+              {/* Order Details */}
+              <div className="mb-6 p-4 bg-gray-50 rounded-xl">
+                <h3 className="font-semibold text-gray-900 mb-2">
+                  {selectedOrder.shopName}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {selectedOrder.shopAddress}
+                </p>
+                <p className="text-sm text-gray-600">
+                  {selectedOrder.shopContact}
+                </p>
 
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto p-6">
-        
-        {/* Order Details */}
-        <div className="mb-6 p-4 bg-gray-50 rounded-xl">
-          <h3 className="font-semibold text-gray-900 mb-2">
-            {selectedOrder.shopName}
-          </h3>
-          <p className="text-sm text-gray-600">{selectedOrder.shopAddress}</p>
-          <p className="text-sm text-gray-600">{selectedOrder.shopContact}</p>
+                <div className="mt-3">
+                  <p className="text-sm font-medium text-gray-700">Items:</p>
+                  {selectedOrder.orderItems.map((item, idx) => (
+                    <p key={idx} className="text-sm text-gray-600">
+                      {item.size} × {item.quantity} = Rs.{" "}
+                      {item.price * item.quantity}/-
+                    </p>
+                  ))}
+                  <p className="text-lg font-bold text-gray-900 mt-2">
+                    Total: Rs. {selectedOrder.totalPrice}/-
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-3">
-            <p className="text-sm font-medium text-gray-700">Items:</p>
-            {selectedOrder.orderItems.map((item, idx) => (
-              <p key={idx} className="text-sm text-gray-600">
-                {item.size} × {item.quantity} = Rs. {item.price * item.quantity}/-
-              </p>
-            ))}
-            <p className="text-lg font-bold text-gray-900 mt-2">
-              Total: Rs. {selectedOrder.totalPrice}/-
-            </p>
+              {/* Payment Status */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-medium mb-2">
+                  Payment Status
+                </label>
+                <select
+                  value={modalData.paymentStatus}
+                  onChange={(e) =>
+                    setModalData({
+                      ...modalData,
+                      paymentStatus: e.target.value,
+                      remainingAmount:
+                        e.target.value === "paid"
+                          ? 0
+                          : e.target.value === "unpaid"
+                          ? selectedOrder.totalPrice
+                          : modalData.remainingAmount,
+                    })
+                  }
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                >
+                  <option value="unpaid">Unpaid</option>
+                  <option value="partially-paid">Partially Paid</option>
+                  <option value="paid">Paid</option>
+                </select>
+              </div>
+
+              {/* Partial Payment */}
+              {modalData.paymentStatus === "partially-paid" && (
+                <div className="mb-6">
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Remaining Amount
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    max={selectedOrder.totalPrice}
+                    value={modalData.remainingAmount}
+                    onChange={(e) =>
+                      setModalData({
+                        ...modalData,
+                        remainingAmount: Math.min(
+                          parseFloat(e.target.value) || 0,
+                          selectedOrder.totalPrice
+                        ),
+                      })
+                    }
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                  />
+                </div>
+              )}
+
+              {/* Order Status */}
+              <div className="mb-6">
+                <label className="block text-gray-700 font-medium mb-2">
+                  Order Status
+                </label>
+                <select
+                  value={modalData.status}
+                  onChange={(e) =>
+                    setModalData({ ...modalData, status: e.target.value })
+                  }
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="in-transit">In Transit</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Footer (Fixed) */}
+            <div className="p-6 border-t flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={handleUpdateOrder}
+                className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-medium"
+              >
+                Update Order
+              </button>
+
+              <button
+                onClick={() => {
+                  setShowModal(false);
+                  setShowDeleteConfirm(true);
+                }}
+                className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 font-medium"
+              >
+                Delete Order
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Payment Status */}
-        <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">
-            Payment Status
-          </label>
-          <select
-            value={modalData.paymentStatus}
-            onChange={(e) =>
-              setModalData({
-                ...modalData,
-                paymentStatus: e.target.value,
-                remainingAmount:
-                  e.target.value === "paid"
-                    ? 0
-                    : e.target.value === "unpaid"
-                    ? selectedOrder.totalPrice
-                    : modalData.remainingAmount,
-              })
-            }
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-          >
-            <option value="unpaid">Unpaid</option>
-            <option value="partially-paid">Partially Paid</option>
-            <option value="paid">Paid</option>
-          </select>
-        </div>
-
-        {/* Partial Payment */}
-        {modalData.paymentStatus === "partially-paid" && (
-          <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">
-              Remaining Amount
-            </label>
-            <input
-              type="number"
-              min="0"
-              max={selectedOrder.totalPrice}
-              value={modalData.remainingAmount}
-              onChange={(e) =>
-                setModalData({
-                  ...modalData,
-                  remainingAmount: Math.min(
-                    parseFloat(e.target.value) || 0,
-                    selectedOrder.totalPrice
-                  ),
-                })
-              }
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-            />
-          </div>
-        )}
-
-        {/* Order Status */}
-        <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">
-            Order Status
-          </label>
-          <select
-            value={modalData.status}
-            onChange={(e) =>
-              setModalData({ ...modalData, status: e.target.value })
-            }
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-          >
-            <option value="pending">Pending</option>
-            <option value="in-transit">In Transit</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Footer (Fixed) */}
-      <div className="p-6 border-t flex flex-col sm:flex-row gap-4">
-        <button
-          onClick={handleUpdateOrder}
-          className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-medium"
-        >
-          Update Order
-        </button>
-
-        <button
-          onClick={() => {
-            setShowModal(false);
-            setShowDeleteConfirm(true);
-          }}
-          className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 font-medium"
-        >
-          Delete Order
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+      )}
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (

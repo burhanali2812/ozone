@@ -767,7 +767,7 @@ module.exports = [
                                                           {
                                                             value: "500ml",
                                                             children:
-                                                              "500ml Bottle - Rs. 260/-",
+                                                              "500ml Bottle - Rs. 290/-",
                                                           },
                                                           void 0,
                                                           false,

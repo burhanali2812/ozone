@@ -682,7 +682,7 @@ const products = [
         title: "Pocket Size",
         description: "Perfect for on-the-go hydration",
         image: "/images/litter0.51.png",
-        price: "260",
+        price: "290",
         unit: "12 bottles",
         features: [
             "Compact & Portable",
@@ -2366,8 +2366,6 @@ const testimonials = [
     {
         id: 1,
         name: "Ahmed Khan",
-        role: "Fitness Enthusiast",
-        image: "👨‍💼",
         rating: 5,
         review: "OZONE mineral water has become an essential part of my daily routine. The taste is pure and refreshing, and I love that it's enriched with natural minerals. Highly recommended!",
         location: "Karachi"
@@ -2375,8 +2373,6 @@ const testimonials = [
     {
         id: 2,
         name: "Fatima Ali",
-        role: "Health Blogger",
-        image: "👩‍💻",
         rating: 5,
         review: "As someone who writes about health and wellness, I'm very particular about water quality. OZONE delivers consistently pure and mineral-rich water. My family loves it!",
         location: "Lahore"
@@ -2384,8 +2380,6 @@ const testimonials = [
     {
         id: 3,
         name: "Hassan Raza",
-        role: "Restaurant Owner",
-        image: "👨‍🍳",
         rating: 5,
         review: "We've been using OZONE for our restaurant for over a year now. Our customers appreciate the quality, and the delivery service is always on time. Great product!",
         location: "Islamabad"
@@ -2393,8 +2387,6 @@ const testimonials = [
     {
         id: 4,
         name: "Ayesha Malik",
-        role: "Working Mom",
-        image: "👩‍⚕️",
         rating: 5,
         review: "Perfect for my family! The different sizes make it easy to pack for school and work. My kids love the taste, and I love knowing they're drinking pure, healthy water.",
         location: "Rawalpindi"
@@ -2402,8 +2394,6 @@ const testimonials = [
     {
         id: 5,
         name: "Usman Tariq",
-        role: "Gym Trainer",
-        image: "💪",
         rating: 5,
         review: "I recommend OZONE to all my clients. Proper hydration is crucial for fitness, and this water provides the minerals needed for optimal performance. Best choice!",
         location: "Faisalabad"
@@ -2411,8 +2401,6 @@ const testimonials = [
     {
         id: 6,
         name: "Sara Ahmed",
-        role: "Teacher",
-        image: "👩‍🏫",
         rating: 5,
         review: "Teaching requires staying hydrated throughout the day. OZONE water keeps me refreshed and energized. The 1.5L bottle is perfect for my classroom.",
         location: "Multan"
@@ -2420,8 +2408,6 @@ const testimonials = [
     {
         id: 7,
         name: "Ali Hussain",
-        role: "Business Executive",
-        image: "👔",
         rating: 5,
         review: "Premium quality water at reasonable prices. We supply OZONE to our entire office. The bulk ordering process is smooth and delivery is always prompt.",
         location: "Karachi"
@@ -2429,8 +2415,6 @@ const testimonials = [
     {
         id: 8,
         name: "Zainab Fatima",
-        role: "Yoga Instructor",
-        image: "🧘‍♀️",
         rating: 5,
         review: "Pure, clean, and refreshing! OZONE water complements my healthy lifestyle perfectly. I can taste the difference in quality compared to other brands.",
         location: "Lahore"
@@ -2457,7 +2441,7 @@ function Testimonials() {
                                         children: "💬"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 97,
+                                        lineNumber: 83,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2465,13 +2449,13 @@ function Testimonials() {
                                         children: "Testimonials"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 98,
+                                        lineNumber: 84,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 96,
+                                lineNumber: 82,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -2479,7 +2463,7 @@ function Testimonials() {
                                 children: "What Our Customers Say"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 102,
+                                lineNumber: 88,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2487,13 +2471,13 @@ function Testimonials() {
                                 children: "Join thousands of satisfied customers who trust OZONE for their daily hydration needs"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 105,
+                                lineNumber: 91,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                        lineNumber: 95,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2525,17 +2509,17 @@ function Testimonials() {
                                                                 className: "jsx-6ab6e10fd789b520"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                                lineNumber: 129,
+                                                                lineNumber: 115,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, i, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                            lineNumber: 124,
+                                                            lineNumber: 110,
                                                             columnNumber: 23
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                    lineNumber: 122,
+                                                    lineNumber: 108,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2547,18 +2531,25 @@ function Testimonials() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                    lineNumber: 135,
+                                                    lineNumber: 121,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "jsx-6ab6e10fd789b520" + " " + "flex items-center gap-4 pt-6 border-t border-gray-100",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-6ab6e10fd789b520" + " " + "w-14 h-14 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full flex items-center justify-center text-3xl",
-                                                            children: testimonial.image
+                                                            className: "jsx-6ab6e10fd789b520" + " " + "w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                className: "jsx-6ab6e10fd789b520" + " " + "text-white text-lg font-bold",
+                                                                children: testimonial.name.charAt(0)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
+                                                                lineNumber: 128,
+                                                                columnNumber: 23
+                                                            }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                            lineNumber: 141,
+                                                            lineNumber: 127,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2569,15 +2560,7 @@ function Testimonials() {
                                                                     children: testimonial.name
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                                    lineNumber: 145,
-                                                                    columnNumber: 23
-                                                                }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                    className: "jsx-6ab6e10fd789b520" + " " + "text-sm text-gray-600",
-                                                                    children: testimonial.role
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                                    lineNumber: 148,
+                                                                    lineNumber: 133,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2594,47 +2577,47 @@ function Testimonials() {
                                                                                 className: "jsx-6ab6e10fd789b520"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                                                lineNumber: 157,
+                                                                                lineNumber: 142,
                                                                                 columnNumber: 27
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                                            lineNumber: 152,
+                                                                            lineNumber: 137,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         testimonial.location
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                                    lineNumber: 151,
+                                                                    lineNumber: 136,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                            lineNumber: 144,
+                                                            lineNumber: 132,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                                    lineNumber: 140,
+                                                    lineNumber: 126,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, testimonial.id, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                            lineNumber: 116,
+                                            lineNumber: 102,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                    lineNumber: 114,
+                                    lineNumber: 100,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 113,
+                                lineNumber: 99,
                                 columnNumber: 11
                             }, this),
                             !showAll && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2645,18 +2628,18 @@ function Testimonials() {
                                         className: "jsx-6ab6e10fd789b520" + " " + "w-2 h-2 rounded-full bg-blue-300"
                                     }, i, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 177,
+                                        lineNumber: 162,
                                         columnNumber: 19
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 174,
+                                lineNumber: 159,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                        lineNumber: 112,
+                        lineNumber: 98,
                         columnNumber: 9
                     }, this),
                     !showAll && testimonials.length > 5 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2670,7 +2653,7 @@ function Testimonials() {
                                     children: "View More Testimonials"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                    lineNumber: 194,
+                                    lineNumber: 179,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2686,12 +2669,12 @@ function Testimonials() {
                                         className: "jsx-6ab6e10fd789b520"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 201,
+                                        lineNumber: 186,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                    lineNumber: 195,
+                                    lineNumber: 180,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2702,18 +2685,18 @@ function Testimonials() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                    lineNumber: 208,
+                                    lineNumber: 193,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                            lineNumber: 190,
+                            lineNumber: 175,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                        lineNumber: 189,
+                        lineNumber: 174,
                         columnNumber: 11
                     }, this),
                     showAll && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2735,24 +2718,24 @@ function Testimonials() {
                                         className: "jsx-6ab6e10fd789b520"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 228,
+                                        lineNumber: 213,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                    lineNumber: 222,
+                                    lineNumber: 207,
                                     columnNumber: 15
                                 }, this),
                                 "Show Less"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                            lineNumber: 218,
+                            lineNumber: 203,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                        lineNumber: 217,
+                        lineNumber: 202,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2766,7 +2749,7 @@ function Testimonials() {
                                         children: "500+"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 243,
+                                        lineNumber: 228,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2774,13 +2757,13 @@ function Testimonials() {
                                         children: "Happy Customers"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 244,
+                                        lineNumber: 229,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 242,
+                                lineNumber: 227,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2791,7 +2774,7 @@ function Testimonials() {
                                         children: "4.9"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 247,
+                                        lineNumber: 232,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2799,13 +2782,13 @@ function Testimonials() {
                                         children: "Average Rating"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 248,
+                                        lineNumber: 233,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 246,
+                                lineNumber: 231,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2816,7 +2799,7 @@ function Testimonials() {
                                         children: "100%"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 251,
+                                        lineNumber: 236,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2824,13 +2807,13 @@ function Testimonials() {
                                         children: "Satisfaction Rate"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 252,
+                                        lineNumber: 237,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 250,
+                                lineNumber: 235,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2841,7 +2824,7 @@ function Testimonials() {
                                         children: "24/7"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 255,
+                                        lineNumber: 240,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2849,25 +2832,25 @@ function Testimonials() {
                                         children: "Support Available"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                        lineNumber: 256,
+                                        lineNumber: 241,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                                lineNumber: 254,
+                                lineNumber: 239,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                        lineNumber: 241,
+                        lineNumber: 226,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-                lineNumber: 93,
+                lineNumber: 79,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2877,7 +2860,7 @@ function Testimonials() {
         ]
     }, void 0, true, {
         fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
-        lineNumber: 92,
+        lineNumber: 78,
         columnNumber: 5
     }, this);
 }

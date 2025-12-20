@@ -23,7 +23,7 @@ export default function Order() {
   const [paidAmount, setPaidAmount] = useState(0);
 
   const productPrices = {
-    "500ml": 260,
+    "500ml": 290,
     "1500ml": 300,
     "6liter": 120,
   };
@@ -148,6 +148,20 @@ export default function Order() {
   const total = calculateTotal();
   const remaining = calculateRemaining();
 
+  // Check if form is valid for submission
+  const isFormValid = () => {
+    return (
+      formData.shopName.trim() !== "" &&
+      formData.shopAddress.trim() !== "" &&
+      formData.whatsappContact.trim() !== "" &&
+      orders.length > 0 &&
+      orders.every((order) => {
+        const qty = parseInt(order.quantity);
+        return qty > 0;
+      })
+    );
+  };
+
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-12">
       <Toaster />
@@ -239,7 +253,7 @@ export default function Order() {
                       }
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
                     >
-                      <option value="500ml">500ml Bottle - Rs. 260/-</option>
+                      <option value="500ml">500ml Bottle - Rs. 290/-</option>
                       <option value="1500ml">1500ml Bottle - Rs. 300/-</option>
                       <option value="6liter">6 Liter Bottle - Rs. 120/-</option>
                     </select>
@@ -454,15 +468,21 @@ export default function Order() {
 
                 <button
                   type="submit"
-                  disabled={
-                    orders.length === 0 ||
-                    !formData.shopName ||
-                    !formData.shopAddress ||
-                    !formData.whatsappContact
+                  disabled={!isFormValid()}
+                  className={`w-full mt-6 py-4 rounded-lg font-medium transition-all ${
+                    isFormValid()
+                      ? "bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg cursor-pointer"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                  title={
+                    !isFormValid()
+                      ? "Please fill all required fields and add at least one item"
+                      : "Click to place order"
                   }
-                  className="w-full mt-6 bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                  Place Order
+                  {isFormValid()
+                    ? "Place Order 🚀"
+                    : "Complete Form to Continue"}
                 </button>
               </div>
             </div>

@@ -1,75 +1,14 @@
-[00:00:02.523] Server  LOG      ✓ Ready in 1684ms
-[00:00:08.174] Server  LOG      ○ Compiling / ...
-[00:00:12.697] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
-[00:00:13.732] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:13.732] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:13.732] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:13.732] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:18.039] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
-[00:13:52.551] Server  LOG        Reload env: .env.local
-[00:13:52.625] Server  LOG      ✓ Compiled in 30ms
-[00:13:57.291] Server  LOG        Reload env: .env.local
-[00:14:04.811] Server  LOG        Reload env: .env.local
-[00:14:06.172] Server  LOG        Reload env: .env.local
-[00:14:08.790] Server  LOG        Reload env: .env.local
-[00:14:13.706] Server  LOG        Reload env: .env.local
-[00:14:19.486] Server  LOG        Reload env: .env.local
-[00:14:25.550] Server  LOG        Reload env: .env.local
-[00:15:21.396] Server  LOG      ✓ Compiled in 14ms
-[00:15:23.449] Server  LOG      ✓ Compiled in 36ms
-[00:15:23.938] Browser ERROR   ./OZONE/ozone-water-1/src/app/order/page.jsx:57:51
-Parsing ecmascript source code failed
-  55 |       }
-  56 |
-> 57 |       setCurrentOrder({ type: "500ml", quantity:  });
-     |                                                   ^
-  58 |     }
-  59 |   };
-  60 |
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Server Component]
-[00:15:25.952] Browser ERROR   ./OZONE/ozone-water-1/src/app/order/page.jsx:19:15
-Parsing ecmascript source code failed
-  17 |   const [currentOrder, setCurrentOrder] = useState({
-  18 |     type: "500ml",
-> 19 |     quantity: ,
-     |               ^
-  20 |   });
-  21 |
-  22 |   const [paymentStatus, setPaymentStatus] = useState("unpaid");
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Client Component Browser]
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Server Component]
-
-  Client Component SSR:
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Client Component SSR]
-    ./OZONE/ozone-water-1/src/app/order/page.jsx [Server Component]
-[00:17:37.680] Server  LOG      ✓ Compiled in 19ms
-[00:17:46.261] Server  LOG      ✓ Compiled in 44ms
-[00:20:02.232] Browser LOG     Order Submitted: {"orderItems":[{"price":260,"quantity":5,"size":"500ml"},{"price":300,"quantity":5,"size":"1500ml"},{"price":120,"quantity":5,"size":"6liter"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":3400,"shopAddress":"24 number street","shopContact":"03070452812","shopName":"Zee Mart","status":"pending","totalPrice":3400}
-[00:20:05.023] Server  LOG     Email server is ready to send messages
-[00:20:05.159] Server  LOG     MongoDB connected successfully
-[00:20:08.693] Server  LOG     Order notification email sent: "<11d325f8-9749-85c8-74a9-96079008df1a@gmail.com>"
-[00:23:12.264] Server  LOG      ✓ Compiled in 22ms
-[00:23:14.974] Server  LOG      ✓ Compiled in 52ms
-[00:23:18.210] Server  LOG      ✓ Compiled in 15ms
-[00:27:38.516] Server  LOG      ✓ Compiled in 79ms
-[00:28:16.963] Server  LOG      ✓ Compiled in 101ms
-[00:29:27.341] Server  LOG      ✓ Compiled in 25ms
-[00:31:38.015] Server  LOG      ✓ Compiled in 23ms
-[00:32:09.950] Server  LOG      ✓ Compiled in 20ms
-[00:32:24.287] Browser LOG     WhatsApp Number: 03070452812
-[00:34:37.012] Server  LOG      ✓ Compiled in 16ms
+[00:00:02.003] Server  LOG      ✓ Ready in 1254ms
+[00:00:05.095] Server  LOG      ○ Compiling /order ...
+[00:00:31.318] Browser LOG     Order Submitted: {"orderItems":[{"price":290,"quantity":5,"size":"500ml"},{"price":300,"quantity":5,"size":"1500ml"},{"price":120,"quantity":5,"size":"6liter"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":3550,"shopAddress":"jjkh","shopContact":"03070452812","shopName":"Burhan Ali","status":"pending","totalPrice":3550}
+[00:00:33.831] Server  LOG     MongoDB connected successfully
+[00:00:33.992] Server  LOG     Email server is ready to send messages
+[00:00:39.007] Server  LOG     Order notification email sent: "<8fbb5ac8-6bea-dbb4-98ed-3434d15d4ccd@gmail.com>"
+[00:04:40.066] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+[00:04:40.301] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:40.301] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:40.301] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:40.301] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:06:19.311] Server  LOG      ✓ Compiled in 14ms
+[00:06:27.961] Server  LOG      ✓ Compiled in 10ms
+[00:09:02.813] Browser LOG     Form submitted: {"email":"syedburhanali2812@gmail.com","message":"hi","name":"Burhan","phone":"03070452812"}

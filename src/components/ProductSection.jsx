@@ -10,7 +10,7 @@ const products = [
 		title: "Pocket Size",
 		description: "Perfect for on-the-go hydration",
 		image: "/images/litter0.51.png",
-		price: "260",
+		price: "290",
 		unit: "12 bottles",
 		features: [
 			"Compact & Portable",
