@@ -37,17 +37,14 @@ export default function Receipt() {
     const configs = {
       "order-placed": {
         title: "Order Placed Successfully",
-        icon: "✅",
         color: "#10b981",
       },
       "order-in-transit": {
         title: "Order In Transit",
-        icon: "🚚",
         color: "#3b82f6",
       },
       "order-delivered": {
         title: "Order Delivered",
-        icon: "📦",
         color: "#a855f7",
       },
       pending: {
@@ -221,16 +218,27 @@ export default function Receipt() {
   };
 
   const openWhatsAppWithImage = (whatsappNumber, imgData) => {
+    // Download the receipt image automatically
+    const link = document.createElement("a");
+    link.href = imgData;
+    link.download = `OZONE_Receipt_${orderData.shopName.replace(
+      /\s+/g,
+      "_"
+    )}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
     // Convert 03xx-xxxxxxx format to 923xxxxxxxxx
-    let formattedNumber = whatsappNumber.replace(/[-\s]/g, ""); // Remove dashes and spaces
+    let formattedNumber = whatsappNumber.replace(/[-\s]/g, "");
     if (formattedNumber.startsWith("0")) {
-      formattedNumber = "92" + formattedNumber.substring(1); // Replace leading 0 with 92
+      formattedNumber = "92" + formattedNumber.substring(1);
     }
 
     const typeConfig = getTypeConfig(receiptType);
     const message =
       `*🌊 OZONE MINERAL WATER*\n\n` +
-      `${typeConfig.icon} *${typeConfig.title}*\n` +
+      `*${typeConfig.title}*\n` +
       `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
       `*Shop:* ${orderData.shopName}\n` +
       `*Address:* ${orderData.shopAddress}\n` +
@@ -249,14 +257,17 @@ export default function Receipt() {
       (orderData.paymentStatus === "partially-paid"
         ? `*Paid:* Rs. ${orderData.paidAmount}/-\n*Remaining:* Rs. ${orderData.remainingAmount}/-\n`
         : "") +
-      `\n📸 Receipt image attached\nThank you! 💧`;
+      `\n\n📸 _Receipt downloaded! Please attach manually_\nThank you! 💧`;
 
+    // Open WhatsApp chat in new window
     const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodeURIComponent(
       message
     )}`;
 
-    window.open(whatsappUrl, "_blank");
-    toast.success("Opening WhatsApp... Please attach the screenshot manually");
+    setTimeout(() => {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      toast.success("Receipt downloaded! WhatsApp chat opened");
+    }, 500);
   };
 
   if (loading) {

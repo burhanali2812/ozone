@@ -16,7 +16,7 @@ export default function Order() {
   const [orders, setOrders] = useState([]);
   const [currentOrder, setCurrentOrder] = useState({
     type: "500ml",
-    quantity: 1,
+    quantity: "",
   });
 
   const [paymentStatus, setPaymentStatus] = useState("unpaid");
@@ -41,20 +41,23 @@ export default function Order() {
   };
 
   const handleAddOrder = () => {
-    if (currentOrder.quantity > 0) {
+    const qty = parseInt(currentOrder.quantity);
+    if (qty > 0) {
       const existingOrderIndex = orders.findIndex(
         (order) => order.type === currentOrder.type
       );
 
       if (existingOrderIndex !== -1) {
         const updatedOrders = [...orders];
-        updatedOrders[existingOrderIndex].quantity += currentOrder.quantity;
+        updatedOrders[existingOrderIndex].quantity += qty;
         setOrders(updatedOrders);
       } else {
-        setOrders([...orders, { ...currentOrder }]);
+        setOrders([...orders, { type: currentOrder.type, quantity: qty }]);
       }
 
-      setCurrentOrder({ type: "500ml", quantity: 1 });
+      setCurrentOrder({ type: "500ml", quantity: "" });
+    } else {
+      toast.error("Please enter a valid quantity");
     }
   };
 
@@ -63,16 +66,15 @@ export default function Order() {
   };
 
   const handleUpdateQuantity = (index, newQuantity) => {
-    if (newQuantity > 0) {
-      const updatedOrders = [...orders];
-      updatedOrders[index].quantity = parseInt(newQuantity);
-      setOrders(updatedOrders);
-    }
+    const updatedOrders = [...orders];
+    updatedOrders[index].quantity = newQuantity;
+    setOrders(updatedOrders);
   };
 
   const calculateTotal = () => {
     return orders.reduce((total, order) => {
-      return total + productPrices[order.type] * order.quantity;
+      const qty = parseInt(order.quantity) || 0;
+      return total + productPrices[order.type] * qty;
     }, 0);
   };
 
@@ -254,9 +256,10 @@ export default function Order() {
                       onChange={(e) =>
                         setCurrentOrder({
                           ...currentOrder,
-                          quantity: parseInt(e.target.value) || 1,
+                          quantity: e.target.value,
                         })
                       }
+                      placeholder="Enter quantity"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
                     />
                   </div>
@@ -302,6 +305,12 @@ export default function Order() {
                             onChange={(e) =>
                               handleUpdateQuantity(index, e.target.value)
                             }
+                            onBlur={(e) => {
+                              const qty = parseInt(e.target.value);
+                              if (!qty || qty < 1) {
+                                handleUpdateQuantity(index, 1);
+                              }
+                            }}
                             className="w-20 px-3 py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none"
                           />
                           <button

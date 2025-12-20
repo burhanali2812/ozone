@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "../../../../lib/db";
 import Order from "../../../../models/Order";
+import { sendOrderNotificationEmail } from "../../../../lib/emailService";
 
 export async function POST(request) {
   try {
@@ -10,16 +11,15 @@ export async function POST(request) {
       shopName,
       shopAddress,
       shopContact,
-      orderItems, 
-        paidAmount,
+      orderItems,
+      paidAmount,
       totalPrice,
       paymentStatus,
       remainingAmount,
       status,
     } = await request.json();
 
-
-    if (!shopName || !shopAddress || !shopContact ) {
+    if (!shopName || !shopAddress || !shopContact) {
       return NextResponse.json(
         { message: "Shop details are required" },
         { status: 400 }
@@ -35,7 +35,7 @@ export async function POST(request) {
 
     // Validate each item
     for (let item of orderItems) {
-      if (!item.size || !item.price || !item.quantity ) {
+      if (!item.size || !item.price || !item.quantity) {
         return NextResponse.json(
           { message: "Each order item must include size, price, and quantity" },
           { status: 400 }
@@ -64,6 +64,12 @@ export async function POST(request) {
 
     await newOrder.save();
 
+    // Send email notification to admin (non-blocking)
+    sendOrderNotificationEmail(newOrder).catch((err) => {
+      console.error("Failed to send order notification email:", err);
+      // Don't fail the order creation if email fails
+    });
+
     return NextResponse.json(
       { message: "Order placed successfully", order: newOrder },
       { status: 201 }
@@ -83,12 +89,16 @@ export async function GET(request) {
     const action = request.nextUrl.searchParams.get("action");
     let orders;
     if (action === "deleted") {
-      orders = await Order.find({ isDeleted: true }).sort({ createdAt: -1 });  
+      orders = await Order.find({ isDeleted: true }).sort({ createdAt: -1 });
     } else {
-
-     orders = await Order.find({ isDeleted: { $ne: true } }).sort({ createdAt: -1 });  
+      orders = await Order.find({ isDeleted: { $ne: true } }).sort({
+        createdAt: -1,
+      });
     }
-    return NextResponse.json({ success : true, message: "Orders fetched successfully", data:orders }, { status: 200 });
+    return NextResponse.json(
+      { success: true, message: "Orders fetched successfully", data: orders },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error fetching orders:", error);
     return NextResponse.json(
@@ -128,10 +138,7 @@ export async function PUT(request) {
     );
 
     if (!updatedOrder) {
-      return NextResponse.json(
-        { message: "Order not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: "Order not found" }, { status: 404 });
     }
 
     return NextResponse.json(
@@ -145,4 +152,3 @@ export async function PUT(request) {
     );
   }
 }
-
