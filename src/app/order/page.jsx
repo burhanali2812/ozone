@@ -17,6 +17,7 @@ export default function Order() {
   const [currentOrder, setCurrentOrder] = useState({
     type: "500ml",
     quantity: "",
+    customPrice: "",
   });
 
   const [paymentStatus, setPaymentStatus] = useState("unpaid");
@@ -42,9 +43,12 @@ export default function Order() {
 
   const handleAddOrder = () => {
     const qty = parseInt(currentOrder.quantity);
-    if (qty > 0) {
+    const price =
+      parseFloat(currentOrder.customPrice) || productPrices[currentOrder.type];
+
+    if (qty > 0 && price > 0) {
       const existingOrderIndex = orders.findIndex(
-        (order) => order.type === currentOrder.type
+        (order) => order.type === currentOrder.type && order.price === price
       );
 
       if (existingOrderIndex !== -1) {
@@ -52,12 +56,15 @@ export default function Order() {
         updatedOrders[existingOrderIndex].quantity += qty;
         setOrders(updatedOrders);
       } else {
-        setOrders([...orders, { type: currentOrder.type, quantity: qty }]);
+        setOrders([
+          ...orders,
+          { type: currentOrder.type, quantity: qty, price: price },
+        ]);
       }
 
-      setCurrentOrder({ type: "500ml", quantity: "" });
+      setCurrentOrder({ type: "500ml", quantity: "", customPrice: "" });
     } else {
-      toast.error("Please enter a valid quantity");
+      toast.error("Please enter a valid quantity and price");
     }
   };
 
@@ -71,10 +78,18 @@ export default function Order() {
     setOrders(updatedOrders);
   };
 
+  const handleUpdatePrice = (index, newPrice) => {
+    const updatedOrders = [...orders];
+    updatedOrders[index].price =
+      parseFloat(newPrice) || productPrices[updatedOrders[index].type];
+    setOrders(updatedOrders);
+  };
+
   const calculateTotal = () => {
     return orders.reduce((total, order) => {
       const qty = parseInt(order.quantity) || 0;
-      return total + productPrices[order.type] * qty;
+      const price = order.price || productPrices[order.type];
+      return total + price * qty;
     }, 0);
   };
 
@@ -108,7 +123,7 @@ export default function Order() {
       orderItems: orders.map((order) => ({
         size: order.type,
         quantity: order.quantity,
-        price: productPrices[order.type],
+        price: order.price || productPrices[order.type],
       })),
       totalPrice: total,
       paymentStatus: finalPaymentStatus,
@@ -122,6 +137,21 @@ export default function Order() {
     try {
       const res = await axios.post("/api/orders", orderPayload);
       if (res.data.message) {
+        // Update stock for each order item
+        try {
+          for (const order of orders) {
+            await axios.patch("/api/stock", {
+              productSize: order.type,
+              productType: order.type === "6liter" ? "pet" : "bottle",
+              quantityToReduce: order.quantity,
+            });
+          }
+          console.log("Stock updated successfully");
+        } catch (stockError) {
+          console.error("Error updating stock:", stockError);
+          toast.error("Order placed but stock update failed");
+        }
+
         toast.success(res.data.message || "Order placed successfully!");
         localStorage.setItem("receiptType", "order-placed");
         localStorage.setItem("currentOrder", JSON.stringify(res.data.order));
@@ -249,6 +279,7 @@ export default function Order() {
                         setCurrentOrder({
                           ...currentOrder,
                           type: e.target.value,
+                          customPrice: "",
                         })
                       }
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
@@ -257,6 +288,25 @@ export default function Order() {
                       <option value="1500ml">1500ml Bottle - Rs. 300/-</option>
                       <option value="6liter">6 Liter Bottle - Rs. 120/-</option>
                     </select>
+                  </div>
+
+                  <div className="w-full sm:w-32">
+                    <label className="block text-gray-700 font-medium mb-2">
+                      Custom Price
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={currentOrder.customPrice}
+                      onChange={(e) =>
+                        setCurrentOrder({
+                          ...currentOrder,
+                          customPrice: e.target.value,
+                        })
+                      }
+                      placeholder={productPrices[currentOrder.type]}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                    />
                   </div>
 
                   <div className="w-full sm:w-32">
@@ -306,27 +356,55 @@ export default function Order() {
                             {order.type === "6liter" && "6 Liter Bottle"}
                           </p>
                           <p className="text-sm text-gray-600">
-                            Rs. {productPrices[order.type]}/- × {order.quantity}{" "}
-                            = Rs.
-                            {productPrices[order.type] * order.quantity}/-
+                            Rs. {order.price || productPrices[order.type]}/- ×{" "}
+                            {order.quantity} = Rs.
+                            {(order.price || productPrices[order.type]) *
+                              order.quantity}
+                            /-
                           </p>
                         </div>
                         <div className="flex items-center gap-3">
-                          <input
-                            type="number"
-                            min="1"
-                            value={order.quantity}
-                            onChange={(e) =>
-                              handleUpdateQuantity(index, e.target.value)
-                            }
-                            onBlur={(e) => {
-                              const qty = parseInt(e.target.value);
-                              if (!qty || qty < 1) {
-                                handleUpdateQuantity(index, 1);
+                          <div>
+                            <label className="text-xs text-gray-600">
+                              Price
+                            </label>
+                            <input
+                              type="number"
+                              min="0"
+                              value={order.price || productPrices[order.type]}
+                              onChange={(e) =>
+                                handleUpdatePrice(index, e.target.value)
                               }
-                            }}
-                            className="w-20 px-3 py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none"
-                          />
+                              onBlur={(e) => {
+                                const price = parseFloat(e.target.value);
+                                if (!price || price < 0) {
+                                  handleUpdatePrice(
+                                    index,
+                                    productPrices[order.type]
+                                  );
+                                }
+                              }}
+                              className="w-20 px-3 py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-gray-600">Qty</label>
+                            <input
+                              type="number"
+                              min="1"
+                              value={order.quantity}
+                              onChange={(e) =>
+                                handleUpdateQuantity(index, e.target.value)
+                              }
+                              onBlur={(e) => {
+                                const qty = parseInt(e.target.value);
+                                if (!qty || qty < 1) {
+                                  handleUpdateQuantity(index, 1);
+                                }
+                              }}
+                              className="w-20 px-3 py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none"
+                            />
+                          </div>
                           <button
                             type="button"
                             onClick={() => handleRemoveOrder(index)}

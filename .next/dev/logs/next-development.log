@@ -1,14 +1,2 @@
-[00:00:02.003] Server  LOG      ✓ Ready in 1254ms
-[00:00:05.095] Server  LOG      ○ Compiling /order ...
-[00:00:31.318] Browser LOG     Order Submitted: {"orderItems":[{"price":290,"quantity":5,"size":"500ml"},{"price":300,"quantity":5,"size":"1500ml"},{"price":120,"quantity":5,"size":"6liter"}],"paidAmount":0,"paymentStatus":"unpaid","remainingAmount":3550,"shopAddress":"jjkh","shopContact":"03070452812","shopName":"Burhan Ali","status":"pending","totalPrice":3550}
-[00:00:33.831] Server  LOG     MongoDB connected successfully
-[00:00:33.992] Server  LOG     Email server is ready to send messages
-[00:00:39.007] Server  LOG     Order notification email sent: "<8fbb5ac8-6bea-dbb4-98ed-3434d15d4ccd@gmail.com>"
-[00:04:40.066] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
-[00:04:40.301] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:04:40.301] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:04:40.301] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:04:40.301] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:06:19.311] Server  LOG      ✓ Compiled in 14ms
-[00:06:27.961] Server  LOG      ✓ Compiled in 10ms
-[00:09:02.813] Browser LOG     Form submitted: {"email":"syedburhanali2812@gmail.com","message":"hi","name":"Burhan","phone":"03070452812"}
+[00:00:01.895] Server  LOG      ✓ Ready in 1198ms
+[00:00:04.992] Server  LOG      ○ Compiling /auth ...
