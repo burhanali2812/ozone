@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Toaster, toast } from "react-hot-toast";
 
 function StockManage() {
   const [stocks, setStocks] = useState([]);
@@ -23,14 +22,14 @@ function StockManage() {
     "1500ml": 6,
     "6liter": 1,
   };
-    const router = useRouter();
-    useEffect(() => {
+  const router = useRouter();
+  useEffect(() => {
     const user = localStorage.getItem("user2");
     if (!user) {
       router.push("/auth");
       return;
     }
-     fetchStocks();
+    fetchStocks();
   }, []);
 
   useEffect(() => {
@@ -89,7 +88,7 @@ function StockManage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-3 sm:p-4 md:p-6">
-        <Toaster />
+      <Toaster />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start items-center sm:items-center gap-4 mb-6 sm:mb-8 pt-3 sm:pt-0">

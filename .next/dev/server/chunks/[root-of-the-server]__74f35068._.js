@@ -108,6 +108,8 @@ const __TURBOPACK__default__export__ = Stock;
 __turbopack_context__.s([
     "GET",
     ()=>GET,
+    "PATCH",
+    ()=>PATCH,
     "POST",
     ()=>POST
 ]);
@@ -126,19 +128,38 @@ async function POST(request) {
                 status: 400
             });
         }
-        const newStock = new __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Stock$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"]({
+        // Check if stock with same productSize and producyType already exists
+        const existingStock = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Stock$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
             productSize,
-            producyType,
-            quantity,
-            costPerType
+            producyType
         });
-        await newStock.save();
-        return new Response(JSON.stringify({
-            message: "Stock added successfully",
-            stock: newStock
-        }), {
-            status: 201
-        });
+        if (existingStock) {
+            existingStock.quantity += quantity;
+            existingStock.costPerType = costPerType; // Update cost per type to latest
+            await existingStock.save();
+            return new Response(JSON.stringify({
+                message: "Stock updated successfully",
+                stock: existingStock,
+                action: "updated"
+            }), {
+                status: 200
+            });
+        } else {
+            const newStock = new __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Stock$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"]({
+                productSize,
+                producyType,
+                quantity,
+                costPerType
+            });
+            await newStock.save();
+            return new Response(JSON.stringify({
+                message: "Stock added successfully",
+                stock: newStock,
+                action: "created"
+            }), {
+                status: 201
+            });
+        }
     } catch (error) {
         console.error("Error adding stock:", error);
         return new Response(JSON.stringify({
@@ -161,6 +182,59 @@ async function GET(request) {
         });
     } catch (error) {
         console.error("Error fetching stocks:", error);
+        return new Response(JSON.stringify({
+            message: "Internal Server Error"
+        }), {
+            status: 500
+        });
+    }
+}
+async function PATCH(request) {
+    try {
+        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
+        const { productSize, producyType, quantityToReduce } = await request.json();
+        if (!productSize || !producyType || quantityToReduce === undefined || quantityToReduce <= 0) {
+            return new Response(JSON.stringify({
+                message: "Product size, product type, and valid quantity to reduce are required"
+            }), {
+                status: 400
+            });
+        }
+        // Find the stock entry for this product size and type
+        const stock = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Stock$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
+            productSize,
+            producyType
+        });
+        if (!stock) {
+            return new Response(JSON.stringify({
+                message: "No stock found for this product"
+            }), {
+                status: 404
+            });
+        }
+        // Check if sufficient stock is available
+        if (stock.quantity < quantityToReduce) {
+            return new Response(JSON.stringify({
+                message: "Insufficient stock",
+                available: stock.quantity,
+                requested: quantityToReduce
+            }), {
+                status: 400
+            });
+        }
+        // Reduce the quantity
+        stock.quantity -= quantityToReduce;
+        await stock.save();
+        return new Response(JSON.stringify({
+            message: "Stock reduced successfully",
+            reducedQuantity: quantityToReduce,
+            remainingQuantity: stock.quantity,
+            updatedStock: stock
+        }), {
+            status: 200
+        });
+    } catch (error) {
+        console.error("Error reducing stock:", error);
         return new Response(JSON.stringify({
             message: "Internal Server Error"
         }), {

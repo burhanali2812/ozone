@@ -68,6 +68,25 @@ export default function Sidebar() {
       ),
       path: "/order",
     },
+     {
+      name: "Stock Management",
+      icon: (
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2} 
+            d="M3 7v10a2 2 0 002 2h3m10-14h3a2 2 0 012 2v10a2 2 0 01-2 2h-3m-10 0H5a2 2 0 01-2-2V7a2 2 0 012-2h3m10 0V5a2 2 0 012-2h3a2 2 0 012 2v3m-5 4h.01M15 16h.01M9 16h.01M9 12h.01M15 12h.01"
+          />
+        </svg>
+      ),
+      path: "/stockManage",
+    },
     {
       name: "Transactions",
       icon: (
@@ -168,44 +187,6 @@ export default function Sidebar() {
         </svg>
       ),
       path: "/supplierManage",
-    },
-    {
-      name: "Receipt",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-          />
-        </svg>
-      ),
-      path: "/receipt",
-    },
-    {
-      name: "User Signup",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-          />
-        </svg>
-      ),
-      path: "/userSignup",
     },
   ];
 
