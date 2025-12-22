@@ -9,12 +9,10 @@ export default function Header() {
   const router = useRouter();
 
   const handleLogin = () => {
-    const existUSer = localStorage.getItem("user2");
-    if (existUSer) {
+    const user = localStorage.getItem("user2");
+    if (user) {
       router.push("/orderDashboard");
-      return;
-    }
-    else{
+    } else {
       router.push("/auth");
     }
   };
@@ -165,7 +163,7 @@ export default function Header() {
             <div className="flex flex-col space-y-2 pt-2">
               <button
                 onClick={() => {
-                  router.push("/auth");
+                  handleLogin();
                   setIsMenuOpen(false);
                 }}
                 className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all font-semibold flex items-center justify-center gap-2"
