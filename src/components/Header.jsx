@@ -8,6 +8,17 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
+  const handleLogin = () => {
+    const existUSer = localStorage.getItem("user2");
+    if (existUSer) {
+      router.push("/orderDashboard");
+      return;
+    }
+    else{
+      router.push("/auth");
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 shadow-lg">
       <nav className="container mx-auto px-4 sm:px-6 py-2">
@@ -64,7 +75,7 @@ export default function Header() {
           {/* Right Side Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
             <button
-              onClick={() => router.push("/auth")}
+              onClick={handleLogin}
               className="bg-white text-blue-600 px-5 py-2 rounded-lg hover:bg-blue-50 transition-all duration-300 font-semibold shadow-md hover:shadow-lg flex items-center gap-2"
             >
               <svg

@@ -18,6 +18,7 @@ export default function Auth() {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setLoading(true);
 
@@ -29,15 +30,19 @@ export default function Auth() {
 
       if (response.data.success) {
         toast.success("Login successful!");
-        localStorage.setItem("user2", JSON.stringify(response.data.user));
-        console.log("User data:", response.data.user);
-        setTimeout(() => {
-          router.push("/orderDashboard");
-        }, 1500);
+       
+          localStorage.setItem("user2", JSON.stringify(response.data.user));
+          console.log("User data:", response.data.user);
+          setTimeout(() => {
+            router.push("/orderDashboard");
+          }, 1500);
+        
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error(error.response?.data?.message || "Login failed. Please try again.");
+      toast.error(
+        error.response?.data?.message || "Login failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -45,7 +50,7 @@ export default function Auth() {
 
   return (
     <section className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center py-12 px-4">
-        <Toaster />
+      <Toaster />
       <div className="w-full max-w-md">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
