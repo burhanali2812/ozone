@@ -134,7 +134,7 @@ async function POST(request) {
             producyType
         });
         if (existingStock) {
-            existingStock.quantity += quantity;
+            existingStock.quantity += Number(quantity);
             existingStock.costPerType = costPerType; // Update cost per type to latest
             await existingStock.save();
             return new Response(JSON.stringify({

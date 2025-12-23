@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 
+
 export default function OrderDashboard() {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
@@ -81,64 +82,125 @@ export default function OrderDashboard() {
   };
 
   // Update order
-  const handleUpdateOrder = async () => {
-    const updatePayload = {
-      action: "update",
-      orderId: selectedOrder._id,
-      updateData: {
-        paymentStatus:
-          selectedOrder.remainingAmount - modalData.remainingAmount === 0
-            ? "paid"
-            : modalData.paymentStatus,
-        paidAmount:
-          modalData.paymentStatus === "paid"
-            ? selectedOrder.totalPrice
-            : selectedOrder.paidAmount + modalData.remainingAmount,
-        remainingAmount:
-          modalData.paymentStatus === "paid"
-            ? 0
-            : selectedOrder.remainingAmount - modalData.remainingAmount,
-        status: modalData.status,
-      },
-    };
-    console.log("Update Payload:", updatePayload);
-    try {
-      const response = await axios.put("/api/orders", updatePayload);
-      if (response.data.success) {
-        setOrders(
-          orders?.map((order) =>
-            order._id === selectedOrder._id
-              ? {
-                  ...order,
-                  paymentStatus: updatePayload.updateData.paymentStatus,
-                  paidAmount: updatePayload.updateData.paidAmount,
-                  remainingAmount: updatePayload.updateData.remainingAmount,
-                  status: updatePayload.updateData.status,
-                }
-              : order
-          )
-        );
-        console.log("Order updated on server:", response.data.order);
-        const getUpdatedOrder = response.data.order;
-        let finalStatus;
-        if (getUpdatedOrder.status === "in-transit") {
-          finalStatus = "order-in-transit";
-        } else if (getUpdatedOrder.status === "completed") {
-          finalStatus = "order-delivered";
-        } else {
-          finalStatus = "pending";
-        }
-        localStorage.setItem("receiptType", finalStatus);
-        localStorage.setItem("currentOrder", JSON.stringify(getUpdatedOrder));
-        toast.success("Order updated successfully!");
-        setShowModal(false);
-        router.push("/receipt");
-      }
-    } catch (error) {
-      toast.error("Failed to update order. Please try again.");
-      console.error("Error updating order:", error);
-    }
+const handleUpdateOrder = async () => {
+  const updatePayload = {
+    action: "update",
+    orderId: selectedOrder._id,
+    updateData: {
+      paymentStatus:
+        selectedOrder.remainingAmount - modalData.remainingAmount === 0
+          ? "paid"
+          : modalData.paymentStatus,
+
+      paidAmount:
+        modalData.paymentStatus === "paid"
+          ? selectedOrder.totalPrice
+          : selectedOrder.paidAmount + modalData.remainingAmount,
+
+      remainingAmount:
+        modalData.paymentStatus === "paid"
+          ? 0
+          : selectedOrder.remainingAmount - modalData.remainingAmount,
+
+      status: modalData.status,
+    },
   };
+
+  console.log("Update Payload:", updatePayload);
+
+  try {
+    //  Update Order
+    const response = await axios.put("/api/orders", updatePayload);
+
+    if (!response.data?.success) {
+      toast.error("Order update failed");
+      return;
+    }
+
+    const updatedOrder = response.data.order;
+
+    // Update UI State
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order._id === updatedOrder._id
+          ? {
+              ...order,
+              paymentStatus: updatedOrder.paymentStatus,
+              paidAmount: updatedOrder.paidAmount,
+              remainingAmount: updatedOrder.remainingAmount,
+              status: updatedOrder.status,
+            }
+          : order
+      )
+    );
+
+    console.log("Order updated on server:", updatedOrder);
+
+    //  Update Stock ONLY when order is completed
+    if (modalData.status === "completed") {
+      try {
+        for (const item of updatedOrder.orderItems) {
+          await axios.patch("/api/stock", {
+            productSize: item.size,
+            producyType: item.size === "6liter" ? "bottle" : "pet",
+            quantityToReduce: item.quantity,
+          });
+        }
+        console.log("Stock updated successfully");
+      } catch (stockError) {
+        console.error("Stock update error:", stockError);
+
+        if (stockError.response?.data?.error === "INSUFFICIENT_STOCK") {
+          toast.error(
+            `Insufficient stock!
+Available: ${stockError.response.data.available}
+Requested: ${stockError.response.data.requested}`
+          );
+          return;
+        }
+
+        toast.error(
+          stockError.response?.data?.message ||
+            "Order updated, but stock update failed"
+        );
+        return;
+      }
+    }
+
+    // Receipt Status
+    let finalStatus = "pending";
+    if (updatedOrder.status === "in-transit") {
+      finalStatus = "order-in-transit";
+    } else if (updatedOrder.status === "completed") {
+      finalStatus = "order-delivered";
+    }
+
+    localStorage.setItem("receiptType", finalStatus);
+    localStorage.setItem("currentOrder", JSON.stringify(updatedOrder));
+
+    toast.success("Order updated successfully!");
+    setShowModal(false);
+    router.push("/receipt");
+  } catch (error) {
+    console.error("Update order error:", error);
+
+    // Backend error
+    if (error.response) {
+      const { data } = error.response;
+      toast.error(data?.message || "Failed to update order");
+      return;
+    }
+
+    // Network error
+    if (error.request) {
+      toast.error("Server not responding. Please try again later.");
+      return;
+    }
+
+    toast.error("Unexpected error occurred");
+  }
+};
+
 
   // Delete order
   const handleDeleteOrder = async () => {

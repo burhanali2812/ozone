@@ -23,7 +23,7 @@ export async function POST(request) {
     const existingStock = await Stock.findOne({ productSize, producyType });
 
     if (existingStock) {
-      existingStock.quantity += quantity;
+      existingStock.quantity += Number(quantity);
       existingStock.costPerType = costPerType; // Update cost per type to latest
       await existingStock.save();
 

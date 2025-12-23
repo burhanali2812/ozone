@@ -101,6 +101,7 @@ export default function Order() {
     e.preventDefault();
 
     const total = calculateTotal();
+
     let finalPaymentStatus = paymentStatus;
     let finalPaidAmount = paidAmount;
     let finalRemainingAmount = total;
@@ -135,43 +136,49 @@ export default function Order() {
     console.log("Order Submitted:", orderPayload);
 
     try {
+      // Create Order
       const res = await axios.post("/api/orders", orderPayload);
-      if (res.data.message) {
-        // Update stock for each order item
-        try {
-          for (const order of orders) {
-            await axios.patch("/api/stock", {
-              productSize: order.type,
-              productType: order.type === "6liter" ? "pet" : "bottle",
-              quantityToReduce: order.quantity,
-            });
-          }
-          console.log("Stock updated successfully");
-        } catch (stockError) {
-          console.error("Error updating stock:", stockError);
-          toast.error("Order placed but stock update failed");
-        }
 
-        toast.success(res.data.message || "Order placed successfully!");
-        localStorage.setItem("receiptType", "order-placed");
-        localStorage.setItem("currentOrder", JSON.stringify(res.data.order));
-        setFormData({
-          shopName: "",
-          shopAddress: "",
-          whatsappContact: "",
-        });
-        setOrders([]);
-        setPaymentStatus("unpaid");
-        setPaidAmount(0);
-        if (user) {
-          router.push("/receipt");
-        }
-      } else {
-        router.push("/");
+      if (!res.data?.message) {
+        toast.error("Order creation failed");
+        return;
+      }
+
+      // Success Handling
+      toast.success(res.data.message || "Order placed successfully!");
+
+      localStorage.setItem("receiptType", "order-placed");
+      localStorage.setItem("currentOrder", JSON.stringify(res.data.order));
+
+      setFormData({
+        shopName: "",
+        shopAddress: "",
+        whatsappContact: "",
+      });
+      setOrders([]);
+      setPaymentStatus("unpaid");
+      setPaidAmount(0);
+
+      if (user) {
+        router.push("/receipt");
       }
     } catch (error) {
-      toast.error("Order placement failed. Please try again.");
       console.error("Order submission error:", error);
+
+      // Backend responded with an error
+      if (error.response) {
+        toast.error(error.response.data?.message || "Order placement failed");
+        return;
+      }
+
+      // Server not responding
+      if (error.request) {
+        toast.error("Server not responding. Please try again later.");
+        return;
+      }
+
+      // Unknown error
+      toast.error("Unexpected error occurred");
     }
   };
 
@@ -290,24 +297,26 @@ export default function Order() {
                     </select>
                   </div>
 
-                  <div className="w-full sm:w-32">
-                    <label className="block text-gray-700 font-medium mb-2">
-                      Custom Price
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={currentOrder.customPrice}
-                      onChange={(e) =>
-                        setCurrentOrder({
-                          ...currentOrder,
-                          customPrice: e.target.value,
-                        })
-                      }
-                      placeholder={productPrices[currentOrder.type]}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                    />
-                  </div>
+                  {user && (
+                    <div className="w-full sm:w-32">
+                      <label className="block text-gray-700 font-medium mb-2">
+                        Custom Price
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={currentOrder.customPrice}
+                        onChange={(e) =>
+                          setCurrentOrder({
+                            ...currentOrder,
+                            customPrice: e.target.value,
+                          })
+                        }
+                        placeholder={productPrices[currentOrder.type]}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                      />
+                    </div>
+                  )}
 
                   <div className="w-full sm:w-32">
                     <label className="block text-gray-700 font-medium mb-2">
@@ -364,29 +373,31 @@ export default function Order() {
                           </p>
                         </div>
                         <div className="flex items-center gap-3">
-                          <div>
-                            <label className="text-xs text-gray-600">
-                              Price
-                            </label>
-                            <input
-                              type="number"
-                              min="0"
-                              value={order.price || productPrices[order.type]}
-                              onChange={(e) =>
-                                handleUpdatePrice(index, e.target.value)
-                              }
-                              onBlur={(e) => {
-                                const price = parseFloat(e.target.value);
-                                if (!price || price < 0) {
-                                  handleUpdatePrice(
-                                    index,
-                                    productPrices[order.type]
-                                  );
+                          {user && (
+                            <div>
+                              <label className="text-xs text-gray-600">
+                                Price
+                              </label>
+                              <input
+                                type="number"
+                                min="0"
+                                value={order.price || productPrices[order.type]}
+                                onChange={(e) =>
+                                  handleUpdatePrice(index, e.target.value)
                                 }
-                              }}
-                              className="w-20 px-3 py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none"
-                            />
-                          </div>
+                                onBlur={(e) => {
+                                  const price = parseFloat(e.target.value);
+                                  if (!price || price < 0) {
+                                    handleUpdatePrice(
+                                      index,
+                                      productPrices[order.type]
+                                    );
+                                  }
+                                }}
+                                className="w-20 px-3 py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none"
+                              />
+                            </div>
+                          )}
                           <div>
                             <label className="text-xs text-gray-600">Qty</label>
                             <input
