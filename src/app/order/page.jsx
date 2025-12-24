@@ -24,9 +24,9 @@ export default function Order() {
   const [paidAmount, setPaidAmount] = useState(0);
 
   const productPrices = {
-    "500ml": 290,
-    "1500ml": 300,
-    "6liter": 120,
+    "500ml": 260,
+    "1500ml": 280,
+    "6liter": 110,
   };
 
   // Check for user in localStorage
@@ -291,9 +291,9 @@ export default function Order() {
                       }
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
                     >
-                      <option value="500ml">500ml Bottle - Rs. 290/-</option>
-                      <option value="1500ml">1500ml Bottle - Rs. 300/-</option>
-                      <option value="6liter">6 Liter Bottle - Rs. 120/-</option>
+                      <option value="500ml">500ml Pet(12 Bottles) - Rs. 260/-</option>
+                      <option value="1500ml">1500ml Pet(6 Bottles) - Rs. 280/-</option>
+                      <option value="6liter">6 Liter Bottle - Rs. 110/-</option>
                     </select>
                   </div>
 
@@ -320,7 +320,9 @@ export default function Order() {
 
                   <div className="w-full sm:w-32">
                     <label className="block text-gray-700 font-medium mb-2">
-                      Pet Quantity
+                      {
+                        currentOrder.type === "6liter" ? "Bottles Quantity" : "Number of Pets"
+                      }
                     </label>
                     <input
                       type="number"
