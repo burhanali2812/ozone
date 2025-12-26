@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import{useRouter} from 'next/navigation';
 import axios from "axios";
 
 export default function UserSignup() {
@@ -14,6 +15,14 @@ export default function UserSignup() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router=useRouter();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user2");
+    if (user) {
+      router.push("/");
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -10,7 +10,7 @@ const products = [
 		title: "Pocket Size",
 		description: "Perfect for on-the-go hydration",
 		image: "/images/litter0.51.png",
-		price: "290",
+		price: "260",
 		unit: "12 bottles",
 		features: [
 			"Compact & Portable",
@@ -27,7 +27,7 @@ const products = [
 		title: "Family Size",
 		description: "Ideal for home & office use",
 		image: "/images/litter1.51.png",
-		price: "300",
+		price: "280",
 		unit: "6 bottles",
 		features: ["Family Size", "Easy to Pour", "Premium Quality", "Value Pack"],
 		badge: "Best Value",
@@ -39,7 +39,7 @@ const products = [
 		title: "Mega Pack",
 		description: "Perfect for gatherings & events",
 		image: "/images/litter61.png",
-		price: "120",
+		price: "110",
 		unit: "Single",
 		features: [
 			"Large Capacity",

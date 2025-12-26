@@ -24,7 +24,7 @@ export async function POST(request) {
 
     if (existingStock) {
       existingStock.quantity += Number(quantity);
-      existingStock.costPerType = costPerType; // Update cost per type to latest
+      existingStock.costPerType = costPerType; 
       await existingStock.save();
 
       return new Response(
