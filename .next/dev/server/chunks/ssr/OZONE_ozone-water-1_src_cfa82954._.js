@@ -657,65 +657,86 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/image.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/navigation.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 "use client";
 ;
 ;
 ;
-const products = [
-    {
-        id: 1,
-        size: "500ml",
-        title: "Pocket Size",
-        description: "Perfect for on-the-go hydration",
-        image: "/images/litter0.51.png",
-        price: "290",
-        unit: "12 bottles",
-        features: [
-            "Compact & Portable",
-            "BPA-Free Bottle",
-            "Rich in Minerals",
-            "pH Balanced"
-        ],
-        badge: "Popular",
-        badgeColor: "bg-blue-500"
-    },
-    {
-        id: 2,
-        size: "1500ml",
-        title: "Family Size",
-        description: "Ideal for home & office use",
-        image: "/images/litter1.51.png",
-        price: "300",
-        unit: "6 bottles",
-        features: [
-            "Family Size",
-            "Easy to Pour",
-            "Premium Quality",
-            "Value Pack"
-        ],
-        badge: "Best Value",
-        badgeColor: "bg-green-500"
-    },
-    {
-        id: 3,
-        size: "6L",
-        title: "Mega Pack",
-        description: "Perfect for gatherings & events",
-        image: "/images/litter61.png",
-        price: "120",
-        unit: "Single",
-        features: [
-            "Large Capacity",
-            "Party Size",
-            "Cost Effective",
-            "Long Lasting"
-        ],
-        badge: "Economy",
-        badgeColor: "bg-purple-500"
+;
+// Helper function to get image based on size
+const getImageForSize = (size)=>{
+    switch(size){
+        case "500ml":
+            return "/images/litter0.51.png";
+        case "1500ml":
+            return "/images/litter1.51.png";
+        case "6L":
+            return "/images/litter61.png";
+        default:
+            return "/images/litter0.51.png";
     }
-];
+};
+// Helper function to get title based on size
+const getTitleForSize = (size)=>{
+    switch(size){
+        case "500ml":
+            return "Pocket Size";
+        case "1500ml":
+            return "Family Size";
+        case "6L":
+            return "Mega Pack";
+        default:
+            return "Water Bottle";
+    }
+};
+// Helper function to get description based on size
+const getDescriptionForSize = (size)=>{
+    switch(size){
+        case "500ml":
+            return "Perfect for on-the-go hydration";
+        case "1500ml":
+            return "Ideal for home & office use";
+        case "6L":
+            return "Perfect for gatherings & events";
+        default:
+            return "Premium mineral water";
+    }
+};
+// Helper function to get features based on product schema
+const getFeaturesForProduct = (product)=>{
+    const features = [];
+    if (product.waterQuality) {
+        features.push(`Water Quality: ${product.waterQuality}`);
+    }
+    if (product.bottleQuality) {
+        features.push(`Bottle Quality: ${product.bottleQuality}`);
+    }
+    if (product.packingType) {
+        features.push(`Packing Type: ${product.packingType}`);
+    }
+    return features;
+};
 function ProductSection() {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
+    const [products, setProducts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    // Fetch products from API
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        const fetchProducts = async ()=>{
+            try {
+                const response = await fetch("/api/product");
+                const data = await response.json();
+                if (data.success && data.products) {
+                    setProducts(data.products);
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            } finally{
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
     const gotoOrderPage = ()=>{
         router.push("/order");
     };
@@ -730,21 +751,21 @@ function ProductSection() {
                         className: "absolute top-0 left-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl"
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                        lineNumber: 69,
-                        columnNumber: 5
+                        lineNumber: 103,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl"
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                        lineNumber: 70,
-                        columnNumber: 5
+                        lineNumber: 104,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                lineNumber: 68,
-                columnNumber: 4
+                lineNumber: 102,
+                columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "container mx-auto px-4 sm:px-6 relative z-10",
@@ -760,200 +781,245 @@ function ProductSection() {
                                         children: "💧"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 77,
-                                        columnNumber: 7
+                                        lineNumber: 111,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-sm font-semibold text-blue-700",
                                         children: "Our Products"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 78,
-                                        columnNumber: 7
+                                        lineNumber: 112,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                lineNumber: 76,
-                                columnNumber: 6
+                                lineNumber: 110,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                 className: "text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4",
                                 children: "Choose Your Perfect Size"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                lineNumber: 82,
-                                columnNumber: 6
+                                lineNumber: 116,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto",
                                 children: "Premium mineral water available in three convenient sizes to fit your lifestyle"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                lineNumber: 85,
-                                columnNumber: 6
+                                lineNumber: 119,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                        lineNumber: 75,
-                        columnNumber: 5
+                        lineNumber: 109,
+                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12",
+                        className: "grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12",
                         children: [
-                            products.map((product, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "col-span-full flex items-center justify-center py-20",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"
+                                }, void 0, false, {
+                                    fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                    lineNumber: 129,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                lineNumber: 128,
+                                columnNumber: 13
+                            }, this) : products.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "col-span-full text-center py-20",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-xl text-gray-600",
+                                    children: "No products available"
+                                }, void 0, false, {
+                                    fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                    lineNumber: 133,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                lineNumber: 132,
+                                columnNumber: 13
+                            }, this) : products.map((product, index)=>{
+                                const productImage = getImageForSize(product.size);
+                                const productTitle = getTitleForSize(product.size);
+                                const productDescription = getDescriptionForSize(product.size);
+                                const productFeatures = getFeaturesForProduct(product);
+                                // Determine badge based on size or quality
+                                let badge = "Premium";
+                                let badgeColor = "bg-blue-500";
+                                if (product.size === "500ml") {
+                                    badge = "Popular";
+                                    badgeColor = "bg-blue-500";
+                                } else if (product.size === "1500ml") {
+                                    badge = "Best Value";
+                                    badgeColor = "bg-green-500";
+                                } else if (product.size === "6L") {
+                                    badge = "Economy";
+                                    badgeColor = "bg-purple-500";
+                                }
+                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2",
                                     style: {
                                         animationDelay: `${index * 100}ms`
                                     },
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: `absolute top-4 right-4 ${product.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-lg`,
-                                            children: product.badge
+                                            className: `absolute top-4 right-4 ${badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-lg`,
+                                            children: badge
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                            lineNumber: 102,
-                                            columnNumber: 8
+                                            lineNumber: 165,
+                                            columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "relative h-64 sm:h-72 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center overflow-hidden",
+                                            className: "relative h-40 sm:h-48 lg:h-56 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center overflow-hidden",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "absolute inset-0 bg-gradient-to-br from-blue-200 to-cyan-200 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-2xl"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 111,
-                                                    columnNumber: 9
+                                                    lineNumber: 174,
+                                                    columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "relative z-10 w-full h-full flex items-center justify-center p-8",
+                                                    className: "relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                        src: product.image,
+                                                        src: productImage,
                                                         alt: `${product.size} Ozone Mineral Water`,
-                                                        width: 200,
-                                                        height: 250,
+                                                        width: 150,
+                                                        height: 180,
                                                         className: "object-contain drop-shadow-2xl transform group-hover:scale-110 transition-transform duration-500"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                        lineNumber: 114,
-                                                        columnNumber: 10
+                                                        lineNumber: 177,
+                                                        columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 113,
-                                                    columnNumber: 9
+                                                    lineNumber: 176,
+                                                    columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "absolute inset-0 flex items-center justify-center pointer-events-none",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "w-48 h-48 border-2 border-blue-200 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-700"
+                                                        className: "w-32 h-32 sm:w-40 sm:h-40 border-2 border-blue-200 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-700"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                        lineNumber: 125,
-                                                        columnNumber: 10
+                                                        lineNumber: 188,
+                                                        columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 124,
-                                                    columnNumber: 9
+                                                    lineNumber: 187,
+                                                    columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                            lineNumber: 109,
-                                            columnNumber: 8
+                                            lineNumber: 172,
+                                            columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "p-6 sm:p-8",
+                                            className: "p-3 sm:p-4 lg:p-6",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "text-center mb-4",
+                                                    className: "text-center mb-2 sm:mb-3",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                            className: "text-3xl sm:text-4xl font-bold text-gray-900 mb-1",
+                                                            className: "text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1",
                                                             children: product.size
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                            lineNumber: 133,
-                                                            columnNumber: 10
+                                                            lineNumber: 196,
+                                                            columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                            className: "text-blue-600 font-semibold text-lg",
-                                                            children: product.title
+                                                            className: "text-blue-600 font-semibold text-sm sm:text-base",
+                                                            children: productTitle
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                            lineNumber: 136,
-                                                            columnNumber: 10
+                                                            lineNumber: 199,
+                                                            columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                            className: "text-gray-600 text-sm mt-2",
-                                                            children: product.description
+                                                            className: "text-gray-600 text-xs sm:text-sm mt-1 hidden sm:block",
+                                                            children: productDescription
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                            lineNumber: 139,
-                                                            columnNumber: 10
+                                                            lineNumber: 202,
+                                                            columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 132,
-                                                    columnNumber: 9
+                                                    lineNumber: 195,
+                                                    columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 mb-4 text-center",
+                                                    className: "bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg sm:rounded-xl p-2 sm:p-3 mb-2 sm:mb-3 text-center",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "flex items-baseline justify-center gap-1",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "text-2xl sm:text-3xl font-bold text-blue-600",
+                                                                    className: "text-lg sm:text-xl lg:text-2xl font-bold text-blue-600",
                                                                     children: [
                                                                         "Rs. ",
                                                                         product.price
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                    lineNumber: 147,
-                                                                    columnNumber: 11
+                                                                    lineNumber: 210,
+                                                                    columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "text-gray-600 text-sm",
+                                                                    className: "text-gray-600 text-xs",
                                                                     children: "/-"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                    lineNumber: 150,
-                                                                    columnNumber: 11
+                                                                    lineNumber: 213,
+                                                                    columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                            lineNumber: 146,
-                                                            columnNumber: 10
+                                                            lineNumber: 209,
+                                                            columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                            className: "text-gray-600 text-xs mt-1",
-                                                            children: product.unit
+                                                            className: "text-gray-600 text-xs mt-1 truncate",
+                                                            children: product.packingType
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                            lineNumber: 152,
-                                                            columnNumber: 10
+                                                            lineNumber: 215,
+                                                            columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 145,
-                                                    columnNumber: 9
+                                                    lineNumber: 208,
+                                                    columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "space-y-2 mb-6",
-                                                    children: product.features.map((feature, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "flex items-center text-sm text-gray-700",
+                                                    className: "space-y-1 sm:space-y-1.5 mb-3 sm:mb-4",
+                                                    children: productFeatures.map((feature, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "flex items-center text-xs sm:text-sm text-gray-700",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0",
+                                                                    className: "w-4 h-4 sm:w-5 sm:h-5 bg-blue-100 rounded-full flex items-center justify-center mr-1.5 sm:mr-2 flex-shrink-0",
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                                        className: "w-3 h-3 text-blue-600",
+                                                                        className: "w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-600",
                                                                         fill: "none",
                                                                         stroke: "currentColor",
                                                                         viewBox: "0 0 24 24",
@@ -964,139 +1030,70 @@ function ProductSection() {
                                                                             d: "M5 13l4 4L19 7"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                            lineNumber: 171,
-                                                                            columnNumber: 14
+                                                                            lineNumber: 234,
+                                                                            columnNumber: 31
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                        lineNumber: 165,
-                                                                        columnNumber: 13
+                                                                        lineNumber: 228,
+                                                                        columnNumber: 29
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                    lineNumber: 164,
-                                                                    columnNumber: 12
+                                                                    lineNumber: 227,
+                                                                    columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                     children: feature
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                    lineNumber: 179,
-                                                                    columnNumber: 12
+                                                                    lineNumber: 242,
+                                                                    columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, idx, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                            lineNumber: 160,
-                                                            columnNumber: 11
+                                                            lineNumber: 223,
+                                                            columnNumber: 25
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 158,
-                                                    columnNumber: 9
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "pt-4 border-t border-gray-100",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "flex items-center justify-between text-sm text-gray-600",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "flex items-center gap-1",
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                                        className: "w-4 h-4 text-green-600",
-                                                                        fill: "currentColor",
-                                                                        viewBox: "0 0 20 20",
-                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                                            fillRule: "evenodd",
-                                                                            d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z",
-                                                                            clipRule: "evenodd"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                            lineNumber: 193,
-                                                                            columnNumber: 13
-                                                                        }, this)
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                        lineNumber: 188,
-                                                                        columnNumber: 12
-                                                                    }, this),
-                                                                    "Pure & Safe"
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                lineNumber: 187,
-                                                                columnNumber: 11
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "flex items-center gap-1",
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                                        className: "w-4 h-4 text-blue-600",
-                                                                        fill: "currentColor",
-                                                                        viewBox: "0 0 20 20",
-                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                                            d: "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                            lineNumber: 207,
-                                                                            columnNumber: 13
-                                                                        }, this)
-                                                                    }, void 0, false, {
-                                                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                        lineNumber: 202,
-                                                                        columnNumber: 12
-                                                                    }, this),
-                                                                    "Premium Quality"
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                                lineNumber: 201,
-                                                                columnNumber: 11
-                                                            }, this)
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                        lineNumber: 186,
-                                                        columnNumber: 10
-                                                    }, this)
-                                                }, void 0, false, {
-                                                    fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 185,
-                                                    columnNumber: 9
+                                                    lineNumber: 221,
+                                                    columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                            lineNumber: 130,
-                                            columnNumber: 8
+                                            lineNumber: 193,
+                                            columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "absolute inset-0 bg-gradient-to-t from-blue-600 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                            lineNumber: 216,
-                                            columnNumber: 8
+                                            lineNumber: 249,
+                                            columnNumber: 19
                                         }, this)
                                     ]
-                                }, product.id, true, {
+                                }, product._id, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                    lineNumber: 94,
-                                    columnNumber: 7
-                                }, this)),
+                                    lineNumber: 157,
+                                    columnNumber: 17
+                                }, this);
+                            }),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "text-center",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: gotoOrderPage,
-                                        className: "group inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300",
+                                        className: "group inline-flex  items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: "Order Now"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 226,
-                                                columnNumber: 8
+                                                lineNumber: 261,
+                                                columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                 className: "w-6 h-6 group-hover:translate-x-1 transition-transform",
@@ -1110,160 +1107,160 @@ function ProductSection() {
                                                     d: "M13 7l5 5m0 0l-5 5m5-5H6"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                    lineNumber: 233,
-                                                    columnNumber: 9
+                                                    lineNumber: 268,
+                                                    columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 227,
-                                                columnNumber: 8
+                                                lineNumber: 262,
+                                                columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 222,
-                                        columnNumber: 7
+                                        lineNumber: 257,
+                                        columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-gray-600 text-sm mt-4",
                                         children: "Choose your preferred size during checkout"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 241,
-                                        columnNumber: 7
+                                        lineNumber: 276,
+                                        columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                lineNumber: 221,
-                                columnNumber: 6
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mt-16 max-w-4xl mx-auto",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "text-center",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
-                                                children: "100%"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 249,
-                                                columnNumber: 8
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-xs sm:text-sm text-gray-600",
-                                                children: "Pure & Natural"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 252,
-                                                columnNumber: 8
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 248,
-                                        columnNumber: 7
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "text-center",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
-                                                children: "ISO"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 257,
-                                                columnNumber: 8
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-xs sm:text-sm text-gray-600",
-                                                children: "Certified Quality"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 260,
-                                                columnNumber: 8
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 256,
-                                        columnNumber: 7
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "text-center",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
-                                                children: "24/7"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 265,
-                                                columnNumber: 8
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-xs sm:text-sm text-gray-600",
-                                                children: "Fresh Supply"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 268,
-                                                columnNumber: 8
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 264,
-                                        columnNumber: 7
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "text-center",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
-                                                children: "500+"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 273,
-                                                columnNumber: 8
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-xs sm:text-sm text-gray-600",
-                                                children: "Happy Customers"
-                                            }, void 0, false, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                                lineNumber: 276,
-                                                columnNumber: 8
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                        lineNumber: 272,
-                                        columnNumber: 7
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                                lineNumber: 247,
-                                columnNumber: 6
+                                lineNumber: 256,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                        lineNumber: 92,
-                        columnNumber: 5
+                        lineNumber: 126,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mt-16 max-w-4xl mx-auto",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
+                                        children: "100%"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 286,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs sm:text-sm text-gray-600",
+                                        children: "Pure & Natural"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 289,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                lineNumber: 285,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
+                                        children: "ISO"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 292,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs sm:text-sm text-gray-600",
+                                        children: "Certified Quality"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 295,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                lineNumber: 291,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
+                                        children: "24/7"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 300,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs sm:text-sm text-gray-600",
+                                        children: "Fresh Supply"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 303,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                lineNumber: 299,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "text-3xl sm:text-4xl font-bold text-blue-600 mb-2",
+                                        children: "500+"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 306,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-xs sm:text-sm text-gray-600",
+                                        children: "Happy Customers"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                        lineNumber: 309,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                                lineNumber: 305,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
+                        lineNumber: 284,
+                        columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-                lineNumber: 73,
-                columnNumber: 4
+                lineNumber: 107,
+                columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/OZONE/ozone-water-1/src/components/ProductSection.jsx",
-        lineNumber: 63,
-        columnNumber: 3
+        lineNumber: 97,
+        columnNumber: 5
     }, this);
 }
 }),

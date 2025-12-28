@@ -19,7 +19,7 @@ export default function UserSignup() {
 
   useEffect(() => {
     const user = localStorage.getItem("user2");
-    if (user) {
+    if (!user) {
       router.push("/");
     }
   }, []);

@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const orderItemSchema = new mongoose.Schema(
   {
-    size: {
-      type: String,
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
       required: true,
-      trim: true,
     },
     price: {
       type: Number,
@@ -64,7 +64,7 @@ const orderSchema = new mongoose.Schema(
     paidAmount: {
       type: Number,
       min: 0,
-        default: 0,
+      default: 0,
     },
     isDeleted: {
       type: Boolean,

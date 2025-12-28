@@ -5,23 +5,31 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     await connectionDb();
-    const { supplierName, contactEmail, address, contact, suppliedItems } = await request.json();
+    const { supplierName, contactEmail, address, contact, suppliedItems } =
+      await request.json();
     if (!supplierName || !contactEmail || !address || !contact) {
       return NextResponse.json(
-        { message: "Supplier name, contact email, address, and contact are required." },
+        {
+          success: false,
+          message:
+            "Supplier name, contact email, address, and contact are required.",
+        },
         { status: 400 }
       );
     }
     if (!Array.isArray(suppliedItems) || suppliedItems.length === 0) {
       return NextResponse.json(
-        { message: "At least one supplied item is required." },
+        { success: false, message: "At least one supplied item is required." },
         { status: 400 }
       );
     }
     for (let item of suppliedItems) {
       if (!item.itemName || !item.price) {
         return NextResponse.json(
-          { message: "Each supplied item must include item name and price." },
+          {
+            success: false,
+            message: "Each supplied item must include item name and price.",
+          },
           { status: 400 }
         );
       }
@@ -34,9 +42,19 @@ export async function POST(request) {
       suppliedItems,
     });
     await newSupplier.save();
-    return NextResponse.json({ message: "Supplier created successfully." , success: true }, { status: 201 });
+    return NextResponse.json(
+      { message: "Supplier created successfully.", success: true },
+      { status: 201 }
+    );
   } catch (error) {
-    return NextResponse.json({ message: "Failed to create supplier.", error: error.message }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to create supplier.",
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -44,7 +62,14 @@ export async function GET(request) {
   try {
     await connectionDb();
     const suppliers = await Supplier.find().sort({ createdAt: -1 });
-    return NextResponse.json({ success: true, message: "Suppliers fetched successfully", data: suppliers }, { status: 200 });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Suppliers fetched successfully",
+        data: suppliers,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error fetching suppliers:", error);
     return NextResponse.json(

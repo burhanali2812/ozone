@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "../../../../lib/db";
 import Order from "../../../../models/Order";
+import Product from "../../../../models/Product";
 import { sendOrderNotificationEmail } from "../../../../lib/emailService";
 
 export async function POST(request) {
@@ -21,23 +22,27 @@ export async function POST(request) {
 
     if (!shopName || !shopAddress || !shopContact) {
       return NextResponse.json(
-        { message: "Shop details are required" },
+        { success: false, message: "Shop details are required" },
         { status: 400 }
       );
     }
 
     if (!Array.isArray(orderItems) || orderItems.length === 0) {
       return NextResponse.json(
-        { message: "Order must contain at least 1 item" },
+        { success: false, message: "Order must contain at least 1 item" },
         { status: 400 }
       );
     }
 
     // Validate each item
     for (let item of orderItems) {
-      if (!item.size || !item.price || !item.quantity) {
+      if (!item.product || !item.price || !item.quantity) {
         return NextResponse.json(
-          { message: "Each order item must include size, price, and quantity" },
+          {
+            success: false,
+            message:
+              "Each order item must include product, price, and quantity",
+          },
           { status: 400 }
         );
       }
@@ -45,7 +50,7 @@ export async function POST(request) {
 
     if (totalPrice === undefined) {
       return NextResponse.json(
-        { message: "totalPrice is required" },
+        { success: false, message: "totalPrice is required" },
         { status: 400 }
       );
     }
@@ -71,13 +76,13 @@ export async function POST(request) {
     });
 
     return NextResponse.json(
-      { message: "Order placed successfully", order: newOrder },
+      { success: true, message: "Order placed successfully", order: newOrder },
       { status: 201 }
     );
   } catch (error) {
     console.error("Order creation error:", error);
     return NextResponse.json(
-      { message: "Server error", error: error.message },
+      { success: false, message: "Server error", error: error.message },
       { status: 500 }
     );
   }
@@ -89,11 +94,15 @@ export async function GET(request) {
     const action = request.nextUrl.searchParams.get("action");
     let orders;
     if (action === "deleted") {
-      orders = await Order.find({ isDeleted: true }).sort({ createdAt: -1 });
+      orders = await Order.find({ isDeleted: true })
+        .populate("orderItems.product")
+        .sort({ createdAt: -1 });
     } else {
-      orders = await Order.find({ isDeleted: { $ne: true } }).sort({
-        createdAt: -1,
-      });
+      orders = await Order.find({ isDeleted: { $ne: true } })
+        .populate("orderItems.product")
+        .sort({
+          createdAt: -1,
+        });
     }
     return NextResponse.json(
       { success: true, message: "Orders fetched successfully", data: orders },
@@ -102,7 +111,7 @@ export async function GET(request) {
   } catch (error) {
     console.error("Error fetching orders:", error);
     return NextResponse.json(
-      { message: "Server error", error: error.message },
+      { success: false, message: "Server error", error: error.message },
       { status: 500 }
     );
   }
@@ -114,7 +123,7 @@ export async function PUT(request) {
 
     if (!orderId) {
       return NextResponse.json(
-        { message: "orderId is required" },
+        { success: false, message: "orderId is required" },
         { status: 400 }
       );
     }
@@ -138,7 +147,10 @@ export async function PUT(request) {
     );
 
     if (!updatedOrder) {
-      return NextResponse.json({ message: "Order not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, message: "Order not found" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(

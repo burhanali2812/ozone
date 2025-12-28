@@ -14,7 +14,7 @@ export async function POST(request) {
       costPerType === undefined
     ) {
       return new Response(
-        JSON.stringify({ message: "All fields are required" }),
+        JSON.stringify({ success: false, message: "All fields are required" }),
         { status: 400 }
       );
     }
@@ -24,11 +24,12 @@ export async function POST(request) {
 
     if (existingStock) {
       existingStock.quantity += Number(quantity);
-      existingStock.costPerType = costPerType; 
+      existingStock.costPerType = costPerType;
       await existingStock.save();
 
       return new Response(
         JSON.stringify({
+          success: true,
           message: "Stock updated successfully",
           stock: existingStock,
           action: "updated",
@@ -46,6 +47,7 @@ export async function POST(request) {
 
       return new Response(
         JSON.stringify({
+          success: true,
           message: "Stock added successfully",
           stock: newStock,
           action: "created",
@@ -55,9 +57,12 @@ export async function POST(request) {
     }
   } catch (error) {
     console.error("Error adding stock:", error);
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ success: false, message: "Internal Server Error" }),
+      {
+        status: 500,
+      }
+    );
   }
 }
 
@@ -65,12 +70,17 @@ export async function GET(request) {
   try {
     await connectionDb();
     const stocks = await Stock.find().sort({ createdAt: -1 });
-    return new Response(JSON.stringify({ stocks }), { status: 200 });
+    return new Response(JSON.stringify({ success: true, stocks }), {
+      status: 200,
+    });
   } catch (error) {
     console.error("Error fetching stocks:", error);
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ success: false, message: "Internal Server Error" }),
+      {
+        status: 500,
+      }
+    );
   }
 }
 
@@ -87,6 +97,7 @@ export async function PATCH(request) {
     ) {
       return new Response(
         JSON.stringify({
+          success: false,
           message:
             "Product size, product type, and valid quantity to reduce are required",
         }),
@@ -99,7 +110,10 @@ export async function PATCH(request) {
 
     if (!stock) {
       return new Response(
-        JSON.stringify({ message: "No stock found for this product" }),
+        JSON.stringify({
+          success: false,
+          message: "No stock found for this product",
+        }),
         { status: 404 }
       );
     }
@@ -108,6 +122,7 @@ export async function PATCH(request) {
     if (stock.quantity < quantityToReduce) {
       return new Response(
         JSON.stringify({
+          success: false,
           message: "Insufficient stock",
           available: stock.quantity,
           requested: quantityToReduce,
@@ -122,6 +137,7 @@ export async function PATCH(request) {
 
     return new Response(
       JSON.stringify({
+        success: true,
         message: "Stock reduced successfully",
         reducedQuantity: quantityToReduce,
         remainingQuantity: stock.quantity,
@@ -131,8 +147,11 @@ export async function PATCH(request) {
     );
   } catch (error) {
     console.error("Error reducing stock:", error);
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ success: false, message: "Internal Server Error" }),
+      {
+        status: 500,
+      }
+    );
   }
 }

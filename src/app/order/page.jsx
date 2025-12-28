@@ -7,6 +7,8 @@ import { toast, Toaster } from "react-hot-toast";
 export default function Order() {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const [formData, setFormData] = useState({
     shopName: "",
     shopAddress: "",
@@ -15,7 +17,8 @@ export default function Order() {
 
   const [orders, setOrders] = useState([]);
   const [currentOrder, setCurrentOrder] = useState({
-    type: "500ml",
+    productId: "",
+    productDetails: null,
     quantity: "",
     customPrice: "",
   });
@@ -23,11 +26,34 @@ export default function Order() {
   const [paymentStatus, setPaymentStatus] = useState("unpaid");
   const [paidAmount, setPaidAmount] = useState(0);
 
-  const productPrices = {
-    "500ml": 260,
-    "1500ml": 280,
-    "6liter": 110,
-  };
+  // Fetch products from database
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/product");
+        const data = await response.json();
+        if (data.success && data.products) {
+          setProducts(data.products);
+          // Set first product as default
+          if (data.products.length > 0) {
+            setCurrentOrder({
+              productId: data.products[0]._id,
+              productDetails: data.products[0],
+              quantity: "",
+              customPrice: "",
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        toast.error("Failed to load products");
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Check for user in localStorage
   useEffect(() => {
@@ -42,13 +68,19 @@ export default function Order() {
   };
 
   const handleAddOrder = () => {
+    if (!currentOrder.productDetails) {
+      toast.error("Please select a product");
+      return;
+    }
+
     const qty = parseInt(currentOrder.quantity);
     const price =
-      parseFloat(currentOrder.customPrice) || productPrices[currentOrder.type];
+      parseFloat(currentOrder.customPrice) || currentOrder.productDetails.price;
 
     if (qty > 0 && price > 0) {
       const existingOrderIndex = orders.findIndex(
-        (order) => order.type === currentOrder.type && order.price === price
+        (order) =>
+          order.productId === currentOrder.productId && order.price === price
       );
 
       if (existingOrderIndex !== -1) {
@@ -58,11 +90,24 @@ export default function Order() {
       } else {
         setOrders([
           ...orders,
-          { type: currentOrder.type, quantity: qty, price: price },
+          {
+            productId: currentOrder.productId,
+            productDetails: currentOrder.productDetails,
+            quantity: qty,
+            price: price,
+          },
         ]);
       }
 
-      setCurrentOrder({ type: "500ml", quantity: "", customPrice: "" });
+      // Reset to first product
+      if (products.length > 0) {
+        setCurrentOrder({
+          productId: products[0]._id,
+          productDetails: products[0],
+          quantity: "",
+          customPrice: "",
+        });
+      }
     } else {
       toast.error("Please enter a valid quantity and price");
     }
@@ -81,14 +126,14 @@ export default function Order() {
   const handleUpdatePrice = (index, newPrice) => {
     const updatedOrders = [...orders];
     updatedOrders[index].price =
-      parseFloat(newPrice) || productPrices[updatedOrders[index].type];
+      parseFloat(newPrice) || updatedOrders[index].productDetails.price;
     setOrders(updatedOrders);
   };
 
   const calculateTotal = () => {
     return orders.reduce((total, order) => {
       const qty = parseInt(order.quantity) || 0;
-      const price = order.price || productPrices[order.type];
+      const price = order.price || order.productDetails.price;
       return total + price * qty;
     }, 0);
   };
@@ -122,9 +167,9 @@ export default function Order() {
       shopAddress: formData.shopAddress,
       shopContact: formData.whatsappContact,
       orderItems: orders.map((order) => ({
-        size: order.type,
+        product: order.productId,
         quantity: order.quantity,
-        price: order.price || productPrices[order.type],
+        price: order.price || order.productDetails.price,
       })),
       totalPrice: total,
       paymentStatus: finalPaymentStatus,
@@ -275,79 +320,94 @@ export default function Order() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
                   Add Products
                 </h2>
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <div className="flex-1">
-                    <label className="block text-gray-700 font-medium mb-2">
-                      Product Type / Pet Price
-                    </label>
-                    <select
-                      value={currentOrder.type}
-                      onChange={(e) =>
-                        setCurrentOrder({
-                          ...currentOrder,
-                          type: e.target.value,
-                          customPrice: "",
-                        })
-                      }
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                    >
-                      <option value="500ml">500ml Pet(12 Bottles) - Rs. 260/-</option>
-                      <option value="1500ml">1500ml Pet(6 Bottles) - Rs. 280/-</option>
-                      <option value="6liter">6 Liter Bottle - Rs. 110/-</option>
-                    </select>
+                {loadingProducts ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                   </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                    <div className="flex-1">
+                      <label className="block text-gray-700 font-medium mb-2">
+                        Select Product
+                      </label>
+                      <select
+                        value={currentOrder.productId}
+                        onChange={(e) => {
+                          const selected = products.find(
+                            (p) => p._id === e.target.value
+                          );
+                          setCurrentOrder({
+                            ...currentOrder,
+                            productId: e.target.value,
+                            productDetails: selected,
+                            customPrice: "",
+                          });
+                        }}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                      >
+                        {products.map((product) => (
+                          <option key={product._id} value={product._id}>
+                            {product.size} - {product.packingType} (
+                            {product.waterQuality}, {product.bottleQuality}) -
+                            Rs. {product.price}/-
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  {user && (
+                    {user && (
+                      <div className="w-full sm:w-32">
+                        <label className="block text-gray-700 font-medium mb-2">
+                          Custom Price
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={currentOrder.customPrice}
+                          onChange={(e) =>
+                            setCurrentOrder({
+                              ...currentOrder,
+                              customPrice: e.target.value,
+                            })
+                          }
+                          placeholder={
+                            currentOrder.productDetails?.price || "0"
+                          }
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                        />
+                      </div>
+                    )}
+
                     <div className="w-full sm:w-32">
                       <label className="block text-gray-700 font-medium mb-2">
-                        Custom Price
+                        Quantity
                       </label>
                       <input
                         type="number"
-                        min="0"
-                        value={currentOrder.customPrice}
+                        min="1"
+                        value={currentOrder.quantity}
                         onChange={(e) =>
                           setCurrentOrder({
                             ...currentOrder,
-                            customPrice: e.target.value,
+                            quantity: e.target.value,
                           })
                         }
-                        placeholder={productPrices[currentOrder.type]}
+                        placeholder="Enter quantity"
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
                       />
                     </div>
-                  )}
-
-                  <div className="w-full sm:w-32">
-                    <label className="block text-gray-700 font-medium mb-2">
-                      {
-                        currentOrder.type === "6liter" ? "Bottles Quantity" : "Number of Pets"
-                      }
-                    </label>
-                    <input
-                      type="number"
-                      min="1"
-                      value={currentOrder.quantity}
-                      onChange={(e) =>
-                        setCurrentOrder({
-                          ...currentOrder,
-                          quantity: e.target.value,
-                        })
-                      }
-                      placeholder="Enter quantity"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
-                    />
+                    <div className="flex items-end">
+                      <button
+                        type="button"
+                        onClick={handleAddOrder}
+                        disabled={loadingProducts || products.length === 0}
+                        className="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-end">
-                    <button
-                      type="button"
-                      onClick={handleAddOrder}
-                      className="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
+                )}
 
                 {/* Current Orders List */}
                 {orders.length > 0 && (
@@ -362,14 +422,17 @@ export default function Order() {
                       >
                         <div className="flex-1">
                           <p className="font-medium text-gray-900">
-                            {order.type === "500ml" && "500ml Bottle"}
-                            {order.type === "1500ml" && "1500ml Bottle"}
-                            {order.type === "6liter" && "6 Liter Bottle"}
+                            {order.productDetails.size} -{" "}
+                            {order.productDetails.packingType}
                           </p>
-                          <p className="text-sm text-gray-600">
-                            Rs. {order.price || productPrices[order.type]}/- ×{" "}
+                          <p className="text-xs text-gray-500">
+                            {order.productDetails.waterQuality} |{" "}
+                            {order.productDetails.bottleQuality}
+                          </p>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Rs. {order.price || order.productDetails.price}/- ×{" "}
                             {order.quantity} = Rs.
-                            {(order.price || productPrices[order.type]) *
+                            {(order.price || order.productDetails.price) *
                               order.quantity}
                             /-
                           </p>
@@ -383,7 +446,9 @@ export default function Order() {
                               <input
                                 type="number"
                                 min="0"
-                                value={order.price || productPrices[order.type]}
+                                value={
+                                  order.price || order.productDetails.price
+                                }
                                 onChange={(e) =>
                                   handleUpdatePrice(index, e.target.value)
                                 }
@@ -392,7 +457,7 @@ export default function Order() {
                                   if (!price || price < 0) {
                                     handleUpdatePrice(
                                       index,
-                                      productPrices[order.type]
+                                      order.productDetails.price
                                     );
                                   }
                                 }}
@@ -508,10 +573,14 @@ export default function Order() {
                         className="flex justify-between text-gray-700"
                       >
                         <span>
-                          {order.type} × {order.quantity}
+                          {order.productDetails.size} (
+                          {order.productDetails.packingType}) × {order.quantity}
                         </span>
                         <span className="font-medium">
-                          Rs. {productPrices[order.type] * order.quantity}/-
+                          Rs.{" "}
+                          {(order.price || order.productDetails.price) *
+                            order.quantity}
+                          /-
                         </span>
                       </div>
                     ))

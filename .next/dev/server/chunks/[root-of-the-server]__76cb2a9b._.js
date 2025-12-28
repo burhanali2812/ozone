@@ -81,10 +81,10 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/mongoose [external] (mongoose, cjs)");
 ;
 const orderItemSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema({
-    size: {
-        type: String,
-        required: true,
-        trim: true
+    product: {
+        type: __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema.Types.ObjectId,
+        ref: "Product",
+        required: true
     },
     price: {
         type: Number,
@@ -486,6 +486,7 @@ async function POST(request) {
         const { shopName, shopAddress, shopContact, orderItems, paidAmount, totalPrice, paymentStatus, remainingAmount, status } = await request.json();
         if (!shopName || !shopAddress || !shopContact) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "Shop details are required"
             }, {
                 status: 400
@@ -493,6 +494,7 @@ async function POST(request) {
         }
         if (!Array.isArray(orderItems) || orderItems.length === 0) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "Order must contain at least 1 item"
             }, {
                 status: 400
@@ -500,9 +502,10 @@ async function POST(request) {
         }
         // Validate each item
         for (let item of orderItems){
-            if (!item.size || !item.price || !item.quantity) {
+            if (!item.product || !item.price || !item.quantity) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                    message: "Each order item must include size, price, and quantity"
+                    success: false,
+                    message: "Each order item must include product, price, and quantity"
                 }, {
                     status: 400
                 });
@@ -510,6 +513,7 @@ async function POST(request) {
         }
         if (totalPrice === undefined) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "totalPrice is required"
             }, {
                 status: 400
@@ -533,6 +537,7 @@ async function POST(request) {
         // Don't fail the order creation if email fails
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: true,
             message: "Order placed successfully",
             order: newOrder
         }, {
@@ -541,6 +546,7 @@ async function POST(request) {
     } catch (error) {
         console.error("Order creation error:", error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: false,
             message: "Server error",
             error: error.message
         }, {
@@ -556,7 +562,7 @@ async function GET(request) {
         if (action === "deleted") {
             orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
                 isDeleted: true
-            }).sort({
+            }).populate("orderItems.product").sort({
                 createdAt: -1
             });
         } else {
@@ -564,7 +570,7 @@ async function GET(request) {
                 isDeleted: {
                     $ne: true
                 }
-            }).sort({
+            }).populate("orderItems.product").sort({
                 createdAt: -1
             });
         }
@@ -578,6 +584,7 @@ async function GET(request) {
     } catch (error) {
         console.error("Error fetching orders:", error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: false,
             message: "Server error",
             error: error.message
         }, {
@@ -591,6 +598,7 @@ async function PUT(request) {
         const { action, orderId, updateData } = await request.json();
         if (!orderId) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "orderId is required"
             }, {
                 status: 400
@@ -612,6 +620,7 @@ async function PUT(request) {
         });
         if (!updatedOrder) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "Order not found"
             }, {
                 status: 404

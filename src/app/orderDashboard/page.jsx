@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 
-
 export default function OrderDashboard() {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
@@ -82,125 +81,124 @@ export default function OrderDashboard() {
   };
 
   // Update order
-const handleUpdateOrder = async () => {
-  const updatePayload = {
-    action: "update",
-    orderId: selectedOrder._id,
-    updateData: {
-      paymentStatus:
-        selectedOrder.remainingAmount - modalData.remainingAmount === 0
-          ? "paid"
-          : modalData.paymentStatus,
+  const handleUpdateOrder = async () => {
+    const updatePayload = {
+      action: "update",
+      orderId: selectedOrder._id,
+      updateData: {
+        paymentStatus:
+          selectedOrder.remainingAmount - modalData.remainingAmount === 0
+            ? "paid"
+            : modalData.paymentStatus,
 
-      paidAmount:
-        modalData.paymentStatus === "paid"
-          ? selectedOrder.totalPrice
-          : selectedOrder.paidAmount + modalData.remainingAmount,
+        paidAmount:
+          modalData.paymentStatus === "paid"
+            ? selectedOrder.totalPrice
+            : selectedOrder.paidAmount + modalData.remainingAmount,
 
-      remainingAmount:
-        modalData.paymentStatus === "paid"
-          ? 0
-          : selectedOrder.remainingAmount - modalData.remainingAmount,
+        remainingAmount:
+          modalData.paymentStatus === "paid"
+            ? 0
+            : selectedOrder.remainingAmount - modalData.remainingAmount,
 
-      status: modalData.status,
-    },
-  };
+        status: modalData.status,
+      },
+    };
 
-  console.log("Update Payload:", updatePayload);
+    console.log("Update Payload:", updatePayload);
 
-  try {
-    //  Update Order
-    const response = await axios.put("/api/orders", updatePayload);
+    try {
+      //  Update Order
+      const response = await axios.put("/api/orders", updatePayload);
 
-    if (!response.data?.success) {
-      toast.error("Order update failed");
-      return;
-    }
+      if (!response.data?.success) {
+        toast.error("Order update failed");
+        return;
+      }
 
-    const updatedOrder = response.data.order;
+      const updatedOrder = response.data.order;
 
-    // Update UI State
-    setOrders((prevOrders) =>
-      prevOrders.map((order) =>
-        order._id === updatedOrder._id
-          ? {
-              ...order,
-              paymentStatus: updatedOrder.paymentStatus,
-              paidAmount: updatedOrder.paidAmount,
-              remainingAmount: updatedOrder.remainingAmount,
-              status: updatedOrder.status,
-            }
-          : order
-      )
-    );
+      // Update UI State
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order._id === updatedOrder._id
+            ? {
+                ...order,
+                paymentStatus: updatedOrder.paymentStatus,
+                paidAmount: updatedOrder.paidAmount,
+                remainingAmount: updatedOrder.remainingAmount,
+                status: updatedOrder.status,
+              }
+            : order
+        )
+      );
 
-    console.log("Order updated on server:", updatedOrder);
+      console.log("Order updated on server:", updatedOrder);
 
-    //  Update Stock ONLY when order is completed
-    if (modalData.status === "completed") {
-      try {
-        for (const item of updatedOrder.orderItems) {
-          await axios.patch("/api/stock", {
-            productSize: item.size,
-            producyType: item.size === "6liter" ? "bottle" : "pet",
-            quantityToReduce: item.quantity,
-          });
-        }
-        console.log("Stock updated successfully");
-      } catch (stockError) {
-        console.error("Stock update error:", stockError);
+      //  Update Stock ONLY when order is completed
+      if (modalData.status === "completed") {
+        try {
+          for (const item of updatedOrder.orderItems) {
+            await axios.patch("/api/stock", {
+              productSize: item.product?.size,
+              producyType: item.product?.size === "6L" ? "bottle" : "pet",
+              quantityToReduce: item.quantity,
+            });
+          }
+          console.log("Stock updated successfully");
+        } catch (stockError) {
+          console.error("Stock update error:", stockError);
 
-        if (stockError.response?.data?.error === "INSUFFICIENT_STOCK") {
-          toast.error(
-            `Insufficient stock!
+          if (stockError.response?.data?.error === "INSUFFICIENT_STOCK") {
+            toast.error(
+              `Insufficient stock!
 Available: ${stockError.response.data.available}
 Requested: ${stockError.response.data.requested}`
+            );
+            return;
+          }
+
+          toast.error(
+            stockError.response?.data?.message ||
+              "Order updated, but stock update failed"
           );
           return;
         }
+      }
 
-        toast.error(
-          stockError.response?.data?.message ||
-            "Order updated, but stock update failed"
-        );
+      // Receipt Status
+      let finalStatus = "pending";
+      if (updatedOrder.status === "in-transit") {
+        finalStatus = "order-in-transit";
+      } else if (updatedOrder.status === "completed") {
+        finalStatus = "order-delivered";
+      }
+
+      localStorage.setItem("receiptType", finalStatus);
+      localStorage.setItem("currentOrder", JSON.stringify(updatedOrder));
+
+      toast.success("Order updated successfully!");
+      setShowModal(false);
+      router.push("/receipt");
+    } catch (error) {
+      console.error("Update order error:", error);
+
+      // Backend error
+      if (error.response) {
+        const { data } = error.response;
+        toast.error(data?.message || "Failed to update order");
         return;
       }
+
+      // Network error
+      if (error.request) {
+        toast.error("Server not responding. Please try again later.");
+        return;
+      }
+
+      toast.error("Unexpected error occurred");
     }
-
-    // Receipt Status
-    let finalStatus = "pending";
-    if (updatedOrder.status === "in-transit") {
-      finalStatus = "order-in-transit";
-    } else if (updatedOrder.status === "completed") {
-      finalStatus = "order-delivered";
-    }
-
-    localStorage.setItem("receiptType", finalStatus);
-    localStorage.setItem("currentOrder", JSON.stringify(updatedOrder));
-
-    toast.success("Order updated successfully!");
-    setShowModal(false);
-    router.push("/receipt");
-  } catch (error) {
-    console.error("Update order error:", error);
-
-    // Backend error
-    if (error.response) {
-      const { data } = error.response;
-      toast.error(data?.message || "Failed to update order");
-      return;
-    }
-
-    // Network error
-    if (error.request) {
-      toast.error("Server not responding. Please try again later.");
-      return;
-    }
-
-    toast.error("Unexpected error occurred");
-  }
-};
-
+  };
 
   // Delete order
   const handleDeleteOrder = async () => {
@@ -566,7 +564,8 @@ Requested: ${stockError.response.data.requested}`
                       <div className="text-sm ">
                         {order?.orderItems.map((item, idx) => (
                           <div key={idx} className="text-gray-700 ">
-                            {item.size} × {item.quantity}
+                            {item.product?.size} ({item.product?.packingType}) ×{" "}
+                            {item.quantity}
                           </div>
                         ))}
                       </div>
@@ -668,7 +667,9 @@ Requested: ${stockError.response.data.requested}`
                   <p className="text-sm font-medium text-gray-700">Items:</p>
                   {selectedOrder.orderItems.map((item, idx) => (
                     <p key={idx} className="text-sm text-gray-600">
-                      {item.size} × {item.quantity} = Rs.{" "}
+                      {item.product?.size} ({item.product?.packingType},{" "}
+                      {item.product?.waterQuality},{" "}
+                      {item.product?.bottleQuality}) × {item.quantity} = Rs.{" "}
                       {item.price * item.quantity}/-
                     </p>
                   ))}
