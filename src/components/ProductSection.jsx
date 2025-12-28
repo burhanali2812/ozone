@@ -58,10 +58,6 @@ const getFeaturesForProduct = (product) => {
     features.push(`Bottle Quality: ${product.bottleQuality}`);
   }
 
-  if (product.packingType) {
-    features.push(`Packing Type: ${product.packingType}`);
-  }
-
   return features;
 };
 
