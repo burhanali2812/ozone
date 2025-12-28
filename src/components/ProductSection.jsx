@@ -119,7 +119,7 @@ export default function ProductSection() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12">
           {loading ? (
             <div className="col-span-full flex items-center justify-center py-20">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
@@ -165,16 +165,16 @@ export default function ProductSection() {
                   </div>
 
                   {/* Image Container */}
-                  <div className="relative h-40 sm:h-48 lg:h-56 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center overflow-hidden">
+                  <div className="relative h-32 sm:h-36 lg:h-40 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center overflow-hidden">
                     {/* Glow Effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-200 to-cyan-200 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-2xl"></div>
 
-                    <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6">
+                    <div className="relative z-10 w-full h-full flex items-center justify-center p-3 sm:p-4">
                       <Image
                         src={productImage}
                         alt={`${product.size} Ozone Mineral Water`}
-                        width={150}
-                        height={180}
+                        width={160}
+                        height={200}
                         className="object-contain drop-shadow-2xl transform group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
@@ -189,13 +189,13 @@ export default function ProductSection() {
                   <div className="p-3 sm:p-4 lg:p-6">
                     {/* Size & Title */}
                     <div className="text-center mb-2 sm:mb-3">
-                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
+                      <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1">
                         {product.size}
                       </h3>
-                      <p className="text-blue-600 font-semibold text-sm sm:text-base">
+                      <p className="text-blue-600 font-semibold text-xs sm:text-sm">
                         {productTitle}
                       </p>
-                      <p className="text-gray-600 text-xs sm:text-sm mt-1 hidden sm:block">
+                      <p className="text-gray-600 text-xs mt-1 hidden sm:block">
                         {productDescription}
                       </p>
                     </div>
@@ -203,7 +203,7 @@ export default function ProductSection() {
                     {/* Price Section */}
                     <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg sm:rounded-xl p-2 sm:p-3 mb-2 sm:mb-3 text-center">
                       <div className="flex items-baseline justify-center gap-1">
-                        <span className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-600">
+                        <span className="text-base sm:text-lg lg:text-xl font-bold text-blue-600">
                           Rs. {product.price}
                         </span>
                         <span className="text-gray-600 text-xs">/-</span>
@@ -218,7 +218,7 @@ export default function ProductSection() {
                       {productFeatures.map((feature, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center text-xs sm:text-sm text-gray-700"
+                          className="flex items-center text-xs text-gray-700"
                         >
                           <div className="w-4 h-4 sm:w-5 sm:h-5 bg-blue-100 rounded-full flex items-center justify-center mr-1.5 sm:mr-2 flex-shrink-0">
                             <svg
@@ -273,40 +273,36 @@ export default function ProductSection() {
               Choose your preferred size during checkout
             </p>
           </div>
-
-        
         </div>
-		  {/* Trust Badges */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mt-16 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
-                100%
-              </div>
-              <p className="text-xs sm:text-sm text-gray-600">Pure & Natural</p>
+        {/* Trust Badges */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mt-16 max-w-4xl mx-auto">
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+              100%
             </div>
-            <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
-                ISO
-              </div>
-              <p className="text-xs sm:text-sm text-gray-600">
-                Certified Quality
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
-                24/7
-              </div>
-              <p className="text-xs sm:text-sm text-gray-600">Fresh Supply</p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
-                500+
-              </div>
-              <p className="text-xs sm:text-sm text-gray-600">
-                Happy Customers
-              </p>
-            </div>
+            <p className="text-xs sm:text-sm text-gray-600">Pure & Natural</p>
           </div>
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+              ISO
+            </div>
+            <p className="text-xs sm:text-sm text-gray-600">
+              Certified Quality
+            </p>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+              24/7
+            </div>
+            <p className="text-xs sm:text-sm text-gray-600">Fresh Supply</p>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+              500+
+            </div>
+            <p className="text-xs sm:text-sm text-gray-600">Happy Customers</p>
+          </div>
+        </div>
       </div>
     </section>
   );

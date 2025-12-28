@@ -2,6 +2,8 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/api/orders/route": "app/api/orders/route.js",
   "/api/product/route": "app/api/product/route.js",
+  "/order/page": "app/order/page.js",
   "/orderDashboard/page": "app/orderDashboard/page.js",
+  "/page": "app/page.js",
   "/product_dashboard/page": "app/product_dashboard/page.js"
 }
