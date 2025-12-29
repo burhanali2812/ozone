@@ -159,6 +159,7 @@ async function POST(request) {
         const { items, supplierInfo } = await request.json();
         if (!Array.isArray(items) || items.length === 0) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "At least one item is required to create an order."
             }, {
                 status: 400
@@ -168,6 +169,7 @@ async function POST(request) {
         for (let item of items){
             if (!item.itemName || !item.quantity || !item.price || !item.total) {
                 return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    success: false,
                     message: "Each item must include name, quantity, price, and total."
                 }, {
                     status: 400

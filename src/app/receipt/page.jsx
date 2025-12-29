@@ -10,23 +10,56 @@ export default function Receipt() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedOrder = localStorage.getItem("currentOrder");
-    const storedType = localStorage.getItem("receiptType") || "order-placed";
+    const fetchOrderWithProducts = async () => {
+      const storedOrder = localStorage.getItem("currentOrder");
+      const storedType = localStorage.getItem("receiptType") || "order-placed";
 
-    if (storedOrder) {
-      try {
-        const parsedOrder = JSON.parse(storedOrder);
-        setOrderData(parsedOrder);
-        setReceiptType(storedType);
-      } catch (error) {
-        console.error("Error parsing order data:", error);
-        toast.error("Failed to load receipt data");
+      if (storedOrder) {
+        try {
+          const parsedOrder = JSON.parse(storedOrder);
+
+          // Fetch all products
+          const productsResponse = await fetch("/api/product");
+          const productsData = await productsResponse.json();
+
+          if (productsData.success && productsData.products) {
+            // Map product IDs to full product details
+            const enrichedOrderItems = parsedOrder.orderItems.map((item) => {
+              const productId =
+                typeof item.product === "string"
+                  ? item.product
+                  : item.product?._id;
+              const productDetails = productsData.products.find(
+                (p) => p._id === productId
+              );
+
+              return {
+                ...item,
+                product: productDetails || item.product,
+              };
+            });
+
+            setOrderData({
+              ...parsedOrder,
+              orderItems: enrichedOrderItems,
+            });
+          } else {
+            setOrderData(parsedOrder);
+          }
+
+          setReceiptType(storedType);
+        } catch (error) {
+          console.error("Error parsing order data:", error);
+          toast.error("Failed to load receipt data");
+        }
+      } else {
+        toast.error("No order data found");
+        setTimeout(() => router.push("/"), 2000);
       }
-    } else {
-      toast.error("No order data found");
-      setTimeout(() => router.push("/"), 2000);
-    }
-    setLoading(false);
+      setLoading(false);
+    };
+
+    fetchOrderWithProducts();
   }, [router]);
 
   const getTypeConfig = (type) => {
@@ -223,23 +256,23 @@ export default function Receipt() {
                       </span>
                       <div className="flex-1">
                         <div className="font-semibold text-gray-900">
-                          {item.size}
+                          {item.product?.size || "N/A"}
                         </div>
-                        {item.packingType && (
+                        {item.product?.packingType && (
                           <div className="text-xs text-gray-500 mt-0.5">
-                            Packing: {item.packingType}
+                            Packing: {item.product.packingType}
                           </div>
                         )}
-                        {(item.waterQuality || item.bottleQuality) && (
+                        {(item.product?.waterQuality ||
+                          item.product?.bottleQuality) && (
                           <div className="text-xs text-gray-500">
-                            {item.waterQuality && (
-                              <span>{item.waterQuality}</span>
+                            {item.product?.waterQuality && (
+                              <span>{item.product.waterQuality}</span>
                             )}
-                            {item.waterQuality && item.bottleQuality && (
-                              <span> | </span>
-                            )}
-                            {item.bottleQuality && (
-                              <span>{item.bottleQuality}</span>
+                            {item.product?.waterQuality &&
+                              item.product?.bottleQuality && <span> | </span>}
+                            {item.product?.bottleQuality && (
+                              <span>{item.product.bottleQuality}</span>
                             )}
                           </div>
                         )}

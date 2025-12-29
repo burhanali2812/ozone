@@ -123,6 +123,7 @@ async function POST(request) {
         const { amount, doBy, purpose } = await request.json();
         if (!amount || !doBy || !purpose) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
                 message: "All fields are required"
             }, {
                 status: 400
@@ -143,6 +144,7 @@ async function POST(request) {
         });
     } catch (error) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: false,
             message: "Failed to record transaction.",
             error: error.message
         }, {
