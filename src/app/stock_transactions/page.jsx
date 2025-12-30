@@ -11,17 +11,72 @@ export default function StockTransactionPage() {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
 
-  // Calculate totals
-  const totalSales = orders
+  // Filter orders and transactions by date for card calculations
+  const getDateFilteredOrders = () => {
+    let filtered = orders;
+
+    if (fromDate) {
+      const fromDateTime = new Date(fromDate).setHours(0, 0, 0, 0);
+      filtered = filtered.filter((order) => {
+        const orderDate = new Date(order.createdAt).setHours(0, 0, 0, 0);
+        return orderDate >= fromDateTime;
+      });
+    }
+
+    if (toDate) {
+      const toDateTime = new Date(toDate).setHours(23, 59, 59, 999);
+      filtered = filtered.filter((order) => {
+        const orderDate = new Date(order.createdAt).getTime();
+        return orderDate <= toDateTime;
+      });
+    }
+
+    return filtered;
+  };
+
+  const getDateFilteredTransactions = () => {
+    let filtered = transactions;
+
+    if (fromDate) {
+      const fromDateTime = new Date(fromDate).setHours(0, 0, 0, 0);
+      filtered = filtered.filter((transaction) => {
+        const transactionDate = new Date(transaction.createdAt).setHours(
+          0,
+          0,
+          0,
+          0
+        );
+        return transactionDate >= fromDateTime;
+      });
+    }
+
+    if (toDate) {
+      const toDateTime = new Date(toDate).setHours(23, 59, 59, 999);
+      filtered = filtered.filter((transaction) => {
+        const transactionDate = new Date(transaction.createdAt).getTime();
+        return transactionDate <= toDateTime;
+      });
+    }
+
+    return filtered;
+  };
+
+  // Calculate totals based on date-filtered data
+  const filteredOrders = getDateFilteredOrders();
+  const filteredTransactions = getDateFilteredTransactions();
+
+  const totalSales = filteredOrders
     .filter(
       (order) =>
         order.paymentStatus === "paid" ||
-        order.paymentStatus === "partially paid"
+        order.paymentStatus === "partially-paid"
     )
     .reduce((sum, order) => sum + (order.totalPrice || 0), 0);
 
-  const totalPurchase = transactions.reduce(
+  const totalPurchase = filteredTransactions.reduce(
     (sum, transaction) => sum + (transaction.amount || 0),
     0
   );
@@ -79,13 +134,54 @@ export default function StockTransactionPage() {
   // Filter data based on card selection
   const handleFilter = (filterType) => {
     setActiveFilter(filterType);
+    applyFilters(filterType, fromDate, toDate);
+  };
+
+  // Apply all filters (type and date)
+  const applyFilters = (filterType, from, to) => {
+    let data = [];
+
+    // Filter by type
     if (filterType === "sales") {
-      setFilteredData(orders);
+      data = [...orders];
     } else if (filterType === "purchase") {
-      setFilteredData(transactions);
+      data = [...transactions];
     } else {
-      setFilteredData([...orders, ...transactions]);
+      data = [...orders, ...transactions];
     }
+
+    // Filter by date range
+    if (from) {
+      const fromDateTime = new Date(from).setHours(0, 0, 0, 0);
+      data = data.filter((item) => {
+        const itemDate = new Date(item.createdAt).setHours(0, 0, 0, 0);
+        return itemDate >= fromDateTime;
+      });
+    }
+
+    if (to) {
+      const toDateTime = new Date(to).setHours(23, 59, 59, 999);
+      data = data.filter((item) => {
+        const itemDate = new Date(item.createdAt).getTime();
+        return itemDate <= toDateTime;
+      });
+    }
+
+    setFilteredData(data);
+  };
+
+  // Handle date filter change
+  const handleDateFilter = (from, to) => {
+    setFromDate(from);
+    setToDate(to);
+    applyFilters(activeFilter, from, to);
+  };
+
+  // Clear date filters
+  const clearDateFilters = () => {
+    setFromDate("");
+    setToDate("");
+    applyFilters(activeFilter, "", "");
   };
 
   // Format date
@@ -131,6 +227,68 @@ export default function StockTransactionPage() {
           <p className="text-gray-600">
             Monitor your sales, purchases, and profit overview
           </p>
+        </div>
+
+        {/* Date Filter Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
+            <div className="flex-1 w-full sm:w-auto">
+              <label className="block text-gray-700 font-medium mb-2 text-sm">
+                From Date
+              </label>
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => handleDateFilter(e.target.value, toDate)}
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+              />
+            </div>
+            <div className="flex-1 w-full sm:w-auto">
+              <label className="block text-gray-700 font-medium mb-2 text-sm">
+                To Date
+              </label>
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => handleDateFilter(fromDate, e.target.value)}
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+              />
+            </div>
+            {(fromDate || toDate) && (
+              <button
+                onClick={clearDateFilters}
+                className="w-full sm:w-auto bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg hover:bg-gray-300 transition-colors font-medium text-sm flex items-center justify-center gap-2"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+                Clear Dates
+              </button>
+            )}
+            {(fromDate || toDate) && (
+              <div className="w-full sm:w-auto bg-blue-50 border border-blue-200 px-4 py-2.5 rounded-lg">
+                <p className="text-xs text-blue-600 font-medium">
+                  {fromDate && toDate
+                    ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(
+                        toDate
+                      ).toLocaleDateString()}`
+                    : fromDate
+                    ? `From: ${new Date(fromDate).toLocaleDateString()}`
+                    : `Until: ${new Date(toDate).toLocaleDateString()}`}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Summary Cards */}
@@ -189,7 +347,7 @@ export default function StockTransactionPage() {
                   <div>
                     <p className="text-sm font-semibold">Revenue</p>
                     <p className="text-xs text-green-600">
-                      {orders.length} Orders
+                      {filteredOrders.length} Orders
                     </p>
                   </div>
                 </div>
@@ -266,7 +424,7 @@ export default function StockTransactionPage() {
                   <div>
                     <p className="text-sm font-semibold">Expenses</p>
                     <p className="text-xs text-red-600">
-                      {transactions.length} Transactions
+                      {filteredTransactions.length} Transactions
                     </p>
                   </div>
                 </div>

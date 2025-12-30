@@ -13,6 +13,8 @@ export default function TransactionPage() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [userName, setUserName] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
 
   // Form state
   const [newTransaction, setNewTransaction] = useState({
@@ -59,8 +61,6 @@ export default function TransactionPage() {
     getTransactions();
   }, []);
 
-
-
   // Calculate totals for each person
   const burhanTotal = transactions
     .filter((t) => t.doBy === "Burhan Ali")
@@ -78,11 +78,50 @@ export default function TransactionPage() {
   // Filter transactions
   const handleFilter = (person) => {
     setActiveFilter(person);
-    if (person === "all") {
-      setFilteredTransactions(transactions);
-    } else {
-      setFilteredTransactions(transactions.filter((t) => t.doBy === person));
+    applyFilters(person, fromDate, toDate);
+  };
+
+  // Apply all filters (person and date)
+  const applyFilters = (person, from, to) => {
+    let filtered = transactions;
+
+    // Filter by person
+    if (person !== "all") {
+      filtered = filtered.filter((t) => t.doBy === person);
     }
+
+    // Filter by date range
+    if (from) {
+      const fromDateTime = new Date(from).setHours(0, 0, 0, 0);
+      filtered = filtered.filter((t) => {
+        const transactionDate = new Date(t.createdAt).setHours(0, 0, 0, 0);
+        return transactionDate >= fromDateTime;
+      });
+    }
+
+    if (to) {
+      const toDateTime = new Date(to).setHours(23, 59, 59, 999);
+      filtered = filtered.filter((t) => {
+        const transactionDate = new Date(t.createdAt).getTime();
+        return transactionDate <= toDateTime;
+      });
+    }
+
+    setFilteredTransactions(filtered);
+  };
+
+  // Handle date filter change
+  const handleDateFilter = (from, to) => {
+    setFromDate(from);
+    setToDate(to);
+    applyFilters(activeFilter, from, to);
+  };
+
+  // Clear date filters
+  const clearDateFilters = () => {
+    setFromDate("");
+    setToDate("");
+    applyFilters(activeFilter, "", "");
   };
 
   // Add transaction
@@ -134,8 +173,6 @@ export default function TransactionPage() {
       <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        
-
           {/* Right - Add Transaction Button */}
           <button
             onClick={() => setShowAddModal(true)}
@@ -156,6 +193,68 @@ export default function TransactionPage() {
             </svg>
             Add Transaction
           </button>
+        </div>
+
+        {/* Date Filter Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
+            <div className="flex-1 w-full sm:w-auto">
+              <label className="block text-gray-700 font-medium mb-2 text-sm">
+                From Date
+              </label>
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => handleDateFilter(e.target.value, toDate)}
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+              />
+            </div>
+            <div className="flex-1 w-full sm:w-auto">
+              <label className="block text-gray-700 font-medium mb-2 text-sm">
+                To Date
+              </label>
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => handleDateFilter(fromDate, e.target.value)}
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+              />
+            </div>
+            {(fromDate || toDate) && (
+              <button
+                onClick={clearDateFilters}
+                className="w-full sm:w-auto bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg hover:bg-gray-300 transition-colors font-medium text-sm flex items-center justify-center gap-2"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+                Clear Dates
+              </button>
+            )}
+            {(fromDate || toDate) && (
+              <div className="w-full sm:w-auto bg-blue-50 border border-blue-200 px-4 py-2.5 rounded-lg">
+                <p className="text-xs text-blue-600 font-medium">
+                  {fromDate && toDate
+                    ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(
+                        toDate
+                      ).toLocaleDateString()}`
+                    : fromDate
+                    ? `From: ${new Date(fromDate).toLocaleDateString()}`
+                    : `Until: ${new Date(toDate).toLocaleDateString()}`}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Summary Cards */}
@@ -179,6 +278,28 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-purple-600">
                   Rs. {burhanTotal.toLocaleString()}/-
                 </p>
+                {burhanTotal + sharjeelTotal > 0 && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-500"
+                        style={{
+                          width: `${(
+                            (burhanTotal / (burhanTotal + sharjeelTotal)) *
+                            100
+                          ).toFixed(1)}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-bold text-purple-600 whitespace-nowrap">
+                      {(
+                        (burhanTotal / (burhanTotal + sharjeelTotal)) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -283,6 +404,28 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-pink-600">
                   Rs. {sharjeelTotal.toLocaleString()}/-
                 </p>
+                {burhanTotal + sharjeelTotal > 0 && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-pink-500 to-pink-600 transition-all duration-500"
+                        style={{
+                          width: `${(
+                            (sharjeelTotal / (burhanTotal + sharjeelTotal)) *
+                            100
+                          ).toFixed(1)}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-bold text-pink-600 whitespace-nowrap">
+                      {(
+                        (sharjeelTotal / (burhanTotal + sharjeelTotal)) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -723,8 +866,6 @@ export default function TransactionPage() {
           </div>
         </div>
       )}
-
-
     </section>
   );
 }
