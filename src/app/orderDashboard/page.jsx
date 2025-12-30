@@ -136,12 +136,44 @@ export default function OrderDashboard() {
       console.log("Order updated on server:", updatedOrder);
 
       //  Update Stock ONLY when order is completed
-      if (modalData.status === "completed") {
+      if (modalData.status === "completed" && modalData.paymentStatus === "paid") {
         try {
+          // Fetch all products from database
+          const productsResponse = await axios.get("/api/product");
+
+          if (!productsResponse.data?.success) {
+            toast.error("Failed to fetch products for stock update");
+            return;
+          }
+
+          const allProducts = productsResponse.data.data;
+
           for (const item of updatedOrder.orderItems) {
+            // Get product ID from order item
+            const productId =
+              typeof item.product === "string"
+                ? item.product
+                : item.product?._id;
+
+            if (!productId) {
+              console.error("Product ID not found for item:", item);
+              continue;
+            }
+
+            // Find product from all products
+            const product = allProducts.find(
+              (p) => p._id.toString() === productId.toString()
+            );
+
+            if (!product) {
+              console.error("Product not found:", productId);
+              continue;
+            }
+
+            // Update stock with fetched product details
             await axios.patch("/api/stock", {
-              productSize: item.product?.size,
-              producyType: item.product?.size === "6L" ? "bottle" : "pet",
+              productSize: product.size,
+              producyType: product.packingType.toLowerCase(),
               quantityToReduce: item.quantity,
             });
           }

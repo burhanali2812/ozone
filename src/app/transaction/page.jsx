@@ -13,8 +13,8 @@ export default function TransactionPage() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [userName, setUserName] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
-  const [fromDate, setFromDate] = useState("mm/dd/yyyy");
-  const [toDate, setToDate] = useState("mm/dd/yyyy");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
 
   // Form state
   const [newTransaction, setNewTransaction] = useState({
@@ -68,6 +68,10 @@ export default function TransactionPage() {
 
   const sharjeelTotal = transactions
     .filter((t) => t.doBy === "Sharjeel Khan")
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  const ozoneTotal = transactions
+    .filter((t) => t.doBy === "Ozone")
     .reduce((sum, t) => sum + t.amount, 0);
 
   // Calculate difference
@@ -258,7 +262,7 @@ export default function TransactionPage() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Burhan Ali Card */}
           <div
             onClick={() => handleFilter("Burhan Ali")}
@@ -278,14 +282,15 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-purple-600">
                   Rs. {burhanTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal > 0 && (
+                {burhanTotal + sharjeelTotal + ozoneTotal > 0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-500"
                         style={{
                           width: `${(
-                            (burhanTotal / (burhanTotal + sharjeelTotal)) *
+                            (burhanTotal /
+                              (burhanTotal + sharjeelTotal + ozoneTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -293,7 +298,8 @@ export default function TransactionPage() {
                     </div>
                     <span className="text-sm font-bold text-purple-600 whitespace-nowrap">
                       {(
-                        (burhanTotal / (burhanTotal + sharjeelTotal)) *
+                        (burhanTotal /
+                          (burhanTotal + sharjeelTotal + ozoneTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -404,14 +410,15 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-pink-600">
                   Rs. {sharjeelTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal > 0 && (
+                {burhanTotal + sharjeelTotal + ozoneTotal > 0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-pink-500 to-pink-600 transition-all duration-500"
                         style={{
                           width: `${(
-                            (sharjeelTotal / (burhanTotal + sharjeelTotal)) *
+                            (sharjeelTotal /
+                              (burhanTotal + sharjeelTotal + ozoneTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -419,7 +426,8 @@ export default function TransactionPage() {
                     </div>
                     <span className="text-sm font-bold text-pink-600 whitespace-nowrap">
                       {(
-                        (sharjeelTotal / (burhanTotal + sharjeelTotal)) *
+                        (sharjeelTotal /
+                          (burhanTotal + sharjeelTotal + ozoneTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -511,6 +519,68 @@ export default function TransactionPage() {
             )}
           </div>
 
+          {/* Ozone Card */}
+          <div
+            onClick={() => handleFilter("Ozone")}
+            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+              activeFilter === "Ozone" ? "ring-4 ring-green-500" : ""
+            }`}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+                OZ
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">Ozone</h3>
+                <p className="text-sm text-gray-600 mb-2">Total Transactions</p>
+                <p className="text-2xl font-bold text-green-600">
+                  Rs. {ozoneTotal.toLocaleString()}/-
+                </p>
+                {burhanTotal + sharjeelTotal + ozoneTotal > 0 && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-500"
+                        style={{
+                          width: `${(
+                            (ozoneTotal /
+                              (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                            100
+                          ).toFixed(1)}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-bold text-green-600 whitespace-nowrap">
+                      {(
+                        (ozoneTotal /
+                          (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {activeFilter === "Ozone" && (
+              <div className="mt-3 text-sm text-green-600 font-semibold flex items-center gap-2">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Filtered
+              </div>
+            )}
+          </div>
+
           {/* All Transactions Card */}
           <div
             onClick={() => handleFilter("all")}
@@ -540,14 +610,16 @@ export default function TransactionPage() {
                 </h3>
                 <p className="text-sm text-gray-600 mb-2">Total Amount</p>
                 <p className="text-2xl font-bold text-blue-600">
-                  Rs. {(burhanTotal + sharjeelTotal).toLocaleString()}/-
+                  Rs.{" "}
+                  {(burhanTotal + sharjeelTotal + ozoneTotal).toLocaleString()}
+                  /-
                 </p>
               </div>
             </div>
 
             {/* Summary Badge */}
             <div className="mt-4 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
-              <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="grid grid-cols-3 gap-2 text-sm">
                 <div>
                   <p className="text-gray-600">Burhan Ali</p>
                   <p className="font-bold text-purple-600">
@@ -558,6 +630,12 @@ export default function TransactionPage() {
                   <p className="text-gray-600">Sharjeel Khan</p>
                   <p className="font-bold text-pink-600">
                     Rs. {sharjeelTotal.toLocaleString()}/-
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Ozone</p>
+                  <p className="font-bold text-green-600">
+                    Rs. {ozoneTotal.toLocaleString()}/-
                   </p>
                 </div>
               </div>
@@ -649,10 +727,16 @@ export default function TransactionPage() {
                             className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
                               transaction.doBy === "Burhan Ali"
                                 ? "bg-gradient-to-br from-purple-500 to-purple-700"
-                                : "bg-gradient-to-br from-pink-500 to-pink-700"
+                                : transaction.doBy === "Sharjeel Khan"
+                                ? "bg-gradient-to-br from-pink-500 to-pink-700"
+                                : "bg-gradient-to-br from-green-500 to-green-700"
                             }`}
                           >
-                            {transaction.doBy === "Burhan Ali" ? "BA" : "SK"}
+                            {transaction.doBy === "Burhan Ali"
+                              ? "BA"
+                              : transaction.doBy === "Sharjeel Khan"
+                              ? "SK"
+                              : "OZ"}
                           </div>
                           <span className="font-medium text-gray-900">
                             {transaction.doBy}
@@ -669,7 +753,9 @@ export default function TransactionPage() {
                           className={`text-lg font-bold ${
                             transaction.doBy === "Burhan Ali"
                               ? "text-purple-600"
-                              : "text-pink-600"
+                              : transaction.doBy === "Sharjeel Khan"
+                              ? "text-pink-600"
+                              : "text-green-600"
                           }`}
                         >
                           Rs. {transaction.amount.toLocaleString()}/-
@@ -780,6 +866,7 @@ export default function TransactionPage() {
                     <option value="">Select Person</option>
                     <option value="Burhan Ali">Burhan Ali</option>
                     <option value="Sharjeel Khan">Sharjeel Khan</option>
+                    <option value="Ozone">Ozone</option>
                   </select>
                 </div>
 

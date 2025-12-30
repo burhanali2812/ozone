@@ -11,8 +11,8 @@ export default function StockTransactionPage() {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
-  const [fromDate, setFromDate] = useState("mm/dd/yyyy");
-  const [toDate, setToDate] = useState("mm/dd/yyyy");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
 
   // Filter orders and transactions by date for card calculations
   const getDateFilteredOrders = () => {
@@ -80,6 +80,14 @@ export default function StockTransactionPage() {
     (sum, transaction) => sum + (transaction.amount || 0),
     0
   );
+
+  // Calculate reinvest (Ozone transactions)
+  const reinvestAmount = filteredTransactions
+    .filter((transaction) => transaction.doBy === "Ozone")
+    .reduce((sum, transaction) => sum + (transaction.amount || 0), 0);
+
+  // Calculate actual sales (total sales - reinvest)
+  const actualSales = totalSales - reinvestAmount;
 
   const totalProfit = totalSales - totalPurchase;
 
@@ -329,23 +337,49 @@ export default function StockTransactionPage() {
               </div>
             </div>
 
-            {/* Badge */}
+            {/* Sales Breakdown */}
             <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-green-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Revenue</p>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-green-700">
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <p className="text-sm font-semibold">Actual Sales</p>
+                  </div>
+                  <p className="text-sm font-bold text-green-700">
+                    Rs. {actualSales.toLocaleString()}/-
+                  </p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-orange-600">
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <p className="text-sm font-semibold">Reinvest</p>
+                  </div>
+                  <p className="text-sm font-bold text-orange-600">
+                    Rs. {reinvestAmount.toLocaleString()}/-
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-green-300">
+                  <div className="flex items-center justify-between">
                     <p className="text-xs text-green-600">
                       {filteredOrders.length} Orders
                     </p>
