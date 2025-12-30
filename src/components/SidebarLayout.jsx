@@ -6,7 +6,7 @@ export default function SidebarLayout({ children }) {
   const pathname = usePathname();
 
 
-  const noSidebarRoutes = ["/", "/auth","/order"];
+  const noSidebarRoutes = ["/", "/auth","/order","/receipt"];
   const shouldShowSidebar = !noSidebarRoutes.includes(pathname);
 
   return (

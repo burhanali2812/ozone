@@ -134,3 +134,8 @@ Import traces:
 [00:31:26.082] Browser LOG     Order updated on server: {"__v":0,"_id":"6953898281a5de29a4d161c0","createdAt":"2025-12-30T08:12:50.877Z","isDeleted":false,"orderItems":[{"price":250,"product":"69524fe82eb029a177c90f44","quantity":4}],"paidAmount":1000,"paymentStatus":"paid","remainingAmount":0,"shopAddress":"Ghouri town street 1 phase 5B","shopContact":"03438502265","shopName":"Mehboob catering service","status":"completed","totalPrice":1000,"updatedAt":"2025-12-30T19:28:20.812Z"}
 [00:31:26.130] Server  LOG     MongoDB already connected
 [00:31:26.263] Server  LOG     MongoDB already connected
+[02:21:38.679] Server  LOG      ✓ Compiled in 411ms
+[02:21:44.395] Server  LOG      ✓ Compiled in 9ms
+[02:21:46.001] Server  LOG      ✓ Compiled in 11ms
+[02:21:48.550] Server  LOG      ✓ Compiled in 8ms
+[02:21:49.969] Server  LOG      ✓ Compiled in 9ms
