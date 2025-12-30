@@ -11,8 +11,8 @@ export default function StockTransactionPage() {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState("mm/dd/yyyy");
+  const [toDate, setToDate] = useState("mm/dd/yyyy");
 
   // Filter orders and transactions by date for card calculations
   const getDateFilteredOrders = () => {

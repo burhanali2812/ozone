@@ -13,8 +13,8 @@ export default function TransactionPage() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [userName, setUserName] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState("mm/dd/yyyy");
+  const [toDate, setToDate] = useState("mm/dd/yyyy");
 
   // Form state
   const [newTransaction, setNewTransaction] = useState({
