@@ -13,6 +13,7 @@ export default function StockTransactionPage() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Filter orders and transactions by date for card calculations
   const getDateFilteredOrders = () => {
@@ -74,7 +75,14 @@ export default function StockTransactionPage() {
         order.paymentStatus === "paid" ||
         order.paymentStatus === "partially-paid"
     )
-    .reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+    .reduce((sum, order) => {
+      // For partially-paid orders, only add the paidAmount
+      if (order.paymentStatus === "partially-paid") {
+        return sum + (order.paidAmount || 0);
+      }
+      // For paid orders, add the full totalPrice
+      return sum + (order.totalPrice || 0);
+    }, 0);
 
   const totalPurchase = filteredTransactions.reduce(
     (sum, transaction) => sum + (transaction.amount || 0),
@@ -145,8 +153,8 @@ export default function StockTransactionPage() {
     applyFilters(filterType, fromDate, toDate);
   };
 
-  // Apply all filters (type and date)
-  const applyFilters = (filterType, from, to) => {
+  // Apply all filters (type, date, and search)
+  const applyFilters = (filterType, from, to, search = searchTerm) => {
     let data = [];
 
     // Filter by type
@@ -154,6 +162,9 @@ export default function StockTransactionPage() {
       data = [...orders];
     } else if (filterType === "purchase") {
       data = [...transactions];
+    } else if (filterType === "reinvest") {
+      // Filter only transactions done by Ozone
+      data = transactions.filter((t) => t.doBy === "Ozone");
     } else {
       data = [...orders, ...transactions];
     }
@@ -175,6 +186,18 @@ export default function StockTransactionPage() {
       });
     }
 
+    // Filter by shop name search (only for orders/sales)
+    if (search && search.trim()) {
+      data = data.filter((item) => {
+        // If item has shopName (it's an order), filter by shop name
+        if (item.shopName) {
+          return item.shopName.toLowerCase().includes(search.toLowerCase());
+        }
+        // If item doesn't have shopName (it's a transaction), keep it only if we're showing purchases
+        return filterType === "purchase";
+      });
+    }
+
     setFilteredData(data);
   };
 
@@ -182,14 +205,20 @@ export default function StockTransactionPage() {
   const handleDateFilter = (from, to) => {
     setFromDate(from);
     setToDate(to);
-    applyFilters(activeFilter, from, to);
+    applyFilters(activeFilter, from, to, searchTerm);
+  };
+
+  // Handle search filter change
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+    applyFilters(activeFilter, fromDate, toDate, value);
   };
 
   // Clear date filters
   const clearDateFilters = () => {
     setFromDate("");
     setToDate("");
-    applyFilters(activeFilter, "", "");
+    applyFilters(activeFilter, "", "", searchTerm);
   };
 
   // Format date
@@ -300,7 +329,7 @@ export default function StockTransactionPage() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Sales Card */}
           <div
             onClick={() => handleFilter("sales")}
@@ -372,7 +401,15 @@ export default function StockTransactionPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <p className="text-sm font-semibold">Reinvest</p>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleFilter("reinvest");
+                      }}
+                      className="text-sm font-semibold hover:underline"
+                    >
+                      Reinvest
+                    </button>
                   </div>
                   <p className="text-sm font-bold text-orange-600">
                     Rs. {reinvestAmount.toLocaleString()}/-
@@ -556,22 +593,155 @@ export default function StockTransactionPage() {
               </div>
             )}
           </div>
+
+          {/* Reinvest Card */}
+          <div
+            onClick={() => handleFilter("reinvest")}
+            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+              activeFilter === "reinvest" ? "ring-4 ring-orange-500" : ""
+            }`}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-xl flex items-center justify-center text-white">
+                <svg
+                  className="w-8 h-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  Reinvest
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">Ozone Transactions</p>
+                <p className="text-2xl font-bold text-orange-600">
+                  Rs. {reinvestAmount.toLocaleString()}/-
+                </p>
+              </div>
+            </div>
+
+            {/* Reinvest Info */}
+            <div className="mt-4 bg-orange-50 border border-orange-200 rounded-lg p-3">
+              <div className="flex items-center gap-2 text-orange-700">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <div>
+                  <p className="text-sm font-semibold">Business Investment</p>
+                  <p className="text-xs text-orange-600">
+                    {
+                      filteredTransactions.filter((t) => t.doBy === "Ozone")
+                        .length
+                    }{" "}
+                    Transactions
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {activeFilter === "reinvest" && (
+              <div className="mt-3 text-sm text-orange-600 font-semibold flex items-center gap-2">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Filtered
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Data Table */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="p-6 bg-gradient-to-r from-purple-50 to-pink-50">
-            <h2 className="text-xl font-bold text-gray-900">
-              {activeFilter === "sales"
-                ? "Sales Details"
-                : activeFilter === "purchase"
-                ? "Purchase Details"
-                : "All Transactions"}
-            </h2>
-            <p className="text-sm text-gray-600 mt-1">
-              Showing {filteredData.length} record
-              {filteredData.length !== 1 ? "s" : ""}
-            </p>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">
+                  {activeFilter === "sales"
+                    ? "Sales Details"
+                    : activeFilter === "purchase"
+                    ? "Purchase Details"
+                    : activeFilter === "reinvest"
+                    ? "Reinvest Transactions (Ozone)"
+                    : "All Transactions"}
+                </h2>
+                <p className="text-sm text-gray-600 mt-1">
+                  Showing {filteredData.length} record
+                  {filteredData.length !== 1 ? "s" : ""}
+                </p>
+              </div>
+
+              {/* Search Input - Only show for sales or all */}
+              {(activeFilter === "sales" || activeFilter === "all") && (
+                <div className="w-full sm:w-80">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search by shop name..."
+                      value={searchTerm}
+                      onChange={(e) => handleSearchChange(e.target.value)}
+                      className="w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+                    />
+                    <svg
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                    {searchTerm && (
+                      <button
+                        onClick={() => handleSearchChange("")}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {loading ? (
@@ -606,7 +776,7 @@ export default function StockTransactionPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {orders.map((order) => (
+                    {filteredData.map((order) => (
                       <tr
                         key={order._id}
                         className="hover:bg-gray-50 transition-colors"
@@ -717,7 +887,7 @@ export default function StockTransactionPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {transactions.map((transaction) => (
+                    {filteredData.map((transaction) => (
                       <tr
                         key={transaction._id}
                         className="hover:bg-gray-50 transition-colors"
@@ -774,6 +944,83 @@ export default function StockTransactionPage() {
                     </tr>
                   </tfoot>
                 </table>
+              ) : activeFilter === "reinvest" ? (
+                // Reinvest Table (Ozone Transactions)
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                        Date & Time
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                        Done By
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                        Purpose
+                      </th>
+                      <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">
+                        Amount
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {filteredData.map((transaction) => (
+                      <tr
+                        key={transaction._id}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                              />
+                            </svg>
+                            {formatDate(transaction.createdAt)}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="font-medium text-orange-700 bg-orange-50 px-3 py-1 rounded-full text-sm">
+                            {transaction.doBy}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-gray-700">
+                            {transaction.purpose}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <span className="text-lg font-bold text-orange-600">
+                            Rs. {transaction.amount?.toLocaleString() || 0}/-
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot className="bg-gray-50">
+                    <tr>
+                      <td
+                        colSpan="3"
+                        className="px-6 py-4 text-right font-bold text-gray-900"
+                      >
+                        Total Reinvest:
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <span className="text-xl font-bold text-orange-600">
+                          Rs. {reinvestAmount.toLocaleString()}/-
+                        </span>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
               ) : (
                 // All Data Table
                 <table className="w-full">
@@ -798,119 +1045,125 @@ export default function StockTransactionPage() {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {/* Show orders */}
-                    {orders.map((order) => (
-                      <tr
-                        key={`order-${order._id}`}
-                        className="hover:bg-gray-50 transition-colors"
-                      >
-                        <td className="px-6 py-4">
-                          <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold border border-green-200">
-                            SALE
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
-                            </svg>
-                            {formatDate(order.createdAt)}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div>
-                            <p className="font-medium text-gray-900">
-                              {order.shopName}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              {order.shopContact}
-                            </p>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm">
-                            {order.orderItems && order.orderItems.length > 0 ? (
-                              <div className="space-y-1">
-                                {order.orderItems
-                                  .slice(0, 2)
-                                  .map((item, idx) => (
-                                    <div key={idx} className="text-gray-600">
-                                      {item.size} × {item.quantity}
+                    {filteredData
+                      .filter((item) => item.shopName)
+                      .map((order) => (
+                        <tr
+                          key={`order-${order._id}`}
+                          className="hover:bg-gray-50 transition-colors"
+                        >
+                          <td className="px-6 py-4">
+                            <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold border border-green-200">
+                              SALE
+                            </span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
+                              </svg>
+                              {formatDate(order.createdAt)}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div>
+                              <p className="font-medium text-gray-900">
+                                {order.shopName}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                {order.shopContact}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="text-sm">
+                              {order.orderItems &&
+                              order.orderItems.length > 0 ? (
+                                <div className="space-y-1">
+                                  {order.orderItems
+                                    .slice(0, 2)
+                                    .map((item, idx) => (
+                                      <div key={idx} className="text-gray-600">
+                                        {item.size} × {item.quantity}
+                                      </div>
+                                    ))}
+                                  {order.orderItems.length > 2 && (
+                                    <div className="text-gray-400 text-xs">
+                                      +{order.orderItems.length - 2} more
                                     </div>
-                                  ))}
-                                {order.orderItems.length > 2 && (
-                                  <div className="text-gray-400 text-xs">
-                                    +{order.orderItems.length - 2} more
-                                  </div>
-                                )}
-                              </div>
-                            ) : (
-                              <span className="text-gray-400">No items</span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <span className="text-lg font-bold text-green-600">
-                            + Rs. {order.totalPrice?.toLocaleString() || 0}/-
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
+                                  )}
+                                </div>
+                              ) : (
+                                <span className="text-gray-400">No items</span>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <span className="text-lg font-bold text-green-600">
+                              + Rs. {order.totalPrice?.toLocaleString() || 0}/-
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
                     {/* Show transactions */}
-                    {transactions.map((transaction) => (
-                      <tr
-                        key={`transaction-${transaction._id}`}
-                        className="hover:bg-gray-50 transition-colors"
-                      >
-                        <td className="px-6 py-4">
-                          <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold border border-red-200">
-                            PURCHASE
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
-                            </svg>
-                            {formatDate(transaction.createdAt)}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="font-medium text-gray-900">
-                            {transaction.doBy}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="text-gray-700">
-                            {transaction.purpose}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <span className="text-lg font-bold text-red-600">
-                            - Rs. {transaction.amount?.toLocaleString() || 0}/-
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
+                    {filteredData
+                      .filter((item) => !item.shopName)
+                      .map((transaction) => (
+                        <tr
+                          key={`transaction-${transaction._id}`}
+                          className="hover:bg-gray-50 transition-colors"
+                        >
+                          <td className="px-6 py-4">
+                            <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold border border-red-200">
+                              PURCHASE
+                            </span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
+                              </svg>
+                              {formatDate(transaction.createdAt)}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="font-medium text-gray-900">
+                              {transaction.doBy}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="text-gray-700">
+                              {transaction.purpose}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <span className="text-lg font-bold text-red-600">
+                              - Rs. {transaction.amount?.toLocaleString() || 0}
+                              /-
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                   <tfoot className="bg-gray-50">
                     <tr className="border-t-2 border-gray-300">
@@ -959,6 +1212,8 @@ export default function StockTransactionPage() {
                   ? "No sales orders found"
                   : activeFilter === "purchase"
                   ? "No purchase transactions found"
+                  : activeFilter === "reinvest"
+                  ? "No reinvest transactions found"
                   : "No data available"}
               </p>
             </div>

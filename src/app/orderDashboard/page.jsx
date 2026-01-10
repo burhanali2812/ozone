@@ -9,6 +9,7 @@ export default function OrderDashboard() {
   const [orders, setOrders] = useState([]);
   const [filterStatus, setFilterStatus] = useState("all");
   const [filterPayment, setFilterPayment] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
@@ -66,7 +67,10 @@ export default function OrderDashboard() {
     const statusMatch = filterStatus === "all" || order.status === filterStatus;
     const paymentMatch =
       filterPayment === "all" || order.paymentStatus === filterPayment;
-    return statusMatch && paymentMatch;
+    const searchMatch =
+      searchQuery === "" ||
+      order.shopName?.toLowerCase().includes(searchQuery.toLowerCase());
+    return statusMatch && paymentMatch && searchMatch;
   });
 
   // Open modal
@@ -87,19 +91,25 @@ export default function OrderDashboard() {
       orderId: selectedOrder._id,
       updateData: {
         paymentStatus:
-          selectedOrder.remainingAmount - modalData.remainingAmount === 0
-            ? "paid"
-            : modalData.paymentStatus,
+          modalData.remainingAmount === 0 ? "paid" : modalData.paymentStatus,
 
         paidAmount:
           modalData.paymentStatus === "paid"
             ? selectedOrder.totalPrice
-            : selectedOrder.paidAmount + modalData.remainingAmount,
+            : modalData.paymentStatus === "unpaid"
+            ? 0
+            : modalData.remainingAmount === 0
+            ? selectedOrder.totalPrice
+            : selectedOrder.paidAmount !== 0
+            ? selectedOrder.paidAmount + modalData.remainingAmount
+            : selectedOrder.totalPrice - modalData.remainingAmount,
 
         remainingAmount:
           modalData.paymentStatus === "paid"
             ? 0
-            : selectedOrder.remainingAmount - modalData.remainingAmount,
+            : modalData.paymentStatus === "unpaid"
+            ? selectedOrder.totalPrice
+            : modalData.remainingAmount,
 
         status: modalData.status,
       },
@@ -120,7 +130,7 @@ export default function OrderDashboard() {
 
       // Update UI State
       setOrders((prevOrders) =>
-        prevOrders.map((order) =>
+        prevOrders?.map((order) =>
           order._id === updatedOrder._id
             ? {
                 ...order,
@@ -136,7 +146,10 @@ export default function OrderDashboard() {
       console.log("Order updated on server:", updatedOrder);
 
       //  Update Stock ONLY when order is completed
-      if (modalData.status === "completed" && modalData.paymentStatus === "paid") {
+      if (
+        modalData.status === "completed" &&
+        modalData.paymentStatus === "paid"
+      ) {
         try {
           // Fetch all products from database
           const productsResponse = await axios.get("/api/product");
@@ -148,7 +161,7 @@ export default function OrderDashboard() {
 
           const allProducts = productsResponse.data.data;
 
-          for (const item of updatedOrder.orderItems) {
+          for (const item of updatedOrder?.orderItems) {
             // Get product ID from order item
             const productId =
               typeof item.product === "string"
@@ -161,7 +174,7 @@ export default function OrderDashboard() {
             }
 
             // Find product from all products
-            const product = allProducts.find(
+            const product = allProducts?.find(
               (p) => p._id.toString() === productId.toString()
             );
 
@@ -302,6 +315,52 @@ Requested: ${stockError.response.data.requested}`
 
         {/* Filter Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          {/* Search Bar */}
+          <div className="mb-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search by shop name..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all"
+              />
+              <svg
+                className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
             {/* Filter Counts - Left side on desktop, center on mobile */}
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
@@ -509,7 +568,9 @@ Requested: ${stockError.response.data.requested}`
           </div>
 
           {/* Active Filters Display */}
-          {(filterStatus !== "all" || filterPayment !== "all") && (
+          {(filterStatus !== "all" ||
+            filterPayment !== "all" ||
+            searchQuery !== "") && (
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="text-sm text-gray-600">Active Filters:</span>
               {filterStatus !== "all" && (
@@ -529,6 +590,17 @@ Requested: ${stockError.response.data.requested}`
                   <button
                     onClick={() => setFilterPayment("all")}
                     className="hover:text-green-900"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+              {searchQuery !== "" && (
+                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium flex items-center gap-2">
+                  Search: "{searchQuery}"
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="hover:text-purple-900"
                   >
                     ×
                   </button>
