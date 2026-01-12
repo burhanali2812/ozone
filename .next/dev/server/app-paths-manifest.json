@@ -8,6 +8,7 @@
   "/orderDashboard/page": "app/orderDashboard/page.js",
   "/page": "app/page.js",
   "/rawItems/manageRawItems/page": "app/rawItems/manageRawItems/page.js",
+  "/receipt/page": "app/receipt/page.js",
   "/stockManage/page": "app/stockManage/page.js",
   "/stock_transactions/page": "app/stock_transactions/page.js",
   "/transaction/page": "app/transaction/page.js"

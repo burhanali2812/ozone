@@ -21,6 +21,9 @@ export default function OrderDashboard() {
     remainingAmount: 0,
     paidAmount: 0,
     status: "",
+    shopName: "",
+    shopAddress: "",
+    shopContact: "",
   });
 
   const getOrders = async () => {
@@ -63,6 +66,18 @@ export default function OrderDashboard() {
     return () => clearInterval(intervalId);
   }, []);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showModal]);
+
   const filteredOrders = orders.filter((order) => {
     const statusMatch = filterStatus === "all" || order.status === filterStatus;
     const paymentMatch =
@@ -80,6 +95,9 @@ export default function OrderDashboard() {
       paymentStatus: order.paymentStatus,
       remainingAmount: order.remainingAmount,
       status: order.status,
+      shopName: order.shopName || "",
+      shopAddress: order.shopAddress || "",
+      shopContact: order.shopContact || "",
     });
     setShowModal(true);
   };
@@ -112,6 +130,9 @@ export default function OrderDashboard() {
             : modalData.remainingAmount,
 
         status: modalData.status,
+        shopName: modalData.shopName,
+        shopAddress: modalData.shopAddress,
+        shopContact: modalData.shopContact,
       },
     };
 
@@ -138,6 +159,9 @@ export default function OrderDashboard() {
                 paidAmount: updatedOrder.paidAmount,
                 remainingAmount: updatedOrder.remainingAmount,
                 status: updatedOrder.status,
+                shopName: updatedOrder.shopName,
+                shopAddress: updatedOrder.shopAddress,
+                shopContact: updatedOrder.shopContact,
               }
             : order
         )
@@ -737,11 +761,18 @@ Requested: ${stockError.response.data.requested}`
 
       {/* Modal */}
       {showModal && selectedOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowModal(false)}
+        >
           {/* Modal Box */}
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl h-[350px] flex flex-col">
+          <div
+            className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col"
+            style={{ maxHeight: "600px" }}
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Header (Fixed) */}
-            <div className="p-6 border-b flex justify-between items-center">
+            <div className="p-6 border-b flex justify-between items-center flex-shrink-0">
               <h2 className="text-2xl font-bold text-gray-900">
                 Manage Order - {selectedOrder.id}
               </h2>
@@ -754,18 +785,72 @@ Requested: ${stockError.response.data.requested}`
             </div>
 
             {/* Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div
+              className="flex-1 overflow-y-auto p-6"
+              style={{ minHeight: 0 }}
+            >
+              {/* Shop Details - Editable */}
+              <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 mb-3">
+                  Shop Details
+                </h3>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Shop Name
+                    </label>
+                    <input
+                      type="text"
+                      value={modalData.shopName}
+                      onChange={(e) =>
+                        setModalData({ ...modalData, shopName: e.target.value })
+                      }
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                      placeholder="Enter shop name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Shop Address
+                    </label>
+                    <input
+                      type="text"
+                      value={modalData.shopAddress}
+                      onChange={(e) =>
+                        setModalData({
+                          ...modalData,
+                          shopAddress: e.target.value,
+                        })
+                      }
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                      placeholder="Enter shop address"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Shop Contact
+                    </label>
+                    <input
+                      type="text"
+                      value={modalData.shopContact}
+                      onChange={(e) =>
+                        setModalData({
+                          ...modalData,
+                          shopContact: e.target.value,
+                        })
+                      }
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                      placeholder="Enter shop contact"
+                    />
+                  </div>
+                </div>
+              </div>
+
               {/* Order Details */}
               <div className="mb-6 p-4 bg-gray-50 rounded-xl">
                 <h3 className="font-semibold text-gray-900 mb-2">
-                  {selectedOrder.shopName}
+                  Order Items
                 </h3>
-                <p className="text-sm text-gray-600">
-                  {selectedOrder.shopAddress}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {selectedOrder.shopContact}
-                </p>
 
                 <div className="mt-3">
                   <p className="text-sm font-medium text-gray-700">Items:</p>
@@ -856,7 +941,7 @@ Requested: ${stockError.response.data.requested}`
             </div>
 
             {/* Footer (Fixed) */}
-            <div className="p-6 border-t flex flex-col sm:flex-row gap-4">
+            <div className="p-6 border-t flex flex-col sm:flex-row gap-4 flex-shrink-0">
               <button
                 onClick={handleUpdateOrder}
                 className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-medium"
