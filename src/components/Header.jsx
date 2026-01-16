@@ -3,6 +3,16 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {
+  FaHome,
+  FaBox,
+  FaInfoCircle,
+  FaEnvelope,
+  FaUserCircle,
+  FaShoppingCart,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,26 +56,30 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-1">
             <Link
               href="#home"
-              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium"
+              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
+              <FaHome className="text-sm" />
               Home
             </Link>
             <Link
               href="#products"
-              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium"
+              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
+              <FaBox className="text-sm" />
               Products
             </Link>
             <Link
               href="#about"
-              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium"
+              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
+              <FaInfoCircle className="text-sm" />
               About
             </Link>
             <Link
               href="#contact"
-              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium"
+              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
+              <FaEnvelope className="text-sm" />
               Contact
             </Link>
           </div>
@@ -76,25 +90,14 @@ export default function Header() {
               onClick={handleLogin}
               className="bg-white text-blue-600 px-5 py-2 rounded-lg hover:bg-blue-50 transition-all duration-300 font-semibold shadow-md hover:shadow-lg flex items-center gap-2"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                />
-              </svg>
+              <FaUserCircle className="text-base" />
               Login
             </button>
             <button
               onClick={() => router.push("/order")}
-              className="bg-yellow-400 text-gray-900 px-5 py-2 rounded-lg hover:bg-yellow-300 transition-all duration-300 font-semibold shadow-md hover:shadow-lg"
+              className="bg-yellow-400 text-gray-900 px-5 py-2 rounded-lg hover:bg-yellow-300 transition-all duration-300 font-semibold shadow-md hover:shadow-lg flex items-center gap-2"
             >
+              <FaShoppingCart className="text-base" />
               Order Now
             </button>
           </div>
@@ -104,28 +107,11 @@ export default function Header() {
             className="lg:hidden text-white p-2 hover:bg-white hover:bg-opacity-20 rounded-lg transition-all"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            {isMenuOpen ? (
+              <FaTimes className="w-6 h-6" />
+            ) : (
+              <FaBars className="w-6 h-6" />
+            )}
           </button>
         </div>
 
@@ -134,30 +120,34 @@ export default function Header() {
           <div className="lg:hidden mt-3 pb-3 space-y-2 border-t border-white border-opacity-20 pt-3">
             <Link
               href="#home"
-              className="block text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
+              className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
+              <FaHome className="text-sm" />
               Home
             </Link>
             <Link
               href="#products"
-              className="block text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
+              className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
+              <FaBox className="text-sm" />
               Products
             </Link>
             <Link
               href="#about"
-              className="block text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
+              className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
+              <FaInfoCircle className="text-sm" />
               About
             </Link>
             <Link
               href="#contact"
-              className="block text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
+              className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
+              <FaEnvelope className="text-sm" />
               Contact
             </Link>
             <div className="flex flex-col space-y-2 pt-2">
@@ -168,19 +158,7 @@ export default function Header() {
                 }}
                 className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all font-semibold flex items-center justify-center gap-2"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                  />
-                </svg>
+                <FaUserCircle className="text-base" />
                 Login
               </button>
               <button
@@ -188,8 +166,9 @@ export default function Header() {
                   router.push("/order");
                   setIsMenuOpen(false);
                 }}
-                className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-all font-semibold"
+                className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-all font-semibold flex items-center justify-center gap-2"
               >
+                <FaShoppingCart className="text-base" />
                 Order Now
               </button>
             </div>

@@ -21,8 +21,6 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
-          
-
             {/* Main Heading */}
             <div className="space-y-3">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
@@ -169,7 +167,7 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-full blur-2xl opacity-30 animate-pulse"></div>
 
                   {/* Water Bottle Image */}
-                  <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-full">
                     <Image
                       src="/images/hero.png"
                       alt="Ozone Mineral Water Bottle"

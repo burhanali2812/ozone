@@ -25,7 +25,6 @@ export default function Home() {
         <ProductSection />
         <FeatureSection />
         <Testimonials/>
-        <ContactSection />
       </main>
       {shouldShowLayout && <Footer />}
     </div>
