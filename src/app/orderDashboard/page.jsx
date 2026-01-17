@@ -24,6 +24,7 @@ export default function OrderDashboard() {
     shopName: "",
     shopAddress: "",
     shopContact: "",
+    orderItems: [],
   });
 
   const getOrders = async () => {
@@ -98,35 +99,47 @@ export default function OrderDashboard() {
       shopName: order.shopName || "",
       shopAddress: order.shopAddress || "",
       shopContact: order.shopContact || "",
+      orderItems: order.orderItems.map((item) => ({
+        ...item,
+        quantity: item.quantity,
+        price: item.price,
+      })),
     });
     setShowModal(true);
   };
 
   // Update order
   const handleUpdateOrder = async () => {
+    // Calculate new total price based on edited items
+    const newTotalPrice = modalData.orderItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
+
     const updatePayload = {
       action: "update",
       orderId: selectedOrder._id,
       updateData: {
+        orderItems: modalData.orderItems,
+        totalPrice: newTotalPrice,
         paymentStatus:
           modalData.remainingAmount === 0 ? "paid" : modalData.paymentStatus,
 
         paidAmount:
           modalData.paymentStatus === "paid"
-            ? selectedOrder.totalPrice
+            ? newTotalPrice
             : modalData.paymentStatus === "unpaid"
             ? 0
             : modalData.remainingAmount === 0
-            ? selectedOrder.totalPrice
+            ? newTotalPrice
             : selectedOrder.paidAmount !== 0
-            ? selectedOrder.paidAmount + modalData.remainingAmount
-            : selectedOrder.totalPrice - modalData.remainingAmount,
+            ? selectedOrder.paidAmount + selectedOrder.remainingAmount - modalData.remainingAmount
+            : newTotalPrice - modalData.remainingAmount,
 
         remainingAmount:
           modalData.paymentStatus === "paid"
             ? 0
             : modalData.paymentStatus === "unpaid"
-            ? selectedOrder.totalPrice
+            ? newTotalPrice
             : modalData.remainingAmount,
 
         status: modalData.status,
@@ -849,22 +862,77 @@ Requested: ${stockError.response.data.requested}`
               {/* Order Details */}
               <div className="mb-6 p-4 bg-gray-50 rounded-xl">
                 <h3 className="font-semibold text-gray-900 mb-2">
-                  Order Items
+                  Order Items (Editable)
                 </h3>
 
-                <div className="mt-3">
-                  <p className="text-sm font-medium text-gray-700">Items:</p>
-                  {selectedOrder.orderItems.map((item, idx) => (
-                    <p key={idx} className="text-sm text-gray-600">
-                      {item.product?.size} ({item.product?.packingType},{" "}
-                      {item.product?.waterQuality},{" "}
-                      {item.product?.bottleQuality}) × {item.quantity} = Rs.{" "}
-                      {item.price * item.quantity}/-
-                    </p>
+                <div className="mt-3 space-y-3">
+                  {modalData.orderItems.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 bg-white rounded-lg border border-gray-200"
+                    >
+                      <p className="text-sm font-medium text-gray-700 mb-2">
+                        {item.product?.size} ({item.product?.packingType},{" "}
+                        {item.product?.waterQuality},{" "}
+                        {item.product?.bottleQuality})
+                      </p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-1">
+                            Quantity
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            value={item.quantity}
+                            onChange={(e) => {
+                              const newItems = [...modalData.orderItems];
+                              newItems[idx].quantity =
+                                parseInt(e.target.value) || 1;
+                              setModalData({
+                                ...modalData,
+                                orderItems: newItems,
+                              });
+                            }}
+                            className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-1">
+                            Price (per unit)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            value={item.price}
+                            onChange={(e) => {
+                              const newItems = [...modalData.orderItems];
+                              newItems[idx].price =
+                                parseFloat(e.target.value) || 0;
+                              setModalData({
+                                ...modalData,
+                                orderItems: newItems,
+                              });
+                            }}
+                            className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm"
+                          />
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-2">
+                        Subtotal: Rs. {item.price * item.quantity}/-
+                      </p>
+                    </div>
                   ))}
-                  <p className="text-lg font-bold text-gray-900 mt-2">
-                    Total: Rs. {selectedOrder.totalPrice}/-
-                  </p>
+                  <div className="pt-2 border-t border-gray-300">
+                    <p className="text-lg font-bold text-gray-900">
+                      Total: Rs.{" "}
+                      {modalData.orderItems.reduce(
+                        (sum, item) => sum + item.price * item.quantity,
+                        0
+                      )}
+                      /-
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -875,7 +943,11 @@ Requested: ${stockError.response.data.requested}`
                 </label>
                 <select
                   value={modalData.paymentStatus}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const newTotalPrice = modalData.orderItems.reduce(
+                      (sum, item) => sum + item.price * item.quantity,
+                      0
+                    );
                     setModalData({
                       ...modalData,
                       paymentStatus: e.target.value,
@@ -883,10 +955,10 @@ Requested: ${stockError.response.data.requested}`
                         e.target.value === "paid"
                           ? 0
                           : e.target.value === "unpaid"
-                          ? selectedOrder.totalPrice
+                          ? newTotalPrice
                           : modalData.remainingAmount,
-                    })
-                  }
+                    });
+                  }}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
                 >
                   <option value="unpaid">Unpaid</option>
@@ -904,19 +976,28 @@ Requested: ${stockError.response.data.requested}`
                   <input
                     type="number"
                     min="0"
-                    max={selectedOrder.totalPrice}
+                    max={modalData.orderItems.reduce(
+                      (sum, item) => sum + item.price * item.quantity,
+                      0
+                    )}
                     value={modalData.remainingAmount}
                     onChange={(e) =>
                       setModalData({
                         ...modalData,
-                        remainingAmount: Math.min(
-                          parseFloat(e.target.value) || 0,
-                          selectedOrder.totalPrice
-                        ),
+                        remainingAmount: parseFloat(e.target.value) || 0,
                       })
                     }
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
+                    placeholder="Enter remaining amount"
                   />
+                  <p className="text-sm text-gray-600 mt-2">
+                    Paid Amount: Rs.{" "}
+                    {modalData.orderItems.reduce(
+                      (sum, item) => sum + item.price * item.quantity,
+                      0
+                    ) - modalData.remainingAmount}
+                    /-
+                  </p>
                 </div>
               )}
 

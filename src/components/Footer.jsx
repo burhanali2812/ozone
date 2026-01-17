@@ -5,6 +5,7 @@ import {
   FaFacebookF,
   FaInstagram,
   FaWhatsapp,
+  FaTiktok,
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
@@ -180,6 +181,16 @@ export default function Footer() {
               >
                 <FaWhatsapp className="text-base group-hover:scale-110 transition-transform" />
               </a>
+              {/* TikTok */}
+              <a
+                href="https://www.tiktok.com/@ozone.water?_r=1&_t=ZS-938vekWBFQb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-black transform hover:scale-110 transition-all duration-300 group"
+                aria-label="TikTok"
+              >
+                <FaTiktok className="text-base group-hover:scale-110 transition-transform" />
+              </a>
             </div>
           </div>
         </div>
@@ -190,7 +201,6 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} OZONE Mineral Water. All rights
               reserved.
             </p>
-          
           </div>
         </div>
       </div>

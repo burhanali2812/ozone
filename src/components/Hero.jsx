@@ -156,9 +156,8 @@ export default function Hero() {
 
           {/* Right Image */}
           <div className="relative order-1 lg:order-2">
-            <div className="relative">
-              {/* Decorative Circle */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full opacity-20 blur-3xl"></div>
+            <div className="relative flex items-center justify-center">
+              {/* Decorative Circle - Removed for cleaner look */}
 
               {/* Main Image Container */}
               <div className="relative z-10 flex items-center justify-center">
