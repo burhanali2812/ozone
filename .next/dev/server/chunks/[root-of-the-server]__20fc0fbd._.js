@@ -115,6 +115,12 @@ const orderSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoo
         required: true,
         trim: true
     },
+    trackingID: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
     orderItems: {
         type: [
             orderItemSchema
@@ -524,6 +530,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1
 ;
 ;
 ;
+const generateTrackingID = ()=>{
+    const prefix = "OZONE";
+    const id = Math.random().toString(36).substring(2, 10).toUpperCase();
+    return `${prefix}-${id}`;
+};
 async function POST(request) {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
@@ -572,7 +583,8 @@ async function POST(request) {
             paidAmount,
             paymentStatus,
             remainingAmount,
-            status
+            status,
+            trackingID: generateTrackingID()
         });
         await newOrder.save();
         // Send email notification to admin (non-blocking)

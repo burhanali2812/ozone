@@ -5,6 +5,7 @@
   "/api/product/route": "app/api/product/route.js",
   "/api/transaction/route": "app/api/transaction/route.js",
   "/auth/page": "app/auth/page.js",
+  "/order/page": "app/order/page.js",
   "/orderDashboard/page": "app/orderDashboard/page.js",
   "/page": "app/page.js",
   "/receipt/page": "app/receipt/page.js",

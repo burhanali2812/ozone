@@ -4,6 +4,14 @@ import Order from "../../../../models/Order";
 import Product from "../../../../models/Product";
 import { sendOrderNotificationEmail } from "../../../../lib/emailService";
 
+
+const generateTrackingID = () => {
+  const prefix = "OZONE";
+  const id = Math.random().toString(36).substring(2, 10).toUpperCase();
+  return `${prefix}-${id}`;
+};
+
+
 export async function POST(request) {
   try {
     await connectDB();
@@ -18,6 +26,7 @@ export async function POST(request) {
       paymentStatus,
       remainingAmount,
       status,
+
     } = await request.json();
 
     if (!shopName || !shopAddress || !shopContact) {
@@ -65,6 +74,7 @@ export async function POST(request) {
       paymentStatus,
       remainingAmount,
       status,
+      trackingID: generateTrackingID(),
     });
 
     await newOrder.save();

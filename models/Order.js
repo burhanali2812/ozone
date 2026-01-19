@@ -40,6 +40,12 @@ const orderSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    trackingID: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
 
     orderItems: {
       type: [orderItemSchema], // ⬅ MULTIPLE ITEMS HERE
