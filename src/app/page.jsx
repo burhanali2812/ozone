@@ -7,6 +7,7 @@ import FeatureSection from "../components/FeatureSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
 import Testimonials from "../components/Testonomials";
+import Tracking from "../components/Tracking";
 
 export default function Home() {
   const pathname = usePathname();
@@ -23,6 +24,7 @@ export default function Home() {
       <main>
         <Hero />
         <ProductSection />
+        <Tracking/>
         <FeatureSection />
         <Testimonials/>
       </main>
