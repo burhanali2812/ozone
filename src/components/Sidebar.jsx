@@ -7,8 +7,8 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
   const router = useRouter();
-    const [user, setUser] = useState(null);
-   useEffect(() => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
     const storedUser = localStorage.getItem("user2");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -22,12 +22,11 @@ export default function Sidebar() {
       router.push("/auth");
     }
   };
-    const handleClicked = () => {
+  const handleClicked = () => {
     if (window.innerWidth < 1024) {
       setIsOpen(false);
     }
-    };
-    
+  };
 
   const menuItems = [
     {
@@ -68,12 +67,12 @@ export default function Sidebar() {
       ),
       path: "/order",
     },
-      {
+    {
       name: "Product Management",
       icon: (
         <svg
           className="w-5 h-5"
-          fill="none" 
+          fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
@@ -82,13 +81,12 @@ export default function Sidebar() {
             strokeLinejoin="round"
             strokeWidth={2}
             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293H10m0 0H8m2 0v3m0-3h4"
-
           />
         </svg>
       ),
       path: "/product_dashboard",
     },
-     {
+    {
       name: "Stock Management",
       icon: (
         <svg
@@ -100,7 +98,7 @@ export default function Sidebar() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2} 
+            strokeWidth={2}
             d="M3 7v10a2 2 0 002 2h3m10-14h3a2 2 0 012 2v10a2 2 0 01-2 2h-3m-10 0H5a2 2 0 01-2-2V7a2 2 0 012-2h3m10 0V5a2 2 0 012-2h3a2 2 0 012 2v3m-5 4h.01M15 16h.01M9 16h.01M9 12h.01M15 12h.01"
           />
         </svg>
@@ -144,6 +142,25 @@ export default function Sidebar() {
         </svg>
       ),
       path: "/stock_transactions",
+    },
+    {
+      name: "Track Orders",
+      icon: (
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+          />
+        </svg>
+      ),
+      path: "/tracking",
     },
 
     {

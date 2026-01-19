@@ -59,6 +59,25 @@ export default function TrackingPage() {
       return;
     }
 
+    // Regex for Pakistani phone number: 03xx-xxxxxxx or 923xxxxxxxxx
+    const contactRegex = /^(03\d{2}-?\d{7}|92\d{10})$/;
+
+    if (!contactRegex.test(contactNumber.replace(/\s/g, ""))) {
+      toast.error(
+        "Invalid contact number format. Use: 03xx-xxxxxxx or 923xxxxxxxxx"
+      );
+      return;
+    }
+
+    if (contactNumber.trim().length < 11) {
+      toast.error("Contact number must be at least 11 digits");
+      return;
+    }
+    if (trackingId.trim().length < 14) {
+      toast.error("Tracking ID must be at least 14 characters");
+      return;
+    }
+
     setLoading(true);
     setSearched(true);
 
@@ -157,7 +176,7 @@ export default function TrackingPage() {
                   type="text"
                   value={trackingId}
                   onChange={(e) => setTrackingId(e.target.value)}
-                  placeholder="Enter your tracking ID"
+                  placeholder="Enter your tracking ID OZONE-XXXXXXXX"
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
                   disabled={loading}
                 />
