@@ -4,13 +4,11 @@ import Order from "../../../../models/Order";
 import Product from "../../../../models/Product";
 import { sendOrderNotificationEmail } from "../../../../lib/emailService";
 
-
 const generateTrackingID = () => {
   const prefix = "OZONE";
   const id = Math.random().toString(36).substring(2, 10).toUpperCase();
   return `${prefix}-${id}`;
 };
-
 
 export async function POST(request) {
   try {
@@ -26,7 +24,6 @@ export async function POST(request) {
       paymentStatus,
       remainingAmount,
       status,
-
     } = await request.json();
 
     if (!shopName || !shopAddress || !shopContact) {
@@ -102,6 +99,35 @@ export async function GET(request) {
   try {
     await connectDB();
     const action = request.nextUrl.searchParams.get("action");
+    const trackingId = request.nextUrl.searchParams.get("trackingId");
+    const contact = request.nextUrl.searchParams.get("contact");
+
+    // Search by tracking ID and contact number
+    if (trackingId && contact) {
+      const order = await Order.findOne({
+        trackingID: trackingId,
+        shopContact: contact,
+        isDeleted: { $ne: true },
+      }).populate("orderItems.product");
+
+      if (!order) {
+        return NextResponse.json(
+          {
+            success: false,
+            message:
+              "Order not found with the provided tracking ID and contact number",
+          },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json(
+        { success: true, message: "Order found", order },
+        { status: 200 }
+      );
+    }
+
+    // Fetch all orders (existing functionality)
     let orders;
     if (action === "deleted") {
       orders = await Order.find({ isDeleted: true })

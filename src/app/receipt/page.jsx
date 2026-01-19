@@ -210,14 +210,14 @@ export default function Receipt() {
           <div className="border-t border-gray-300 my-4"></div>
 
           {/* Tracking ID */}
-          {orderData.trackingId && (
+          {orderData.trackingID && (
             <div className="mb-4 bg-blue-50 border border-blue-200 rounded-md p-3">
               <div className="flex justify-between items-center">
                 <span className="text-xs text-blue-600 font-semibold uppercase tracking-wide">
                   Tracking ID:
                 </span>
                 <span className="text-sm font-bold text-blue-800">
-                  {orderData.trackingId}
+                  {orderData.trackingID}
                 </span>
               </div>
             </div>

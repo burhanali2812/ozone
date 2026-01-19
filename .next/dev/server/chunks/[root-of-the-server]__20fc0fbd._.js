@@ -614,6 +614,34 @@ async function GET(request) {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
         const action = request.nextUrl.searchParams.get("action");
+        const trackingId = request.nextUrl.searchParams.get("trackingId");
+        const contact = request.nextUrl.searchParams.get("contact");
+        // Search by tracking ID and contact number
+        if (trackingId && contact) {
+            const order = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
+                trackingID: trackingId,
+                shopContact: contact,
+                isDeleted: {
+                    $ne: true
+                }
+            }).populate("orderItems.product");
+            if (!order) {
+                return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                    success: false,
+                    message: "Order not found with the provided tracking ID and contact number"
+                }, {
+                    status: 404
+                });
+            }
+            return __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: true,
+                message: "Order found",
+                order
+            }, {
+                status: 200
+            });
+        }
+        // Fetch all orders (existing functionality)
         let orders;
         if (action === "deleted") {
             orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
