@@ -13,6 +13,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { MdTrackChanges } from "react-icons/md";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,6 +83,13 @@ export default function Header() {
               <FaEnvelope className="text-sm" />
               Contact
             </Link>
+            <Link
+              href="/tracking"
+              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
+            >
+              <MdTrackChanges className="text-sm" />
+              Track Order
+            </Link>
           </div>
 
           {/* Right Side Buttons */}
@@ -149,6 +157,14 @@ export default function Header() {
             >
               <FaEnvelope className="text-sm" />
               Contact
+            </Link>
+            <Link
+              href="/tracking"
+              className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <MdTrackChanges className="text-sm" />
+              Track Order
             </Link>
             <div className="flex flex-col space-y-2 pt-2">
               <button
