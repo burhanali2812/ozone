@@ -133,7 +133,16 @@ export async function GET(request) {
       orders = await Order.find({ isDeleted: true })
         .populate("orderItems.product")
         .sort({ createdAt: -1 });
-    } else {
+    } 
+    else if(action === "top20"){
+      orders = await Order.find({ isDeleted: { $ne: true } })
+        .populate("orderItems.product")
+        .sort({
+          createdAt: -1,
+        })
+        .limit(20);
+    }
+    else {
       orders = await Order.find({ isDeleted: { $ne: true } })
         .populate("orderItems.product")
         .sort({

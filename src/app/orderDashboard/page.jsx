@@ -16,6 +16,8 @@ export default function OrderDashboard() {
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [userName, setUserName] = useState("");
+  const [isLoadingAll, setIsLoadingAll] = useState(false);
+  const [isLoadingDeleted, setIsLoadingDeleted] = useState(false);
   const [modalData, setModalData] = useState({
     paymentStatus: "",
     remainingAmount: 0,
@@ -27,9 +29,15 @@ export default function OrderDashboard() {
     orderItems: [],
   });
 
-  const getOrders = async () => {
+  const getOrders = async (action) => {
+    if (action === "all") {
+      setIsLoadingAll(true);
+    } else if (action === "deleted") {
+      setIsLoadingDeleted(true);
+    }
+
     try {
-      const res = await axios.get("/api/orders?action=active");
+      const res = await axios.get(`/api/orders?action=${action}`);
       if (res.data.success) {
         setOrders(res.data.data);
         console.log("Fetched Orders:", res.data.data);
@@ -39,6 +47,12 @@ export default function OrderDashboard() {
     } catch (error) {
       console.error("Error fetching orders:", error);
       setOrders([]);
+    } finally {
+      if (action === "all") {
+        setIsLoadingAll(false);
+      } else if (action === "deleted") {
+        setIsLoadingDeleted(false);
+      }
     }
   };
 
@@ -55,13 +69,16 @@ export default function OrderDashboard() {
       console.error("Error parsing user data:", error);
       setUserName("User");
     }
-    getOrders();
+    getOrders("top20");
 
     // Auto-refresh orders every 20 minutes
-    const intervalId = setInterval(() => {
-      getOrders();
-      console.log("Auto-refreshing orders...");
-    }, 20 * 60 * 1000); // 20 minutes in milliseconds
+    const intervalId = setInterval(
+      () => {
+        getOrders("top20");
+        console.log("Auto-refreshing orders...");
+      },
+      20 * 60 * 1000,
+    ); // 20 minutes in milliseconds
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
@@ -128,19 +145,21 @@ export default function OrderDashboard() {
           modalData.paymentStatus === "paid"
             ? newTotalPrice
             : modalData.paymentStatus === "unpaid"
-            ? 0
-            : modalData.remainingAmount === 0
-            ? newTotalPrice
-            : selectedOrder.paidAmount !== 0
-            ? selectedOrder.paidAmount + selectedOrder.remainingAmount - modalData.remainingAmount
-            : newTotalPrice - modalData.remainingAmount,
+              ? 0
+              : modalData.remainingAmount === 0
+                ? newTotalPrice
+                : selectedOrder.paidAmount !== 0
+                  ? selectedOrder.paidAmount +
+                    selectedOrder.remainingAmount -
+                    modalData.remainingAmount
+                  : newTotalPrice - modalData.remainingAmount,
 
         remainingAmount:
           modalData.paymentStatus === "paid"
             ? 0
             : modalData.paymentStatus === "unpaid"
-            ? newTotalPrice
-            : modalData.remainingAmount,
+              ? newTotalPrice
+              : modalData.remainingAmount,
 
         status: modalData.status,
         shopName: modalData.shopName,
@@ -176,8 +195,8 @@ export default function OrderDashboard() {
                 shopAddress: updatedOrder.shopAddress,
                 shopContact: updatedOrder.shopContact,
               }
-            : order
-        )
+            : order,
+        ),
       );
 
       console.log("Order updated on server:", updatedOrder);
@@ -212,7 +231,7 @@ export default function OrderDashboard() {
 
             // Find product from all products
             const product = allProducts?.find(
-              (p) => p._id.toString() === productId.toString()
+              (p) => p._id.toString() === productId.toString(),
             );
 
             if (!product) {
@@ -235,14 +254,14 @@ export default function OrderDashboard() {
             toast.error(
               `Insufficient stock!
 Available: ${stockError.response.data.available}
-Requested: ${stockError.response.data.requested}`
+Requested: ${stockError.response.data.requested}`,
             );
             return;
           }
 
           toast.error(
             stockError.response?.data?.message ||
-              "Order updated, but stock update failed"
+              "Order updated, but stock update failed",
           );
           return;
         }
@@ -562,7 +581,7 @@ Requested: ${stockError.response.data.requested}`
                         Partially Paid (
                         {
                           orders.filter(
-                            (o) => o.paymentStatus === "partially-paid"
+                            (o) => o.paymentStatus === "partially-paid",
                           ).length
                         }
                         )
@@ -647,6 +666,108 @@ Requested: ${stockError.response.data.requested}`
           )}
         </div>
 
+        {/* Load Order Buttons */}
+        <div className="mb-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <button
+            onClick={() => getOrders("all")}
+            disabled={isLoadingAll}
+            className="bg-blue-600 text-white px-4 sm:px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+          >
+            {isLoadingAll ? (
+              <>
+                <svg
+                  className="animate-spin h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                <span className="hidden sm:inline">Loading...</span>
+              </>
+            ) : (
+              <>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                  />
+                </svg>
+                <span className="text-sm sm:text-base">Load All Orders</span>
+              </>
+            )}
+          </button>
+          <button
+            onClick={() => getOrders("deleted")}
+            disabled={isLoadingDeleted}
+            className="bg-red-600 text-white px-4 sm:px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+          >
+            {isLoadingDeleted ? (
+              <>
+                <svg
+                  className="animate-spin h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                <span className="hidden sm:inline">Loading...</span>
+              </>
+            ) : (
+              <>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+                <span className="text-sm sm:text-base">
+                  Load Deleted Orders
+                </span>
+              </>
+            )}
+          </button>
+        </div>
+
         {/* Orders Table */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="overflow-x-auto">
@@ -719,7 +840,7 @@ Requested: ${stockError.response.data.requested}`
                     <td className="px-6 py-4">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium ${getPaymentColor(
-                          order.paymentStatus
+                          order.paymentStatus,
                         )}`}
                       >
                         {order.paymentStatus === "paid" && "Paid"}
@@ -740,7 +861,7 @@ Requested: ${stockError.response.data.requested}`
                     <td className="px-6 py-4">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                          order.status
+                          order.status,
                         )}`}
                       >
                         {order.status.charAt(0).toUpperCase() +
@@ -928,7 +1049,7 @@ Requested: ${stockError.response.data.requested}`
                       Total: Rs.{" "}
                       {modalData.orderItems.reduce(
                         (sum, item) => sum + item.price * item.quantity,
-                        0
+                        0,
                       )}
                       /-
                     </p>
@@ -946,7 +1067,7 @@ Requested: ${stockError.response.data.requested}`
                   onChange={(e) => {
                     const newTotalPrice = modalData.orderItems.reduce(
                       (sum, item) => sum + item.price * item.quantity,
-                      0
+                      0,
                     );
                     setModalData({
                       ...modalData,
@@ -955,8 +1076,8 @@ Requested: ${stockError.response.data.requested}`
                         e.target.value === "paid"
                           ? 0
                           : e.target.value === "unpaid"
-                          ? newTotalPrice
-                          : modalData.remainingAmount,
+                            ? newTotalPrice
+                            : modalData.remainingAmount,
                     });
                   }}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none"
@@ -978,7 +1099,7 @@ Requested: ${stockError.response.data.requested}`
                     min="0"
                     max={modalData.orderItems.reduce(
                       (sum, item) => sum + item.price * item.quantity,
-                      0
+                      0,
                     )}
                     value={modalData.remainingAmount}
                     onChange={(e) =>
@@ -994,7 +1115,7 @@ Requested: ${stockError.response.data.requested}`
                     Paid Amount: Rs.{" "}
                     {modalData.orderItems.reduce(
                       (sum, item) => sum + item.price * item.quantity,
-                      0
+                      0,
                     ) - modalData.remainingAmount}
                     /-
                   </p>

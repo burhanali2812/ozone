@@ -649,6 +649,14 @@ async function GET(request) {
             }).populate("orderItems.product").sort({
                 createdAt: -1
             });
+        } else if (action === "top20") {
+            orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
+                isDeleted: {
+                    $ne: true
+                }
+            }).populate("orderItems.product").sort({
+                createdAt: -1
+            }).limit(20);
         } else {
             orders = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Order$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
                 isDeleted: {
