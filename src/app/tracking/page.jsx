@@ -19,13 +19,13 @@ export default function TrackingPage() {
   const [searched, setSearched] = useState(false);
 
   const statusImages = {
-    "order-placed": "/images/order-placed.png", // Dummy - user will upload
-    "order-in-transit": "/images/in-transit.png", // Dummy - user will upload
-    "order-delivered": "/images/delivered.png", // Dummy - user will upload
+    pending: "/images/order-placed.png", // Dummy - user will upload
+    "in-transit": "/images/in-transit.png", // Dummy - user will upload
+    completed: "/images/delivered.png", // Dummy - user will upload
   };
 
   const statusConfig = {
-    "order-placed": {
+    pending: {
       title: "Order Placed",
       color: "text-blue-600",
       bgColor: "bg-blue-50",
@@ -33,7 +33,7 @@ export default function TrackingPage() {
       icon: FaBox,
       message: "Your order has been placed successfully and is being prepared.",
     },
-    "order-in-transit": {
+    "in-transit": {
       title: "In Transit",
       color: "text-orange-600",
       bgColor: "bg-orange-50",
@@ -41,7 +41,7 @@ export default function TrackingPage() {
       icon: FaTruck,
       message: "Your order is on the way to your location.",
     },
-    "order-delivered": {
+    completed: {
       title: "Delivered",
       color: "text-green-600",
       bgColor: "bg-green-50",
@@ -141,7 +141,7 @@ export default function TrackingPage() {
   };
 
   const getStatusConfig = (status) => {
-    return statusConfig[status] || statusConfig["order-placed"];
+    return statusConfig[status] || statusConfig["pending"];
   };
 
   return (
@@ -150,9 +150,9 @@ export default function TrackingPage() {
 
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-8 animate-fadeIn">
+        <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <MdTrackChanges className="text-5xl text-blue-600 animate-pulse" />
+            <MdTrackChanges className="text-5xl text-blue-600" />
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
               Track Your Order
             </h1>
@@ -163,7 +163,7 @@ export default function TrackingPage() {
         </div>
 
         {/* Search Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 border-2 border-blue-100 animate-slideUp">
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 border-2 border-blue-100">
           <form onSubmit={handleSearch} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               {/* Tracking ID Input */}
@@ -204,7 +204,7 @@ export default function TrackingPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-all transform hover:scale-105 shadow-lg font-semibold"
+                className="flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors shadow-lg font-semibold"
               >
                 {loading ? (
                   <>
@@ -223,7 +223,7 @@ export default function TrackingPage() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="bg-gray-200 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-300 transition-all transform hover:scale-105 font-semibold"
+                  className="bg-gray-200 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-300 transition-colors font-semibold"
                 >
                   Reset
                 </button>
@@ -234,25 +234,23 @@ export default function TrackingPage() {
 
         {/* Order Status Display */}
         {searched && !loading && (
-          <div className="animate-fadeIn">
+          <div>
             {orderData ? (
               <div className="space-y-6">
                 {/* Status Banner */}
                 <div
-                  className={`${
-                    getStatusConfig(orderData.orderStatus).bgColor
-                  } ${
-                    getStatusConfig(orderData.orderStatus).borderColor
+                  className={`${getStatusConfig(orderData.status).bgColor} ${
+                    getStatusConfig(orderData.status).borderColor
                   } border-2 rounded-2xl p-6 md:p-8 shadow-xl`}
                 >
                   <div className="flex flex-col lg:flex-row items-center gap-8">
                     {/* Status Image */}
-                    <div className="flex-shrink-0 animate-bounce">
+                    <div className="flex-shrink-0">
                       <div className="relative w-48 h-48 md:w-64 md:h-64">
                         {/* Placeholder for dummy image */}
                         <div className="w-full h-full bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full flex items-center justify-center">
                           {React.createElement(
-                            getStatusConfig(orderData.orderStatus).icon,
+                            getStatusConfig(orderData.status).icon,
                             { className: "text-8xl text-white" }
                           )}
                         </div>
@@ -263,28 +261,28 @@ export default function TrackingPage() {
                     <div className="flex-1 text-center lg:text-left space-y-4">
                       <div className="flex items-center justify-center lg:justify-start gap-3">
                         {React.createElement(
-                          getStatusConfig(orderData.orderStatus).icon,
+                          getStatusConfig(orderData.status).icon,
                           {
                             className: `text-4xl ${
-                              getStatusConfig(orderData.orderStatus).color
+                              getStatusConfig(orderData.status).color
                             }`,
                           }
                         )}
                         <h2
                           className={`text-3xl md:text-4xl font-bold ${
-                            getStatusConfig(orderData.orderStatus).color
+                            getStatusConfig(orderData.status).color
                           }`}
                         >
-                          {getStatusConfig(orderData.orderStatus).title}
+                          {getStatusConfig(orderData.status).title}
                         </h2>
                       </div>
                       <p className="text-gray-700 text-lg">
-                        {getStatusConfig(orderData.orderStatus).message}
+                        {getStatusConfig(orderData.status).message}
                       </p>
                       <div className="inline-block bg-white px-6 py-3 rounded-lg shadow-md">
                         <p className="text-sm text-gray-600">Tracking ID</p>
                         <p className="text-xl font-bold text-gray-900">
-                          {orderData.trackingId}
+                          {orderData.trackingID}
                         </p>
                       </div>
                     </div>
@@ -303,16 +301,14 @@ export default function TrackingPage() {
                     {/* Steps */}
                     <div className="space-y-6">
                       {[
-                        { key: "order-placed", label: "Order Placed" },
-                        { key: "order-in-transit", label: "In Transit" },
-                        { key: "order-delivered", label: "Delivered" },
+                        { key: "pending", label: "Order Placed" },
+                        { key: "in-transit", label: "In Transit" },
+                        { key: "completed", label: "Delivered" },
                       ].map((step, index) => {
                         const isActive =
-                          orderData.orderStatus === step.key ||
-                          (orderData.orderStatus === "order-delivered" &&
-                            index <= 2) ||
-                          (orderData.orderStatus === "order-in-transit" &&
-                            index <= 1);
+                          orderData.status === step.key ||
+                          (orderData.status === "completed" && index <= 2) ||
+                          (orderData.status === "in-transit" && index <= 1);
 
                         return (
                           <div
@@ -345,8 +341,8 @@ export default function TrackingPage() {
                             </div>
 
                             {/* Active Indicator */}
-                            {orderData.orderStatus === step.key && (
-                              <div className="px-4 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full animate-pulse">
+                            {orderData.status === step.key && (
+                              <div className="px-4 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full">
                                 Current
                               </div>
                             )}
@@ -493,37 +489,6 @@ export default function TrackingPage() {
           </div>
         )}
       </div>
-
-      {/* Custom CSS for animations */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.6s ease-out;
-        }
-
-        .animate-slideUp {
-          animation: slideUp 0.6s ease-out;
-        }
-      `}</style>
     </section>
   );
 }

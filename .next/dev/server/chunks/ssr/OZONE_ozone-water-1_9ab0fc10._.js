@@ -7,14 +7,12 @@ __turbopack_context__.s([
     ()=>TrackingPage
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/styled-jsx/style.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/react-hot-toast/dist/index.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/react-icons/fa/index.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$md$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/react-icons/md/index.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/OZONE/ozone-water-1/node_modules/next/image.js [app-ssr] (ecmascript)");
 "use client";
-;
 ;
 ;
 ;
@@ -28,12 +26,12 @@ function TrackingPage() {
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [searched, setSearched] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const statusImages = {
-        "pending": "/images/order-placed.png",
+        pending: "/images/order-placed.png",
         "in-transit": "/images/in-transit.png",
-        "completed": "/images/delivered.png"
+        completed: "/images/delivered.png"
     };
     const statusConfig = {
-        "pending": {
+        pending: {
             title: "Order Placed",
             color: "text-blue-600",
             bgColor: "bg-blue-50",
@@ -49,7 +47,7 @@ function TrackingPage() {
             icon: __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaTruck"],
             message: "Your order is on the way to your location."
         },
-        "completed": {
+        completed: {
             title: "Delivered",
             color: "text-green-600",
             bgColor: "bg-green-50",
@@ -127,7 +125,7 @@ function TrackingPage() {
         return statusConfig[status] || statusConfig["pending"];
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-        className: "jsx-8ca90b29f0676ccb" + " " + "min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-8 px-4",
+        className: "min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-8 px-4",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Toaster"], {
                 position: "top-center"
@@ -137,23 +135,23 @@ function TrackingPage() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-8ca90b29f0676ccb" + " " + "container mx-auto max-w-6xl",
+                className: "container mx-auto max-w-6xl",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-8ca90b29f0676ccb" + " " + "text-center mb-8 animate-fadeIn",
+                        className: "text-center mb-8",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-8ca90b29f0676ccb" + " " + "flex items-center justify-center gap-3 mb-4",
+                                className: "flex items-center justify-center gap-3 mb-4",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$md$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["MdTrackChanges"], {
-                                        className: "text-5xl text-blue-600 animate-pulse"
+                                        className: "text-5xl text-blue-600"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
                                         lineNumber: 155,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                        className: "jsx-8ca90b29f0676ccb" + " " + "text-4xl md:text-5xl font-bold text-gray-900",
+                                        className: "text-4xl md:text-5xl font-bold text-gray-900",
                                         children: "Track Your Order"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
@@ -167,7 +165,7 @@ function TrackingPage() {
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600 text-lg",
+                                className: "text-gray-600 text-lg",
                                 children: "Enter your tracking ID and contact number to track your order status"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
@@ -181,19 +179,19 @@ function TrackingPage() {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-8ca90b29f0676ccb" + " " + "bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 border-2 border-blue-100 animate-slideUp",
+                        className: "bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 border-2 border-blue-100",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                             onSubmit: handleSearch,
-                            className: "jsx-8ca90b29f0676ccb" + " " + "space-y-6",
+                            className: "space-y-6",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "grid md:grid-cols-2 gap-6",
+                                    className: "grid md:grid-cols-2 gap-6",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "space-y-2",
+                                            className: "space-y-2",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "block text-sm font-semibold text-gray-700",
+                                                    className: "block text-sm font-semibold text-gray-700",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$md$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["MdTrackChanges"], {
                                                             className: "inline mr-2 text-blue-600"
@@ -214,8 +212,8 @@ function TrackingPage() {
                                                     value: trackingId,
                                                     onChange: (e)=>setTrackingId(e.target.value),
                                                     placeholder: "Enter your tracking ID OZONE-XXXXXXXX",
-                                                    disabled: loading,
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                                                    className: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none",
+                                                    disabled: loading
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
                                                     lineNumber: 175,
@@ -228,10 +226,10 @@ function TrackingPage() {
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "space-y-2",
+                                            className: "space-y-2",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "block text-sm font-semibold text-gray-700",
+                                                    className: "block text-sm font-semibold text-gray-700",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaPhone"], {
                                                             className: "inline mr-2 text-blue-600"
@@ -252,8 +250,8 @@ function TrackingPage() {
                                                     value: contactNumber,
                                                     onChange: (e)=>setContactNumber(e.target.value),
                                                     placeholder: "Enter contact number",
-                                                    disabled: loading,
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                                                    className: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none",
+                                                    disabled: loading
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
                                                     lineNumber: 191,
@@ -272,16 +270,16 @@ function TrackingPage() {
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "flex flex-col sm:flex-row gap-3 justify-center",
+                                    className: "flex flex-col sm:flex-row gap-3 justify-center",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "submit",
                                             disabled: loading,
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-all transform hover:scale-105 shadow-lg font-semibold",
+                                            className: "flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors shadow-lg font-semibold",
                                             children: loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8ca90b29f0676ccb" + " " + "w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
+                                                        className: "w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
                                                         lineNumber: 211,
@@ -307,7 +305,7 @@ function TrackingPage() {
                                         (trackingId || contactNumber || orderData) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "button",
                                             onClick: handleReset,
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "bg-gray-200 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-300 transition-all transform hover:scale-105 font-semibold",
+                                            className: "bg-gray-200 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-300 transition-colors font-semibold",
                                             children: "Reset"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
@@ -332,105 +330,104 @@ function TrackingPage() {
                         columnNumber: 9
                     }, this),
                     searched && !loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-8ca90b29f0676ccb" + " " + "animate-fadeIn",
                         children: orderData ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-8ca90b29f0676ccb" + " " + "space-y-6",
+                            className: "space-y-6",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + `${getStatusConfig(orderData.status).bgColor} ${getStatusConfig(orderData.status).borderColor} border-2 rounded-2xl p-6 md:p-8 shadow-xl`,
+                                    className: `${getStatusConfig(orderData.status).bgColor} ${getStatusConfig(orderData.status).borderColor} border-2 rounded-2xl p-6 md:p-8 shadow-xl`,
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-8ca90b29f0676ccb" + " " + "flex flex-col lg:flex-row items-center gap-8",
+                                        className: "flex flex-col lg:flex-row items-center gap-8",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8ca90b29f0676ccb" + " " + "flex-shrink-0 animate-bounce",
+                                                className: "flex-shrink-0",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "relative w-48 h-48 md:w-64 md:h-64",
+                                                    className: "relative w-48 h-48 md:w-64 md:h-64",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8ca90b29f0676ccb" + " " + "w-full h-full bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full flex items-center justify-center",
+                                                        className: "w-full h-full bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full flex items-center justify-center",
                                                         children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].createElement(getStatusConfig(orderData.status).icon, {
                                                             className: "text-8xl text-white"
                                                         })
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                        lineNumber: 253,
+                                                        lineNumber: 251,
                                                         columnNumber: 25
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 251,
+                                                    lineNumber: 249,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                lineNumber: 250,
+                                                lineNumber: 248,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "jsx-8ca90b29f0676ccb" + " " + "flex-1 text-center lg:text-left space-y-4",
+                                                className: "flex-1 text-center lg:text-left space-y-4",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8ca90b29f0676ccb" + " " + "flex items-center justify-center lg:justify-start gap-3",
+                                                        className: "flex items-center justify-center lg:justify-start gap-3",
                                                         children: [
                                                             /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].createElement(getStatusConfig(orderData.status).icon, {
                                                                 className: `text-4xl ${getStatusConfig(orderData.status).color}`
                                                             }),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                                className: "jsx-8ca90b29f0676ccb" + " " + `text-3xl md:text-4xl font-bold ${getStatusConfig(orderData.status).color}`,
+                                                                className: `text-3xl md:text-4xl font-bold ${getStatusConfig(orderData.status).color}`,
                                                                 children: getStatusConfig(orderData.status).title
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                lineNumber: 273,
+                                                                lineNumber: 271,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                        lineNumber: 264,
+                                                        lineNumber: 262,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-700 text-lg",
+                                                        className: "text-gray-700 text-lg",
                                                         children: getStatusConfig(orderData.status).message
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                        lineNumber: 281,
+                                                        lineNumber: 279,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "jsx-8ca90b29f0676ccb" + " " + "inline-block bg-white px-6 py-3 rounded-lg shadow-md",
+                                                        className: "inline-block bg-white px-6 py-3 rounded-lg shadow-md",
                                                         children: [
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "jsx-8ca90b29f0676ccb" + " " + "text-sm text-gray-600",
+                                                                className: "text-sm text-gray-600",
                                                                 children: "Tracking ID"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                lineNumber: 285,
+                                                                lineNumber: 283,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                className: "jsx-8ca90b29f0676ccb" + " " + "text-xl font-bold text-gray-900",
-                                                                children: orderData.trackingId
+                                                                className: "text-xl font-bold text-gray-900",
+                                                                children: orderData.trackingID
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                lineNumber: 286,
+                                                                lineNumber: 284,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                        lineNumber: 284,
+                                                        lineNumber: 282,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                lineNumber: 263,
+                                                lineNumber: 261,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                        lineNumber: 248,
+                                        lineNumber: 246,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
@@ -439,28 +436,28 @@ function TrackingPage() {
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "bg-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-gray-100",
+                                    className: "bg-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-gray-100",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "text-2xl font-bold text-gray-900 mb-6",
+                                            className: "text-2xl font-bold text-gray-900 mb-6",
                                             children: "Order Progress"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 296,
+                                            lineNumber: 294,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "relative",
+                                            className: "relative",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "absolute left-6 top-0 bottom-0 w-1 bg-gray-200 hidden md:block"
+                                                    className: "absolute left-6 top-0 bottom-0 w-1 bg-gray-200 hidden md:block"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 301,
+                                                    lineNumber: 299,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "space-y-6",
+                                                    className: "space-y-6",
                                                     children: [
                                                         {
                                                             key: "pending",
@@ -477,240 +474,239 @@ function TrackingPage() {
                                                     ].map((step, index)=>{
                                                         const isActive = orderData.status === step.key || orderData.status === "completed" && index <= 2 || orderData.status === "in-transit" && index <= 1;
                                                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "flex items-center gap-4 relative",
+                                                            className: "flex items-center gap-4 relative",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + `w-12 h-12 rounded-full flex items-center justify-center z-10 transition-all ${isActive ? "bg-blue-600 text-white shadow-lg scale-110" : "bg-gray-200 text-gray-400"}`,
+                                                                    className: `w-12 h-12 rounded-full flex items-center justify-center z-10 transition-all ${isActive ? "bg-blue-600 text-white shadow-lg scale-110" : "bg-gray-200 text-gray-400"}`,
                                                                     children: /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].createElement(statusConfig[step.key].icon, {
                                                                         className: "text-2xl"
                                                                     })
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 323,
+                                                                    lineNumber: 319,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "flex-1",
+                                                                    className: "flex-1",
                                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                        className: "jsx-8ca90b29f0676ccb" + " " + `font-semibold text-lg ${isActive ? "text-gray-900" : "text-gray-400"}`,
+                                                                        className: `font-semibold text-lg ${isActive ? "text-gray-900" : "text-gray-400"}`,
                                                                         children: step.label
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                        lineNumber: 338,
+                                                                        lineNumber: 334,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 337,
+                                                                    lineNumber: 333,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 orderData.status === step.key && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "px-4 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full animate-pulse",
+                                                                    className: "px-4 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full",
                                                                     children: "Current"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 349,
+                                                                    lineNumber: 345,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             ]
                                                         }, step.key, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 318,
+                                                            lineNumber: 314,
                                                             columnNumber: 27
                                                         }, this);
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 304,
+                                                    lineNumber: 302,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 299,
+                                            lineNumber: 297,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                    lineNumber: 295,
+                                    lineNumber: 293,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "bg-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-gray-100",
+                                    className: "bg-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-gray-100",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "text-2xl font-bold text-gray-900 mb-6",
+                                            className: "text-2xl font-bold text-gray-900 mb-6",
                                             children: "Order Details"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 362,
+                                            lineNumber: 358,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "mb-6 p-4 bg-gray-50 rounded-lg",
+                                            className: "mb-6 p-4 bg-gray-50 rounded-lg",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "font-semibold text-gray-900 mb-3",
+                                                    className: "font-semibold text-gray-900 mb-3",
                                                     children: "Delivery Information"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 368,
+                                                    lineNumber: 364,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "space-y-2 text-sm",
+                                                    className: "space-y-2 text-sm",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "flex justify-between",
+                                                            className: "flex justify-between",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600",
+                                                                    className: "text-gray-600",
                                                                     children: "Shop Name:"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 373,
+                                                                    lineNumber: 369,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "font-medium text-gray-900",
+                                                                    className: "font-medium text-gray-900",
                                                                     children: orderData.shopName
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 374,
+                                                                    lineNumber: 370,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 372,
+                                                            lineNumber: 368,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "flex justify-between",
+                                                            className: "flex justify-between",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600",
+                                                                    className: "text-gray-600",
                                                                     children: "Address:"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 379,
+                                                                    lineNumber: 375,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "font-medium text-gray-900 text-right max-w-[60%]",
+                                                                    className: "font-medium text-gray-900 text-right max-w-[60%]",
                                                                     children: orderData.shopAddress
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 380,
+                                                                    lineNumber: 376,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 378,
+                                                            lineNumber: 374,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "flex justify-between",
+                                                            className: "flex justify-between",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600",
+                                                                    className: "text-gray-600",
                                                                     children: "Contact:"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 385,
+                                                                    lineNumber: 381,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "font-medium text-gray-900",
+                                                                    className: "font-medium text-gray-900",
                                                                     children: orderData.shopContact
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 386,
+                                                                    lineNumber: 382,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 384,
+                                                            lineNumber: 380,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 371,
+                                                    lineNumber: 367,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 367,
+                                            lineNumber: 363,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "mb-6",
+                                            className: "mb-6",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "font-semibold text-gray-900 mb-3",
+                                                    className: "font-semibold text-gray-900 mb-3",
                                                     children: "Items"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 395,
+                                                    lineNumber: 391,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "space-y-3",
+                                                    className: "space-y-3",
                                                     children: orderData.orderItems.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors",
+                                                            className: "flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "flex items-center gap-3",
+                                                                    className: "flex items-center gap-3",
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "jsx-8ca90b29f0676ccb" + " " + "w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold",
+                                                                            className: "w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold",
                                                                             children: index + 1
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                            lineNumber: 403,
+                                                                            lineNumber: 399,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "jsx-8ca90b29f0676ccb",
                                                                             children: [
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "font-semibold text-gray-900",
+                                                                                    className: "font-semibold text-gray-900",
                                                                                     children: item.product?.size || "N/A"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                                    lineNumber: 407,
+                                                                                    lineNumber: 403,
                                                                                     columnNumber: 31
                                                                                 }, this),
                                                                                 item.product?.packingType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-xs text-gray-500",
+                                                                                    className: "text-xs text-gray-500",
                                                                                     children: item.product.packingType
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                                    lineNumber: 411,
+                                                                                    lineNumber: 407,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                            lineNumber: 406,
+                                                                            lineNumber: 402,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 402,
+                                                                    lineNumber: 398,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-right",
+                                                                    className: "text-right",
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                            className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600 text-sm",
+                                                                            className: "text-gray-600 text-sm",
                                                                             children: [
                                                                                 item.quantity,
                                                                                 " × Rs. ",
@@ -718,59 +714,59 @@ function TrackingPage() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                            lineNumber: 418,
+                                                                            lineNumber: 414,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                                            className: "jsx-8ca90b29f0676ccb" + " " + "font-bold text-gray-900",
+                                                                            className: "font-bold text-gray-900",
                                                                             children: [
                                                                                 "Rs. ",
                                                                                 item.price * item.quantity
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                            lineNumber: 421,
+                                                                            lineNumber: 417,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                                    lineNumber: 417,
+                                                                    lineNumber: 413,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, index, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 398,
+                                                            lineNumber: 394,
                                                             columnNumber: 25
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 396,
+                                                    lineNumber: 392,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 394,
+                                            lineNumber: 390,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "jsx-8ca90b29f0676ccb" + " " + "border-t pt-6",
+                                            className: "border-t pt-6",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "flex justify-between items-center mb-3",
+                                                    className: "flex justify-between items-center mb-3",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "text-lg font-semibold text-gray-900",
+                                                            className: "text-lg font-semibold text-gray-900",
                                                             children: "Total Amount:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 433,
+                                                            lineNumber: 429,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "text-2xl font-bold text-blue-600",
+                                                            className: "text-2xl font-bold text-blue-600",
                                                             children: [
                                                                 "Rs. ",
                                                                 orderData.totalPrice,
@@ -778,50 +774,50 @@ function TrackingPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 436,
+                                                            lineNumber: 432,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 432,
+                                                    lineNumber: 428,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "jsx-8ca90b29f0676ccb" + " " + "flex justify-between items-center",
+                                                    className: "flex justify-between items-center",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600",
+                                                            className: "text-gray-600",
                                                             children: "Payment Status:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 441,
+                                                            lineNumber: 437,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "jsx-8ca90b29f0676ccb" + " " + `px-4 py-2 rounded-full font-semibold ${orderData.paymentStatus === "paid" ? "bg-green-100 text-green-700" : orderData.paymentStatus === "partially-paid" ? "bg-yellow-100 text-yellow-700" : "bg-red-100 text-red-700"}`,
+                                                            className: `px-4 py-2 rounded-full font-semibold ${orderData.paymentStatus === "paid" ? "bg-green-100 text-green-700" : orderData.paymentStatus === "partially-paid" ? "bg-yellow-100 text-yellow-700" : "bg-red-100 text-red-700"}`,
                                                             children: orderData.paymentStatus === "paid" ? "Paid" : orderData.paymentStatus === "partially-paid" ? "Partially Paid" : "Unpaid"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                            lineNumber: 442,
+                                                            lineNumber: 438,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                                    lineNumber: 440,
+                                                    lineNumber: 436,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 431,
+                                            lineNumber: 427,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                    lineNumber: 361,
+                                    lineNumber: 357,
                                     columnNumber: 17
                                 }, this)
                             ]
@@ -830,65 +826,64 @@ function TrackingPage() {
                             lineNumber: 239,
                             columnNumber: 15
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "jsx-8ca90b29f0676ccb" + " " + "bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-red-100",
+                            className: "bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-red-100",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4",
+                                    className: "w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        className: "w-12 h-12 text-red-600",
                                         fill: "none",
                                         stroke: "currentColor",
                                         viewBox: "0 0 24 24",
-                                        className: "jsx-8ca90b29f0676ccb" + " " + "w-12 h-12 text-red-600",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             strokeLinecap: "round",
                                             strokeLinejoin: "round",
                                             strokeWidth: 2,
-                                            d: "M6 18L18 6M6 6l12 12",
-                                            className: "jsx-8ca90b29f0676ccb"
+                                            d: "M6 18L18 6M6 6l12 12"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                            lineNumber: 470,
+                                            lineNumber: 466,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                        lineNumber: 464,
+                                        lineNumber: 460,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                    lineNumber: 463,
+                                    lineNumber: 459,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-2xl font-bold text-gray-900 mb-2",
+                                    className: "text-2xl font-bold text-gray-900 mb-2",
                                     children: "Order Not Found"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                    lineNumber: 478,
+                                    lineNumber: 474,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "text-gray-600 mb-6",
+                                    className: "text-gray-600 mb-6",
                                     children: "We couldn't find an order with the provided tracking ID and contact number. Please check your information and try again."
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                    lineNumber: 481,
+                                    lineNumber: 477,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: handleReset,
-                                    className: "jsx-8ca90b29f0676ccb" + " " + "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all",
+                                    className: "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all",
                                     children: "Try Again"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                                    lineNumber: 485,
+                                    lineNumber: 481,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
-                            lineNumber: 462,
+                            lineNumber: 458,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
@@ -901,11 +896,7 @@ function TrackingPage() {
                 fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
                 lineNumber: 151,
                 columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "8ca90b29f0676ccb",
-                children: "@keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes slideUp{0%{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.animate-fadeIn.jsx-8ca90b29f0676ccb{animation:.6s ease-out fadeIn}.animate-slideUp.jsx-8ca90b29f0676ccb{animation:.6s ease-out slideUp}"
-            }, void 0, false, void 0, this)
+            }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/OZONE/ozone-water-1/src/app/tracking/page.jsx",
@@ -913,454 +904,6 @@ function TrackingPage() {
         columnNumber: 5
     }, this);
 }
-}),
-"[project]/OZONE/ozone-water-1/node_modules/next/dist/compiled/client-only/index.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
-
-}),
-"[project]/OZONE/ozone-water-1/node_modules/styled-jsx/dist/index/index.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
-
-__turbopack_context__.r("[project]/OZONE/ozone-water-1/node_modules/next/dist/compiled/client-only/index.js [app-ssr] (ecmascript)");
-var React = __turbopack_context__.r("[project]/OZONE/ozone-water-1/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
-function _interopDefaultLegacy(e) {
-    return e && typeof e === 'object' && 'default' in e ? e : {
-        'default': e
-    };
-}
-var React__default = /*#__PURE__*/ _interopDefaultLegacy(React);
-/*
-Based on Glamor's sheet
-https://github.com/threepointone/glamor/blob/667b480d31b3721a905021b26e1290ce92ca2879/src/sheet.js
-*/ function _defineProperties(target, props) {
-    for(var i = 0; i < props.length; i++){
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-    }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-}
-var isProd = typeof process !== "undefined" && process.env && ("TURBOPACK compile-time value", "development") === "production";
-var isString = function(o) {
-    return Object.prototype.toString.call(o) === "[object String]";
-};
-var StyleSheet = /*#__PURE__*/ function() {
-    function StyleSheet(param) {
-        var ref = param === void 0 ? {} : param, _name = ref.name, name = _name === void 0 ? "stylesheet" : _name, _optimizeForSpeed = ref.optimizeForSpeed, optimizeForSpeed = _optimizeForSpeed === void 0 ? isProd : _optimizeForSpeed;
-        invariant$1(isString(name), "`name` must be a string");
-        this._name = name;
-        this._deletedRulePlaceholder = "#" + name + "-deleted-rule____{}";
-        invariant$1(typeof optimizeForSpeed === "boolean", "`optimizeForSpeed` must be a boolean");
-        this._optimizeForSpeed = optimizeForSpeed;
-        this._serverSheet = undefined;
-        this._tags = [];
-        this._injected = false;
-        this._rulesCount = 0;
-        var node = ("TURBOPACK compile-time value", "undefined") !== "undefined" && document.querySelector('meta[property="csp-nonce"]');
-        this._nonce = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : null;
-    }
-    var _proto = StyleSheet.prototype;
-    _proto.setOptimizeForSpeed = function setOptimizeForSpeed(bool) {
-        invariant$1(typeof bool === "boolean", "`setOptimizeForSpeed` accepts a boolean");
-        invariant$1(this._rulesCount === 0, "optimizeForSpeed cannot be when rules have already been inserted");
-        this.flush();
-        this._optimizeForSpeed = bool;
-        this.inject();
-    };
-    _proto.isOptimizeForSpeed = function isOptimizeForSpeed() {
-        return this._optimizeForSpeed;
-    };
-    _proto.inject = function inject() {
-        var _this = this;
-        invariant$1(!this._injected, "sheet already injected");
-        this._injected = true;
-        if (("TURBOPACK compile-time value", "undefined") !== "undefined" && this._optimizeForSpeed) //TURBOPACK unreachable
-        ;
-        this._serverSheet = {
-            cssRules: [],
-            insertRule: function(rule, index) {
-                if (typeof index === "number") {
-                    _this._serverSheet.cssRules[index] = {
-                        cssText: rule
-                    };
-                } else {
-                    _this._serverSheet.cssRules.push({
-                        cssText: rule
-                    });
-                }
-                return index;
-            },
-            deleteRule: function(index) {
-                _this._serverSheet.cssRules[index] = null;
-            }
-        };
-    };
-    _proto.getSheetForTag = function getSheetForTag(tag) {
-        if (tag.sheet) {
-            return tag.sheet;
-        }
-        // this weirdness brought to you by firefox
-        for(var i = 0; i < document.styleSheets.length; i++){
-            if (document.styleSheets[i].ownerNode === tag) {
-                return document.styleSheets[i];
-            }
-        }
-    };
-    _proto.getSheet = function getSheet() {
-        return this.getSheetForTag(this._tags[this._tags.length - 1]);
-    };
-    _proto.insertRule = function insertRule(rule, index) {
-        invariant$1(isString(rule), "`insertRule` accepts only strings");
-        if ("TURBOPACK compile-time truthy", 1) {
-            if (typeof index !== "number") {
-                index = this._serverSheet.cssRules.length;
-            }
-            this._serverSheet.insertRule(rule, index);
-            return this._rulesCount++;
-        }
-        //TURBOPACK unreachable
-        ;
-        var sheet;
-        var insertionPoint;
-    };
-    _proto.replaceRule = function replaceRule(index, rule) {
-        if (this._optimizeForSpeed || ("TURBOPACK compile-time value", "undefined") === "undefined") {
-            var sheet = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : this._serverSheet;
-            if (!rule.trim()) {
-                rule = this._deletedRulePlaceholder;
-            }
-            if (!sheet.cssRules[index]) {
-                // @TBD Should we throw an error?
-                return index;
-            }
-            sheet.deleteRule(index);
-            try {
-                sheet.insertRule(rule, index);
-            } catch (error) {
-                if ("TURBOPACK compile-time truthy", 1) {
-                    console.warn("StyleSheet: illegal rule: \n\n" + rule + "\n\nSee https://stackoverflow.com/q/20007992 for more info");
-                }
-                // In order to preserve the indices we insert a deleteRulePlaceholder
-                sheet.insertRule(this._deletedRulePlaceholder, index);
-            }
-        } else //TURBOPACK unreachable
-        {
-            var tag;
-        }
-        return index;
-    };
-    _proto.deleteRule = function deleteRule(index) {
-        if ("TURBOPACK compile-time truthy", 1) {
-            this._serverSheet.deleteRule(index);
-            return;
-        }
-        //TURBOPACK unreachable
-        ;
-        var tag;
-    };
-    _proto.flush = function flush() {
-        this._injected = false;
-        this._rulesCount = 0;
-        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
-        ;
-        else {
-            // simpler on server
-            this._serverSheet.cssRules = [];
-        }
-    };
-    _proto.cssRules = function cssRules() {
-        var _this = this;
-        if ("TURBOPACK compile-time truthy", 1) {
-            return this._serverSheet.cssRules;
-        }
-        //TURBOPACK unreachable
-        ;
-    };
-    _proto.makeStyleTag = function makeStyleTag(name, cssString, relativeToTag) {
-        if (cssString) {
-            invariant$1(isString(cssString), "makeStyleTag accepts only strings as second parameter");
-        }
-        var tag = document.createElement("style");
-        if (this._nonce) tag.setAttribute("nonce", this._nonce);
-        tag.type = "text/css";
-        tag.setAttribute("data-" + name, "");
-        if (cssString) {
-            tag.appendChild(document.createTextNode(cssString));
-        }
-        var head = document.head || document.getElementsByTagName("head")[0];
-        if (relativeToTag) {
-            head.insertBefore(tag, relativeToTag);
-        } else {
-            head.appendChild(tag);
-        }
-        return tag;
-    };
-    _createClass(StyleSheet, [
-        {
-            key: "length",
-            get: function get() {
-                return this._rulesCount;
-            }
-        }
-    ]);
-    return StyleSheet;
-}();
-function invariant$1(condition, message) {
-    if (!condition) {
-        throw new Error("StyleSheet: " + message + ".");
-    }
-}
-function hash(str) {
-    var _$hash = 5381, i = str.length;
-    while(i){
-        _$hash = _$hash * 33 ^ str.charCodeAt(--i);
-    }
-    /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
-   * integers. Since we want the results to be always positive, convert the
-   * signed int to an unsigned by doing an unsigned bitshift. */ return _$hash >>> 0;
-}
-var stringHash = hash;
-var sanitize = function(rule) {
-    return rule.replace(/\/style/gi, "\\/style");
-};
-var cache = {};
-/**
- * computeId
- *
- * Compute and memoize a jsx id from a basedId and optionally props.
- */ function computeId(baseId, props) {
-    if (!props) {
-        return "jsx-" + baseId;
-    }
-    var propsToString = String(props);
-    var key = baseId + propsToString;
-    if (!cache[key]) {
-        cache[key] = "jsx-" + stringHash(baseId + "-" + propsToString);
-    }
-    return cache[key];
-}
-/**
- * computeSelector
- *
- * Compute and memoize dynamic selectors.
- */ function computeSelector(id, css) {
-    var selectoPlaceholderRegexp = /__jsx-style-dynamic-selector/g;
-    // Sanitize SSR-ed CSS.
-    // Client side code doesn't need to be sanitized since we use
-    // document.createTextNode (dev) and the CSSOM api sheet.insertRule (prod).
-    if ("TURBOPACK compile-time truthy", 1) {
-        css = sanitize(css);
-    }
-    var idcss = id + css;
-    if (!cache[idcss]) {
-        cache[idcss] = css.replace(selectoPlaceholderRegexp, id);
-    }
-    return cache[idcss];
-}
-function mapRulesToStyle(cssRules, options) {
-    if (options === void 0) options = {};
-    return cssRules.map(function(args) {
-        var id = args[0];
-        var css = args[1];
-        return /*#__PURE__*/ React__default["default"].createElement("style", {
-            id: "__" + id,
-            // Avoid warnings upon render with a key
-            key: "__" + id,
-            nonce: options.nonce ? options.nonce : undefined,
-            dangerouslySetInnerHTML: {
-                __html: css
-            }
-        });
-    });
-}
-var StyleSheetRegistry = /*#__PURE__*/ function() {
-    function StyleSheetRegistry(param) {
-        var ref = param === void 0 ? {} : param, _styleSheet = ref.styleSheet, styleSheet = _styleSheet === void 0 ? null : _styleSheet, _optimizeForSpeed = ref.optimizeForSpeed, optimizeForSpeed = _optimizeForSpeed === void 0 ? false : _optimizeForSpeed;
-        this._sheet = styleSheet || new StyleSheet({
-            name: "styled-jsx",
-            optimizeForSpeed: optimizeForSpeed
-        });
-        this._sheet.inject();
-        if (styleSheet && typeof optimizeForSpeed === "boolean") {
-            this._sheet.setOptimizeForSpeed(optimizeForSpeed);
-            this._optimizeForSpeed = this._sheet.isOptimizeForSpeed();
-        }
-        this._fromServer = undefined;
-        this._indices = {};
-        this._instancesCounts = {};
-    }
-    var _proto = StyleSheetRegistry.prototype;
-    _proto.add = function add(props) {
-        var _this = this;
-        if (undefined === this._optimizeForSpeed) {
-            this._optimizeForSpeed = Array.isArray(props.children);
-            this._sheet.setOptimizeForSpeed(this._optimizeForSpeed);
-            this._optimizeForSpeed = this._sheet.isOptimizeForSpeed();
-        }
-        if (("TURBOPACK compile-time value", "undefined") !== "undefined" && !this._fromServer) //TURBOPACK unreachable
-        ;
-        var ref = this.getIdAndRules(props), styleId = ref.styleId, rules = ref.rules;
-        // Deduping: just increase the instances count.
-        if (styleId in this._instancesCounts) {
-            this._instancesCounts[styleId] += 1;
-            return;
-        }
-        var indices = rules.map(function(rule) {
-            return _this._sheet.insertRule(rule);
-        }) // Filter out invalid rules
-        .filter(function(index) {
-            return index !== -1;
-        });
-        this._indices[styleId] = indices;
-        this._instancesCounts[styleId] = 1;
-    };
-    _proto.remove = function remove(props) {
-        var _this = this;
-        var styleId = this.getIdAndRules(props).styleId;
-        invariant(styleId in this._instancesCounts, "styleId: `" + styleId + "` not found");
-        this._instancesCounts[styleId] -= 1;
-        if (this._instancesCounts[styleId] < 1) {
-            var tagFromServer = this._fromServer && this._fromServer[styleId];
-            if (tagFromServer) {
-                tagFromServer.parentNode.removeChild(tagFromServer);
-                delete this._fromServer[styleId];
-            } else {
-                this._indices[styleId].forEach(function(index) {
-                    return _this._sheet.deleteRule(index);
-                });
-                delete this._indices[styleId];
-            }
-            delete this._instancesCounts[styleId];
-        }
-    };
-    _proto.update = function update(props, nextProps) {
-        this.add(nextProps);
-        this.remove(props);
-    };
-    _proto.flush = function flush() {
-        this._sheet.flush();
-        this._sheet.inject();
-        this._fromServer = undefined;
-        this._indices = {};
-        this._instancesCounts = {};
-    };
-    _proto.cssRules = function cssRules() {
-        var _this = this;
-        var fromServer = this._fromServer ? Object.keys(this._fromServer).map(function(styleId) {
-            return [
-                styleId,
-                _this._fromServer[styleId]
-            ];
-        }) : [];
-        var cssRules = this._sheet.cssRules();
-        return fromServer.concat(Object.keys(this._indices).map(function(styleId) {
-            return [
-                styleId,
-                _this._indices[styleId].map(function(index) {
-                    return cssRules[index].cssText;
-                }).join(_this._optimizeForSpeed ? "" : "\n")
-            ];
-        }) // filter out empty rules
-        .filter(function(rule) {
-            return Boolean(rule[1]);
-        }));
-    };
-    _proto.styles = function styles(options) {
-        return mapRulesToStyle(this.cssRules(), options);
-    };
-    _proto.getIdAndRules = function getIdAndRules(props) {
-        var css = props.children, dynamic = props.dynamic, id = props.id;
-        if (dynamic) {
-            var styleId = computeId(id, dynamic);
-            return {
-                styleId: styleId,
-                rules: Array.isArray(css) ? css.map(function(rule) {
-                    return computeSelector(styleId, rule);
-                }) : [
-                    computeSelector(styleId, css)
-                ]
-            };
-        }
-        return {
-            styleId: computeId(id),
-            rules: Array.isArray(css) ? css : [
-                css
-            ]
-        };
-    };
-    /**
-   * selectFromServer
-   *
-   * Collects style tags from the document with id __jsx-XXX
-   */ _proto.selectFromServer = function selectFromServer() {
-        var elements = Array.prototype.slice.call(document.querySelectorAll('[id^="__jsx-"]'));
-        return elements.reduce(function(acc, element) {
-            var id = element.id.slice(2);
-            acc[id] = element;
-            return acc;
-        }, {});
-    };
-    return StyleSheetRegistry;
-}();
-function invariant(condition, message) {
-    if (!condition) {
-        throw new Error("StyleSheetRegistry: " + message + ".");
-    }
-}
-var StyleSheetContext = /*#__PURE__*/ React.createContext(null);
-StyleSheetContext.displayName = "StyleSheetContext";
-function createStyleRegistry() {
-    return new StyleSheetRegistry();
-}
-function StyleRegistry(param) {
-    var configuredRegistry = param.registry, children = param.children;
-    var rootRegistry = React.useContext(StyleSheetContext);
-    var ref = React.useState(function() {
-        return rootRegistry || configuredRegistry || createStyleRegistry();
-    }), registry = ref[0];
-    return /*#__PURE__*/ React__default["default"].createElement(StyleSheetContext.Provider, {
-        value: registry
-    }, children);
-}
-function useStyleRegistry() {
-    return React.useContext(StyleSheetContext);
-}
-// Opt-into the new `useInsertionEffect` API in React 18, fallback to `useLayoutEffect`.
-// https://github.com/reactwg/react-18/discussions/110
-var useInsertionEffect = React__default["default"].useInsertionEffect || React__default["default"].useLayoutEffect;
-var defaultRegistry = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : undefined;
-function JSXStyle(props) {
-    var registry = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : useStyleRegistry();
-    // If `registry` does not exist, we do nothing here.
-    if (!registry) {
-        return null;
-    }
-    if ("TURBOPACK compile-time truthy", 1) {
-        registry.add(props);
-        return null;
-    }
-    //TURBOPACK unreachable
-    ;
-}
-JSXStyle.dynamic = function(info) {
-    return info.map(function(tagInfo) {
-        var baseId = tagInfo[0];
-        var props = tagInfo[1];
-        return computeId(baseId, props);
-    }).join(" ");
-};
-exports.StyleRegistry = StyleRegistry;
-exports.createStyleRegistry = createStyleRegistry;
-exports.style = JSXStyle;
-exports.useStyleRegistry = useStyleRegistry;
-}),
-"[project]/OZONE/ozone-water-1/node_modules/styled-jsx/style.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
-
-module.exports = __turbopack_context__.r("[project]/OZONE/ozone-water-1/node_modules/styled-jsx/dist/index/index.js [app-ssr] (ecmascript)").style;
 }),
 "[project]/OZONE/ozone-water-1/node_modules/goober/dist/goober.modern.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -2079,4 +1622,4 @@ var zt = n;
 }),
 ];
 
-//# sourceMappingURL=OZONE_ozone-water-1_6bf1d2c1._.js.map
+//# sourceMappingURL=OZONE_ozone-water-1_9ab0fc10._.js.map
