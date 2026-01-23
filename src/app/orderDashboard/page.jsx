@@ -244,9 +244,12 @@ export default function OrderDashboard() {
               productSize: product.size,
               producyType: product.packingType.toLowerCase(),
               quantityToReduce: item.quantity,
+              orderId: updatedOrder._id,
+              reason: "Order delivered",
             });
           }
           console.log("Stock updated successfully");
+          toast.success("Order completed and stock deducted successfully!");
         } catch (stockError) {
           console.error("Stock update error:", stockError);
 

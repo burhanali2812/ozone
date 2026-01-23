@@ -12,8 +12,8 @@ function StockManage() {
   const [formData, setFormData] = useState({
     productSize: "500ml",
     producyType: "pet",
+    bottleQuality: "pure",
     quantity: "",
-    costPerType: "",
   });
 
   // Bottle quantities mapping
@@ -37,7 +37,7 @@ function StockManage() {
       setFilteredStocks(stocks);
     } else {
       setFilteredStocks(
-        stocks.filter((stock) => stock.productSize === selectedSize)
+        stocks.filter((stock) => stock.productSize === selectedSize),
       );
     }
   }, [selectedSize, stocks]);
@@ -59,6 +59,15 @@ function StockManage() {
       .reduce((total, stock) => total + stock.quantity, 0);
   };
 
+  const getStockByQuality = (size, quality) => {
+    return stocks
+      .filter(
+        (stock) =>
+          stock.productSize === size && stock.bottleQuality === quality,
+      )
+      .reduce((total, stock) => total + stock.quantity, 0);
+  };
+
   const getTotalBottles = (size, quantity) => {
     return quantity * bottleQuantities[size];
   };
@@ -72,8 +81,8 @@ function StockManage() {
       setFormData({
         productSize: "500ml",
         producyType: "pet",
+        bottleQuality: "pure",
         quantity: "",
-        costPerType: "",
       });
       fetchStocks();
     } catch (error) {
@@ -95,12 +104,33 @@ function StockManage() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
             Stock Management
           </h1>
-          <button
-            onClick={() => setShowModal(true)}
-            className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg text-sm sm:text-base"
-          >
-            + Add Stock
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <button
+              onClick={() => router.push("/stock_logs")}
+              className="w-full sm:w-auto bg-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-green-700 transition-colors font-medium shadow-lg text-sm sm:text-base flex items-center justify-center gap-2"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              View Stock Logs
+            </button>
+            <button
+              onClick={() => setShowModal(true)}
+              className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg text-sm sm:text-base"
+            >
+              + Add Stock
+            </button>
+          </div>
         </div>
 
         {/* Stock Cards */}
@@ -108,6 +138,9 @@ function StockManage() {
           {["500ml", "1500ml", "6liter"].map((size) => {
             const totalQuantity = getStockBySize(size);
             const totalBottles = getTotalBottles(size, totalQuantity);
+            const pureQuantity = getStockByQuality(size, "pure");
+            const mixQuantity = getStockByQuality(size, "mix");
+
             return (
               <div
                 key={size}
@@ -129,12 +162,33 @@ function StockManage() {
                 <div className="space-y-2 sm:space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-xs sm:text-sm text-gray-600">
-                      Total Quantity:
+                      Total PETs:
                     </span>
                     <span className="text-xl sm:text-2xl font-bold text-blue-600">
                       {totalQuantity}
                     </span>
                   </div>
+
+                  {/* Show PETs by quality for 500ml and 1500ml */}
+                  {(size === "500ml" || size === "1500ml") && (
+                    <div className="bg-gray-50 rounded-lg p-2 sm:p-3 space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-600">
+                          <b>Pure PETs:</b>
+                        </span>
+                        <span className="text-sm sm:text-base font-semibold text-green-600">
+                          {pureQuantity}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-600"><b>Mix PETs:</b></span>
+                        <span className="text-sm sm:text-base font-semibold text-orange-600">
+                          {mixQuantity}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex justify-between items-center">
                     <span className="text-xs sm:text-sm text-gray-600">
                       Bottles per Pet:
@@ -219,6 +273,14 @@ function StockManage() {
                         </span>
                       </div>
                       <div>
+                        <span className="text-gray-600">Quality:</span>
+                        <span
+                          className={`ml-2 font-medium capitalize ${stock.bottleQuality === "pure" ? "text-green-600" : "text-orange-600"}`}
+                        >
+                          {stock.bottleQuality}
+                        </span>
+                      </div>
+                      <div>
                         <span className="text-gray-600">Quantity:</span>
                         <span className="ml-2 font-semibold">
                           {stock.quantity}
@@ -230,18 +292,6 @@ function StockManage() {
                           {stock.quantity * bottleQuantities[stock.productSize]}
                         </span>
                       </div>
-                      <div>
-                        <span className="text-gray-600">Cost/Type:</span>
-                        <span className="ml-2 font-medium">
-                          Rs. {stock.costPerType}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="pt-2 border-t">
-                      <span className="text-gray-600 text-sm">Total Cost:</span>
-                      <span className="ml-2 font-bold text-blue-600">
-                        Rs. {stock.quantity * stock.costPerType}/-
-                      </span>
                     </div>
                   </div>
                 ))
@@ -266,16 +316,13 @@ function StockManage() {
                       Type
                     </th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                      Quality
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                       Quantity
                     </th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                       Bottles
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Cost Per Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Total Cost
                     </th>
                   </tr>
                 </thead>
@@ -300,24 +347,29 @@ function StockManage() {
                         <td className="px-6 py-4 text-sm font-medium text-gray-900 capitalize">
                           {stock.producyType}
                         </td>
+                        <td className="px-6 py-4">
+                          <span
+                            className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
+                              stock.bottleQuality === "pure"
+                                ? "bg-green-100 text-green-800"
+                                : "bg-orange-100 text-orange-800"
+                            }`}
+                          >
+                            {stock.bottleQuality}
+                          </span>
+                        </td>
                         <td className="px-6 py-4 text-sm font-semibold text-gray-900">
                           {stock.quantity}
                         </td>
                         <td className="px-6 py-4 text-sm font-semibold text-green-600">
                           {stock.quantity * bottleQuantities[stock.productSize]}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-700">
-                          Rs. {stock.costPerType}/-
-                        </td>
-                        <td className="px-6 py-4 text-sm font-bold text-gray-900">
-                          Rs. {stock.quantity * stock.costPerType}/-
-                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
                       <td
-                        colSpan="7"
+                        colSpan="6"
                         className="px-6 py-8 text-center text-gray-500"
                       >
                         No stock records found
@@ -380,6 +432,21 @@ function StockManage() {
               </div>
               <div>
                 <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
+                  Bottle Quality *
+                </label>
+                <select
+                  name="bottleQuality"
+                  value={formData.bottleQuality}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
+                >
+                  <option value="pure">Pure</option>
+                  <option value="mix">Mix</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
                   Quantity (Pets) *
                 </label>
                 <input
@@ -398,29 +465,6 @@ function StockManage() {
                     <span className="font-semibold text-green-600">
                       {formData.quantity *
                         bottleQuantities[formData.productSize]}
-                    </span>
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
-                  Cost Per Type *
-                </label>
-                <input
-                  type="number"
-                  name="costPerType"
-                  value={formData.costPerType}
-                  onChange={handleChange}
-                  required
-                  min="0"
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
-                  placeholder="Enter cost per pet"
-                />
-                {formData.quantity && formData.costPerType && (
-                  <p className="text-xs sm:text-sm text-gray-600 mt-1.5 sm:mt-2">
-                    Total Cost:{" "}
-                    <span className="font-semibold text-blue-600">
-                      Rs. {formData.quantity * formData.costPerType}/-
                     </span>
                   </p>
                 )}

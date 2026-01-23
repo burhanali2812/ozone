@@ -1,5 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/api/orders/route": "app/api/orders/route.js",
-  "/orderDashboard/page": "app/orderDashboard/page.js"
+  "/api/product/route": "app/api/product/route.js",
+  "/api/stock/logs/route": "app/api/stock/logs/route.js",
+  "/api/stock/route": "app/api/stock/route.js",
+  "/orderDashboard/page": "app/orderDashboard/page.js",
+  "/page": "app/page.js",
+  "/stockManage/page": "app/stockManage/page.js",
+  "/stock_logs/page": "app/stock_logs/page.js"
 }

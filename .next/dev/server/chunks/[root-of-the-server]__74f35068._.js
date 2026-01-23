@@ -91,10 +91,6 @@ const StockSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoo
         type: Number,
         required: true,
         default: 0
-    },
-    costPerType: {
-        type: Number,
-        required: true
     }
 }, {
     timestamps: true

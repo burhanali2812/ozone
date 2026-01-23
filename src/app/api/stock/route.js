@@ -1,17 +1,18 @@
 import connectionDb from "../../../../lib/db";
 import Stock from "../../../../models/Stock";
+import StockLog from "../../../../models/StockLog";
 
 export async function POST(request) {
   try {
     await connectionDb();
-    const { productSize, producyType, quantity, costPerType } =
+    const { productSize, producyType, bottleQuality, quantity } =
       await request.json();
 
     if (
       !productSize ||
       !producyType ||
-      quantity === undefined ||
-      costPerType === undefined
+      !bottleQuality ||
+      quantity === undefined
     ) {
       return new Response(
         JSON.stringify({ success: false, message: "All fields are required" }),
@@ -19,13 +20,25 @@ export async function POST(request) {
       );
     }
 
-    // Check if stock with same productSize and producyType already exists
-    const existingStock = await Stock.findOne({ productSize, producyType });
+    // Check if stock with same productSize, producyType and bottleQuality already exists
+    const existingStock = await Stock.findOne({ productSize, producyType, bottleQuality });
 
     if (existingStock) {
+      const previousQuantity = existingStock.quantity;
       existingStock.quantity += Number(quantity);
-      existingStock.costPerType = costPerType;
       await existingStock.save();
+
+      // Create log entry
+      await StockLog.create({
+        productSize,
+        producyType,
+        bottleQuality,
+        actionType: "add",
+        quantityChanged: Number(quantity),
+        previousQuantity,
+        newQuantity: existingStock.quantity,
+        reason: "Stock replenishment",
+      });
 
       return new Response(
         JSON.stringify({
@@ -40,10 +53,22 @@ export async function POST(request) {
       const newStock = new Stock({
         productSize,
         producyType,
+        bottleQuality,
         quantity,
-        costPerType,
       });
       await newStock.save();
+
+      // Create log entry for new stock
+      await StockLog.create({
+        productSize,
+        producyType,
+        bottleQuality,
+        actionType: "add",
+        quantityChanged: Number(quantity),
+        previousQuantity: 0,
+        newQuantity: Number(quantity),
+        reason: "Initial stock added",
+      });
 
       return new Response(
         JSON.stringify({
@@ -87,7 +112,7 @@ export async function GET(request) {
 export async function PATCH(request) {
   try {
     await connectionDb();
-    const { productSize, producyType, quantityToReduce } = await request.json();
+    const { productSize, producyType, quantityToReduce, orderId, reason } = await request.json();
 
     if (
       !productSize ||
@@ -126,14 +151,28 @@ export async function PATCH(request) {
           message: "Insufficient stock",
           available: stock.quantity,
           requested: quantityToReduce,
+          error: "INSUFFICIENT_STOCK",
         }),
         { status: 400 }
       );
     }
 
     // Reduce the quantity
+    const previousQuantity = stock.quantity;
     stock.quantity -= quantityToReduce;
     await stock.save();
+
+    // Create log entry for stock reduction
+    await StockLog.create({
+      productSize,
+      producyType,
+      actionType: reason === "Order delivered" ? "order_delivered" : "reduce",
+      quantityChanged: quantityToReduce,
+      previousQuantity,
+      newQuantity: stock.quantity,
+      orderId: orderId || null,
+      reason: reason || "Stock reduced",
+    });
 
     return new Response(
       JSON.stringify({
