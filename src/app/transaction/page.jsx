@@ -70,6 +70,10 @@ export default function TransactionPage() {
     .filter((t) => t.doBy === "Sharjeel Khan")
     .reduce((sum, t) => sum + t.amount, 0);
 
+  const iftikharTotal = transactions
+    .filter((t) => t.doBy === "Iftikhar Ali")
+    .reduce((sum, t) => sum + t.amount, 0);
+
   const ozoneTotal = transactions
     .filter((t) => t.doBy === "Ozone")
     .reduce((sum, t) => sum + t.amount, 0);
@@ -250,11 +254,11 @@ export default function TransactionPage() {
                 <p className="text-xs text-blue-600 font-medium">
                   {fromDate && toDate
                     ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(
-                        toDate
+                        toDate,
                       ).toLocaleDateString()}`
                     : fromDate
-                    ? `From: ${new Date(fromDate).toLocaleDateString()}`
-                    : `Until: ${new Date(toDate).toLocaleDateString()}`}
+                      ? `From: ${new Date(fromDate).toLocaleDateString()}`
+                      : `Until: ${new Date(toDate).toLocaleDateString()}`}
                 </p>
               </div>
             )}
@@ -262,7 +266,7 @@ export default function TransactionPage() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {/* Burhan Ali Card */}
           <div
             onClick={() => handleFilter("Burhan Ali")}
@@ -282,7 +286,8 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-purple-600">
                   Rs. {burhanTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal + ozoneTotal > 0 && (
+                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
+                  0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
@@ -290,7 +295,10 @@ export default function TransactionPage() {
                         style={{
                           width: `${(
                             (burhanTotal /
-                              (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                              (burhanTotal +
+                                sharjeelTotal +
+                                iftikharTotal +
+                                ozoneTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -299,7 +307,10 @@ export default function TransactionPage() {
                     <span className="text-sm font-bold text-purple-600 whitespace-nowrap">
                       {(
                         (burhanTotal /
-                          (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                          (burhanTotal +
+                            sharjeelTotal +
+                            iftikharTotal +
+                            ozoneTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -410,7 +421,8 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-pink-600">
                   Rs. {sharjeelTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal + ozoneTotal > 0 && (
+                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
+                  0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
@@ -418,7 +430,10 @@ export default function TransactionPage() {
                         style={{
                           width: `${(
                             (sharjeelTotal /
-                              (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                              (burhanTotal +
+                                sharjeelTotal +
+                                iftikharTotal +
+                                ozoneTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -427,7 +442,10 @@ export default function TransactionPage() {
                     <span className="text-sm font-bold text-pink-600 whitespace-nowrap">
                       {(
                         (sharjeelTotal /
-                          (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                          (burhanTotal +
+                            sharjeelTotal +
+                            iftikharTotal +
+                            ozoneTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -519,6 +537,77 @@ export default function TransactionPage() {
             )}
           </div>
 
+          {/* Iftikhar Ali Card */}
+          <div
+            onClick={() => handleFilter("Iftikhar Ali")}
+            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+              activeFilter === "Iftikhar Ali" ? "ring-4 ring-orange-500" : ""
+            }`}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+                IA
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">
+                  Iftikhar Ali
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">Total Transactions</p>
+                <p className="text-2xl font-bold text-orange-600">
+                  Rs. {iftikharTotal.toLocaleString()}/-
+                </p>
+                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
+                  0 && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-500"
+                        style={{
+                          width: `${(
+                            (iftikharTotal /
+                              (burhanTotal +
+                                sharjeelTotal +
+                                iftikharTotal +
+                                ozoneTotal)) *
+                            100
+                          ).toFixed(1)}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-bold text-orange-600 whitespace-nowrap">
+                      {(
+                        (iftikharTotal /
+                          (burhanTotal +
+                            sharjeelTotal +
+                            iftikharTotal +
+                            ozoneTotal)) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {activeFilter === "Iftikhar Ali" && (
+              <div className="mt-3 text-sm text-orange-600 font-semibold flex items-center gap-2">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Filtered
+              </div>
+            )}
+          </div>
+
           {/* Ozone Card */}
           <div
             onClick={() => handleFilter("Ozone")}
@@ -536,7 +625,8 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-green-600">
                   Rs. {ozoneTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal + ozoneTotal > 0 && (
+                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
+                  0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
@@ -544,7 +634,10 @@ export default function TransactionPage() {
                         style={{
                           width: `${(
                             (ozoneTotal /
-                              (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                              (burhanTotal +
+                                sharjeelTotal +
+                                iftikharTotal +
+                                ozoneTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -553,7 +646,10 @@ export default function TransactionPage() {
                     <span className="text-sm font-bold text-green-600 whitespace-nowrap">
                       {(
                         (ozoneTotal /
-                          (burhanTotal + sharjeelTotal + ozoneTotal)) *
+                          (burhanTotal +
+                            sharjeelTotal +
+                            iftikharTotal +
+                            ozoneTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -611,7 +707,12 @@ export default function TransactionPage() {
                 <p className="text-sm text-gray-600 mb-2">Total Amount</p>
                 <p className="text-2xl font-bold text-blue-600">
                   Rs.{" "}
-                  {(burhanTotal + sharjeelTotal + ozoneTotal).toLocaleString()}
+                  {(
+                    burhanTotal +
+                    sharjeelTotal +
+                    iftikharTotal +
+                    ozoneTotal
+                  ).toLocaleString()}
                   /-
                 </p>
               </div>
@@ -619,7 +720,7 @@ export default function TransactionPage() {
 
             {/* Summary Badge */}
             <div className="mt-4 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
-              <div className="grid grid-cols-3 gap-2 text-sm">
+              <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
                   <p className="text-gray-600">Burhan Ali</p>
                   <p className="font-bold text-purple-600">
@@ -630,6 +731,12 @@ export default function TransactionPage() {
                   <p className="text-gray-600">Sharjeel Khan</p>
                   <p className="font-bold text-pink-600">
                     Rs. {sharjeelTotal.toLocaleString()}/-
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Iftikhar Ali</p>
+                  <p className="font-bold text-orange-600">
+                    Rs. {iftikharTotal.toLocaleString()}/-
                   </p>
                 </div>
                 <div>
@@ -728,15 +835,19 @@ export default function TransactionPage() {
                               transaction.doBy === "Burhan Ali"
                                 ? "bg-gradient-to-br from-purple-500 to-purple-700"
                                 : transaction.doBy === "Sharjeel Khan"
-                                ? "bg-gradient-to-br from-pink-500 to-pink-700"
-                                : "bg-gradient-to-br from-green-500 to-green-700"
+                                  ? "bg-gradient-to-br from-pink-500 to-pink-700"
+                                  : transaction.doBy === "Iftikhar Ali"
+                                    ? "bg-gradient-to-br from-orange-500 to-orange-700"
+                                    : "bg-gradient-to-br from-green-500 to-green-700"
                             }`}
                           >
                             {transaction.doBy === "Burhan Ali"
                               ? "BA"
                               : transaction.doBy === "Sharjeel Khan"
-                              ? "SK"
-                              : "OZ"}
+                                ? "SK"
+                                : transaction.doBy === "Iftikhar Ali"
+                                  ? "IA"
+                                  : "OZ"}
                           </div>
                           <span className="font-medium text-gray-900">
                             {transaction.doBy}
@@ -754,8 +865,10 @@ export default function TransactionPage() {
                             transaction.doBy === "Burhan Ali"
                               ? "text-purple-600"
                               : transaction.doBy === "Sharjeel Khan"
-                              ? "text-pink-600"
-                              : "text-green-600"
+                                ? "text-pink-600"
+                                : transaction.doBy === "Iftikhar Ali"
+                                  ? "text-orange-600"
+                                  : "text-green-600"
                           }`}
                         >
                           Rs. {transaction.amount.toLocaleString()}/-
@@ -866,6 +979,7 @@ export default function TransactionPage() {
                     <option value="">Select Person</option>
                     <option value="Burhan Ali">Burhan Ali</option>
                     <option value="Sharjeel Khan">Sharjeel Khan</option>
+                    <option value="Iftikhar Ali">Iftikhar Ali</option>
                     <option value="Ozone">Ozone</option>
                   </select>
                 </div>
