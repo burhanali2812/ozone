@@ -83,6 +83,16 @@ export default function TransactionPage() {
   const isBurhanHigher = burhanTotal > sharjeelTotal;
   const isSharjeelHigher = sharjeelTotal > burhanTotal;
 
+  // Calculate Iftikhar Ali comparisons
+  const iftikharVsBurhan = Math.abs(iftikharTotal - burhanTotal);
+  const iftikharVsSharjeel = Math.abs(iftikharTotal - sharjeelTotal);
+  const isIftikharHigherThanBurhan = iftikharTotal > burhanTotal;
+  const isIftikharHigherThanSharjeel = iftikharTotal > sharjeelTotal;
+  const isIftikharHigher =
+    isIftikharHigherThanBurhan && isIftikharHigherThanSharjeel;
+  const isIftikharLower =
+    iftikharTotal < burhanTotal && iftikharTotal < sharjeelTotal;
+
   // Filter transactions
   const handleFilter = (person) => {
     setActiveFilter(person);
@@ -589,6 +599,114 @@ export default function TransactionPage() {
                 )}
               </div>
             </div>
+
+            {/* Status Badge */}
+            {isIftikharHigher ? (
+              <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-green-700">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-semibold">Highest Partner</p>
+                    <p className="text-xs text-green-600">
+                      Above Burhan by Rs. {iftikharVsBurhan.toLocaleString()}/-
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : isIftikharLower ? (
+              <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-red-700">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-semibold">Lowest Partner</p>
+                    <p className="text-xs text-red-600">Below average</p>
+                  </div>
+                </div>
+              </div>
+            ) : isIftikharHigherThanBurhan ? (
+              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-blue-700">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-semibold">Higher than Burhan</p>
+                    <p className="text-lg font-bold">
+                      Rs. {iftikharVsBurhan.toLocaleString()}/-
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : isIftikharHigherThanSharjeel ? (
+              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-blue-700">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-semibold">
+                      Higher than Sharjeel
+                    </p>
+                    <p className="text-lg font-bold">
+                      Rs. {iftikharVsSharjeel.toLocaleString()}/-
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="mt-4 bg-gray-50 border border-gray-200 rounded-lg p-3">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.75-8.25a.75.75 0 011.5 0v3.69l2.28 2.28a.75.75 0 11-1.06 1.06l-2.5-2.5a.75.75 0 01-.22-.53V7.75z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <p className="text-sm font-semibold">Middle Position</p>
+                </div>
+              </div>
+            )}
 
             {activeFilter === "Iftikhar Ali" && (
               <div className="mt-3 text-sm text-orange-600 font-semibold flex items-center gap-2">
