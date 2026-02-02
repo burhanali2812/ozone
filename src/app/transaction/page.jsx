@@ -296,8 +296,7 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-purple-600">
                   Rs. {burhanTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
-                  0 && (
+                {burhanTotal + sharjeelTotal + iftikharTotal > 0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
@@ -305,10 +304,7 @@ export default function TransactionPage() {
                         style={{
                           width: `${(
                             (burhanTotal /
-                              (burhanTotal +
-                                sharjeelTotal +
-                                iftikharTotal +
-                                ozoneTotal)) *
+                              (burhanTotal + sharjeelTotal + iftikharTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -317,10 +313,7 @@ export default function TransactionPage() {
                     <span className="text-sm font-bold text-purple-600 whitespace-nowrap">
                       {(
                         (burhanTotal /
-                          (burhanTotal +
-                            sharjeelTotal +
-                            iftikharTotal +
-                            ozoneTotal)) *
+                          (burhanTotal + sharjeelTotal + iftikharTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -431,8 +424,7 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-pink-600">
                   Rs. {sharjeelTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
-                  0 && (
+                {burhanTotal + sharjeelTotal + iftikharTotal > 0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
@@ -440,10 +432,7 @@ export default function TransactionPage() {
                         style={{
                           width: `${(
                             (sharjeelTotal /
-                              (burhanTotal +
-                                sharjeelTotal +
-                                iftikharTotal +
-                                ozoneTotal)) *
+                              (burhanTotal + sharjeelTotal + iftikharTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -452,10 +441,7 @@ export default function TransactionPage() {
                     <span className="text-sm font-bold text-pink-600 whitespace-nowrap">
                       {(
                         (sharjeelTotal /
-                          (burhanTotal +
-                            sharjeelTotal +
-                            iftikharTotal +
-                            ozoneTotal)) *
+                          (burhanTotal + sharjeelTotal + iftikharTotal)) *
                         100
                       ).toFixed(1)}
                       %
@@ -566,8 +552,7 @@ export default function TransactionPage() {
                 <p className="text-2xl font-bold text-orange-600">
                   Rs. {iftikharTotal.toLocaleString()}/-
                 </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
-                  0 && (
+                {burhanTotal + sharjeelTotal + iftikharTotal > 0 && (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
                       <div
@@ -575,10 +560,7 @@ export default function TransactionPage() {
                         style={{
                           width: `${(
                             (iftikharTotal /
-                              (burhanTotal +
-                                sharjeelTotal +
-                                iftikharTotal +
-                                ozoneTotal)) *
+                              (burhanTotal + sharjeelTotal + iftikharTotal)) *
                             100
                           ).toFixed(1)}%`,
                         }}
@@ -587,10 +569,7 @@ export default function TransactionPage() {
                     <span className="text-sm font-bold text-orange-600 whitespace-nowrap">
                       {(
                         (iftikharTotal /
-                          (burhanTotal +
-                            sharjeelTotal +
-                            iftikharTotal +
-                            ozoneTotal)) *
+                          (burhanTotal + sharjeelTotal + iftikharTotal)) *
                         100
                       ).toFixed(1)}
                       %

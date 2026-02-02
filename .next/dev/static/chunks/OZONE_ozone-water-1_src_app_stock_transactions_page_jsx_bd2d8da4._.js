@@ -82,7 +82,7 @@ function StockTransactionPage() {
     const reinvestAmount = filteredTransactions.filter((transaction)=>transaction.doBy === "Ozone").reduce((sum, transaction)=>sum + (transaction.amount || 0), 0);
     // Calculate actual sales (total sales - reinvest)
     const actualSales = totalSales - reinvestAmount;
-    const totalProfit = totalSales - totalPurchase;
+    const totalProfit = actualSales - totalPurchase;
     // Fetch orders and transactions
     const fetchData = async ()=>{
         try {
@@ -874,7 +874,7 @@ function StockTransactionPage() {
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "text-sm text-gray-600 mb-2",
-                                                        children: "Sales - Purchase"
+                                                        children: "Actual Sales - Purchase"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
                                                         lineNumber: 550,
@@ -913,7 +913,7 @@ function StockTransactionPage() {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                             className: "text-gray-600",
-                                                            children: "Sales"
+                                                            children: "Actual Sales"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
                                                             lineNumber: 565,
@@ -923,7 +923,7 @@ function StockTransactionPage() {
                                                             className: "font-bold text-green-600",
                                                             children: [
                                                                 "Rs. ",
-                                                                totalSales.toLocaleString(),
+                                                                actualSales.toLocaleString(),
                                                                 "/-"
                                                             ]
                                                         }, void 0, true, {
@@ -2394,7 +2394,7 @@ function StockTransactionPage() {
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                         colSpan: "4",
                                                         className: "px-6 py-4 text-right font-bold text-gray-900",
-                                                        children: "Net Profit (Sales - Purchase):"
+                                                        children: "Net Profit (Actual Sales - Purchase):"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
                                                         lineNumber: 1170,

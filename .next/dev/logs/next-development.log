@@ -37,3 +37,65 @@
 [00:01:28.655] Browser LOG     All attendance data received: [{"__v":0,"_id":"697fb621ef26d8c1e6fb2134","checkIn":"2026-02-01T14:30:00.000Z","checkOut":"2026-02-01T18:00:00.000Z","createdAt":"2026-02-01T20:22:57.979Z","date":"2026-01-31T19:00:00.000Z","hoursWorked":3.5,"notes":"","status":"checked-out","updatedAt":"2026-02-01T20:23:20.391Z","weekNumber":5,"workerId":{"__v":0,"_id":"697fb0422247d060e17a70f1","address":"","cnicNumber":"","contact":"03499749936","createdAt":"2026-02-01T19:57:54.790Z","dateOfJoin":"2026-01-29T00:00:00.000Z","emergencyContact":"","fatherContact":"03189359804","fatherName":"Bakht Biland shah","name":"Umair Ali","status":"active","updatedAt":"2026-02-01T20:35:31.567Z","weeklyPayment":3750},"year":2026},{"__v":0,"_id":"697fb5f1ef26d8c1e6fb2128","checkIn":"2026-01-31T15:00:00.000Z","checkOut":"2026-01-31T17:00:00.000Z","createdAt":"2026-02-01T20:22:09.688Z","date":"2026-01-30T19:00:00.000Z","hoursWorked":2,"notes":"","status":"checked-out","updatedAt":"2026-02-01T20:22:30.393Z","weekNumber":5,"workerId":{"__v":0,"_id":"697fb0422247d060e17a70f1","address":"","cnicNumber":"","contact":"03499749936","createdAt":"2026-02-01T19:57:54.790Z","dateOfJoin":"2026-01-29T00:00:00.000Z","emergencyContact":"","fatherContact":"03189359804","fatherName":"Bakht Biland shah","name":"Umair Ali","status":"active","updatedAt":"2026-02-01T20:35:31.567Z","weeklyPayment":3750},"year":2026},{"__v":0,"_id":"697fb58cef26d8c1e6fb211c","checkIn":"2026-01-30T15:00:00.000Z","checkOut":"2026-01-31T00:00:00.000Z","createdAt":"2026-02-01T20:20:28.547Z","date":"2026-01-29T19:00:00.000Z","hoursWorked":9,"notes":"","status":"checked-out","updatedAt":"2026-02-01T20:21:24.695Z","weekNumber":5,"workerId":{"__v":0,"_id":"697fb0422247d060e17a70f1","address":"","cnicNumber":"","contact":"03499749936","createdAt":"2026-02-01T19:57:54.790Z","dateOfJoin":"2026-01-29T00:00:00.000Z","emergencyContact":"","fatherContact":"03189359804","fatherName":"Bakht Biland shah","name":"Umair Ali","status":"active","updatedAt":"2026-02-01T20:35:31.567Z","weeklyPayment":3750},"year":2026},{"__v":0,"_id":"697fb416ef26d8c1e6fb2108","checkIn":"2026-01-29T05:00:00.000Z","checkOut":"2026-01-29T09:30:00.000Z","createdAt":"2026-02-01T20:14:14.890Z","date":"2026-01-28T19:00:00.000Z","hoursWorked":4.5,"notes":"","status":"checked-out","updatedAt":"2026-02-01T20:16:59.095Z","weekNumber":5,"workerId":{"__v":0,"_id":"697fb0422247d060e17a70f1","address":"","cnicNumber":"","contact":"03499749936","createdAt":"2026-02-01T19:57:54.790Z","dateOfJoin":"2026-01-29T00:00:00.000Z","emergencyContact":"","fatherContact":"03189359804","fatherName":"Bakht Biland shah","name":"Umair Ali","status":"active","updatedAt":"2026-02-01T20:35:31.567Z","weeklyPayment":3750},"year":2026}]
 [00:03:07.767] Server  LOG      ✓ Compiled in 44ms
 [00:03:12.080] Server  LOG      ✓ Compiled in 21ms
+[00:58:16.091] Server  LOG     MongoDB already connected
+[00:58:16.221] Server  LOG     MongoDB already connected
+[00:58:33.731] Server  LOG      ✓ Compiled in 38ms
+[00:59:15.994] Server  LOG      ✓ Compiled in 38ms
+[00:59:33.426] Server  LOG     MongoDB already connected
+[00:59:33.439] Server  LOG     MongoDB already connected
+[00:59:33.597] Server  LOG     MongoDB already connected
+[00:59:33.691] Server  LOG     MongoDB already connected
+[01:00:08.233] Server  LOG      ✓ Compiled in 53ms
+[01:00:57.555] Server  LOG      ✓ Compiled in 36ms
+[01:01:41.969] Server  LOG      ✓ Compiled in 42ms
+[01:01:45.231] Server  LOG      ✓ Compiled in 40ms
+[01:02:07.117] Server  LOG      ✓ Compiled in 86ms
+[01:02:07.615] Browser ERROR   ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx:567:26
+Parsing ecmascript source code failed
+  565 |                   <p className="text-gray-600">Sales</p>
+  566 |                   <p className="font-bold text-green-600">
+> 567 |                     Rs. {.toLocaleString()}/-
+      |                          ^
+  568 |                   </p>
+  569 |                 </div>
+  570 |                 <div>
+
+Expected '</', got '.'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Server Component]
+[01:02:07.616] Browser ERROR   ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx:567:26
+Parsing ecmascript source code failed
+  565 |                   <p className="text-gray-600">Sales</p>
+  566 |                   <p className="font-bold text-green-600">
+> 567 |                     Rs. {.toLocaleString()}/-
+      |                          ^
+  568 |                   </p>
+  569 |                 </div>
+  570 |                 <div>
+
+Expected '</', got '.'
+
+Import traces:
+  Client Component Browser:
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Client Component Browser]
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Client Component SSR]
+    ./OZONE/ozone-water-1/src/app/stock_transactions/page.jsx [Server Component]
+[01:02:09.610] Browser ERROR   uncaughtError: ReferenceError: ac is not defined
+[01:02:09.903] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:02:09.911] Server  LOG      ✓ Compiled in 69ms
+[01:02:10.571] Server  LOG     MongoDB already connected
+[01:02:10.589] Server  LOG     MongoDB already connected
+[01:02:11.539] Server  LOG     MongoDB already connected
+[01:02:11.545] Server  LOG     MongoDB already connected
+[01:02:14.531] Server  LOG      ✓ Compiled in 33ms
+[01:02:19.050] Server  LOG      ✓ Compiled in 28ms

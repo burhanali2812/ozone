@@ -2,10 +2,13 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/api/orders/route": "app/api/orders/route.js",
   "/api/product/route": "app/api/product/route.js",
+  "/api/transaction/route": "app/api/transaction/route.js",
   "/api/worker/attendance/route": "app/api/worker/attendance/route.js",
   "/api/worker/route": "app/api/worker/route.js",
   "/orderDashboard/page": "app/orderDashboard/page.js",
   "/page": "app/page.js",
+  "/stock_transactions/page": "app/stock_transactions/page.js",
+  "/transaction/page": "app/transaction/page.js",
   "/workerManage/page": "app/workerManage/page.js",
   "/workerManage/view/[workerId]/page": "app/workerManage/view/[workerId]/page.js"
 }

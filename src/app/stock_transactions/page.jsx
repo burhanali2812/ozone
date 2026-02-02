@@ -97,7 +97,7 @@ export default function StockTransactionPage() {
   // Calculate actual sales (total sales - reinvest)
   const actualSales = totalSales - reinvestAmount;
 
-  const totalProfit = totalSales - totalPurchase;
+  const totalProfit = actualSales - totalPurchase;
 
   // Fetch orders and transactions
   const fetchData = async () => {
@@ -547,7 +547,7 @@ export default function StockTransactionPage() {
                 <h3 className="text-lg font-bold text-gray-900 mb-1">
                   Total Profit
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">Sales - Purchase</p>
+                <p className="text-sm text-gray-600 mb-2">Actual Sales - Purchase</p>
                 <p
                   className={`text-2xl font-bold ${
                     totalProfit >= 0 ? "text-blue-600" : "text-red-600"
@@ -562,9 +562,9 @@ export default function StockTransactionPage() {
             <div className="mt-4 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <p className="text-gray-600">Sales</p>
+                  <p className="text-gray-600">Actual Sales</p>
                   <p className="font-bold text-green-600">
-                    Rs. {totalSales.toLocaleString()}/-
+                    Rs. {actualSales.toLocaleString()}/-
                   </p>
                 </div>
                 <div>
@@ -1171,7 +1171,7 @@ export default function StockTransactionPage() {
                         colSpan="4"
                         className="px-6 py-4 text-right font-bold text-gray-900"
                       >
-                        Net Profit (Sales - Purchase):
+                        Net Profit (Actual Sales - Purchase):
                       </td>
                       <td className="px-6 py-4 text-right">
                         <span
