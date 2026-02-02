@@ -736,7 +736,7 @@ export default function ViewWorker() {
                   <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-700">
                     Check In
                   </th>
-                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-700">
+                  <th className=" md:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-700">
                     Check Out
                   </th>
                   <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-700">
@@ -764,7 +764,7 @@ export default function ViewWorker() {
                     <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-600 text-xs sm:text-sm">
                       {formatDateTime(attendance.checkIn)}
                     </td>
-                    <td className="hidden md:table-cell px-3 sm:px-6 py-3 sm:py-4 text-gray-600 text-xs sm:text-sm">
+                    <td className=" md:table-cell px-3 sm:px-6 py-3 sm:py-4 text-gray-600 text-xs sm:text-sm">
                       {attendance.checkOut
                         ? formatDateTime(attendance.checkOut)
                         : "Not checked out"}
