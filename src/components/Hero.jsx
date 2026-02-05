@@ -166,9 +166,9 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-full blur-2xl opacity-30 animate-pulse"></div>
 
                   {/* Water Bottle Image */}
-                  <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-full">
+                  <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-3xl">
                     <Image
-                      src="/images/hero.png"
+                      src="/images/hero3.jpeg"
                       alt="Ozone Mineral Water Bottle"
                       width={500}
                       height={500}
