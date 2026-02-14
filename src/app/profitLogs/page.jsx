@@ -120,11 +120,11 @@ export default function ProfitLogsPage() {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Total Profit Card */}
-          <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-lg p-6 text-white">
+          <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium opacity-90">Total Profit</h3>
+              <h3 className="text-sm font-medium text-gray-600">Total Profit</h3>
               <svg
-                className="w-8 h-8 opacity-80"
+                className="w-8 h-8 text-green-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -137,18 +137,18 @@ export default function ProfitLogsPage() {
                 />
               </svg>
             </div>
-            <p className="text-3xl font-bold">Rs. {totalProfit.toFixed(2)}</p>
-            <p className="text-sm opacity-80 mt-1">
+            <p className="text-3xl font-bold text-green-600">Rs. {totalProfit.toFixed(2)}</p>
+            <p className="text-sm text-gray-500 mt-1">
               From {filteredOrders.length} orders
             </p>
           </div>
 
           {/* Total Revenue Card */}
-          <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl shadow-lg p-6 text-white">
+          <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium opacity-90">Total Revenue</h3>
+              <h3 className="text-sm font-medium text-gray-600">Total Revenue</h3>
               <svg
-                className="w-8 h-8 opacity-80"
+                className="w-8 h-8 text-blue-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -161,18 +161,18 @@ export default function ProfitLogsPage() {
                 />
               </svg>
             </div>
-            <p className="text-3xl font-bold">Rs. {totalRevenue.toFixed(2)}</p>
-            <p className="text-sm opacity-80 mt-1">Total sales amount</p>
+            <p className="text-3xl font-bold text-blue-600">Rs. {totalRevenue.toFixed(2)}</p>
+            <p className="text-sm text-gray-500 mt-1">Total sales amount</p>
           </div>
 
           {/* Total Costs Card */}
-          <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl shadow-lg p-6 text-black">
+          <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium opacity-90">
+              <h3 className="text-sm font-medium text-gray-600">
                 Production Costs
               </h3>
               <svg
-                className="w-8 h-8 opacity-80"
+                className="w-8 h-8 text-orange-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -185,18 +185,18 @@ export default function ProfitLogsPage() {
                 />
               </svg>
             </div>
-            <p className="text-3xl font-bold">Rs. {totalCost.toFixed(2)}</p>
-            <p className="text-sm opacity-80 mt-1">
+            <p className="text-3xl font-bold text-orange-600">Rs. {totalCost.toFixed(2)}</p>
+            <p className="text-sm text-gray-500 mt-1">
               + Rs. {totalDelivery.toFixed(2)} delivery
             </p>
           </div>
 
           {/* Profit Margin Card */}
-          <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl shadow-lg p-6 text-white">
+          <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium opacity-90">Profit Margin</h3>
+              <h3 className="text-sm font-medium text-gray-600">Profit Margin</h3>
               <svg
-                className="w-8 h-8 opacity-80"
+                className="w-8 h-8 text-purple-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -209,13 +209,13 @@ export default function ProfitLogsPage() {
                 />
               </svg>
             </div>
-            <p className="text-3xl font-bold">
+            <p className="text-3xl font-bold text-purple-600">
               {totalRevenue > 0
                 ? ((totalProfit / totalRevenue) * 100).toFixed(1)
                 : 0}
               %
             </p>
-            <p className="text-sm opacity-80 mt-1">Average margin</p>
+            <p className="text-sm text-gray-500 mt-1">Average margin</p>
           </div>
         </div>
 
