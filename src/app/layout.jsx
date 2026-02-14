@@ -8,6 +8,11 @@ export const metadata = {
   title: "Ozone Mineral Water - Sip the Good Life",
   description:
     "Premium mineral water available in 500ml and 1500ml bottles. Experience pure hydration with Ozone Mineral Water.",
+  icons: {
+    icon: "/favicon.ico", // or '/icon.png'
+    apple: "/apple-icon.png", // Optional: for Apple devices
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {

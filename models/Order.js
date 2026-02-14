@@ -17,8 +17,12 @@ const orderItemSchema = new mongoose.Schema(
       required: true,
       min: 1,
     },
+    cost: {
+      type: Number,
+      min: 0,
+    },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const orderSchema = new mongoose.Schema(
@@ -61,6 +65,23 @@ const orderSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
+    totalcost: {
+      type: Number,
+      default: 0,
+    },
+    productionCosts: {
+      type: Map,
+      of: Number,
+      default: {},
+    },
+    deliveryCharges: {
+      type: Number,
+      default: 0,
+    },
+    netProfit: {
+      type: Number,
+      default: 0,
+    },
 
     paymentStatus: {
       type: String,
@@ -99,7 +120,7 @@ const orderSchema = new mongoose.Schema(
       default: "pending",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("Order", orderSchema);

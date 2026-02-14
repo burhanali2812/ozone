@@ -27,6 +27,8 @@ export default function OrderDashboard() {
     shopAddress: "",
     shopContact: "",
     orderItems: [],
+    productionCosts: [],
+    deliveryCharges: 0,
   });
 
   const getOrders = async (action) => {
@@ -121,6 +123,13 @@ export default function OrderDashboard() {
         quantity: item.quantity,
         price: item.price,
       })),
+      productionCosts: order.orderItems.map((item) => ({
+        productId: item.product?._id,
+        productName: `${item.product?.size} (${item.product?.packingType})`,
+        quantity: item.quantity,
+        costPerUnit: order.productionCosts?.[item.product?._id] || 0,
+      })),
+      deliveryCharges: order.deliveryCharges || 0,
     });
     setShowModal(true);
   };
@@ -131,6 +140,20 @@ export default function OrderDashboard() {
     const newTotalPrice = modalData.orderItems.reduce((sum, item) => {
       return sum + item.price * item.quantity;
     }, 0);
+
+    // Calculate total production cost
+    const totalProductionCost =
+      modalData.status === "completed" && modalData.paymentStatus === "paid"
+        ? modalData.productionCosts.reduce((sum, item) => {
+            return sum + item.costPerUnit * item.quantity;
+          }, 0)
+        : 0;
+
+    // Calculate net profit
+    const netProfit =
+      modalData.status === "completed" && modalData.paymentStatus === "paid"
+        ? newTotalPrice - totalProductionCost - modalData.deliveryCharges
+        : 0;
 
     const updatePayload = {
       action: "update",
@@ -165,6 +188,25 @@ export default function OrderDashboard() {
         shopName: modalData.shopName,
         shopAddress: modalData.shopAddress,
         shopContact: modalData.shopContact,
+        productionCosts:
+          modalData.status === "completed" && modalData.paymentStatus === "paid"
+            ? modalData.productionCosts.reduce((acc, item) => {
+                acc[item.productId] = item.costPerUnit;
+                return acc;
+              }, {})
+            : undefined,
+        deliveryCharges:
+          modalData.status === "completed" && modalData.paymentStatus === "paid"
+            ? modalData.deliveryCharges
+            : undefined,
+        totalcost:
+          modalData.status === "completed" && modalData.paymentStatus === "paid"
+            ? totalProductionCost
+            : undefined,
+        netProfit:
+          modalData.status === "completed" && modalData.paymentStatus === "paid"
+            ? netProfit
+            : undefined,
       },
     };
 
@@ -1143,6 +1185,165 @@ Requested: ${stockError.response.data.requested}`,
                   <option value="cancelled">Cancelled</option>
                 </select>
               </div>
+
+              {/* Production Cost & Profit Section */}
+              {modalData.status === "completed" &&
+                modalData.paymentStatus === "paid" && (
+                  <div className="mb-6 p-4 bg-green-50 rounded-xl border-2 border-green-200">
+                    <h3 className="font-semibold text-gray-900 mb-4 text-lg">
+                      📊 Production Cost & Profit Analysis
+                    </h3>
+
+                    {/* Production Costs per Item */}
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Production Cost (per item)
+                      </label>
+                      <div className="space-y-3">
+                        {modalData.productionCosts.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="p-3 bg-white rounded-lg border border-gray-200"
+                          >
+                            <p className="text-sm font-medium text-gray-700 mb-2">
+                              {item.productName} × {item.quantity}
+                            </p>
+                            <div>
+                              <label className="block text-xs font-medium text-gray-600 mb-1">
+                                Cost per unit (Rs.)
+                              </label>
+                              <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                value={item.costPerUnit}
+                                onChange={(e) => {
+                                  const newCosts = [
+                                    ...modalData.productionCosts,
+                                  ];
+                                  newCosts[idx].costPerUnit =
+                                    parseFloat(e.target.value) || 0;
+                                  setModalData({
+                                    ...modalData,
+                                    productionCosts: newCosts,
+                                  });
+                                }}
+                                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-green-600 focus:outline-none text-sm"
+                                placeholder="Enter production cost per unit"
+                              />
+                              <p className="text-xs text-gray-600 mt-1">
+                                Total Cost: Rs.{" "}
+                                {(item.costPerUnit * item.quantity).toFixed(2)}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Delivery Charges */}
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Delivery Charges
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={modalData.deliveryCharges}
+                        onChange={(e) =>
+                          setModalData({
+                            ...modalData,
+                            deliveryCharges: parseFloat(e.target.value) || 0,
+                          })
+                        }
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-600 focus:outline-none"
+                        placeholder="Enter delivery charges"
+                      />
+                    </div>
+
+                    {/* Profit Calculation */}
+                    <div className="mt-4 p-4 bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg border-2 border-green-300">
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700">Total Revenue:</span>
+                          <span className="font-semibold text-gray-900">
+                            Rs.{" "}
+                            {modalData.orderItems
+                              .reduce(
+                                (sum, item) => sum + item.price * item.quantity,
+                                0,
+                              )
+                              .toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700">
+                            Total Production Cost:
+                          </span>
+                          <span className="font-semibold text-red-600">
+                            - Rs.{" "}
+                            {modalData.productionCosts
+                              .reduce(
+                                (sum, item) =>
+                                  sum + item.costPerUnit * item.quantity,
+                                0,
+                              )
+                              .toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700">
+                            Delivery Charges:
+                          </span>
+                          <span className="font-semibold text-red-600">
+                            - Rs. {modalData.deliveryCharges.toFixed(2)}
+                          </span>
+                        </div>
+                        <div className="border-t-2 border-green-400 pt-2 mt-2">
+                          <div className="flex justify-between">
+                            <span className="text-lg font-bold text-gray-900">
+                              Net Profit:
+                            </span>
+                            <span
+                              className={`text-lg font-bold ${
+                                modalData.orderItems.reduce(
+                                  (sum, item) =>
+                                    sum + item.price * item.quantity,
+                                  0,
+                                ) -
+                                  modalData.productionCosts.reduce(
+                                    (sum, item) =>
+                                      sum + item.costPerUnit * item.quantity,
+                                    0,
+                                  ) -
+                                  modalData.deliveryCharges >=
+                                0
+                                  ? "text-green-700"
+                                  : "text-red-700"
+                              }`}
+                            >
+                              Rs.{" "}
+                              {(
+                                modalData.orderItems.reduce(
+                                  (sum, item) =>
+                                    sum + item.price * item.quantity,
+                                  0,
+                                ) -
+                                modalData.productionCosts.reduce(
+                                  (sum, item) =>
+                                    sum + item.costPerUnit * item.quantity,
+                                  0,
+                                ) -
+                                modalData.deliveryCharges
+                              ).toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
             </div>
 
             {/* Footer (Fixed) */}

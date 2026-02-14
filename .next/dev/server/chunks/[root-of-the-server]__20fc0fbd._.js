@@ -95,6 +95,10 @@ const orderItemSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mo
         type: Number,
         required: true,
         min: 1
+    },
+    cost: {
+        type: Number,
+        min: 0
     }
 }, {
     _id: false
@@ -135,6 +139,23 @@ const orderSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoo
         type: Number,
         required: true,
         min: 0
+    },
+    totalcost: {
+        type: Number,
+        default: 0
+    },
+    productionCosts: {
+        type: Map,
+        of: Number,
+        default: {}
+    },
+    deliveryCharges: {
+        type: Number,
+        default: 0
+    },
+    netProfit: {
+        type: Number,
+        default: 0
     },
     paymentStatus: {
         type: String,
