@@ -37,18 +37,18 @@ export default function Header() {
             <div className="relative">
               <Image
                 src={"/images/logo2.png"}
-                alt="OZONE MINER WATER Logo"
+                alt="Ozone Mineral Water® Pvt Ltd Logo"
                 width={150}
                 height={45}
                 className="transition-transform group-hover:scale-110 duration-300"
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-xl font-bold text-white tracking-wide">
-                OZONE
+              <span className="text-base sm:text-lg font-bold text-white tracking-wide">
+                OZONE MINERAL WATER®
               </span>
-              <span className="text-[10px] sm:text-xs text-blue-100 -mt-1">
-                MINERAL WATER
+              <span className="text-[9px] sm:text-[10px] text-blue-100 -mt-1">
+                Pvt Ltd
               </span>
             </div>
           </Link>

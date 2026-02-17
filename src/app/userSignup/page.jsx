@@ -76,12 +76,12 @@ export default function UserSignup() {
             <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-2xl">O</span>
             </div>
-            <span className="text-3xl font-bold text-gray-900">OZONE</span>
+            <span className="text-2xl font-bold text-gray-900">Ozone Mineral Water® Pvt Ltd</span>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             Create Account
           </h1>
-          <p className="text-gray-600">Join OZONE Mineral Water</p>
+          <p className="text-gray-600">Join Ozone Mineral Water® Pvt Ltd</p>
         </div>
 
         {/* Signup Form Card */}

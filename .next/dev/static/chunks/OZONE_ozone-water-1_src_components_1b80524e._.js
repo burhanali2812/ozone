@@ -50,7 +50,7 @@ function Header() {
                                     className: "relative",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         src: "/images/logo2.png",
-                                        alt: "OZONE MINER WATER Logo",
+                                        alt: "Ozone Mineral Water® Pvt Ltd Logo",
                                         width: 150,
                                         height: 45,
                                         className: "transition-transform group-hover:scale-110 duration-300"
@@ -68,16 +68,16 @@ function Header() {
                                     className: "flex flex-col",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-lg sm:text-xl font-bold text-white tracking-wide",
-                                            children: "OZONE"
+                                            className: "text-base sm:text-lg font-bold text-white tracking-wide",
+                                            children: "OZONE MINERAL WATER®"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
                                             lineNumber: 47,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-[10px] sm:text-xs text-blue-100 -mt-1",
-                                            children: "MINERAL WATER"
+                                            className: "text-[9px] sm:text-[10px] text-blue-100 -mt-1",
+                                            children: "Pvt Ltd"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
                                             lineNumber: 50,
@@ -496,18 +496,28 @@ function Footer() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "mb-4",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                            src: "/images/logo2.png",
-                                            alt: "OZONE Mineral Water",
-                                            width: 180,
-                                            height: 60,
-                                            className: "object-contain"
-                                        }, void 0, false, {
-                                            fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                            lineNumber: 35,
-                                            columnNumber: 15
-                                        }, this)
-                                    }, void 0, false, {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                src: "/images/logo2.png",
+                                                alt: "Ozone Mineral Water® Pvt Ltd",
+                                                width: 180,
+                                                height: 60,
+                                                className: "object-contain"
+                                            }, void 0, false, {
+                                                fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
+                                                lineNumber: 35,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                className: "text-white font-bold text-lg mt-3",
+                                                children: "Ozone Mineral Water® Pvt Ltd"
+                                            }, void 0, false, {
+                                                fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
+                                                lineNumber: 42,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
                                         lineNumber: 34,
                                         columnNumber: 13
@@ -517,7 +527,7 @@ function Footer() {
                                         children: "Sip the Good Life"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 43,
+                                        lineNumber: 46,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -525,7 +535,7 @@ function Footer() {
                                         children: "Premium mineral water with perfect TDS balance for your health and wellness."
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 46,
+                                        lineNumber: 49,
                                         columnNumber: 13
                                     }, this)
                                 ]
@@ -541,7 +551,7 @@ function Footer() {
                                         children: "Quick Links"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 54,
+                                        lineNumber: 57,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -556,19 +566,19 @@ function Footer() {
                                                             className: "text-xs mr-2 group-hover:translate-x-1 transition-transform"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 61,
+                                                            lineNumber: 64,
                                                             columnNumber: 19
                                                         }, this),
                                                         "Home"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 57,
+                                                    lineNumber: 60,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 56,
+                                                lineNumber: 59,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -580,19 +590,19 @@ function Footer() {
                                                             className: "text-xs mr-2 group-hover:translate-x-1 transition-transform"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 70,
+                                                            lineNumber: 73,
                                                             columnNumber: 19
                                                         }, this),
                                                         "Products"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 66,
+                                                    lineNumber: 69,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 65,
+                                                lineNumber: 68,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -604,19 +614,19 @@ function Footer() {
                                                             className: "text-xs mr-2 group-hover:translate-x-1 transition-transform"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 79,
+                                                            lineNumber: 82,
                                                             columnNumber: 19
                                                         }, this),
                                                         "About Us"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 75,
+                                                    lineNumber: 78,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 74,
+                                                lineNumber: 77,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -628,31 +638,31 @@ function Footer() {
                                                             className: "text-xs mr-2 group-hover:translate-x-1 transition-transform"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 88,
+                                                            lineNumber: 91,
                                                             columnNumber: 19
                                                         }, this),
                                                         "Contact"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 84,
+                                                    lineNumber: 87,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 83,
+                                                lineNumber: 86,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 55,
+                                        lineNumber: 58,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                lineNumber: 53,
+                                lineNumber: 56,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -662,7 +672,7 @@ function Footer() {
                                         children: "Our Products"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 97,
+                                        lineNumber: 100,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -675,14 +685,14 @@ function Footer() {
                                                         className: "text-blue-400 mr-2 text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 100,
+                                                        lineNumber: 103,
                                                         columnNumber: 17
                                                     }, this),
                                                     "500ml Bottle"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 99,
+                                                lineNumber: 102,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -692,14 +702,14 @@ function Footer() {
                                                         className: "text-blue-400 mr-2 text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 104,
+                                                        lineNumber: 107,
                                                         columnNumber: 17
                                                     }, this),
                                                     "1500ml Bottle"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 103,
+                                                lineNumber: 106,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -709,14 +719,14 @@ function Footer() {
                                                         className: "text-blue-400 mr-2 text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 108,
+                                                        lineNumber: 111,
                                                         columnNumber: 17
                                                     }, this),
                                                     "6L Bottle"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 107,
+                                                lineNumber: 110,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -726,14 +736,14 @@ function Footer() {
                                                         className: "text-blue-400 mr-2 text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 112,
+                                                        lineNumber: 115,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Bulk Orders"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 111,
+                                                lineNumber: 114,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -743,26 +753,26 @@ function Footer() {
                                                         className: "text-blue-400 mr-2 text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 116,
+                                                        lineNumber: 119,
                                                         columnNumber: 17
                                                     }, this),
                                                     "Corporate Packages"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 115,
+                                                lineNumber: 118,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 98,
+                                        lineNumber: 101,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                lineNumber: 96,
+                                lineNumber: 99,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -772,7 +782,7 @@ function Footer() {
                                         children: "Get in Touch"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 124,
+                                        lineNumber: 127,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -788,12 +798,12 @@ function Footer() {
                                                             className: "text-sm"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 131,
+                                                            lineNumber: 134,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 130,
+                                                        lineNumber: 133,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -801,13 +811,13 @@ function Footer() {
                                                         children: "+92 326 6783442"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 133,
+                                                        lineNumber: 136,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 126,
+                                                lineNumber: 129,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -820,12 +830,12 @@ function Footer() {
                                                             className: "text-sm"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 140,
+                                                            lineNumber: 143,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 139,
+                                                        lineNumber: 142,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -833,13 +843,13 @@ function Footer() {
                                                         children: "ozonewater12@gmail.com"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 142,
+                                                        lineNumber: 145,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 135,
+                                                lineNumber: 138,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -851,12 +861,12 @@ function Footer() {
                                                             className: "text-sm"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                            lineNumber: 146,
+                                                            lineNumber: 149,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 145,
+                                                        lineNumber: 148,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -864,19 +874,19 @@ function Footer() {
                                                         children: "Pakistan"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                        lineNumber: 148,
+                                                        lineNumber: 151,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 144,
+                                                lineNumber: 147,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 125,
+                                        lineNumber: 128,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h5", {
@@ -884,7 +894,7 @@ function Footer() {
                                         children: "Follow Us"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 152,
+                                        lineNumber: 155,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -900,12 +910,12 @@ function Footer() {
                                                     className: "text-base group-hover:scale-110 transition-transform"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 162,
+                                                    lineNumber: 165,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 155,
+                                                lineNumber: 158,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -918,12 +928,12 @@ function Footer() {
                                                     className: "text-base group-hover:scale-110 transition-transform"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 172,
+                                                    lineNumber: 175,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 165,
+                                                lineNumber: 168,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -936,12 +946,12 @@ function Footer() {
                                                     className: "text-base group-hover:scale-110 transition-transform"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 182,
+                                                    lineNumber: 185,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 175,
+                                                lineNumber: 178,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -954,24 +964,24 @@ function Footer() {
                                                     className: "text-base group-hover:scale-110 transition-transform"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                    lineNumber: 192,
+                                                    lineNumber: 195,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                                lineNumber: 185,
+                                                lineNumber: 188,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                        lineNumber: 153,
+                                        lineNumber: 156,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                lineNumber: 123,
+                                lineNumber: 126,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -989,21 +999,21 @@ function Footer() {
                                 children: [
                                     "© ",
                                     new Date().getFullYear(),
-                                    " OZONE Mineral Water. All rights reserved."
+                                    " Ozone Mineral Water® Pvt Ltd. All rights reserved."
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                                lineNumber: 200,
+                                lineNumber: 203,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                            lineNumber: 199,
+                            lineNumber: 202,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Footer.jsx",
-                        lineNumber: 198,
+                        lineNumber: 201,
                         columnNumber: 9
                     }, this)
                 ]
@@ -1403,7 +1413,7 @@ function Sidebar() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                             className: "text-2xl font-bold bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent",
-                                            children: "Ozone Water"
+                                            children: "Ozone Mineral Water® Pvt Ltd"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
                                             lineNumber: 307,

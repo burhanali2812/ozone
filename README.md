@@ -1,10 +1,10 @@
-# OZONE MINER WATER
+# OZONE MINERAL WATER® PVT LTD
 
-Welcome to the OZONE MINER WATER project! This project is designed to showcase our premium bottled water products, emphasizing quality and a healthy lifestyle. 
+Welcome to the Ozone Mineral Water® Pvt Ltd project! This project is designed to showcase our premium bottled water products, emphasizing quality and a healthy lifestyle. 
 
 ## Project Overview
 
-OZONE MINER WATER offers two sizes of bottled water:
+Ozone Mineral Water® Pvt Ltd offers two sizes of bottled water:
 - **500ml**
 - **1500ml**
 
@@ -22,7 +22,7 @@ Our slogan, **"Sip the Good Life,"** reflects our commitment to providing refres
 
 ## Getting Started
 
-To get started with the OZONE MINER WATER project, follow these steps:
+To get started with the Ozone Mineral Water® Pvt Ltd project, follow these steps:
 
 1. **Clone the repository**:
    ```bash
@@ -54,13 +54,13 @@ To get started with the OZONE MINER WATER project, follow these steps:
 
 ## Contributing
 
-We welcome contributions to improve the OZONE MINER WATER project. Please feel free to submit issues or pull requests.
+We welcome contributions to improve the Ozone Mineral Water® Pvt Ltd project. Please feel free to submit issues or pull requests.
 
 ## Contact
 
 For any inquiries or further information, please reach out to us at:
 
-- **Email**: support@ozoneminerwater.com
+- **Email**: ozonewater12@gmail.com
 - **Phone**: +1 (800) 123-4567
 
-Thank you for your interest in OZONE MINER WATER! Enjoy sipping the good life!# ozone
+Thank you for your interest in Ozone Mineral Water® Pvt Ltd! Enjoy sipping the good life!# ozone

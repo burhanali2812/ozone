@@ -34,11 +34,14 @@ export default function Footer() {
             <div className="mb-4">
               <Image
                 src="/images/logo2.png"
-                alt="OZONE Mineral Water"
+                alt="Ozone Mineral Water® Pvt Ltd"
                 width={180}
                 height={60}
                 className="object-contain"
               />
+              <h3 className="text-white font-bold text-lg mt-3">
+                Ozone Mineral Water® Pvt Ltd
+              </h3>
             </div>
             <p className="text-gray-400 text-sm italic mb-4">
               Sip the Good Life
@@ -198,7 +201,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
             <p className="mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} OZONE Mineral Water. All rights
+              &copy; {new Date().getFullYear()} Ozone Mineral Water® Pvt Ltd. All rights
               reserved.
             </p>
           </div>

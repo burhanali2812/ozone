@@ -2015,7 +2015,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                 children: "Total Production Cost:"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                                lineNumber: 1284,
+                                                                lineNumber: 1281,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2027,13 +2027,13 @@ Requested: ${stockError.response.data.requested}`);
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                                lineNumber: 1287,
+                                                                lineNumber: 1284,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                        lineNumber: 1283,
+                                                        lineNumber: 1280,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2044,7 +2044,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                 children: "Delivery Charges:"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                                lineNumber: 1301,
+                                                                lineNumber: 1296,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2055,13 +2055,13 @@ Requested: ${stockError.response.data.requested}`);
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                                lineNumber: 1304,
+                                                                lineNumber: 1299,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                        lineNumber: 1300,
+                                                        lineNumber: 1295,
                                                         columnNumber: 25
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2074,7 +2074,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                     children: "Net Profit:"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                                    lineNumber: 1310,
+                                                                    lineNumber: 1305,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2086,18 +2086,18 @@ Requested: ${stockError.response.data.requested}`);
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                                    lineNumber: 1313,
+                                                                    lineNumber: 1308,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                            lineNumber: 1309,
+                                                            lineNumber: 1304,
                                                             columnNumber: 27
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                                        lineNumber: 1308,
+                                                        lineNumber: 1303,
                                                         columnNumber: 25
                                                     }, this)
                                                 ]
@@ -2132,7 +2132,7 @@ Requested: ${stockError.response.data.requested}`);
                                     children: "Update Order"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1360,
+                                    lineNumber: 1351,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2144,13 +2144,13 @@ Requested: ${stockError.response.data.requested}`);
                                     children: "Delete Order"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1367,
+                                    lineNumber: 1358,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                            lineNumber: 1359,
+                            lineNumber: 1350,
                             columnNumber: 13
                         }, this)
                     ]
@@ -2186,17 +2186,17 @@ Requested: ${stockError.response.data.requested}`);
                                             d: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                            lineNumber: 1393,
+                                            lineNumber: 1384,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                        lineNumber: 1387,
+                                        lineNumber: 1378,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1386,
+                                    lineNumber: 1377,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -2204,7 +2204,7 @@ Requested: ${stockError.response.data.requested}`);
                                     children: "Delete Order?"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1401,
+                                    lineNumber: 1392,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2212,13 +2212,13 @@ Requested: ${stockError.response.data.requested}`);
                                     children: "Are you sure you want to delete this order? This action cannot be undone."
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1404,
+                                    lineNumber: 1395,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                            lineNumber: 1385,
+                            lineNumber: 1376,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2230,7 +2230,7 @@ Requested: ${stockError.response.data.requested}`);
                                     children: "Cancel"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1411,
+                                    lineNumber: 1402,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2239,24 +2239,24 @@ Requested: ${stockError.response.data.requested}`);
                                     children: "Delete"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                                    lineNumber: 1417,
+                                    lineNumber: 1408,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                            lineNumber: 1410,
+                            lineNumber: 1401,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                    lineNumber: 1384,
+                    lineNumber: 1375,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
-                lineNumber: 1383,
+                lineNumber: 1374,
                 columnNumber: 9
             }, this)
         ]

@@ -48,7 +48,7 @@ export default function FeatureSection() {
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
             Witness how we transform natural water into perfectly balanced,
-            mineral-rich OZONE Water with ideal TDS of 140
+            mineral-rich Ozone Mineral Water® Pvt Ltd with ideal TDS of 140
           </p>
         </div>
 
@@ -257,7 +257,7 @@ export default function FeatureSection() {
                 </div>
               </div>
               <h3 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
-                Perfectly Balanced OZONE Water
+                Perfectly Balanced Water
               </h3>
               <p className="text-base sm:text-lg text-blue-50 mb-8 max-w-2xl mx-auto leading-relaxed">
                 The result is ideal drinking water with perfect mineral balance,
@@ -278,7 +278,7 @@ export default function FeatureSection() {
               Ready to Experience Pure Hydration?
             </h3>
             <p className="text-gray-600 mb-7 leading-relaxed">
-              Join thousands of satisfied customers who trust OZONE for their
+              Join thousands of satisfied customers who trust Ozone Mineral Water® Pvt Ltd for their
               daily hydration needs
             </p>
             <button

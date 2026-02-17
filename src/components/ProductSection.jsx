@@ -172,7 +172,7 @@ export default function ProductSection() {
                     <div className="relative z-10 w-full h-full flex items-center justify-center p-3 sm:p-4">
                       <Image
                         src={productImage}
-                        alt={`${product.size} Ozone Mineral Water`}
+                        alt={`${product.size} Ozone Mineral Water® Pvt Ltd`}
                         width={160}
                         height={200}
                         className="object-contain drop-shadow-2xl transform group-hover:scale-110 transition-transform duration-500"

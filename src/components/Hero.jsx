@@ -24,10 +24,10 @@ export default function Hero() {
             {/* Main Heading */}
             <div className="space-y-3">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                OZONE
+                OZONE MINERAL WATER®
               </h1>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                MINERAL WATER
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                Pvt Ltd
               </h2>
             </div>
 
@@ -169,7 +169,7 @@ export default function Hero() {
                   <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-3xl">
                     <Image
                       src="/images/hero3.jpeg"
-                      alt="Ozone Mineral Water Bottle"
+                      alt="Ozone Mineral Water® Pvt Ltd Bottle"
                       width={500}
                       height={500}
                       className="object-contain drop-shadow-2xl animate-float"

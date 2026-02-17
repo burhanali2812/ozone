@@ -66,15 +66,15 @@ function Hero() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                             className: "jsx-df223b087bf364ca" + " " + "text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight",
-                                            children: "OZONE"
+                                            children: "OZONE MINERAL WATER®"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Hero.jsx",
                                             lineNumber: 26,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "jsx-df223b087bf364ca" + " " + "text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent",
-                                            children: "MINERAL WATER"
+                                            className: "jsx-df223b087bf364ca" + " " + "text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent",
+                                            children: "Pvt Ltd"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Hero.jsx",
                                             lineNumber: 29,
@@ -443,7 +443,7 @@ function Hero() {
                                                 className: "jsx-df223b087bf364ca" + " " + "relative w-full h-full flex items-center justify-center overflow-hidden rounded-3xl",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                     src: "/images/hero3.jpeg",
-                                                    alt: "Ozone Mineral Water Bottle",
+                                                    alt: "Ozone Mineral Water® Pvt Ltd Bottle",
                                                     width: 500,
                                                     height: 500,
                                                     className: "object-contain drop-shadow-2xl animate-float",
@@ -903,7 +903,7 @@ function ProductSection() {
                                                     className: "relative z-10 w-full h-full flex items-center justify-center p-3 sm:p-4",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                         src: productImage,
-                                                        alt: `${product.size} Ozone Mineral Water`,
+                                                        alt: `${product.size} Ozone Mineral Water® Pvt Ltd`,
                                                         width: 160,
                                                         height: 200,
                                                         className: "object-contain drop-shadow-2xl transform group-hover:scale-110 transition-transform duration-500"
@@ -1363,7 +1363,7 @@ function FeatureSection() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "text-lg sm:text-xl text-gray-600 leading-relaxed",
-                                children: "Witness how we transform natural water into perfectly balanced, mineral-rich OZONE Water with ideal TDS of 140"
+                                children: "Witness how we transform natural water into perfectly balanced, mineral-rich Ozone Mineral Water® Pvt Ltd with ideal TDS of 140"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/FeatureSection.jsx",
                                 lineNumber: 49,
@@ -2018,7 +2018,7 @@ function FeatureSection() {
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                 className: "text-3xl sm:text-4xl font-bold mb-4 tracking-tight",
-                                                children: "Perfectly Balanced OZONE Water"
+                                                children: "Perfectly Balanced Water"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/FeatureSection.jsx",
                                                 lineNumber: 259,
@@ -2088,7 +2088,7 @@ function FeatureSection() {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-gray-600 mb-7 leading-relaxed",
-                                    children: "Join thousands of satisfied customers who trust OZONE for their daily hydration needs"
+                                    children: "Join thousands of satisfied customers who trust Ozone Mineral Water® Pvt Ltd for their daily hydration needs"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/FeatureSection.jsx",
                                     lineNumber: 280,
@@ -2622,21 +2622,21 @@ const testimonials = [
         id: 1,
         name: "Ahmed Khan",
         rating: 5,
-        review: "OZONE mineral water has become an essential part of my daily routine. The taste is pure and refreshing, and I love that it's enriched with natural minerals. Highly recommended!",
+        review: "Ozone Mineral Water® Pvt Ltd has become an essential part of my daily routine. The taste is pure and refreshing, and I love that it's enriched with natural minerals. Highly recommended!",
         location: "Karachi"
     },
     {
         id: 2,
         name: "Fatima Ali",
         rating: 5,
-        review: "As someone who writes about health and wellness, I'm very particular about water quality. OZONE delivers consistently pure and mineral-rich water. My family loves it!",
+        review: "As someone who writes about health and wellness, I'm very particular about water quality. Ozone Mineral Water® Pvt Ltd delivers consistently pure and mineral-rich water. My family loves it!",
         location: "Lahore"
     },
     {
         id: 3,
         name: "Hassan Raza",
         rating: 5,
-        review: "We've been using OZONE for our restaurant for over a year now. Our customers appreciate the quality, and the delivery service is always on time. Great product!",
+        review: "We've been using Ozone Mineral Water® Pvt Ltd for our restaurant for over a year now. Our customers appreciate the quality, and the delivery service is always on time. Great product!",
         location: "Islamabad"
     },
     {
@@ -2650,28 +2650,28 @@ const testimonials = [
         id: 5,
         name: "Usman Tariq",
         rating: 5,
-        review: "I recommend OZONE to all my clients. Proper hydration is crucial for fitness, and this water provides the minerals needed for optimal performance. Best choice!",
+        review: "I recommend Ozone Mineral Water® Pvt Ltd to all my clients. Proper hydration is crucial for fitness, and this water provides the minerals needed for optimal performance. Best choice!",
         location: "Faisalabad"
     },
     {
         id: 6,
         name: "Sara Ahmed",
         rating: 5,
-        review: "Teaching requires staying hydrated throughout the day. OZONE water keeps me refreshed and energized. The 1.5L bottle is perfect for my classroom.",
+        review: "Teaching requires staying hydrated throughout the day. Ozone Mineral Water® Pvt Ltd keeps me refreshed and energized. The 1.5L bottle is perfect for my classroom.",
         location: "Multan"
     },
     {
         id: 7,
         name: "Ali Hussain",
         rating: 5,
-        review: "Premium quality water at reasonable prices. We supply OZONE to our entire office. The bulk ordering process is smooth and delivery is always prompt.",
+        review: "Premium quality water at reasonable prices. We supply Ozone Mineral Water® Pvt Ltd to our entire office. The bulk ordering process is smooth and delivery is always prompt.",
         location: "Karachi"
     },
     {
         id: 8,
         name: "Zainab Fatima",
         rating: 5,
-        review: "Pure, clean, and refreshing! OZONE water complements my healthy lifestyle perfectly. I can taste the difference in quality compared to other brands.",
+        review: "Pure, clean, and refreshing! Ozone Mineral Water® Pvt Ltd complements my healthy lifestyle perfectly. I can taste the difference in quality compared to other brands.",
         location: "Lahore"
     }
 ];
@@ -2723,7 +2723,7 @@ function Testimonials() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: "jsx-6ab6e10fd789b520" + " " + "text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto",
-                                children: "Join thousands of satisfied customers who trust OZONE for their daily hydration needs"
+                                children: "Join thousands of satisfied customers who trust Ozone Mineral Water® Pvt Ltd for their daily hydration needs"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Testonomials.jsx",
                                 lineNumber: 91,

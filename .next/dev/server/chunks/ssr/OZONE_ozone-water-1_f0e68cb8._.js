@@ -128,8 +128,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1
 ;
 ;
 const metadata = {
-    title: "Ozone Mineral Water - Sip the Good Life",
-    description: "Premium mineral water available in 500ml and 1500ml bottles. Experience pure hydration with Ozone Mineral Water.",
+    title: "Ozone Mineral Water® Pvt Ltd - Sip the Good Life",
+    description: "Premium mineral water available in 500ml and 1500ml bottles. Experience pure hydration with Ozone Mineral Water® Pvt Ltd.",
     icons: {
         icon: "/favicon.ico",
         apple: "/apple-icon.png",

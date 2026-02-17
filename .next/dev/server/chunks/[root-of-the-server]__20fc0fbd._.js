@@ -392,7 +392,7 @@ function generateOrderEmailHTML(order) {
             🎉 New Order Received!
           </h1>
           <p style="color: #dbeafe; margin: 10px 0 0 0; font-size: 14px;">
-            ${process.env.COMPANY_NAME || "OZONE MINER WATER"}
+            ${process.env.COMPANY_NAME || "Ozone Mineral Water® Pvt Ltd"}
           </p>
         </div>
 
@@ -487,7 +487,7 @@ function generateOrderEmailHTML(order) {
         <!-- Footer -->
         <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
           <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px; font-weight: 600;">
-            ${process.env.COMPANY_NAME || "OZONE MINER WATER"}
+            ${process.env.COMPANY_NAME || "Ozone Mineral Water® Pvt Ltd"}
           </p>
           <p style="margin: 0; color: #9ca3af; font-size: 12px;">
             This is an automated notification. Please do not reply to this email.
@@ -509,7 +509,7 @@ async function sendOrderNotificationEmail(order) {
             };
         }
         const mailOptions = {
-            from: `"${process.env.COMPANY_NAME || "OZONE MINER WATER"}" <${process.env.EMAIL_USER}>`,
+            from: `"${process.env.COMPANY_NAME || "Ozone Mineral Water® Pvt Ltd"}" <${process.env.EMAIL_USER}>`,
             to: adminEmail,
             subject: `🔔 New Order from ${order.shopName} - Order #${order._id}`,
             html: generateOrderEmailHTML(order)

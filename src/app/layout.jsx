@@ -5,9 +5,9 @@ import SidebarLayout from "../components/SidebarLayout";
 import Script from "next/script";
 
 export const metadata = {
-  title: "Ozone Mineral Water - Sip the Good Life",
+  title: "Ozone Mineral Water® Pvt Ltd - Sip the Good Life",
   description:
-    "Premium mineral water available in 500ml and 1500ml bottles. Experience pure hydration with Ozone Mineral Water.",
+    "Premium mineral water available in 500ml and 1500ml bottles. Experience pure hydration with Ozone Mineral Water® Pvt Ltd.",
   icons: {
     icon: "/favicon.ico", // or '/icon.png'
     apple: "/apple-icon.png", // Optional: for Apple devices

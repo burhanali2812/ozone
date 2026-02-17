@@ -7,7 +7,7 @@ const testimonials = [
     name: "Ahmed Khan",
     rating: 5,
     review:
-      "OZONE mineral water has become an essential part of my daily routine. The taste is pure and refreshing, and I love that it's enriched with natural minerals. Highly recommended!",
+      "Ozone Mineral Water® Pvt Ltd has become an essential part of my daily routine. The taste is pure and refreshing, and I love that it's enriched with natural minerals. Highly recommended!",
     location: "Karachi",
   },
   {
@@ -15,7 +15,7 @@ const testimonials = [
     name: "Fatima Ali",
     rating: 5,
     review:
-      "As someone who writes about health and wellness, I'm very particular about water quality. OZONE delivers consistently pure and mineral-rich water. My family loves it!",
+      "As someone who writes about health and wellness, I'm very particular about water quality. Ozone Mineral Water® Pvt Ltd delivers consistently pure and mineral-rich water. My family loves it!",
     location: "Lahore",
   },
   {
@@ -23,7 +23,7 @@ const testimonials = [
     name: "Hassan Raza",
     rating: 5,
     review:
-      "We've been using OZONE for our restaurant for over a year now. Our customers appreciate the quality, and the delivery service is always on time. Great product!",
+      "We've been using Ozone Mineral Water® Pvt Ltd for our restaurant for over a year now. Our customers appreciate the quality, and the delivery service is always on time. Great product!",
     location: "Islamabad",
   },
   {
@@ -39,7 +39,7 @@ const testimonials = [
     name: "Usman Tariq",
     rating: 5,
     review:
-      "I recommend OZONE to all my clients. Proper hydration is crucial for fitness, and this water provides the minerals needed for optimal performance. Best choice!",
+      "I recommend Ozone Mineral Water® Pvt Ltd to all my clients. Proper hydration is crucial for fitness, and this water provides the minerals needed for optimal performance. Best choice!",
     location: "Faisalabad",
   },
   {
@@ -47,7 +47,7 @@ const testimonials = [
     name: "Sara Ahmed",
     rating: 5,
     review:
-      "Teaching requires staying hydrated throughout the day. OZONE water keeps me refreshed and energized. The 1.5L bottle is perfect for my classroom.",
+      "Teaching requires staying hydrated throughout the day. Ozone Mineral Water® Pvt Ltd keeps me refreshed and energized. The 1.5L bottle is perfect for my classroom.",
     location: "Multan",
   },
   {
@@ -55,7 +55,7 @@ const testimonials = [
     name: "Ali Hussain",
     rating: 5,
     review:
-      "Premium quality water at reasonable prices. We supply OZONE to our entire office. The bulk ordering process is smooth and delivery is always prompt.",
+      "Premium quality water at reasonable prices. We supply Ozone Mineral Water® Pvt Ltd to our entire office. The bulk ordering process is smooth and delivery is always prompt.",
     location: "Karachi",
   },
   {
@@ -63,7 +63,7 @@ const testimonials = [
     name: "Zainab Fatima",
     rating: 5,
     review:
-      "Pure, clean, and refreshing! OZONE water complements my healthy lifestyle perfectly. I can taste the difference in quality compared to other brands.",
+      "Pure, clean, and refreshing! Ozone Mineral Water® Pvt Ltd complements my healthy lifestyle perfectly. I can taste the difference in quality compared to other brands.",
     location: "Lahore",
   },
 ];
@@ -89,7 +89,7 @@ export default function Testimonials() {
             What Our Customers Say
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust OZONE for their
+            Join thousands of satisfied customers who trust Ozone Mineral Water® Pvt Ltd for their
             daily hydration needs
           </p>
         </div>

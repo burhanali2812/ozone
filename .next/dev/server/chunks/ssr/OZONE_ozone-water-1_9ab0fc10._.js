@@ -211,7 +211,7 @@ function TrackingPage() {
                                                     type: "text",
                                                     value: trackingId,
                                                     onChange: (e)=>setTrackingId(e.target.value),
-                                                    placeholder: "Enter your tracking ID OZONE-XXXXXXXX",
+                                                    placeholder: "Enter your tracking ID (format: OZONE-XXXXXXXX)",
                                                     className: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none",
                                                     disabled: loading
                                                 }, void 0, false, {

@@ -305,7 +305,7 @@ export default function Sidebar() {
               <div className="p-6 border-b border-purple-700">
                 <Link href="/">
                   <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent">
-                    Ozone Water
+                    Ozone Mineral Water® Pvt Ltd
                   </h2>
                   <p className="text-sm text-purple-300 mt-1">
                     Management System

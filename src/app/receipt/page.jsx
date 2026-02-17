@@ -189,7 +189,7 @@ export default function Receipt() {
           {/* Header */}
           <div className="text-center mb-4">
             <h1 className="text-xl font-bold text-gray-900 tracking-wide">
-              OZONE MINERAL WATER
+              OZONE MINERAL WATER® PVT LTD
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">
               Sip the Good Life
@@ -373,7 +373,7 @@ export default function Receipt() {
           {/* Footer */}
           <div className="text-center text-xs text-gray-500">
             <p>
-              OZONE © {new Date().toLocaleString()} | Thank you for your order!
+              Ozone Mineral Water® Pvt Ltd © {new Date().toLocaleString()} | Thank you for your order!
             </p>
           </div>
         </div>

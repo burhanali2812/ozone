@@ -1,7 +1,7 @@
 {
   "name": "ozone-water",
   "version": "1.0.0",
-  "description": "OZONE MINER WATER - Sip the Good Life",
+  "description": "Ozone Mineral Water® Pvt Ltd - Sip the Good Life",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",

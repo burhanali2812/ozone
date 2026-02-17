@@ -276,7 +276,7 @@ export default function Order() {
             Place Your Order
           </h1>
           <p className="text-lg sm:text-xl text-gray-600">
-            OZONE Mineral Water
+            Ozone Mineral Water® Pvt Ltd
           </p>
           {user && (
             <p className="text-xs sm:text-sm text-gray-500 mt-2">
