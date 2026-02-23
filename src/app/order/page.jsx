@@ -20,7 +20,7 @@ export default function Order() {
     productId: "",
     productDetails: null,
     quantity: "",
-    customPrice: "",
+    discountedPrice: "",
   });
 
   const [paymentStatus, setPaymentStatus] = useState("unpaid");
@@ -40,7 +40,7 @@ export default function Order() {
               productId: data.products[0]._id,
               productDetails: data.products[0],
               quantity: "",
-              customPrice: "",
+              discountedPrice: "",
             });
           }
         }
@@ -74,13 +74,15 @@ export default function Order() {
     }
 
     const qty = parseInt(currentOrder.quantity);
-    const price =
-      parseFloat(currentOrder.customPrice) || currentOrder.productDetails.price;
+    const actualPrice = currentOrder.productDetails.price;
+    const discountedPrice =
+      parseFloat(currentOrder.discountedPrice) || actualPrice;
 
-    if (qty > 0 && price > 0) {
+    if (qty > 0 && discountedPrice > 0) {
       const existingOrderIndex = orders.findIndex(
         (order) =>
-          order.productId === currentOrder.productId && order.price === price
+          order.productId === currentOrder.productId &&
+          order.discountedPrice === discountedPrice,
       );
 
       if (existingOrderIndex !== -1) {
@@ -94,7 +96,8 @@ export default function Order() {
             productId: currentOrder.productId,
             productDetails: currentOrder.productDetails,
             quantity: qty,
-            price: price,
+            actualPrice: actualPrice,
+            discountedPrice: discountedPrice,
           },
         ]);
       }
@@ -105,7 +108,7 @@ export default function Order() {
           productId: products[0]._id,
           productDetails: products[0],
           quantity: "",
-          customPrice: "",
+          discountedPrice: "",
         });
       }
     } else {
@@ -125,41 +128,62 @@ export default function Order() {
 
   const handleUpdatePrice = (index, newPrice) => {
     const updatedOrders = [...orders];
-    updatedOrders[index].price =
-      parseFloat(newPrice) || updatedOrders[index].productDetails.price;
+    const parsedPrice = parseFloat(newPrice);
+    updatedOrders[index].discountedPrice =
+      parsedPrice >= 0 ? parsedPrice : updatedOrders[index].actualPrice;
     setOrders(updatedOrders);
   };
 
   const calculateTotal = () => {
     return orders.reduce((total, order) => {
       const qty = parseInt(order.quantity) || 0;
-      const price = order.price || order.productDetails.price;
-      return total + price * qty;
+      const actualPrice = order.actualPrice || 0;
+      return total + actualPrice * qty;
+    }, 0);
+  };
+
+  const calculateDiscount = () => {
+    return orders.reduce((totalDiscount, order) => {
+      const qty = parseInt(order.quantity) || 0;
+      const actualPrice = order.actualPrice || 0;
+      const discountedPrice = order.discountedPrice || 0;
+      const discount = (actualPrice - discountedPrice) * qty;
+      return totalDiscount + discount;
+    }, 0);
+  };
+
+  const calculateGrandTotal = () => {
+    return orders.reduce((grandTotal, order) => {
+      const qty = parseInt(order.quantity) || 0;
+      const discountedPrice = order.discountedPrice || 0;
+      return grandTotal + discountedPrice * qty;
     }, 0);
   };
 
   const calculateRemaining = () => {
-    return calculateTotal() - paidAmount;
+    return calculateGrandTotal() - paidAmount;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const total = calculateTotal();
+    const totalPrice = calculateTotal();
+    const totalDiscount = calculateDiscount();
+    const grandTotal = calculateGrandTotal();
 
     let finalPaymentStatus = paymentStatus;
     let finalPaidAmount = paidAmount;
-    let finalRemainingAmount = total;
+    let finalRemainingAmount = grandTotal;
 
     // Calculate remaining amount based on payment status
     if (paymentStatus === "paid") {
-      finalPaidAmount = total;
+      finalPaidAmount = grandTotal;
       finalRemainingAmount = 0;
     } else if (paymentStatus === "partially-paid") {
-      finalRemainingAmount = total - paidAmount;
+      finalRemainingAmount = grandTotal - paidAmount;
     } else {
       finalPaidAmount = 0;
-      finalRemainingAmount = total;
+      finalRemainingAmount = grandTotal;
     }
 
     const orderPayload = {
@@ -169,9 +193,12 @@ export default function Order() {
       orderItems: orders.map((order) => ({
         product: order.productId,
         quantity: order.quantity,
-        price: order.price || order.productDetails.price,
+        price: order.actualPrice,
+        discountedPrice: order.discountedPrice,
       })),
-      totalPrice: total,
+      totalPrice: totalPrice,
+      totalDiscount: totalDiscount,
+      grandTotal: grandTotal,
       paymentStatus: finalPaymentStatus,
       paidAmount: finalPaidAmount,
       remainingAmount: finalRemainingAmount,
@@ -227,7 +254,9 @@ export default function Order() {
     }
   };
 
-  const total = calculateTotal();
+  const totalPrice = calculateTotal();
+  const totalDiscount = calculateDiscount();
+  const grandTotal = calculateGrandTotal();
   const remaining = calculateRemaining();
 
   // Check if form is valid for submission
@@ -359,13 +388,13 @@ export default function Order() {
                         value={currentOrder.productId}
                         onChange={(e) => {
                           const selected = products.find(
-                            (p) => p._id === e.target.value
+                            (p) => p._id === e.target.value,
                           );
                           setCurrentOrder({
                             ...currentOrder,
                             productId: e.target.value,
                             productDetails: selected,
-                            customPrice: "",
+                            discountedPrice: "",
                           });
                         }}
                         className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
@@ -381,18 +410,18 @@ export default function Order() {
                     </div>
 
                     {user && (
-                      <div className="w-full sm:w-28 md:w-32">
+                      <div className="w-full sm:w-32 md:w-36">
                         <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
-                          Custom Price
+                          Discounted Price
                         </label>
                         <input
                           type="number"
                           min="0"
-                          value={currentOrder.customPrice}
+                          value={currentOrder.discountedPrice}
                           onChange={(e) =>
                             setCurrentOrder({
                               ...currentOrder,
-                              customPrice: e.target.value,
+                              discountedPrice: e.target.value,
                             })
                           }
                           placeholder={
@@ -455,35 +484,41 @@ export default function Order() {
                             {order.productDetails.bottleQuality}
                           </p>
                           <p className="text-xs sm:text-sm text-gray-600 mt-1">
-                            Rs. {order.price || order.productDetails.price}/- ×{" "}
-                            {order.quantity} = Rs.
-                            {(order.price || order.productDetails.price) *
-                              order.quantity}
-                            /-
+                            {order.actualPrice !== order.discountedPrice && (
+                              <span className="line-through text-gray-400 mr-2">
+                                Rs. {order.actualPrice}/-
+                              </span>
+                            )}
+                            Rs. {order.discountedPrice}/- × {order.quantity} =
+                            Rs.
+                            {order.discountedPrice * order.quantity}/-
+                            {order.actualPrice !== order.discountedPrice && (
+                              <span className="text-green-600 ml-2 text-xs">
+                                (Save Rs.{" "}
+                                {(order.actualPrice - order.discountedPrice) *
+                                  order.quantity}
+                                )
+                              </span>
+                            )}
                           </p>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                           {user && (
                             <div>
                               <label className="text-xs text-gray-600">
-                                Price
+                                Disc. Price
                               </label>
                               <input
                                 type="number"
                                 min="0"
-                                value={
-                                  order.price || order.productDetails.price
-                                }
+                                value={order.discountedPrice}
                                 onChange={(e) =>
                                   handleUpdatePrice(index, e.target.value)
                                 }
                                 onBlur={(e) => {
                                   const price = parseFloat(e.target.value);
-                                  if (!price || price < 0) {
-                                    handleUpdatePrice(
-                                      index,
-                                      order.productDetails.price
-                                    );
+                                  if (isNaN(price) || price < 0) {
+                                    handleUpdatePrice(index, order.actualPrice);
                                   }
                                 }}
                                 className="w-16 sm:w-20 px-2 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 focus:border-blue-600 focus:outline-none text-sm"
@@ -538,7 +573,7 @@ export default function Order() {
                         onChange={(e) => {
                           setPaymentStatus(e.target.value);
                           if (e.target.value === "paid") {
-                            setPaidAmount(total);
+                            setPaidAmount(grandTotal);
                           } else if (e.target.value === "unpaid") {
                             setPaidAmount(0);
                           }
@@ -559,11 +594,14 @@ export default function Order() {
                         <input
                           type="number"
                           min="0"
-                          max={total}
+                          max={grandTotal}
                           value={paidAmount}
                           onChange={(e) =>
                             setPaidAmount(
-                              Math.min(parseFloat(e.target.value) || 0, total)
+                              Math.min(
+                                parseFloat(e.target.value) || 0,
+                                grandTotal,
+                              ),
                             )
                           }
                           className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
@@ -602,10 +640,7 @@ export default function Order() {
                           {order.productDetails.packingType}) × {order.quantity}
                         </span>
                         <span className="font-medium whitespace-nowrap">
-                          Rs.{" "}
-                          {(order.price || order.productDetails.price) *
-                            order.quantity}
-                          /-
+                          Rs. {order.discountedPrice * order.quantity}/-
                         </span>
                       </div>
                     ))
@@ -613,9 +648,21 @@ export default function Order() {
                 </div>
 
                 <div className="border-t border-gray-200 pt-3 sm:pt-4 space-y-2 sm:space-y-3">
-                  <div className="flex justify-between text-base sm:text-lg font-semibold">
-                    <span>Total Amount:</span>
-                    <span className="text-blue-600">Rs. {total}/-</span>
+                  <div className="flex justify-between text-sm sm:text-base text-gray-700">
+                    <span>Total Price:</span>
+                    <span>Rs. {totalPrice}/-</span>
+                  </div>
+                  {totalDiscount > 0 && (
+                    <div className="flex justify-between text-sm sm:text-base text-green-600">
+                      <span>Total Discount:</span>
+                      <span>- Rs. {totalDiscount.toFixed(2)}/-</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-base sm:text-lg font-semibold border-t pt-2">
+                    <span>Grand Total:</span>
+                    <span className="text-blue-600">
+                      Rs. {grandTotal.toFixed(2)}/-
+                    </span>
                   </div>
 
                   {user && paymentStatus !== "unpaid" && (
@@ -637,8 +684,8 @@ export default function Order() {
                         user && paymentStatus === "paid"
                           ? "bg-green-100 text-green-700"
                           : user && paymentStatus === "partially-paid"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-red-100 text-red-700"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : "bg-red-100 text-red-700"
                       }`}
                     >
                       {user && paymentStatus === "paid" && "Fully Paid"}

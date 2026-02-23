@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -8,6 +8,7 @@ export default function Receipt() {
   const [orderData, setOrderData] = useState(null);
   const [receiptType, setReceiptType] = useState("order-placed");
   const [loading, setLoading] = useState(true);
+  const receiptRef = useRef(null);
 
   useEffect(() => {
     const fetchOrderWithProducts = async () => {
@@ -30,7 +31,7 @@ export default function Receipt() {
                   ? item.product
                   : item.product?._id;
               const productDetails = productsData.products.find(
-                (p) => p._id === productId
+                (p) => p._id === productId,
               );
 
               return {
@@ -106,6 +107,38 @@ export default function Receipt() {
     return `https://wa.me/${formattedNumber}`;
   };
 
+  const downloadPDF = async () => {
+    try {
+      const html2pdf = (await import("html2pdf.js")).default;
+      const element = receiptRef.current;
+
+      const opt = {
+        margin: 0.5,
+        filename: `Ozone-Receipt-${orderData.trackingID || Date.now()}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, logging: false },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      };
+
+      await html2pdf().set(opt).from(element).save();
+      toast.success("Receipt downloaded successfully!");
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+      toast.error("Failed to download PDF");
+    }
+  };
+
+  // Auto-download PDF on load (optional - remove if not wanted)
+  useEffect(() => {
+    if (orderData && receiptRef.current) {
+      // Wait a moment for everything to render before downloading
+      const timer = setTimeout(() => {
+        downloadPDF();
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [orderData]);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
@@ -163,6 +196,27 @@ export default function Receipt() {
       <div className="container mx-auto px-4 max-w-xl">
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-2 mb-3 justify-center">
+          {/* Download PDF */}
+          <button
+            onClick={downloadPDF}
+            className="bg-blue-600 text-white text-xs px-4 py-2 rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2 shadow-sm"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <span>Download PDF</span>
+          </button>
+
           {/* WhatsApp */}
           <a
             href={getWhatsAppUrl()}
@@ -185,7 +239,10 @@ export default function Receipt() {
         </div>
 
         {/* Receipt Card - Clean Text Only */}
-        <div className="bg-white p-5 shadow-md rounded-md max-w-[400px] mx-auto font-sans">
+        <div
+          ref={receiptRef}
+          className="bg-white p-5 shadow-md rounded-md max-w-[400px] mx-auto font-sans"
+        >
           {/* Header */}
           <div className="text-center mb-4">
             <h1 className="text-xl font-bold text-gray-900 tracking-wide">
@@ -254,62 +311,134 @@ export default function Receipt() {
 
           {/* Order Items */}
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wide">
+            <h2 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
               Order Details
             </h2>
-            <div className="space-y-2">
-              {orderData.orderItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="border-b border-gray-100 pb-2 last:border-0"
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="flex items-start gap-2 flex-1">
-                      <span className="text-gray-500 text-sm mt-0.5">
-                        {index + 1}.
-                      </span>
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-900">
-                          {item.product?.size || "N/A"}
-                        </div>
-                        {item.product?.packingType && (
-                          <div className="text-xs text-gray-500 mt-0.5">
-                            Packing: {item.product.packingType}
-                          </div>
-                        )}
-                        {(item.product?.waterQuality ||
-                          item.product?.bottleQuality) && (
-                          <div className="text-xs text-gray-500">
-                            {item.product?.waterQuality && (
-                              <span>{item.product.waterQuality}</span>
-                            )}
-                            {item.product?.waterQuality &&
-                              item.product?.bottleQuality && <span> | </span>}
-                            {item.product?.bottleQuality && (
-                              <span>{item.product.bottleQuality}</span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="text-right ml-2">
-                      <div className="text-gray-500 text-xs">
-                        {item.quantity} × Rs. {item.price}
-                      </div>
-                      <div className="font-semibold text-gray-900">
-                        Rs. {item.price * item.quantity}/-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
 
-              <div className="flex justify-between items-center pt-3 border-t border-gray-200 mt-2">
-                <span className="font-semibold text-gray-900">Total:</span>
-                <span className="text-lg font-bold text-gray-900">
-                  Rs. {orderData.totalPrice}/-
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-gray-300">
+                    <th className="text-left py-2 px-1 font-semibold text-gray-700">
+                      #
+                    </th>
+                    <th className="text-left py-2 px-1 font-semibold text-gray-700">
+                      Item
+                    </th>
+                    <th className="text-center py-2 px-1 font-semibold text-gray-700">
+                      Qty
+                    </th>
+                    <th className="text-right py-2 px-1 font-semibold text-gray-700">
+                      Price
+                    </th>
+                    <th className="text-right py-2 px-1 font-semibold text-gray-700">
+                      Disc. Price
+                    </th>
+                    <th className="text-right py-2 px-1 font-semibold text-gray-700">
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orderData.orderItems.map((item, index) => {
+                    const actualPrice = item.price || 0;
+                    const discountedPrice =
+                      item.discountedPrice || item.price || 0;
+                    const hasDiscount =
+                      item.discountedPrice &&
+                      item.discountedPrice !== item.price;
+
+                    return (
+                      <tr key={index} className="border-b border-gray-100">
+                        <td className="py-2 px-1 text-gray-600">{index + 1}</td>
+                        <td className="py-2 px-1">
+                          <div className="font-medium text-gray-900">
+                            {item.product?.size || "N/A"}
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            {item.product?.packingType}
+                          </div>
+                        </td>
+                        <td className="py-2 px-1 text-center text-gray-900 font-medium">
+                          {item.quantity}
+                        </td>
+                        <td className="py-2 px-1 text-right">
+                          <span
+                            className={
+                              hasDiscount
+                                ? "line-through text-gray-400"
+                                : "text-gray-900"
+                            }
+                          >
+                            Rs. {actualPrice}
+                          </span>
+                        </td>
+                        <td className="py-2 px-1 text-right">
+                          <span className="text-gray-900 font-medium">
+                            Rs. {discountedPrice}
+                          </span>
+                        </td>
+                        <td className="py-2 px-1 text-right">
+                          <div className="font-semibold text-gray-900">
+                            Rs. {(discountedPrice * item.quantity).toFixed(2)}
+                          </div>
+                          {hasDiscount && (
+                            <div className="text-[10px] text-green-600">
+                              Save Rs.{" "}
+                              {(
+                                (actualPrice - discountedPrice) *
+                                item.quantity
+                              ).toFixed(2)}
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Pricing Summary */}
+            <div className="pt-3 border-t-2 border-gray-300 mt-3 space-y-2">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-gray-600">Total Price:</span>
+                <span className="font-semibold text-gray-900">
+                  Rs. {(orderData.totalPrice || 0).toFixed(2)}/-
                 </span>
               </div>
+
+              {(() => {
+                const grandTotal = orderData.orderItems.reduce((sum, item) => {
+                  const discountedPrice =
+                    item.discountedPrice || item.price || 0;
+                  return sum + discountedPrice * item.quantity;
+                }, 0);
+                const totalDiscount = (orderData.totalPrice || 0) - grandTotal;
+
+                return (
+                  <>
+                    {totalDiscount > 0 && (
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-600">Total Discount:</span>
+                        <span className="font-semibold text-green-600">
+                          - Rs. {totalDiscount.toFixed(2)}/-
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="flex justify-between items-center pt-2 border-t border-gray-200">
+                      <span className="font-bold text-gray-900">
+                        Grand Total (Payable):
+                      </span>
+                      <span className="text-lg font-bold text-blue-600">
+                        Rs. {grandTotal.toFixed(2)}/-
+                      </span>
+                    </div>
+                  </>
+                );
+              })()}
             </div>
           </div>
 
@@ -334,8 +463,8 @@ export default function Receipt() {
               {orderData.paymentStatus === "paid" && (
                 <div className="flex justify-between">
                   <span className="text-gray-500">Paid Amount:</span>
-                  <span className="font-semibold text-green-500">
-                    Rs. {orderData.paidAmount}/-
+                  <span className="font-semibold text-green-600">
+                    Rs. {orderData.paidAmount.toFixed(2)}/-
                   </span>
                 </div>
               )}
@@ -344,14 +473,14 @@ export default function Receipt() {
                 <>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Paid:</span>
-                    <span className="font-semibold text-green-500">
-                      Rs. {orderData.paidAmount}/-
+                    <span className="font-semibold text-green-600">
+                      Rs. {orderData.paidAmount.toFixed(2)}/-
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Remaining:</span>
-                    <span className="font-semibold text-red-500">
-                      Rs. {orderData.remainingAmount}/-
+                    <span className="font-semibold text-red-600">
+                      Rs. {orderData.remainingAmount.toFixed(2)}/-
                     </span>
                   </div>
                 </>
@@ -360,8 +489,20 @@ export default function Receipt() {
               {orderData.paymentStatus === "unpaid" && (
                 <div className="flex justify-between">
                   <span className="text-gray-500">Pending:</span>
-                  <span className="font-semibold text-red-500">
-                    Rs. {orderData.totalPrice}/-
+                  <span className="font-semibold text-red-600">
+                    Rs.{" "}
+                    {(() => {
+                      const grandTotal = orderData.orderItems.reduce(
+                        (sum, item) => {
+                          const discountedPrice =
+                            item.discountedPrice || item.price || 0;
+                          return sum + discountedPrice * item.quantity;
+                        },
+                        0,
+                      );
+                      return grandTotal.toFixed(2);
+                    })()}
+                    /-
                   </span>
                 </div>
               )}
@@ -373,7 +514,8 @@ export default function Receipt() {
           {/* Footer */}
           <div className="text-center text-xs text-gray-500">
             <p>
-              Ozone Mineral Water® Pvt Ltd © {new Date().toLocaleString()} | Thank you for your order!
+              Ozone Mineral Water® Pvt Ltd © {new Date().toLocaleString()} |
+              Thank you for your order!
             </p>
           </div>
         </div>
