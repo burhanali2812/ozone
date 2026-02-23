@@ -29,7 +29,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 shadow-lg relative">
+    <header className="sticky top-0 z-50 shadow-lg">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
         style={{ backgroundImage: "url('/images/ramzan.jpg')" }}

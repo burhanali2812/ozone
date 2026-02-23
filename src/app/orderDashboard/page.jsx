@@ -128,7 +128,10 @@ export default function OrderDashboard() {
         productName: `${item.product?.size} (${item.product?.packingType})`,
         quantity: item.quantity,
         // Automatically use product's production cost if not already set in order
-        costPerUnit: order.productionCosts?.[item.product?._id] || item.product?.productionCost || 0,
+        costPerUnit:
+          order.productionCosts?.[item.product?._id] ||
+          item.product?.productionCost ||
+          0,
       })),
       deliveryCharges: order.deliveryCharges || 0,
     });
@@ -139,7 +142,7 @@ export default function OrderDashboard() {
   const handleUpdateOrder = async () => {
     // Calculate new total price based on edited items
     const newTotalPrice = modalData.orderItems.reduce((sum, item) => {
-      return sum + item.price * item.quantity;
+      return sum + item.discountedPrice * item.quantity;
     }, 0);
 
     // Calculate total production cost
@@ -887,8 +890,12 @@ Requested: ${stockError.response.data.requested}`,
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      {order.status === "completed" && order.paymentStatus === "paid" && order.netProfit !== undefined ? (
-                        <span className={`font-semibold ${order.netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {order.status === "completed" &&
+                      order.paymentStatus === "paid" &&
+                      order.netProfit !== undefined ? (
+                        <span
+                          className={`font-semibold ${order.netProfit >= 0 ? "text-green-600" : "text-red-600"}`}
+                        >
                           Rs. {order.netProfit.toFixed(2)}
                         </span>
                       ) : (
@@ -963,14 +970,25 @@ Requested: ${stockError.response.data.requested}`,
               <div className="bg-white rounded-xl p-4 shadow">
                 <p className="text-sm text-gray-600 mb-1">Completed & Paid</p>
                 <p className="text-2xl font-bold text-blue-600">
-                  {filteredOrders.filter(o => o.status === 'completed' && o.paymentStatus === 'paid').length}
+                  {
+                    filteredOrders.filter(
+                      (o) =>
+                        o.status === "completed" && o.paymentStatus === "paid",
+                    ).length
+                  }
                 </p>
               </div>
               <div className="bg-white rounded-xl p-4 shadow">
                 <p className="text-sm text-gray-600 mb-1">Total Profit</p>
                 <p className="text-2xl font-bold text-green-600">
-                  Rs. {filteredOrders
-                    .filter(o => o.status === 'completed' && o.paymentStatus === 'paid' && o.netProfit !== undefined)
+                  Rs.{" "}
+                  {filteredOrders
+                    .filter(
+                      (o) =>
+                        o.status === "completed" &&
+                        o.paymentStatus === "paid" &&
+                        o.netProfit !== undefined,
+                    )
                     .reduce((sum, o) => sum + o.netProfit, 0)
                     .toFixed(2)}
                 </p>
@@ -1135,7 +1153,8 @@ Requested: ${stockError.response.data.requested}`,
                     <p className="text-lg font-bold text-gray-900">
                       Total: Rs.{" "}
                       {modalData.orderItems.reduce(
-                        (sum, item) => sum + item.discountedPrice * item.quantity,
+                        (sum, item) =>
+                          sum + item.discountedPrice * item.quantity,
                         0,
                       )}
                       /-
@@ -1313,7 +1332,8 @@ Requested: ${stockError.response.data.requested}`,
                             Rs.{" "}
                             {modalData.orderItems
                               .reduce(
-                                (sum, item) => sum + item.discountedPrice * item.quantity,
+                                (sum, item) =>
+                                  sum + item.discountedPrice * item.quantity,
                                 0,
                               )
                               .toFixed(2)}

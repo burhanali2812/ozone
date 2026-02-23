@@ -14,6 +14,7 @@ export default function StockTransactionPage() {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [purposeSearch, setPurposeSearch] = useState("");
 
   // Filter orders and transactions by date for card calculations
   const getDateFilteredOrders = () => {
@@ -154,7 +155,7 @@ export default function StockTransactionPage() {
   };
 
   // Apply all filters (type, date, and search)
-  const applyFilters = (filterType, from, to, search = searchTerm) => {
+  const applyFilters = (filterType, from, to, search = searchTerm, purposeSearchTerm = purposeSearch) => {
     let data = [];
 
     // Filter by type
@@ -198,6 +199,18 @@ export default function StockTransactionPage() {
       });
     }
 
+    // Filter by purpose search (only for transactions)
+    if (purposeSearchTerm && purposeSearchTerm.trim()) {
+      data = data.filter((item) => {
+        // If item has purpose (it's a transaction), filter by purpose
+        if (item.purpose) {
+          return item.purpose.toLowerCase().includes(purposeSearchTerm.toLowerCase());
+        }
+        // If item doesn't have purpose (it's an order), keep it only if we're showing sales
+        return filterType === "sales";
+      });
+    }
+
     setFilteredData(data);
   };
 
@@ -205,20 +218,26 @@ export default function StockTransactionPage() {
   const handleDateFilter = (from, to) => {
     setFromDate(from);
     setToDate(to);
-    applyFilters(activeFilter, from, to, searchTerm);
+    applyFilters(activeFilter, from, to, searchTerm, purposeSearch);
   };
 
   // Handle search filter change
   const handleSearchChange = (value) => {
     setSearchTerm(value);
-    applyFilters(activeFilter, fromDate, toDate, value);
+    applyFilters(activeFilter, fromDate, toDate, value, purposeSearch);
+  };
+
+  // Handle purpose search filter change
+  const handlePurposeSearchChange = (value) => {
+    setPurposeSearch(value);
+    applyFilters(activeFilter, fromDate, toDate, searchTerm, value);
   };
 
   // Clear date filters
   const clearDateFilters = () => {
     setFromDate("");
     setToDate("");
-    applyFilters(activeFilter, "", "", searchTerm);
+    applyFilters(activeFilter, "", "", searchTerm, purposeSearch);
   };
 
   // Format date
@@ -694,53 +713,104 @@ export default function StockTransactionPage() {
                 </p>
               </div>
 
-              {/* Search Input - Only show for sales or all */}
-              {(activeFilter === "sales" || activeFilter === "all") && (
-                <div className="w-full sm:w-80">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Search by shop name..."
-                      value={searchTerm}
-                      onChange={(e) => handleSearchChange(e.target.value)}
-                      className="w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
-                    />
-                    <svg
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              {/* Search Inputs */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                {/* Search by Shop Name - Only show for sales or all */}
+                {(activeFilter === "sales" || activeFilter === "all") && (
+                  <div className="w-full sm:w-64">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search by shop name..."
+                        value={searchTerm}
+                        onChange={(e) => handleSearchChange(e.target.value)}
+                        className="w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
                       />
-                    </svg>
-                    {searchTerm && (
-                      <button
-                        onClick={() => handleSearchChange("")}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      <svg
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                      </svg>
+                      {searchTerm && (
+                        <button
+                          onClick={() => handleSearchChange("")}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
-                    )}
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+
+                {/* Search by Purpose - Only show for purchase, reinvest or all */}
+                {(activeFilter === "purchase" || activeFilter === "reinvest" || activeFilter === "all") && (
+                  <div className="w-full sm:w-64">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search by purpose..."
+                        value={purposeSearch}
+                        onChange={(e) => handlePurposeSearchChange(e.target.value)}
+                        className="w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+                      />
+                      <svg
+                        className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        />
+                      </svg>
+                      {purposeSearch && (
+                        <button
+                          onClick={() => handlePurposeSearchChange("")}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        >
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

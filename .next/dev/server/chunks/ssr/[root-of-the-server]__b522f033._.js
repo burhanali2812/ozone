@@ -111,6 +111,7 @@ function StockTransactionPage() {
     const [fromDate, setFromDate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [toDate, setToDate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const [purposeSearch, setPurposeSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     // Filter orders and transactions by date for card calculations
     const getDateFilteredOrders = ()=>{
         let filtered = orders;
@@ -213,7 +214,7 @@ function StockTransactionPage() {
         applyFilters(filterType, fromDate, toDate);
     };
     // Apply all filters (type, date, and search)
-    const applyFilters = (filterType, from, to, search = searchTerm)=>{
+    const applyFilters = (filterType, from, to, search = searchTerm, purposeSearchTerm = purposeSearch)=>{
         let data = [];
         // Filter by type
         if (filterType === "sales") {
@@ -259,24 +260,40 @@ function StockTransactionPage() {
                 return filterType === "purchase";
             });
         }
+        // Filter by purpose search (only for transactions)
+        if (purposeSearchTerm && purposeSearchTerm.trim()) {
+            data = data.filter((item)=>{
+                // If item has purpose (it's a transaction), filter by purpose
+                if (item.purpose) {
+                    return item.purpose.toLowerCase().includes(purposeSearchTerm.toLowerCase());
+                }
+                // If item doesn't have purpose (it's an order), keep it only if we're showing sales
+                return filterType === "sales";
+            });
+        }
         setFilteredData(data);
     };
     // Handle date filter change
     const handleDateFilter = (from, to)=>{
         setFromDate(from);
         setToDate(to);
-        applyFilters(activeFilter, from, to, searchTerm);
+        applyFilters(activeFilter, from, to, searchTerm, purposeSearch);
     };
     // Handle search filter change
     const handleSearchChange = (value)=>{
         setSearchTerm(value);
-        applyFilters(activeFilter, fromDate, toDate, value);
+        applyFilters(activeFilter, fromDate, toDate, value, purposeSearch);
+    };
+    // Handle purpose search filter change
+    const handlePurposeSearchChange = (value)=>{
+        setPurposeSearch(value);
+        applyFilters(activeFilter, fromDate, toDate, searchTerm, value);
     };
     // Clear date filters
     const clearDateFilters = ()=>{
         setFromDate("");
         setToDate("");
-        applyFilters(activeFilter, "", "", searchTerm);
+        applyFilters(activeFilter, "", "", searchTerm, purposeSearch);
     };
     // Format date
     const formatDate = (dateString)=>{
@@ -301,7 +318,7 @@ function StockTransactionPage() {
             children: status || "N/A"
         }, void 0, false, {
             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-            lineNumber: 245,
+            lineNumber: 264,
             columnNumber: 7
         }, this);
     };
@@ -310,7 +327,7 @@ function StockTransactionPage() {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Toaster"], {}, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                lineNumber: 257,
+                lineNumber: 276,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -324,7 +341,7 @@ function StockTransactionPage() {
                                 children: "Stock Transactions"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 261,
+                                lineNumber: 280,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -332,13 +349,13 @@ function StockTransactionPage() {
                                 children: "Monitor your sales, purchases, and profit overview"
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 264,
+                                lineNumber: 283,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                        lineNumber: 260,
+                        lineNumber: 279,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -354,7 +371,7 @@ function StockTransactionPage() {
                                             children: "From Date"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 273,
+                                            lineNumber: 292,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -364,13 +381,13 @@ function StockTransactionPage() {
                                             className: "w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 276,
+                                            lineNumber: 295,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 272,
+                                    lineNumber: 291,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -381,7 +398,7 @@ function StockTransactionPage() {
                                             children: "To Date"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 284,
+                                            lineNumber: 303,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -391,13 +408,13 @@ function StockTransactionPage() {
                                             className: "w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 287,
+                                            lineNumber: 306,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 283,
+                                    lineNumber: 302,
                                     columnNumber: 13
                                 }, this),
                                 (fromDate || toDate) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -416,19 +433,19 @@ function StockTransactionPage() {
                                                 d: "M6 18L18 6M6 6l12 12"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 305,
+                                                lineNumber: 324,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 299,
+                                            lineNumber: 318,
                                             columnNumber: 17
                                         }, this),
                                         "Clear Dates"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 295,
+                                    lineNumber: 314,
                                     columnNumber: 15
                                 }, this),
                                 (fromDate || toDate) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -438,23 +455,23 @@ function StockTransactionPage() {
                                         children: fromDate && toDate ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(toDate).toLocaleDateString()}` : fromDate ? `From: ${new Date(fromDate).toLocaleDateString()}` : `Until: ${new Date(toDate).toLocaleDateString()}`
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 317,
+                                        lineNumber: 336,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 316,
+                                    lineNumber: 335,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                            lineNumber: 271,
+                            lineNumber: 290,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                        lineNumber: 270,
+                        lineNumber: 289,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -481,17 +498,17 @@ function StockTransactionPage() {
                                                         d: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 348,
+                                                        lineNumber: 367,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 342,
+                                                    lineNumber: 361,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 341,
+                                                lineNumber: 360,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -502,7 +519,7 @@ function StockTransactionPage() {
                                                         children: "Total Sales"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 357,
+                                                        lineNumber: 376,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -510,7 +527,7 @@ function StockTransactionPage() {
                                                         children: "From Orders (Paid/Partial)"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 360,
+                                                        lineNumber: 379,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -522,19 +539,19 @@ function StockTransactionPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 363,
+                                                        lineNumber: 382,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 356,
+                                                lineNumber: 375,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 340,
+                                        lineNumber: 359,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -558,12 +575,12 @@ function StockTransactionPage() {
                                                                         clipRule: "evenodd"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 379,
+                                                                        lineNumber: 398,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 374,
+                                                                    lineNumber: 393,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -571,13 +588,13 @@ function StockTransactionPage() {
                                                                     children: "Actual Sales"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 385,
+                                                                    lineNumber: 404,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 373,
+                                                            lineNumber: 392,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -589,13 +606,13 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 387,
+                                                            lineNumber: 406,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 372,
+                                                    lineNumber: 391,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -614,12 +631,12 @@ function StockTransactionPage() {
                                                                         clipRule: "evenodd"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 398,
+                                                                        lineNumber: 417,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 393,
+                                                                    lineNumber: 412,
                                                                     columnNumber: 21
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -631,13 +648,13 @@ function StockTransactionPage() {
                                                                     children: "Reinvest"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 404,
+                                                                    lineNumber: 423,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 392,
+                                                            lineNumber: 411,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -649,13 +666,13 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 414,
+                                                            lineNumber: 433,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 391,
+                                                    lineNumber: 410,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -670,28 +687,28 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 420,
+                                                            lineNumber: 439,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 419,
+                                                        lineNumber: 438,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 418,
+                                                    lineNumber: 437,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 371,
+                                            lineNumber: 390,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 370,
+                                        lineNumber: 389,
                                         columnNumber: 13
                                     }, this),
                                     activeFilter === "sales" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -707,25 +724,25 @@ function StockTransactionPage() {
                                                     clipRule: "evenodd"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 435,
+                                                    lineNumber: 454,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 430,
+                                                lineNumber: 449,
                                                 columnNumber: 17
                                             }, this),
                                             "Filtered"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 429,
+                                        lineNumber: 448,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 334,
+                                lineNumber: 353,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -749,17 +766,17 @@ function StockTransactionPage() {
                                                         d: "M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 461,
+                                                        lineNumber: 480,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 455,
+                                                    lineNumber: 474,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 454,
+                                                lineNumber: 473,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -770,7 +787,7 @@ function StockTransactionPage() {
                                                         children: "Total Purchase"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 470,
+                                                        lineNumber: 489,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -778,7 +795,7 @@ function StockTransactionPage() {
                                                         children: "From Transactions"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 473,
+                                                        lineNumber: 492,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -790,19 +807,19 @@ function StockTransactionPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 474,
+                                                        lineNumber: 493,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 469,
+                                                lineNumber: 488,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 453,
+                                        lineNumber: 472,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -822,12 +839,12 @@ function StockTransactionPage() {
                                                             clipRule: "evenodd"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 489,
+                                                            lineNumber: 508,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 484,
+                                                        lineNumber: 503,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -837,7 +854,7 @@ function StockTransactionPage() {
                                                                 children: "Expenses"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 496,
+                                                                lineNumber: 515,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -848,29 +865,29 @@ function StockTransactionPage() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 497,
+                                                                lineNumber: 516,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 495,
+                                                        lineNumber: 514,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 483,
+                                                lineNumber: 502,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 482,
+                                            lineNumber: 501,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 481,
+                                        lineNumber: 500,
                                         columnNumber: 13
                                     }, this),
                                     activeFilter === "purchase" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -886,25 +903,25 @@ function StockTransactionPage() {
                                                     clipRule: "evenodd"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 512,
+                                                    lineNumber: 531,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 507,
+                                                lineNumber: 526,
                                                 columnNumber: 17
                                             }, this),
                                             "Filtered"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 506,
+                                        lineNumber: 525,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 447,
+                                lineNumber: 466,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -928,17 +945,17 @@ function StockTransactionPage() {
                                                         d: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 538,
+                                                        lineNumber: 557,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 532,
+                                                    lineNumber: 551,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 531,
+                                                lineNumber: 550,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -949,7 +966,7 @@ function StockTransactionPage() {
                                                         children: "Total Profit"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 547,
+                                                        lineNumber: 566,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -957,7 +974,7 @@ function StockTransactionPage() {
                                                         children: "Actual Sales - Purchase"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 550,
+                                                        lineNumber: 569,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -969,19 +986,19 @@ function StockTransactionPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 551,
+                                                        lineNumber: 570,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 546,
+                                                lineNumber: 565,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 530,
+                                        lineNumber: 549,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -996,7 +1013,7 @@ function StockTransactionPage() {
                                                             children: "Actual Sales"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 565,
+                                                            lineNumber: 584,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1008,13 +1025,13 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 566,
+                                                            lineNumber: 585,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 564,
+                                                    lineNumber: 583,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1024,7 +1041,7 @@ function StockTransactionPage() {
                                                             children: "Purchase"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 571,
+                                                            lineNumber: 590,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1036,24 +1053,24 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 572,
+                                                            lineNumber: 591,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 570,
+                                                    lineNumber: 589,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 563,
+                                            lineNumber: 582,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 562,
+                                        lineNumber: 581,
                                         columnNumber: 13
                                     }, this),
                                     activeFilter === "all" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1069,25 +1086,25 @@ function StockTransactionPage() {
                                                     clipRule: "evenodd"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 586,
+                                                    lineNumber: 605,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 581,
+                                                lineNumber: 600,
                                                 columnNumber: 17
                                             }, this),
                                             "Showing All"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 580,
+                                        lineNumber: 599,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 524,
+                                lineNumber: 543,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1111,17 +1128,17 @@ function StockTransactionPage() {
                                                         d: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 612,
+                                                        lineNumber: 631,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 606,
+                                                    lineNumber: 625,
                                                     columnNumber: 17
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 605,
+                                                lineNumber: 624,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1132,7 +1149,7 @@ function StockTransactionPage() {
                                                         children: "Reinvest"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 621,
+                                                        lineNumber: 640,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1140,7 +1157,7 @@ function StockTransactionPage() {
                                                         children: "Ozone Transactions"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 624,
+                                                        lineNumber: 643,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1152,19 +1169,19 @@ function StockTransactionPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 625,
+                                                        lineNumber: 644,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 620,
+                                                lineNumber: 639,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 604,
+                                        lineNumber: 623,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1182,12 +1199,12 @@ function StockTransactionPage() {
                                                         clipRule: "evenodd"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 639,
+                                                        lineNumber: 658,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 634,
+                                                    lineNumber: 653,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1197,7 +1214,7 @@ function StockTransactionPage() {
                                                             children: "Business Investment"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 646,
+                                                            lineNumber: 665,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1209,24 +1226,24 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 647,
+                                                            lineNumber: 666,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 645,
+                                                    lineNumber: 664,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 633,
+                                            lineNumber: 652,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 632,
+                                        lineNumber: 651,
                                         columnNumber: 13
                                     }, this),
                                     activeFilter === "reinvest" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1242,31 +1259,31 @@ function StockTransactionPage() {
                                                     clipRule: "evenodd"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 665,
+                                                    lineNumber: 684,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 660,
+                                                lineNumber: 679,
                                                 columnNumber: 17
                                             }, this),
                                             "Filtered"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 659,
+                                        lineNumber: 678,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 598,
+                                lineNumber: 617,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                        lineNumber: 332,
+                        lineNumber: 351,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1284,7 +1301,7 @@ function StockTransactionPage() {
                                                     children: activeFilter === "sales" ? "Sales Details" : activeFilter === "purchase" ? "Purchase Details" : activeFilter === "reinvest" ? "Reinvest Transactions (Ozone)" : "All Transactions"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 682,
+                                                    lineNumber: 701,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1297,99 +1314,183 @@ function StockTransactionPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 691,
+                                                    lineNumber: 710,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 681,
+                                            lineNumber: 700,
                                             columnNumber: 15
                                         }, this),
-                                        (activeFilter === "sales" || activeFilter === "all") && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "w-full sm:w-80",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "relative",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                        type: "text",
-                                                        placeholder: "Search by shop name...",
-                                                        value: searchTerm,
-                                                        onChange: (e)=>handleSearchChange(e.target.value),
-                                                        className: "w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 701,
-                                                        columnNumber: 21
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                        className: "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400",
-                                                        fill: "none",
-                                                        stroke: "currentColor",
-                                                        viewBox: "0 0 24 24",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                            strokeLinecap: "round",
-                                                            strokeLinejoin: "round",
-                                                            strokeWidth: 2,
-                                                            d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 714,
-                                                            columnNumber: 23
-                                                        }, this)
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 708,
-                                                        columnNumber: 21
-                                                    }, this),
-                                                    searchTerm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                        onClick: ()=>handleSearchChange(""),
-                                                        className: "absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                            className: "w-4 h-4",
-                                                            fill: "none",
-                                                            stroke: "currentColor",
-                                                            viewBox: "0 0 24 24",
-                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                                strokeLinecap: "round",
-                                                                strokeLinejoin: "round",
-                                                                strokeWidth: 2,
-                                                                d: "M6 18L18 6M6 6l12 12"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex flex-col sm:flex-row gap-3 w-full sm:w-auto",
+                                            children: [
+                                                (activeFilter === "sales" || activeFilter === "all") && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "w-full sm:w-64",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "text",
+                                                                placeholder: "Search by shop name...",
+                                                                value: searchTerm,
+                                                                onChange: (e)=>handleSearchChange(e.target.value),
+                                                                className: "w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 732,
-                                                                columnNumber: 27
+                                                                lineNumber: 722,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                className: "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400",
+                                                                fill: "none",
+                                                                stroke: "currentColor",
+                                                                viewBox: "0 0 24 24",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round",
+                                                                    strokeWidth: 2,
+                                                                    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                    lineNumber: 735,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                lineNumber: 729,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            searchTerm && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                onClick: ()=>handleSearchChange(""),
+                                                                className: "absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                    className: "w-4 h-4",
+                                                                    fill: "none",
+                                                                    stroke: "currentColor",
+                                                                    viewBox: "0 0 24 24",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                        strokeLinecap: "round",
+                                                                        strokeLinejoin: "round",
+                                                                        strokeWidth: 2,
+                                                                        d: "M6 18L18 6M6 6l12 12"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                        lineNumber: 753,
+                                                                        columnNumber: 29
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                    lineNumber: 747,
+                                                                    columnNumber: 27
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                lineNumber: 743,
+                                                                columnNumber: 25
                                                             }, this)
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 726,
-                                                            columnNumber: 25
-                                                        }, this)
-                                                    }, void 0, false, {
+                                                        ]
+                                                    }, void 0, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 722,
-                                                        columnNumber: 23
+                                                        lineNumber: 721,
+                                                        columnNumber: 21
                                                     }, this)
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 700,
-                                                columnNumber: 19
-                                            }, this)
-                                        }, void 0, false, {
+                                                }, void 0, false, {
+                                                    fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                    lineNumber: 720,
+                                                    columnNumber: 19
+                                                }, this),
+                                                (activeFilter === "purchase" || activeFilter === "reinvest" || activeFilter === "all") && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "w-full sm:w-64",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "relative",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                type: "text",
+                                                                placeholder: "Search by purpose...",
+                                                                value: purposeSearch,
+                                                                onChange: (e)=>handlePurposeSearchChange(e.target.value),
+                                                                className: "w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                lineNumber: 770,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                className: "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400",
+                                                                fill: "none",
+                                                                stroke: "currentColor",
+                                                                viewBox: "0 0 24 24",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round",
+                                                                    strokeWidth: 2,
+                                                                    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                    lineNumber: 783,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                lineNumber: 777,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            purposeSearch && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                onClick: ()=>handlePurposeSearchChange(""),
+                                                                className: "absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                    className: "w-4 h-4",
+                                                                    fill: "none",
+                                                                    stroke: "currentColor",
+                                                                    viewBox: "0 0 24 24",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                        strokeLinecap: "round",
+                                                                        strokeLinejoin: "round",
+                                                                        strokeWidth: 2,
+                                                                        d: "M6 18L18 6M6 6l12 12"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                        lineNumber: 801,
+                                                                        columnNumber: 29
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                    lineNumber: 795,
+                                                                    columnNumber: 27
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                                lineNumber: 791,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                        lineNumber: 769,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
+                                                    lineNumber: 768,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 699,
-                                            columnNumber: 17
+                                            lineNumber: 717,
+                                            columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 680,
+                                    lineNumber: 699,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 679,
+                                lineNumber: 698,
                                 columnNumber: 11
                             }, this),
                             loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1398,12 +1499,12 @@ function StockTransactionPage() {
                                     className: "animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-600"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 749,
+                                    lineNumber: 819,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 748,
+                                lineNumber: 818,
                                 columnNumber: 13
                             }, this) : filteredData.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "overflow-x-auto",
@@ -1420,7 +1521,7 @@ function StockTransactionPage() {
                                                         children: "Date & Time"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 758,
+                                                        lineNumber: 828,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1428,7 +1529,7 @@ function StockTransactionPage() {
                                                         children: "Shop Name"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 761,
+                                                        lineNumber: 831,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1436,7 +1537,7 @@ function StockTransactionPage() {
                                                         children: "Contact"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 764,
+                                                        lineNumber: 834,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1444,7 +1545,7 @@ function StockTransactionPage() {
                                                         children: "Items"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 767,
+                                                        lineNumber: 837,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1452,7 +1553,7 @@ function StockTransactionPage() {
                                                         children: "Status"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 770,
+                                                        lineNumber: 840,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1460,18 +1561,18 @@ function StockTransactionPage() {
                                                         children: "Total Price"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 773,
+                                                        lineNumber: 843,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 757,
+                                                lineNumber: 827,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 756,
+                                            lineNumber: 826,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1496,24 +1597,24 @@ function StockTransactionPage() {
                                                                             d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 792,
+                                                                            lineNumber: 862,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 786,
+                                                                        lineNumber: 856,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     formatDate(order.createdAt)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 785,
+                                                                lineNumber: 855,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 784,
+                                                            lineNumber: 854,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1525,7 +1626,7 @@ function StockTransactionPage() {
                                                                         children: order.shopName
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 804,
+                                                                        lineNumber: 874,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1533,18 +1634,18 @@ function StockTransactionPage() {
                                                                         children: order.shopAddress
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 807,
+                                                                        lineNumber: 877,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 803,
+                                                                lineNumber: 873,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 802,
+                                                            lineNumber: 872,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1552,7 +1653,7 @@ function StockTransactionPage() {
                                                             children: order.shopContact
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 812,
+                                                            lineNumber: 882,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1569,7 +1670,7 @@ function StockTransactionPage() {
                                                                                     children: item.size
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                    lineNumber: 824,
+                                                                                    lineNumber: 894,
                                                                                     columnNumber: 37
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1577,7 +1678,7 @@ function StockTransactionPage() {
                                                                                     children: "×"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                    lineNumber: 827,
+                                                                                    lineNumber: 897,
                                                                                     columnNumber: 37
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1585,7 +1686,7 @@ function StockTransactionPage() {
                                                                                     children: item.quantity
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                    lineNumber: 828,
+                                                                                    lineNumber: 898,
                                                                                     columnNumber: 37
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1593,7 +1694,7 @@ function StockTransactionPage() {
                                                                                     children: "@"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                    lineNumber: 831,
+                                                                                    lineNumber: 901,
                                                                                     columnNumber: 37
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1604,35 +1705,35 @@ function StockTransactionPage() {
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                    lineNumber: 832,
+                                                                                    lineNumber: 902,
                                                                                     columnNumber: 37
                                                                                 }, this)
                                                                             ]
                                                                         }, idx, true, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 820,
+                                                                            lineNumber: 890,
                                                                             columnNumber: 35
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 818,
+                                                                    lineNumber: 888,
                                                                     columnNumber: 31
                                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                     className: "text-gray-400",
                                                                     children: "No items"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 839,
+                                                                    lineNumber: 909,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 816,
+                                                                lineNumber: 886,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 815,
+                                                            lineNumber: 885,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1640,7 +1741,7 @@ function StockTransactionPage() {
                                                             children: getPaymentStatusBadge(order.paymentStatus)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 843,
+                                                            lineNumber: 913,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1654,23 +1755,23 @@ function StockTransactionPage() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 847,
+                                                                lineNumber: 917,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 846,
+                                                            lineNumber: 916,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, order._id, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 780,
+                                                    lineNumber: 850,
                                                     columnNumber: 23
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 778,
+                                            lineNumber: 848,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tfoot", {
@@ -1683,7 +1784,7 @@ function StockTransactionPage() {
                                                         children: "Total Sales:"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 856,
+                                                        lineNumber: 926,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1697,29 +1798,29 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 863,
+                                                            lineNumber: 933,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 862,
+                                                        lineNumber: 932,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 855,
+                                                lineNumber: 925,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 854,
+                                            lineNumber: 924,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 755,
+                                    lineNumber: 825,
                                     columnNumber: 17
                                 }, this) : activeFilter === "purchase" ? // Purchase Table
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -1734,7 +1835,7 @@ function StockTransactionPage() {
                                                         children: "Date & Time"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 875,
+                                                        lineNumber: 945,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1742,7 +1843,7 @@ function StockTransactionPage() {
                                                         children: "Done By"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 878,
+                                                        lineNumber: 948,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1750,7 +1851,7 @@ function StockTransactionPage() {
                                                         children: "Purpose"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 881,
+                                                        lineNumber: 951,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1758,18 +1859,18 @@ function StockTransactionPage() {
                                                         children: "Amount"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 884,
+                                                        lineNumber: 954,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 874,
+                                                lineNumber: 944,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 873,
+                                            lineNumber: 943,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1794,24 +1895,24 @@ function StockTransactionPage() {
                                                                             d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 903,
+                                                                            lineNumber: 973,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 897,
+                                                                        lineNumber: 967,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     formatDate(transaction.createdAt)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 896,
+                                                                lineNumber: 966,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 895,
+                                                            lineNumber: 965,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1821,12 +1922,12 @@ function StockTransactionPage() {
                                                                 children: transaction.doBy
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 914,
+                                                                lineNumber: 984,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 913,
+                                                            lineNumber: 983,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1836,12 +1937,12 @@ function StockTransactionPage() {
                                                                 children: transaction.purpose
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 919,
+                                                                lineNumber: 989,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 918,
+                                                            lineNumber: 988,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1855,23 +1956,23 @@ function StockTransactionPage() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 924,
+                                                                lineNumber: 994,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 923,
+                                                            lineNumber: 993,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, transaction._id, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 891,
+                                                    lineNumber: 961,
                                                     columnNumber: 23
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 889,
+                                            lineNumber: 959,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tfoot", {
@@ -1884,7 +1985,7 @@ function StockTransactionPage() {
                                                         children: "Total Purchase:"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 933,
+                                                        lineNumber: 1003,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1898,29 +1999,29 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 940,
+                                                            lineNumber: 1010,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 939,
+                                                        lineNumber: 1009,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 932,
+                                                lineNumber: 1002,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 931,
+                                            lineNumber: 1001,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 872,
+                                    lineNumber: 942,
                                     columnNumber: 17
                                 }, this) : activeFilter === "reinvest" ? // Reinvest Table (Ozone Transactions)
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -1935,7 +2036,7 @@ function StockTransactionPage() {
                                                         children: "Date & Time"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 952,
+                                                        lineNumber: 1022,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1943,7 +2044,7 @@ function StockTransactionPage() {
                                                         children: "Done By"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 955,
+                                                        lineNumber: 1025,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1951,7 +2052,7 @@ function StockTransactionPage() {
                                                         children: "Purpose"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 958,
+                                                        lineNumber: 1028,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1959,18 +2060,18 @@ function StockTransactionPage() {
                                                         children: "Amount"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 961,
+                                                        lineNumber: 1031,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 951,
+                                                lineNumber: 1021,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 950,
+                                            lineNumber: 1020,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1995,24 +2096,24 @@ function StockTransactionPage() {
                                                                             d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 980,
+                                                                            lineNumber: 1050,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 974,
+                                                                        lineNumber: 1044,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     formatDate(transaction.createdAt)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 973,
+                                                                lineNumber: 1043,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 972,
+                                                            lineNumber: 1042,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2022,12 +2123,12 @@ function StockTransactionPage() {
                                                                 children: transaction.doBy
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 991,
+                                                                lineNumber: 1061,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 990,
+                                                            lineNumber: 1060,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2037,12 +2138,12 @@ function StockTransactionPage() {
                                                                 children: transaction.purpose
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 996,
+                                                                lineNumber: 1066,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 995,
+                                                            lineNumber: 1065,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2056,23 +2157,23 @@ function StockTransactionPage() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1001,
+                                                                lineNumber: 1071,
                                                                 columnNumber: 27
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 1000,
+                                                            lineNumber: 1070,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, transaction._id, true, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                    lineNumber: 968,
+                                                    lineNumber: 1038,
                                                     columnNumber: 23
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 966,
+                                            lineNumber: 1036,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tfoot", {
@@ -2085,7 +2186,7 @@ function StockTransactionPage() {
                                                         children: "Total Reinvest:"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1010,
+                                                        lineNumber: 1080,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2099,29 +2200,29 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 1017,
+                                                            lineNumber: 1087,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1016,
+                                                        lineNumber: 1086,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 1009,
+                                                lineNumber: 1079,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 1008,
+                                            lineNumber: 1078,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 949,
+                                    lineNumber: 1019,
                                     columnNumber: 17
                                 }, this) : // All Data Table
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -2136,7 +2237,7 @@ function StockTransactionPage() {
                                                         children: "Type"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1029,
+                                                        lineNumber: 1099,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -2144,7 +2245,7 @@ function StockTransactionPage() {
                                                         children: "Date & Time"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1032,
+                                                        lineNumber: 1102,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -2152,7 +2253,7 @@ function StockTransactionPage() {
                                                         children: "Details"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1035,
+                                                        lineNumber: 1105,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -2160,7 +2261,7 @@ function StockTransactionPage() {
                                                         children: "Description"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1038,
+                                                        lineNumber: 1108,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -2168,18 +2269,18 @@ function StockTransactionPage() {
                                                         children: "Amount"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1041,
+                                                        lineNumber: 1111,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 1028,
+                                                lineNumber: 1098,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 1027,
+                                            lineNumber: 1097,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -2195,12 +2296,12 @@ function StockTransactionPage() {
                                                                     children: "SALE"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1056,
+                                                                    lineNumber: 1126,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1055,
+                                                                lineNumber: 1125,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2220,24 +2321,24 @@ function StockTransactionPage() {
                                                                                 d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                lineNumber: 1068,
+                                                                                lineNumber: 1138,
                                                                                 columnNumber: 33
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 1062,
+                                                                            lineNumber: 1132,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         formatDate(order.createdAt)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1061,
+                                                                    lineNumber: 1131,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1060,
+                                                                lineNumber: 1130,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2249,7 +2350,7 @@ function StockTransactionPage() {
                                                                             children: order.shopName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 1080,
+                                                                            lineNumber: 1150,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2257,18 +2358,18 @@ function StockTransactionPage() {
                                                                             children: order.shopContact
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 1083,
+                                                                            lineNumber: 1153,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1079,
+                                                                    lineNumber: 1149,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1078,
+                                                                lineNumber: 1148,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2287,7 +2388,7 @@ function StockTransactionPage() {
                                                                                     ]
                                                                                 }, idx, true, {
                                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                    lineNumber: 1096,
+                                                                                    lineNumber: 1166,
                                                                                     columnNumber: 39
                                                                                 }, this)),
                                                                             order.orderItems.length > 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2299,30 +2400,30 @@ function StockTransactionPage() {
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                lineNumber: 1101,
+                                                                                lineNumber: 1171,
                                                                                 columnNumber: 37
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 1092,
+                                                                        lineNumber: 1162,
                                                                         columnNumber: 33
                                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                         className: "text-gray-400",
                                                                         children: "No items"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                        lineNumber: 1107,
+                                                                        lineNumber: 1177,
                                                                         columnNumber: 33
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1089,
+                                                                    lineNumber: 1159,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1088,
+                                                                lineNumber: 1158,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2336,18 +2437,18 @@ function StockTransactionPage() {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1112,
+                                                                    lineNumber: 1182,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1111,
+                                                                lineNumber: 1181,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, `order-${order._id}`, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1051,
+                                                        lineNumber: 1121,
                                                         columnNumber: 25
                                                     }, this)),
                                                 filteredData.filter((item)=>!item.shopName).map((transaction)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
@@ -2360,12 +2461,12 @@ function StockTransactionPage() {
                                                                     children: "PURCHASE"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1127,
+                                                                    lineNumber: 1197,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1126,
+                                                                lineNumber: 1196,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2385,24 +2486,24 @@ function StockTransactionPage() {
                                                                                 d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                                lineNumber: 1139,
+                                                                                lineNumber: 1209,
                                                                                 columnNumber: 33
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                            lineNumber: 1133,
+                                                                            lineNumber: 1203,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         formatDate(transaction.createdAt)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1132,
+                                                                    lineNumber: 1202,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1131,
+                                                                lineNumber: 1201,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2412,12 +2513,12 @@ function StockTransactionPage() {
                                                                     children: transaction.doBy
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1150,
+                                                                    lineNumber: 1220,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1149,
+                                                                lineNumber: 1219,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2427,12 +2528,12 @@ function StockTransactionPage() {
                                                                     children: transaction.purpose
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1155,
+                                                                    lineNumber: 1225,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1154,
+                                                                lineNumber: 1224,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2446,24 +2547,24 @@ function StockTransactionPage() {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                    lineNumber: 1160,
+                                                                    lineNumber: 1230,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                                lineNumber: 1159,
+                                                                lineNumber: 1229,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, `transaction-${transaction._id}`, true, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1122,
+                                                        lineNumber: 1192,
                                                         columnNumber: 25
                                                     }, this))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 1046,
+                                            lineNumber: 1116,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tfoot", {
@@ -2477,7 +2578,7 @@ function StockTransactionPage() {
                                                         children: "Net Profit (Actual Sales - Purchase):"
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1170,
+                                                        lineNumber: 1240,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -2491,34 +2592,34 @@ function StockTransactionPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                            lineNumber: 1177,
+                                                            lineNumber: 1247,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                        lineNumber: 1176,
+                                                        lineNumber: 1246,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 1169,
+                                                lineNumber: 1239,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 1168,
+                                            lineNumber: 1238,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                    lineNumber: 1026,
+                                    lineNumber: 1096,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 752,
+                                lineNumber: 822,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "text-center py-16",
@@ -2537,17 +2638,17 @@ function StockTransactionPage() {
                                                 d: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                                lineNumber: 1199,
+                                                lineNumber: 1269,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                            lineNumber: 1193,
+                                            lineNumber: 1263,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 1192,
+                                        lineNumber: 1262,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -2555,7 +2656,7 @@ function StockTransactionPage() {
                                         children: "No Records Found"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 1207,
+                                        lineNumber: 1277,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2563,31 +2664,31 @@ function StockTransactionPage() {
                                         children: activeFilter === "sales" ? "No sales orders found" : activeFilter === "purchase" ? "No purchase transactions found" : activeFilter === "reinvest" ? "No reinvest transactions found" : "No data available"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                        lineNumber: 1210,
+                                        lineNumber: 1280,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                                lineNumber: 1191,
+                                lineNumber: 1261,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                        lineNumber: 678,
+                        lineNumber: 697,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-                lineNumber: 258,
+                lineNumber: 277,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/OZONE/ozone-water-1/src/app/stock_transactions/page.jsx",
-        lineNumber: 256,
+        lineNumber: 275,
         columnNumber: 5
     }, this);
 }

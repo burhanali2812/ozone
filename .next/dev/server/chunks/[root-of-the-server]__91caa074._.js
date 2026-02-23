@@ -144,11 +144,6 @@ const orderSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoo
         type: Number,
         default: 0
     },
-    productionCosts: {
-        type: Map,
-        of: Number,
-        default: {}
-    },
     deliveryCharges: {
         type: Number,
         default: 0
@@ -202,7 +197,7 @@ const orderSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoo
 }, {
     timestamps: true
 });
-const __TURBOPACK__default__export__ = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Order", orderSchema);
+const __TURBOPACK__default__export__ = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Order || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Order", orderSchema);
 }),
 "[project]/OZONE/ozone-water-1/models/Product.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

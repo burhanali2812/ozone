@@ -69,11 +69,7 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    productionCosts: {
-      type: Map,
-      of: Number,
-      default: {},
-    },
+
     deliveryCharges: {
       type: Number,
       default: 0,
@@ -123,4 +119,4 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("Order", orderSchema);
+export default mongoose.models.Order || mongoose.model("Order", orderSchema);
