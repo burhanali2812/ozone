@@ -4,18 +4,25 @@ import Product from "../../../../models/Product";
 export async function POST(request) {
   try {
     await connectionDb();
-    const { packingType, size, bottleQuality, waterQuality, price } =
-      await request.json();
+    const {
+      packingType,
+      size,
+      bottleQuality,
+      waterQuality,
+      price,
+      productionCost,
+    } = await request.json();
     if (
       !packingType ||
       !size ||
       !bottleQuality ||
       !waterQuality ||
-      price === undefined
+      price === undefined ||
+      productionCost === undefined
     ) {
       return new Response(
         JSON.stringify({ success: false, message: "All fields are required" }),
-        { status: 400 }
+        { status: 400 },
       );
     }
     const newProduct = new Product({
@@ -24,6 +31,7 @@ export async function POST(request) {
       bottleQuality,
       waterQuality,
       price,
+      productionCost,
     });
     await newProduct.save();
     return new Response(
@@ -32,13 +40,13 @@ export async function POST(request) {
         message: "Product added successfully",
         product: newProduct,
       }),
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("Error adding product:", error);
     return new Response(
       JSON.stringify({ success: false, message: "Internal Server Error" }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -54,7 +62,7 @@ export async function GET() {
     console.error("Error fetching products:", error);
     return new Response(
       JSON.stringify({ success: false, message: "Internal Server Error" }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -66,14 +74,14 @@ export async function DELETE(request) {
     if (!productId) {
       return new Response(
         JSON.stringify({ success: false, message: "Product ID is required" }),
-        { status: 400 }
+        { status: 400 },
       );
     }
     const deletedProduct = await Product.findByIdAndDelete(productId);
     if (!deletedProduct) {
       return new Response(
         JSON.stringify({ success: false, message: "Product not found" }),
-        { status: 404 }
+        { status: 404 },
       );
     }
     return new Response(
@@ -82,13 +90,13 @@ export async function DELETE(request) {
         message: "Product deleted successfully",
         product: deletedProduct,
       }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error deleting product:", error);
     return new Response(
       JSON.stringify({ success: false, message: "Internal Server Error" }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -96,30 +104,38 @@ export async function DELETE(request) {
 export async function PUT(request) {
   try {
     await connectionDb();
-    const { productId, packingType, size, bottleQuality, waterQuality, price } =
-      await request.json();
+    const {
+      productId,
+      packingType,
+      size,
+      bottleQuality,
+      waterQuality,
+      price,
+      productionCost,
+    } = await request.json();
     if (
       !productId ||
       !packingType ||
       !size ||
       !bottleQuality ||
       !waterQuality ||
-      price === undefined
+      price === undefined ||
+      productionCost === undefined
     ) {
       return new Response(
         JSON.stringify({ success: false, message: "All fields are required" }),
-        { status: 400 }
+        { status: 400 },
       );
     }
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
-      { packingType, size, bottleQuality, waterQuality, price },
-      { new: true }
+      { packingType, size, bottleQuality, waterQuality, price, productionCost },
+      { new: true },
     );
     if (!updatedProduct) {
       return new Response(
         JSON.stringify({ success: false, message: "Product not found" }),
-        { status: 404 }
+        { status: 404 },
       );
     }
     return new Response(
@@ -128,13 +144,13 @@ export async function PUT(request) {
         message: "Product updated successfully",
         product: updatedProduct,
       }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error updating product:", error);
     return new Response(
       JSON.stringify({ success: false, message: "Internal Server Error" }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

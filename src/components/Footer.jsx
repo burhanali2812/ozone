@@ -201,8 +201,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
             <p className="mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} Ozone Mineral Water® Pvt Ltd. All rights
-              reserved.
+              &copy; {new Date().getFullYear()} Ozone Mineral Water® Pvt Ltd.
+              All rights reserved.
             </p>
           </div>
         </div>

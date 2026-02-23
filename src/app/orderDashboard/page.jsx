@@ -127,7 +127,8 @@ export default function OrderDashboard() {
         productId: item.product?._id,
         productName: `${item.product?.size} (${item.product?.packingType})`,
         quantity: item.quantity,
-        costPerUnit: order.productionCosts?.[item.product?._id] || 0,
+        // Automatically use product's production cost if not already set in order
+        costPerUnit: order.productionCosts?.[item.product?._id] || item.product?.productionCost || 0,
       })),
       deliveryCharges: order.deliveryCharges || 0,
     });
@@ -832,6 +833,9 @@ Requested: ${stockError.response.data.requested}`,
                     Total Amount
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                    Profit
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Payment
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
@@ -881,6 +885,15 @@ Requested: ${stockError.response.data.requested}`,
                       <span className="font-semibold text-gray-900">
                         Rs. {order.totalPrice}/-
                       </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {order.status === "completed" && order.paymentStatus === "paid" && order.netProfit !== undefined ? (
+                        <span className={`font-semibold ${order.netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          Rs. {order.netProfit.toFixed(2)}
+                        </span>
+                      ) : (
+                        <span className="text-gray-400 text-sm">-</span>
+                      )}
                     </td>
                     <td className="px-6 py-4">
                       <span
@@ -936,6 +949,35 @@ Requested: ${stockError.response.data.requested}`,
             </div>
           )}
         </div>
+
+        {/* Total Profit Summary */}
+        {filteredOrders.length > 0 && (
+          <div className="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl shadow-lg p-6 border-2 border-green-200">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white rounded-xl p-4 shadow">
+                <p className="text-sm text-gray-600 mb-1">Total Orders</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {filteredOrders.length}
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow">
+                <p className="text-sm text-gray-600 mb-1">Completed & Paid</p>
+                <p className="text-2xl font-bold text-blue-600">
+                  {filteredOrders.filter(o => o.status === 'completed' && o.paymentStatus === 'paid').length}
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow">
+                <p className="text-sm text-gray-600 mb-1">Total Profit</p>
+                <p className="text-2xl font-bold text-green-600">
+                  Rs. {filteredOrders
+                    .filter(o => o.status === 'completed' && o.paymentStatus === 'paid' && o.netProfit !== undefined)
+                    .reduce((sum, o) => sum + o.netProfit, 0)
+                    .toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Modal */}
@@ -1070,10 +1112,10 @@ Requested: ${stockError.response.data.requested}`,
                           <input
                             type="number"
                             min="0"
-                            value={item.price}
+                            value={item.discountedPrice}
                             onChange={(e) => {
                               const newItems = [...modalData.orderItems];
-                              newItems[idx].price =
+                              newItems[idx].discountedPrice =
                                 parseFloat(e.target.value) || 0;
                               setModalData({
                                 ...modalData,
@@ -1085,7 +1127,7 @@ Requested: ${stockError.response.data.requested}`,
                         </div>
                       </div>
                       <p className="text-sm text-gray-600 mt-2">
-                        Subtotal: Rs. {item.price * item.quantity}/-
+                        Subtotal: Rs. {item.discountedPrice * item.quantity}/-
                       </p>
                     </div>
                   ))}
@@ -1093,7 +1135,7 @@ Requested: ${stockError.response.data.requested}`,
                     <p className="text-lg font-bold text-gray-900">
                       Total: Rs.{" "}
                       {modalData.orderItems.reduce(
-                        (sum, item) => sum + item.price * item.quantity,
+                        (sum, item) => sum + item.discountedPrice * item.quantity,
                         0,
                       )}
                       /-
@@ -1111,7 +1153,7 @@ Requested: ${stockError.response.data.requested}`,
                   value={modalData.paymentStatus}
                   onChange={(e) => {
                     const newTotalPrice = modalData.orderItems.reduce(
-                      (sum, item) => sum + item.price * item.quantity,
+                      (sum, item) => sum + item.discountedPrice * item.quantity,
                       0,
                     );
                     setModalData({
@@ -1159,7 +1201,7 @@ Requested: ${stockError.response.data.requested}`,
                   <p className="text-sm text-gray-600 mt-2">
                     Paid Amount: Rs.{" "}
                     {modalData.orderItems.reduce(
-                      (sum, item) => sum + item.price * item.quantity,
+                      (sum, item) => sum + item.discountedPrice * item.quantity,
                       0,
                     ) - modalData.remainingAmount}
                     /-
@@ -1271,7 +1313,7 @@ Requested: ${stockError.response.data.requested}`,
                             Rs.{" "}
                             {modalData.orderItems
                               .reduce(
-                                (sum, item) => sum + item.price * item.quantity,
+                                (sum, item) => sum + item.discountedPrice * item.quantity,
                                 0,
                               )
                               .toFixed(2)}
@@ -1309,7 +1351,7 @@ Requested: ${stockError.response.data.requested}`,
                               className={`text-lg font-bold ${
                                 modalData.orderItems.reduce(
                                   (sum, item) =>
-                                    sum + item.price * item.quantity,
+                                    sum + item.discountedPrice * item.quantity,
                                   0,
                                 ) -
                                   modalData.productionCosts.reduce(
@@ -1327,7 +1369,7 @@ Requested: ${stockError.response.data.requested}`,
                               {(
                                 modalData.orderItems.reduce(
                                   (sum, item) =>
-                                    sum + item.price * item.quantity,
+                                    sum + item.discountedPrice * item.quantity,
                                   0,
                                 ) -
                                 modalData.productionCosts.reduce(

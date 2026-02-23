@@ -89,8 +89,8 @@ export default function Testimonials() {
             What Our Customers Say
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust Ozone Mineral Water® Pvt Ltd for their
-            daily hydration needs
+            Join thousands of satisfied customers who trust Ozone Mineral Water®
+            Pvt Ltd for their daily hydration needs
           </p>
         </div>
 
@@ -163,7 +163,7 @@ export default function Testimonials() {
                     key={i}
                     className="w-2 h-2 rounded-full bg-blue-300"
                   ></div>
-                )
+                ),
               )}
             </div>
           )}

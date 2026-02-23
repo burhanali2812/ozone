@@ -29,8 +29,13 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 shadow-lg">
-      <nav className="container mx-auto px-4 sm:px-6 py-2">
+    <header className="sticky top-0 z-50 shadow-lg relative">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
+        style={{ backgroundImage: "url('/images/ramzan.jpg')" }}
+      ></div>
+      <div className="absolute inset-0 bg-blue-900 bg-opacity-40"></div>
+      <nav className="container mx-auto px-4 sm:px-6 py-2 relative z-10">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">

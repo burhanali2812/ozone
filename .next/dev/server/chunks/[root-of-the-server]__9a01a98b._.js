@@ -87,19 +87,23 @@ const productSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: String,
         required: true,
         enum: [
-            'Pure',
-            'Mix'
+            "Pure",
+            "Mix"
         ]
     },
     waterQuality: {
         type: String,
         required: true,
         enum: [
-            'RO (Reverse Osmosis)',
-            'Mineral'
+            "RO (Reverse Osmosis)",
+            "Mineral"
         ]
     },
     price: {
+        type: Number,
+        required: true
+    },
+    productionCost: {
         type: Number,
         required: true
     }
@@ -127,8 +131,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1
 async function POST(request) {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
-        const { packingType, size, bottleQuality, waterQuality, price } = await request.json();
-        if (!packingType || !size || !bottleQuality || !waterQuality || price === undefined) {
+        const { packingType, size, bottleQuality, waterQuality, price, productionCost } = await request.json();
+        if (!packingType || !size || !bottleQuality || !waterQuality || price === undefined || productionCost === undefined) {
             return new Response(JSON.stringify({
                 success: false,
                 message: "All fields are required"
@@ -141,7 +145,8 @@ async function POST(request) {
             size,
             bottleQuality,
             waterQuality,
-            price
+            price,
+            productionCost
         });
         await newProduct.save();
         return new Response(JSON.stringify({
@@ -222,8 +227,8 @@ async function DELETE(request) {
 async function PUT(request) {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])();
-        const { productId, packingType, size, bottleQuality, waterQuality, price } = await request.json();
-        if (!productId || !packingType || !size || !bottleQuality || !waterQuality || price === undefined) {
+        const { productId, packingType, size, bottleQuality, waterQuality, price, productionCost } = await request.json();
+        if (!productId || !packingType || !size || !bottleQuality || !waterQuality || price === undefined || productionCost === undefined) {
             return new Response(JSON.stringify({
                 success: false,
                 message: "All fields are required"
@@ -236,7 +241,8 @@ async function PUT(request) {
             size,
             bottleQuality,
             waterQuality,
-            price
+            price,
+            productionCost
         }, {
             new: true
         });

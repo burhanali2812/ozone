@@ -8,7 +8,7 @@ import {
   FiSave,
   FiPackage,
 } from "react-icons/fi";
-import{useRouter} from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export default function ProductDashboard() {
   const [products, setProducts] = useState([]);
@@ -22,10 +22,11 @@ export default function ProductDashboard() {
     bottleQuality: "",
     waterQuality: "",
     price: "",
+    productionCost: "",
   });
-    const router=useRouter();
+  const router = useRouter();
 
-   useEffect(() => {
+  useEffect(() => {
     const user = localStorage.getItem("user2");
     if (!user) {
       router.push("/auth");
@@ -71,6 +72,7 @@ export default function ProductDashboard() {
         body: JSON.stringify({
           ...formData,
           price: parseFloat(formData.price),
+          productionCost: parseFloat(formData.productionCost),
         }),
       });
       const data = await response.json();
@@ -106,6 +108,7 @@ export default function ProductDashboard() {
           productId: editingProduct._id,
           ...formData,
           price: parseFloat(formData.price),
+          productionCost: parseFloat(formData.productionCost),
         }),
       });
       const data = await response.json();
@@ -166,6 +169,7 @@ export default function ProductDashboard() {
       bottleQuality: product.bottleQuality,
       waterQuality: product.waterQuality,
       price: product.price,
+      productionCost: product.productionCost || "",
     });
     setShowEditModal(true);
   };
@@ -181,6 +185,7 @@ export default function ProductDashboard() {
       bottleQuality: "",
       waterQuality: "",
       price: "",
+      productionCost: "",
     });
   };
 
@@ -249,6 +254,12 @@ export default function ProductDashboard() {
                     <th className="px-6 py-4 text-left text-sm font-semibold">
                       Price
                     </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold">
+                      Production Cost
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold">
+                      Profit Margin
+                    </th>
                     <th className="px-6 py-4 text-center text-sm font-semibold">
                       Actions
                     </th>
@@ -274,6 +285,18 @@ export default function ProductDashboard() {
                       </td>
                       <td className="px-6 py-4 text-sm font-semibold text-green-600">
                         Rs. {product.price.toFixed(2)}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-semibold text-orange-600">
+                        Rs.{" "}
+                        {product.productionCost
+                          ? product.productionCost.toFixed(2)
+                          : "N/A"}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-semibold text-purple-600">
+                        Rs.{" "}
+                        {product.productionCost
+                          ? (product.price - product.productionCost).toFixed(2)
+                          : "N/A"}
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-center gap-2">
@@ -409,6 +432,22 @@ export default function ProductDashboard() {
                   required
                 />
               </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Production Cost (Rs.)
+                </label>
+                <input
+                  type="number"
+                  name="productionCost"
+                  value={formData.productionCost}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  placeholder="0.00"
+                  step="0.01"
+                  min="0"
+                  required
+                />
+              </div>
               <div className="flex gap-3 pt-4">
                 <button
                   type="button"
@@ -519,6 +558,21 @@ export default function ProductDashboard() {
                   type="number"
                   name="price"
                   value={formData.price}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  step="0.01"
+                  min="0"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Production Cost (Rs.)
+                </label>
+                <input
+                  type="number"
+                  name="productionCost"
+                  value={formData.productionCost}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   step="0.01"

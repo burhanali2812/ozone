@@ -273,7 +273,7 @@ function Order() {
                     price: order.actualPrice,
                     discountedPrice: order.discountedPrice
                 })),
-            totalPrice: totalPrice,
+            totalPrice: grandTotal,
             totalDiscount: totalDiscount,
             grandTotal: grandTotal,
             paymentStatus: finalPaymentStatus,

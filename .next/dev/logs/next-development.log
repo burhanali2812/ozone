@@ -1,2 +1,10 @@
-[00:00:01.356] Server  LOG      ✓ Ready in 861ms
-[00:00:04.916] Server  LOG      ○ Compiling /receipt ...
+[00:00:02.735] Server  LOG      ✓ Ready in 1721ms
+[00:00:02.820] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+[00:00:07.023] Server  LOG      ○ Compiling /_not-found/page ...
+[00:00:08.570] Server  LOG     MongoDB connected successfully
+[00:00:23.456] Server  LOG     MongoDB already connected
+[00:00:23.605] Browser WARN    Image with src "/images/hero3.jpeg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:24.612] Browser WARN    Image with src "/images/litter0.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:24.613] Browser WARN    Image with src "/images/litter1.51.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:24.613] Browser WARN    Image with src "/images/litter61.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:34.839] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.

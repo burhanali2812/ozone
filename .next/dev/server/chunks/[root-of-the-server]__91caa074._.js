@@ -226,19 +226,23 @@ const productSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: String,
         required: true,
         enum: [
-            'Pure',
-            'Mix'
+            "Pure",
+            "Mix"
         ]
     },
     waterQuality: {
         type: String,
         required: true,
         enum: [
-            'RO (Reverse Osmosis)',
-            'Mineral'
+            "RO (Reverse Osmosis)",
+            "Mineral"
         ]
     },
     price: {
+        type: Number,
+        required: true
+    },
+    productionCost: {
         type: Number,
         required: true
     }
