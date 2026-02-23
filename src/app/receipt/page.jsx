@@ -410,12 +410,20 @@ export default function Receipt() {
               </div>
 
               {(() => {
+                // Calculate original total (before discount)
+                const originalTotal = orderData.orderItems.reduce((sum, item) => {
+                  const price = item.price || 0;
+                  return sum + price * item.quantity;
+                }, 0);
+
+                // Calculate grand total (after discount)
                 const grandTotal = orderData.orderItems.reduce((sum, item) => {
-                  const discountedPrice =
-                    item.discountedPrice || item.price || 0;
+                  const discountedPrice = item.discountedPrice || item.price || 0;
                   return sum + discountedPrice * item.quantity;
                 }, 0);
-                const totalDiscount = (orderData.totalPrice || 0) - grandTotal;
+
+                // Total discount is the difference between original and discounted
+                const totalDiscount = originalTotal - grandTotal;
 
                 return (
                   <>
