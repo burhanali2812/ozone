@@ -402,23 +402,20 @@ export default function Receipt() {
 
             {/* Pricing Summary */}
             <div className="pt-3 border-t-2 border-gray-300 mt-3 space-y-2">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-600">Total Price:</span>
-                <span className="font-semibold text-gray-900">
-                  Rs. {(orderData.totalPrice || 0).toFixed(2)}/-
-                </span>
-              </div>
-
               {(() => {
                 // Calculate original total (before discount)
-                const originalTotal = orderData.orderItems.reduce((sum, item) => {
-                  const price = item.price || 0;
-                  return sum + price * item.quantity;
-                }, 0);
+                const originalTotal = orderData.orderItems.reduce(
+                  (sum, item) => {
+                    const price = item.price || 0;
+                    return sum + price * item.quantity;
+                  },
+                  0,
+                );
 
                 // Calculate grand total (after discount)
                 const grandTotal = orderData.orderItems.reduce((sum, item) => {
-                  const discountedPrice = item.discountedPrice || item.price || 0;
+                  const discountedPrice =
+                    item.discountedPrice || item.price || 0;
                   return sum + discountedPrice * item.quantity;
                 }, 0);
 
@@ -427,6 +424,13 @@ export default function Receipt() {
 
                 return (
                   <>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-600">Total Price:</span>
+                      <span className="font-semibold text-gray-900">
+                        Rs. {originalTotal.toFixed(2)}/-
+                      </span>
+                    </div>
+
                     {totalDiscount > 0 && (
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-gray-600">Total Discount:</span>

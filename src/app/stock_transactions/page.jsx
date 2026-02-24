@@ -49,7 +49,7 @@ export default function StockTransactionPage() {
           0,
           0,
           0,
-          0
+          0,
         );
         return transactionDate >= fromDateTime;
       });
@@ -74,7 +74,7 @@ export default function StockTransactionPage() {
     .filter(
       (order) =>
         order.paymentStatus === "paid" ||
-        order.paymentStatus === "partially-paid"
+        order.paymentStatus === "partially-paid",
     )
     .reduce((sum, order) => {
       // For partially-paid orders, only add the paidAmount
@@ -87,7 +87,7 @@ export default function StockTransactionPage() {
 
   const totalPurchase = filteredTransactions.reduce(
     (sum, transaction) => sum + (transaction.amount || 0),
-    0
+    0,
   );
 
   // Calculate reinvest (Ozone transactions)
@@ -114,7 +114,7 @@ export default function StockTransactionPage() {
         const paidOrders = ordersRes.data.data.filter(
           (order) =>
             order.paymentStatus === "paid" ||
-            order.paymentStatus === "partially-paid"
+            order.paymentStatus === "partially-paid",
         );
         setOrders(paidOrders);
       } else {
@@ -155,7 +155,13 @@ export default function StockTransactionPage() {
   };
 
   // Apply all filters (type, date, and search)
-  const applyFilters = (filterType, from, to, search = searchTerm, purposeSearchTerm = purposeSearch) => {
+  const applyFilters = (
+    filterType,
+    from,
+    to,
+    search = searchTerm,
+    purposeSearchTerm = purposeSearch,
+  ) => {
     let data = [];
 
     // Filter by type
@@ -204,7 +210,9 @@ export default function StockTransactionPage() {
       data = data.filter((item) => {
         // If item has purpose (it's a transaction), filter by purpose
         if (item.purpose) {
-          return item.purpose.toLowerCase().includes(purposeSearchTerm.toLowerCase());
+          return item.purpose
+            .toLowerCase()
+            .includes(purposeSearchTerm.toLowerCase());
         }
         // If item doesn't have purpose (it's an order), keep it only if we're showing sales
         return filterType === "sales";
@@ -336,11 +344,11 @@ export default function StockTransactionPage() {
                 <p className="text-xs text-blue-600 font-medium">
                   {fromDate && toDate
                     ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(
-                        toDate
+                        toDate,
                       ).toLocaleDateString()}`
                     : fromDate
-                    ? `From: ${new Date(fromDate).toLocaleDateString()}`
-                    : `Until: ${new Date(toDate).toLocaleDateString()}`}
+                      ? `From: ${new Date(fromDate).toLocaleDateString()}`
+                      : `Until: ${new Date(toDate).toLocaleDateString()}`}
                 </p>
               </div>
             )}
@@ -566,7 +574,9 @@ export default function StockTransactionPage() {
                 <h3 className="text-lg font-bold text-gray-900 mb-1">
                   Total Profit
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">Actual Sales - Purchase</p>
+                <p className="text-sm text-gray-600 mb-2">
+                  Actual Sales - Purchase
+                </p>
                 <p
                   className={`text-2xl font-bold ${
                     totalProfit >= 0 ? "text-blue-600" : "text-red-600"
@@ -702,10 +712,10 @@ export default function StockTransactionPage() {
                   {activeFilter === "sales"
                     ? "Sales Details"
                     : activeFilter === "purchase"
-                    ? "Purchase Details"
-                    : activeFilter === "reinvest"
-                    ? "Reinvest Transactions (Ozone)"
-                    : "All Transactions"}
+                      ? "Purchase Details"
+                      : activeFilter === "reinvest"
+                        ? "Reinvest Transactions (Ozone)"
+                        : "All Transactions"}
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
                   Showing {filteredData.length} record
@@ -764,14 +774,18 @@ export default function StockTransactionPage() {
                 )}
 
                 {/* Search by Purpose - Only show for purchase, reinvest or all */}
-                {(activeFilter === "purchase" || activeFilter === "reinvest" || activeFilter === "all") && (
+                {(activeFilter === "purchase" ||
+                  activeFilter === "reinvest" ||
+                  activeFilter === "all") && (
                   <div className="w-full sm:w-64">
                     <div className="relative">
                       <input
                         type="text"
                         placeholder="Search by purpose..."
                         value={purposeSearch}
-                        onChange={(e) => handlePurposeSearchChange(e.target.value)}
+                        onChange={(e) =>
+                          handlePurposeSearchChange(e.target.value)
+                        }
                         className="w-full px-4 py-2.5 pl-10 pr-10 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
                       />
                       <svg
@@ -1281,10 +1295,10 @@ export default function StockTransactionPage() {
                 {activeFilter === "sales"
                   ? "No sales orders found"
                   : activeFilter === "purchase"
-                  ? "No purchase transactions found"
-                  : activeFilter === "reinvest"
-                  ? "No reinvest transactions found"
-                  : "No data available"}
+                    ? "No purchase transactions found"
+                    : activeFilter === "reinvest"
+                      ? "No reinvest transactions found"
+                      : "No data available"}
               </p>
             </div>
           )}
