@@ -84,8 +84,22 @@ export default function OurTeam() {
               } items-center gap-8 lg:gap-16`}
             >
               {/* Image Section */}
-              <div className="w-full lg:w-2/5">
-                <div className="relative w-full h-80 lg:h-96 border-8 border-blue-600 rounded-2xl overflow-hidden shadow-xl">
+              <div className="w-full lg:w-2/5 relative">
+                {/* Decorative Background Square */}
+                <div className="absolute -left-4 -top-4 w-full h-full bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl -z-10"></div>
+                
+                {/* Main Image Container with Left Border Accent */}
+                <div className="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl">
+                  {/* Left Border Accent */}
+                  <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-blue-600 via-cyan-600 to-blue-600 z-10"></div>
+                  
+                  {/* Top Border Accent */}
+                  <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 z-10"></div>
+                  
+                  {/* Corner Decoration */}
+                  <div className="absolute top-4 right-4 w-12 h-12 border-t-4 border-r-4 border-blue-600 rounded-tr-lg z-10"></div>
+                  <div className="absolute bottom-4 left-4 w-12 h-12 border-b-4 border-l-4 border-blue-600 rounded-bl-lg z-10"></div>
+                  
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -171,9 +185,7 @@ export default function OurTeam() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">
-              Innovation
-            </h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">Innovation</h3>
             <p className="text-gray-600">
               Constantly pushing boundaries with cutting-edge water purification
               technology.
@@ -198,7 +210,8 @@ export default function OurTeam() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-3">Integrity</h3>
             <p className="text-gray-600">
-              Building trust through transparency and ethical business practices.
+              Building trust through transparency and ethical business
+              practices.
             </p>
           </div>
         </div>
