@@ -58,3 +58,4 @@
 [00:39:25.092] Browser WARN    Image with src "/images/burhan.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [00:39:25.092] Browser WARN    Image with src "/images/iftikhar.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [00:39:25.092] Browser WARN    Image with src "/images/sharjeel.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:47:14.203] Server  LOG      ✓ Compiled in 23ms

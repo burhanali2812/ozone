@@ -43,7 +43,7 @@ export default function OurTeam() {
       {/* Back Button */}
       <div className="max-w-7xl mx-auto mb-6">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push('/')}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
         >
           <svg
