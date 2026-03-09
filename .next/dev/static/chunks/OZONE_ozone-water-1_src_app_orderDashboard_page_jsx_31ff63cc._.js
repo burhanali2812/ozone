@@ -1216,7 +1216,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                 className: `font-semibold ${order.netProfit >= 0 ? "text-green-600" : "text-red-600"}`,
                                                                 children: [
                                                                     "Rs. ",
-                                                                    order.netProfit.toFixed(2)
+                                                                    order.netProfit?.toFixed(2)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
@@ -1437,7 +1437,7 @@ Requested: ${stockError.response.data.requested}`);
                                             children: [
                                                 "Rs.",
                                                 " ",
-                                                filteredOrders.filter((o)=>o.status === "completed" && o.paymentStatus === "paid" && o.netProfit !== undefined).reduce((sum, o)=>sum + o.netProfit, 0).toFixed(2)
+                                                filteredOrders.filter((o)=>o.status === "completed" && o.paymentStatus === "paid" && o.netProfit !== undefined).reduce((sum, o)=>sum + o.netProfit, 0)?.toFixed(2)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
@@ -2039,7 +2039,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                             children: [
                                                                                 "Total Cost: Rs.",
                                                                                 " ",
-                                                                                (item.costPerUnit * item.quantity).toFixed(2)
+                                                                                (item.costPerUnit * item.quantity)?.toFixed(2)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
@@ -2123,7 +2123,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                 children: [
                                                                     "Rs.",
                                                                     " ",
-                                                                    modalData.orderItems.reduce((sum, item)=>sum + item.discountedPrice * item.quantity, 0).toFixed(2)
+                                                                    modalData.orderItems.reduce((sum, item)=>sum + item.discountedPrice * item.quantity, 0)?.toFixed(2)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
@@ -2152,7 +2152,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                 children: [
                                                                     "- Rs.",
                                                                     " ",
-                                                                    modalData.productionCosts.reduce((sum, item)=>sum + item.costPerUnit * item.quantity, 0).toFixed(2)
+                                                                    modalData.productionCosts.reduce((sum, item)=>sum + item.costPerUnit * item.quantity, 0)?.toFixed(2)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
@@ -2180,7 +2180,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                 className: "font-semibold text-red-600",
                                                                 children: [
                                                                     "- Rs. ",
-                                                                    modalData.deliveryCharges.toFixed(2)
+                                                                    modalData.deliveryCharges?.toFixed(2)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",
@@ -2211,7 +2211,7 @@ Requested: ${stockError.response.data.requested}`);
                                                                     children: [
                                                                         "Rs.",
                                                                         " ",
-                                                                        (modalData.orderItems.reduce((sum, item)=>sum + item.discountedPrice * item.quantity, 0) - modalData.productionCosts.reduce((sum, item)=>sum + item.costPerUnit * item.quantity, 0) - modalData.deliveryCharges).toFixed(2)
+                                                                        (modalData.orderItems.reduce((sum, item)=>sum + item.discountedPrice * item.quantity, 0) - modalData.productionCosts.reduce((sum, item)=>sum + item.costPerUnit * item.quantity, 0) - modalData.deliveryCharges)?.toFixed(2)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/OZONE/ozone-water-1/src/app/orderDashboard/page.jsx",

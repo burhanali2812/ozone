@@ -896,7 +896,7 @@ Requested: ${stockError.response.data.requested}`,
                         <span
                           className={`font-semibold ${order.netProfit >= 0 ? "text-green-600" : "text-red-600"}`}
                         >
-                          Rs. {order.netProfit.toFixed(2)}
+                          Rs. {order.netProfit?.toFixed(2)}
                         </span>
                       ) : (
                         <span className="text-gray-400 text-sm">-</span>
@@ -990,7 +990,7 @@ Requested: ${stockError.response.data.requested}`,
                         o.netProfit !== undefined,
                     )
                     .reduce((sum, o) => sum + o.netProfit, 0)
-                    .toFixed(2)}
+                    ?.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -1294,7 +1294,7 @@ Requested: ${stockError.response.data.requested}`,
                               />
                               <p className="text-xs text-gray-600 mt-1">
                                 Total Cost: Rs.{" "}
-                                {(item.costPerUnit * item.quantity).toFixed(2)}
+                                {(item.costPerUnit * item.quantity)?.toFixed(2)}
                               </p>
                             </div>
                           </div>
@@ -1336,7 +1336,7 @@ Requested: ${stockError.response.data.requested}`,
                                   sum + item.discountedPrice * item.quantity,
                                 0,
                               )
-                              .toFixed(2)}
+                              ?.toFixed(2)}
                           </span>
                         </div>
                         <div className="flex justify-between text-sm">
@@ -1351,7 +1351,7 @@ Requested: ${stockError.response.data.requested}`,
                                   sum + item.costPerUnit * item.quantity,
                                 0,
                               )
-                              .toFixed(2)}
+                              ?.toFixed(2)}
                           </span>
                         </div>
                         <div className="flex justify-between text-sm">
@@ -1359,7 +1359,7 @@ Requested: ${stockError.response.data.requested}`,
                             Delivery Charges:
                           </span>
                           <span className="font-semibold text-red-600">
-                            - Rs. {modalData.deliveryCharges.toFixed(2)}
+                            - Rs. {modalData.deliveryCharges?.toFixed(2)}
                           </span>
                         </div>
                         <div className="border-t-2 border-green-400 pt-2 mt-2">
@@ -1398,7 +1398,7 @@ Requested: ${stockError.response.data.requested}`,
                                   0,
                                 ) -
                                 modalData.deliveryCharges
-                              ).toFixed(2)}
+                              )?.toFixed(2)}
                             </span>
                           </div>
                         </div>

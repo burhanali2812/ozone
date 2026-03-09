@@ -12,6 +12,7 @@ import {
   FaShoppingCart,
   FaBars,
   FaTimes,
+  FaUsers,
 } from "react-icons/fa";
 import { MdTrackChanges } from "react-icons/md";
 
@@ -89,6 +90,13 @@ export default function Header() {
               Contact
             </Link>
             <Link
+              href="/team"
+              className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
+            >
+              <FaUsers className="text-sm" />
+              Our Team
+            </Link>
+            <Link
               href="/tracking"
               className="text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2"
             >
@@ -162,6 +170,14 @@ export default function Header() {
             >
               <FaEnvelope className="text-sm" />
               Contact
+            </Link>
+            <Link
+              href="/team"
+              className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <FaUsers className="text-sm" />
+              Our Team
             </Link>
             <Link
               href="/tracking"

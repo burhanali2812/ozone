@@ -66,14 +66,14 @@ function Header() {
                 }
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                lineNumber: 33,
+                lineNumber: 34,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "absolute inset-0 bg-blue-900 bg-opacity-40"
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                lineNumber: 37,
+                lineNumber: 38,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -96,12 +96,12 @@ function Header() {
                                             className: "transition-transform group-hover:scale-110 duration-300"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                            lineNumber: 43,
+                                            lineNumber: 44,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 42,
+                                        lineNumber: 43,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -112,7 +112,7 @@ function Header() {
                                                 children: "OZONE MINERAL WATER®"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 52,
+                                                lineNumber: 53,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -120,19 +120,19 @@ function Header() {
                                                 children: "Pvt Ltd"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 55,
+                                                lineNumber: 56,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 51,
+                                        lineNumber: 52,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 41,
+                                lineNumber: 42,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -146,14 +146,14 @@ function Header() {
                                                 className: "text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 67,
+                                                lineNumber: 68,
                                                 columnNumber: 15
                                             }, this),
                                             "Home"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 63,
+                                        lineNumber: 64,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -164,14 +164,14 @@ function Header() {
                                                 className: "text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 74,
+                                                lineNumber: 75,
                                                 columnNumber: 15
                                             }, this),
                                             "Products"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 70,
+                                        lineNumber: 71,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -182,14 +182,14 @@ function Header() {
                                                 className: "text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 81,
+                                                lineNumber: 82,
                                                 columnNumber: 15
                                             }, this),
                                             "About"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 77,
+                                        lineNumber: 78,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -200,14 +200,32 @@ function Header() {
                                                 className: "text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 88,
+                                                lineNumber: 89,
                                                 columnNumber: 15
                                             }, this),
                                             "Contact"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 84,
+                                        lineNumber: 85,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        href: "/team",
+                                        className: "text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaUsers"], {
+                                                className: "text-sm"
+                                            }, void 0, false, {
+                                                fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
+                                                lineNumber: 96,
+                                                columnNumber: 15
+                                            }, this),
+                                            "Our Team"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
+                                        lineNumber: 92,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -218,20 +236,20 @@ function Header() {
                                                 className: "text-sm"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 95,
+                                                lineNumber: 103,
                                                 columnNumber: 15
                                             }, this),
                                             "Track Order"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 91,
+                                        lineNumber: 99,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 62,
+                                lineNumber: 63,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -245,14 +263,14 @@ function Header() {
                                                 className: "text-base"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 106,
+                                                lineNumber: 114,
                                                 columnNumber: 15
                                             }, this),
                                             "Login"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 102,
+                                        lineNumber: 110,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -263,20 +281,20 @@ function Header() {
                                                 className: "text-base"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 113,
+                                                lineNumber: 121,
                                                 columnNumber: 15
                                             }, this),
                                             "Order Now"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 109,
+                                        lineNumber: 117,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 101,
+                                lineNumber: 109,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -286,24 +304,24 @@ function Header() {
                                     className: "w-6 h-6"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                    lineNumber: 124,
+                                    lineNumber: 132,
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaBars"], {
                                     className: "w-6 h-6"
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                    lineNumber: 126,
+                                    lineNumber: 134,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 119,
+                                lineNumber: 127,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                        lineNumber: 39,
+                        lineNumber: 40,
                         columnNumber: 9
                     }, this),
                     isMenuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -318,14 +336,14 @@ function Header() {
                                         className: "text-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 139,
+                                        lineNumber: 147,
                                         columnNumber: 15
                                     }, this),
                                     "Home"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 134,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -337,14 +355,14 @@ function Header() {
                                         className: "text-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 147,
+                                        lineNumber: 155,
                                         columnNumber: 15
                                     }, this),
                                     "Products"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 142,
+                                lineNumber: 150,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -356,14 +374,14 @@ function Header() {
                                         className: "text-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 155,
+                                        lineNumber: 163,
                                         columnNumber: 15
                                     }, this),
                                     "About"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 150,
+                                lineNumber: 158,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -375,14 +393,33 @@ function Header() {
                                         className: "text-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 163,
+                                        lineNumber: 171,
                                         columnNumber: 15
                                     }, this),
                                     "Contact"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 158,
+                                lineNumber: 166,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                href: "/team",
+                                className: "flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all",
+                                onClick: ()=>setIsMenuOpen(false),
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaUsers"], {
+                                        className: "text-sm"
+                                    }, void 0, false, {
+                                        fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
+                                        lineNumber: 179,
+                                        columnNumber: 15
+                                    }, this),
+                                    "Our Team"
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
+                                lineNumber: 174,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -394,14 +431,14 @@ function Header() {
                                         className: "text-sm"
                                     }, void 0, false, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 171,
+                                        lineNumber: 187,
                                         columnNumber: 15
                                     }, this),
                                     "Track Order"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 166,
+                                lineNumber: 182,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,14 +455,14 @@ function Header() {
                                                 className: "text-base"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 182,
+                                                lineNumber: 198,
                                                 columnNumber: 17
                                             }, this),
                                             "Login"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 175,
+                                        lineNumber: 191,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -439,38 +476,38 @@ function Header() {
                                                 className: "text-base"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                                lineNumber: 192,
+                                                lineNumber: 208,
                                                 columnNumber: 17
                                             }, this),
                                             "Order Now"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                        lineNumber: 185,
+                                        lineNumber: 201,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                                lineNumber: 174,
+                                lineNumber: 190,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                        lineNumber: 133,
+                        lineNumber: 141,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-                lineNumber: 38,
+                lineNumber: 39,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
-        lineNumber: 32,
+        lineNumber: 33,
         columnNumber: 5
     }, this);
 }
@@ -1334,6 +1371,30 @@ function Sidebar() {
                 columnNumber: 9
             }, this),
             path: "/workerManage"
+        },
+        {
+            name: "Our Team",
+            icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                className: "w-5 h-5",
+                fill: "none",
+                stroke: "currentColor",
+                viewBox: "0 0 24 24",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round",
+                    strokeWidth: 2,
+                    d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                }, void 0, false, {
+                    fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
+                    lineNumber: 232,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
+                lineNumber: 226,
+                columnNumber: 9
+            }, this),
+            path: "/team"
         }
     ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1353,7 +1414,7 @@ function Sidebar() {
                         d: "M6 18L18 6M6 6l12 12"
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                        lineNumber: 239,
+                        lineNumber: 258,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                         strokeLinecap: "round",
@@ -1362,17 +1423,17 @@ function Sidebar() {
                         d: "M4 6h16M4 12h16M4 18h16"
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                        lineNumber: 246,
+                        lineNumber: 265,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                    lineNumber: 232,
+                    lineNumber: 251,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                lineNumber: 228,
+                lineNumber: 247,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1390,7 +1451,7 @@ function Sidebar() {
                         d: "M11 19l-7-7 7-7m8 14l-7-7 7-7"
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                        lineNumber: 270,
+                        lineNumber: 289,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                         strokeLinecap: "round",
@@ -1399,17 +1460,17 @@ function Sidebar() {
                         d: "M13 5l7 7-7 7M5 5l7 7-7 7"
                     }, void 0, false, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                        lineNumber: 277,
+                        lineNumber: 296,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                    lineNumber: 263,
+                    lineNumber: 282,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                lineNumber: 257,
+                lineNumber: 276,
                 columnNumber: 7
             }, this),
             isOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1417,7 +1478,7 @@ function Sidebar() {
                 onClick: ()=>setIsOpen(false)
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                lineNumber: 289,
+                lineNumber: 308,
                 columnNumber: 9
             }, this),
             isOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1436,7 +1497,7 @@ function Sidebar() {
                                             children: "Ozone Mineral Water® Pvt Ltd"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                            lineNumber: 307,
+                                            lineNumber: 326,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1444,18 +1505,18 @@ function Sidebar() {
                                             children: "Management System"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                            lineNumber: 310,
+                                            lineNumber: 329,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                    lineNumber: 306,
+                                    lineNumber: 325,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                lineNumber: 305,
+                                lineNumber: 324,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -1474,24 +1535,24 @@ function Sidebar() {
                                                     children: item.name
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                                    lineNumber: 333,
+                                                    lineNumber: 352,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, item.path, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                            lineNumber: 322,
+                                            lineNumber: 341,
                                             columnNumber: 23
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                    lineNumber: 318,
+                                    lineNumber: 337,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                lineNumber: 317,
+                                lineNumber: 336,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1505,7 +1566,7 @@ function Sidebar() {
                                             children: user?.name ? user.name.charAt(0).toUpperCase() : "A"
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                            lineNumber: 346,
+                                            lineNumber: 365,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1516,7 +1577,7 @@ function Sidebar() {
                                                     children: user?.name
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 369,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1524,13 +1585,13 @@ function Sidebar() {
                                                     children: "Click to Logout"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                                    lineNumber: 351,
+                                                    lineNumber: 370,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                            lineNumber: 349,
+                                            lineNumber: 368,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -1545,34 +1606,34 @@ function Sidebar() {
                                                 d: "M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                                             }, void 0, false, {
                                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                                lineNumber: 359,
+                                                lineNumber: 378,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                            lineNumber: 353,
+                                            lineNumber: 372,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                    lineNumber: 342,
+                                    lineNumber: 361,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                                lineNumber: 341,
+                                lineNumber: 360,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                        lineNumber: 303,
+                        lineNumber: 322,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/OZONE/ozone-water-1/src/components/Sidebar.jsx",
-                    lineNumber: 298,
+                    lineNumber: 317,
                     columnNumber: 11
                 }, this)
             }, void 0, false)
@@ -1601,7 +1662,8 @@ function SidebarLayout({ children }) {
         "/auth",
         "/order",
         "/receipt",
-        "/tracking"
+        "/tracking",
+        "/team"
     ];
     const shouldShowSidebar = !noSidebarRoutes.includes(pathname);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
