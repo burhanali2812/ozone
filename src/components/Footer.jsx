@@ -15,7 +15,7 @@ import { IoWaterSharp } from "react-icons/io5";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gray-900 text-white overflow-hidden">
+    <footer id="footer" className="relative bg-gray-900 text-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-gray-900 to-cyan-900/20"></div>
       <div
@@ -27,11 +27,11 @@ export default function Footer() {
         }}
       ></div>
 
-      <div className="container mx-auto px-6 py-12 relative z-10">
+      <div className="container mx-auto px-6 py-2 relative z-10">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="mb-4">
+            <div className="mb-4 ">
               <Image
                 src="/images/logo2.png"
                 alt="Ozone Mineral Water® Pvt Ltd"
@@ -198,7 +198,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8">
+        <div className="border-t border-gray-800 pt-3">
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
             <p className="mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} Ozone Mineral Water® Pvt Ltd.
