@@ -9,10 +9,15 @@ export const metadata = {
   description:
     "Premium mineral water available in 500ml and 1500ml bottles. Experience pure hydration with Ozone Mineral Water® Pvt Ltd.",
   icons: {
-    icon: "/favicon.ico", // or '/icon.png'
-    apple: "/apple-icon.png", // Optional: for Apple devices
-    shortcut: "/favicon.ico",
+    icon: [
+      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon.ico" },
+    ],
+    apple: "/images/apple-touch-icon.png",
+    shortcut: "/images/favicon.ico",
   },
+  manifest: "/images/site.webmanifest",
 };
 
 export default function RootLayout({ children }) {
