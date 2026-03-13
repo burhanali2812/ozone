@@ -914,7 +914,7 @@ export default function StockTransactionPage() {
                                     </span>
                                     <span className="text-gray-400">@</span>
                                     <span className="text-gray-600">
-                                      Rs. {item.price}
+                                      Rs. {item.discountedPrice}
                                     </span>
                                   </div>
                                 ))}
