@@ -33,7 +33,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 shadow-lg">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
-        style={{ backgroundImage: "url('/images/ramzan.jpg')" }}
+        style={{ backgroundImage: "url('/images/eid2.jpg')" }}
       ></div>
       <div className="absolute inset-0 bg-blue-900 bg-opacity-40"></div>
       <nav className="container mx-auto px-4 sm:px-6 py-2 relative z-10">

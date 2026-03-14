@@ -40,7 +40,7 @@ function Header() {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90",
                 style: {
-                    backgroundImage: "url('/images/ramzan.jpg')"
+                    backgroundImage: "url('/images/eid2.jpg')"
                 }
             }, void 0, false, {
                 fileName: "[project]/OZONE/ozone-water-1/src/components/Header.jsx",
