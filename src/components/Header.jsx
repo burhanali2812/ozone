@@ -166,12 +166,14 @@ export default function Header() {
               About
             </Link>
             <Link
-              href="#contact"
+               href="https://g.page/r/CZy3m3Y2buBZEBM/review"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               <FaEnvelope className="text-sm" />
-              Contact
+              FeedBack
             </Link>
             <Link
               href="/team"
