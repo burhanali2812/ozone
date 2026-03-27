@@ -912,7 +912,7 @@ export default function StockTransactionPage() {
                                     className="flex items-center gap-2"
                                   >
                                     <span className="text-gray-900 font-medium">
-                                      {item.size}
+                                      {item.itemName}
                                     </span>
                                     <span className="text-gray-500">×</span>
                                     <span className="text-gray-600">
