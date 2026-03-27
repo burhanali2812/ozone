@@ -854,8 +854,14 @@ export default function StockTransactionPage() {
                       <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                         Status
                       </th>
+                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                        Paid Amount
+                      </th>
+                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                        Due Amount
+                      </th>
                       <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">
-                        Total Price
+                        Total Amount
                       </th>
                     </tr>
                   </thead>
@@ -927,6 +933,12 @@ export default function StockTransactionPage() {
                         <td className="px-6 py-4">
                           {getPaymentStatusBadge(order.paymentStatus)}
                         </td>
+                         <td className="px-6 py-4 text-blue-700">
+                          {order.paidAmount }
+                        </td>
+                         <td className="px-6 py-4 text-red-700">
+                          {order.remainingAmount ? order.remainingAmount : 0}
+                        </td>
                         <td className="px-6 py-4 text-right">
                           <span className="text-lg font-bold text-green-600">
                             Rs. {order.totalPrice?.toLocaleString() || 0}/-
@@ -943,6 +955,7 @@ export default function StockTransactionPage() {
                       >
                         Total Sales:
                       </td>
+                      
                       <td className="px-6 py-4 text-right">
                         <span className="text-xl font-bold text-green-600">
                           Rs. {totalSales.toLocaleString()}/-
@@ -1004,6 +1017,7 @@ export default function StockTransactionPage() {
                             {transaction.purpose}
                           </span>
                         </td>
+                        
                         <td className="px-6 py-4 text-right">
                           <span className="text-lg font-bold text-red-600">
                             Rs. {transaction.amount?.toLocaleString() || 0}/-
