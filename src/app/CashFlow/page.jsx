@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "@/components/Sidebar";
-import SidebarLayout from "@/components/SidebarLayout";
+
 
 export default function CashFlowPage() {
   const [cashFlows, setCashFlows] = useState([]);
@@ -27,7 +26,7 @@ export default function CashFlowPage() {
   const fetchCashFlows = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/cashFlow/cashFlow.js");
+      const response = await fetch("/api/cashFlow");
       const data = await response.json();
       setCashFlows(data);
       calculateTotals(data);
@@ -80,7 +79,7 @@ export default function CashFlowPage() {
 
     try {
       setLoading(true);
-      const response = await fetch("/api/cashFlow/cashFlow.js", {
+      const response = await fetch("/api/cashFlow", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -140,13 +139,16 @@ export default function CashFlowPage() {
   };
 
   return (
-    <SidebarLayout>
-      <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="px-6 py-4">
-            <h1 className="text-3xl font-bold text-gray-900">Cash Flow Management</h1>
-            <p className="text-gray-600 mt-1">Track all cash in and cash out transactions</p>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Cash Flow Management
+            </h1>
+            <p className="text-gray-600 mt-1">
+              Track all cash in and cash out transactions
+            </p>
           </div>
         </div>
 
@@ -160,14 +162,20 @@ export default function CashFlowPage() {
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
-              <p className="text-gray-600 text-sm font-medium">Total Cash Out</p>
+              <p className="text-gray-600 text-sm font-medium">
+                Total Cash Out
+              </p>
               <p className="text-3xl font-bold text-red-600 mt-2">
                 {formatCurrency(totalOut)}
               </p>
             </div>
-            <div className={`bg-white rounded-lg shadow p-6 border-l-4 ${totalIn - totalOut >= 0 ? 'border-blue-500' : 'border-orange-500'}`}>
+            <div
+              className={`bg-white rounded-lg shadow p-6 border-l-4 ${totalIn - totalOut >= 0 ? "border-blue-500" : "border-orange-500"}`}
+            >
               <p className="text-gray-600 text-sm font-medium">Net Balance</p>
-              <p className={`text-3xl font-bold mt-2 ${totalIn - totalOut >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
+              <p
+                className={`text-3xl font-bold mt-2 ${totalIn - totalOut >= 0 ? "text-blue-600" : "text-orange-600"}`}
+              >
                 {formatCurrency(totalIn - totalOut)}
               </p>
             </div>
@@ -177,7 +185,9 @@ export default function CashFlowPage() {
             {/* Form Section */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Add New Entry</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">
+                  Add New Entry
+                </h2>
 
                 {successMessage && (
                   <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
@@ -207,7 +217,9 @@ export default function CashFlowPage() {
                           onChange={handleInputChange}
                           className="w-4 h-4 text-green-600"
                         />
-                        <span className="ml-2 text-sm text-gray-700">Cash In</span>
+                        <span className="ml-2 text-sm text-gray-700">
+                          Cash In
+                        </span>
                       </label>
                       <label className="flex items-center cursor-pointer">
                         <input
@@ -218,7 +230,9 @@ export default function CashFlowPage() {
                           onChange={handleInputChange}
                           className="w-4 h-4 text-red-600"
                         />
-                        <span className="ml-2 text-sm text-gray-700">Cash Out</span>
+                        <span className="ml-2 text-sm text-gray-700">
+                          Cash Out
+                        </span>
                       </label>
                     </div>
                   </div>
@@ -300,7 +314,9 @@ export default function CashFlowPage() {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                  <h2 className="text-xl font-bold text-gray-900">Recent Transactions</h2>
+                  <h2 className="text-xl font-bold text-gray-900">
+                    Recent Transactions
+                  </h2>
                   <button
                     onClick={fetchCashFlows}
                     disabled={loading}
@@ -385,6 +401,6 @@ export default function CashFlowPage() {
           </div>
         </div>
       </div>
-    </SidebarLayout>
+   
   );
 }
