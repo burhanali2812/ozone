@@ -22,12 +22,12 @@ export default function Header() {
   const router = useRouter();
 
   const headerImages = [
-     "/images/trust.jpeg",
+    "/images/trust.jpeg",
     "/images/study.jpeg",
-        "/images/hospital.jpeg",
+    "/images/hospital.jpeg",
     "/images/nature.jpeg",
     "/images/gym.jpeg",
-        "/images/kitchen.jpeg",
+    "/images/kitchen.jpeg",
     "/images/running.jpeg",
     "/images/lunch.jpeg",
     "/images/sleep.jpeg",
@@ -35,14 +35,13 @@ export default function Header() {
     "/images/office.jpeg",
     "/images/child.jpeg",
     "/images/prayer.jpeg",
-
   ];
 
   // Slideshow effect
   useEffect(() => {
     const slideShowInterval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
-        prevIndex === headerImages.length - 1 ? 0 : prevIndex + 1
+        prevIndex === headerImages.length - 1 ? 0 : prevIndex + 1,
       );
     }, 3000); // Change image every 5 seconds
 
@@ -195,7 +194,7 @@ export default function Header() {
               About
             </Link>
             <Link
-               href="https://g.page/r/CZy3m3Y2buBZEBM/review"
+              href="https://g.page/r/CZy3m3Y2buBZEBM/review"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-white hover:bg-white hover:bg-opacity-20 px-4 py-2 rounded-lg transition-all"

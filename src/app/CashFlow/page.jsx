@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-
 export default function CashFlowPage() {
   const [cashFlows, setCashFlows] = useState([]);
   const [filteredCashFlows, setFilteredCashFlows] = useState([]);
@@ -46,14 +45,16 @@ export default function CashFlowPage() {
     // Filter by source
     if (searchSource.trim()) {
       filtered = filtered.filter((item) =>
-        item.source.toLowerCase().includes(searchSource.toLowerCase())
+        item.source.toLowerCase().includes(searchSource.toLowerCase()),
       );
     }
 
     // Filter by description
     if (searchDescription.trim()) {
       filtered = filtered.filter((item) =>
-        item.description.toLowerCase().includes(searchDescription.toLowerCase())
+        item.description
+          .toLowerCase()
+          .includes(searchDescription.toLowerCase()),
       );
     }
 
@@ -78,7 +79,7 @@ export default function CashFlowPage() {
   const fetchCashFlows = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/cashFlow/cashFlow.js");
+      const response = await fetch("/api/cashFlow");
       const data = await response.json();
       setCashFlows(data);
       calculateTotals(data);
@@ -192,342 +193,341 @@ export default function CashFlowPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-white shadow-sm border-b border-gray-200">
-          <div className="px-6 py-4">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Cash Flow Management
-            </h1>
-            <p className="text-gray-600 mt-1">
-              Track all cash in and cash out transactions
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="px-6 py-4">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Cash Flow Management
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Track all cash in and cash out transactions
+          </p>
+        </div>
+      </div>
+
+      <div className="p-6 max-w-7xl mx-auto">
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+            <p className="text-gray-600 text-sm font-medium">Total Cash In</p>
+            <p className="text-3xl font-bold text-green-600 mt-2">
+              {formatCurrency(totalIn)}
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
+            <p className="text-gray-600 text-sm font-medium">Total Cash Out</p>
+            <p className="text-3xl font-bold text-red-600 mt-2">
+              {formatCurrency(totalOut)}
+            </p>
+          </div>
+          <div
+            className={`bg-white rounded-lg shadow p-6 border-l-4 ${totalIn - totalOut >= 0 ? "border-blue-500" : "border-orange-500"}`}
+          >
+            <p className="text-gray-600 text-sm font-medium">Net Balance</p>
+            <p
+              className={`text-3xl font-bold mt-2 ${totalIn - totalOut >= 0 ? "text-blue-600" : "text-orange-600"}`}
+            >
+              {formatCurrency(totalIn - totalOut)}
             </p>
           </div>
         </div>
 
-        <div className="p-6 max-w-7xl mx-auto">
-          {/* Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
-              <p className="text-gray-600 text-sm font-medium">Total Cash In</p>
-              <p className="text-3xl font-bold text-green-600 mt-2">
-                {formatCurrency(totalIn)}
-              </p>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
-              <p className="text-gray-600 text-sm font-medium">
-                Total Cash Out
-              </p>
-              <p className="text-3xl font-bold text-red-600 mt-2">
-                {formatCurrency(totalOut)}
-              </p>
-            </div>
-            <div
-              className={`bg-white rounded-lg shadow p-6 border-l-4 ${totalIn - totalOut >= 0 ? "border-blue-500" : "border-orange-500"}`}
-            >
-              <p className="text-gray-600 text-sm font-medium">Net Balance</p>
-              <p
-                className={`text-3xl font-bold mt-2 ${totalIn - totalOut >= 0 ? "text-blue-600" : "text-orange-600"}`}
-              >
-                {formatCurrency(totalIn - totalOut)}
-              </p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Form Section */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
+                Add New Entry
+              </h2>
+
+              {successMessage && (
+                <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+                  {successMessage}
+                </div>
+              )}
+
+              {errorMessage && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  {errorMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Type Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Transaction Type
+                  </label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="In"
+                        checked={formData.type === "In"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4 text-green-600"
+                      />
+                      <span className="ml-2 text-sm text-gray-700">
+                        Cash In
+                      </span>
+                    </label>
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="Out"
+                        checked={formData.type === "Out"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4 text-red-600"
+                      />
+                      <span className="ml-2 text-sm text-gray-700">
+                        Cash Out
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Source */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Source
+                  </label>
+                  <input
+                    type="text"
+                    name="source"
+                    value={formData.source}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Customer Payment, Supplier Invoice"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Amount */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Amount
+                  </label>
+                  <input
+                    type="number"
+                    name="amount"
+                    value={formData.amount}
+                    onChange={handleInputChange}
+                    placeholder="0.00"
+                    step="0.01"
+                    min="0"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    placeholder="Enter transaction details..."
+                    rows="3"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Date */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 rounded-lg transition duration-200"
+                >
+                  {loading ? "Adding..." : "Add Entry"}
+                </button>
+              </form>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Form Section */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">
-                  Add New Entry
+          {/* Transactions List Section */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Transactions
                 </h2>
+                <button
+                  onClick={fetchCashFlows}
+                  disabled={loading}
+                  className="px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm transition"
+                >
+                  {loading ? "Refreshing..." : "Refresh"}
+                </button>
+              </div>
 
-                {successMessage && (
-                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
-                    {successMessage}
-                  </div>
-                )}
-
-                {errorMessage && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                    {errorMessage}
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Type Selection */}
+              {/* Filter Section */}
+              <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+                  {/* Type Filter */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Transaction Type
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Type
                     </label>
-                    <div className="flex gap-4">
-                      <label className="flex items-center cursor-pointer">
-                        <input
-                          type="radio"
-                          name="type"
-                          value="In"
-                          checked={formData.type === "In"}
-                          onChange={handleInputChange}
-                          className="w-4 h-4 text-green-600"
-                        />
-                        <span className="ml-2 text-sm text-gray-700">
-                          Cash In
-                        </span>
-                      </label>
-                      <label className="flex items-center cursor-pointer">
-                        <input
-                          type="radio"
-                          name="type"
-                          value="Out"
-                          checked={formData.type === "Out"}
-                          onChange={handleInputChange}
-                          className="w-4 h-4 text-red-600"
-                        />
-                        <span className="ml-2 text-sm text-gray-700">
-                          Cash Out
-                        </span>
-                      </label>
-                    </div>
+                    <select
+                      value={filterType}
+                      onChange={(e) => setFilterType(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="all">All</option>
+                      <option value="In">Cash In</option>
+                      <option value="Out">Cash Out</option>
+                    </select>
                   </div>
 
-                  {/* Source */}
+                  {/* Source Search */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
                       Source
                     </label>
                     <input
                       type="text"
-                      name="source"
-                      value={formData.source}
-                      onChange={handleInputChange}
-                      placeholder="e.g., Customer Payment, Supplier Invoice"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      value={searchSource}
+                      onChange={(e) => setSearchSource(e.target.value)}
+                      placeholder="Search source..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
-                  {/* Amount */}
+                  {/* Description Search */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                      Description
+                    </label>
+                    <input
+                      type="text"
+                      value={searchDescription}
+                      onChange={(e) => setSearchDescription(e.target.value)}
+                      placeholder="Search description..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  {/* Amount Search */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">
                       Amount
                     </label>
                     <input
                       type="number"
-                      name="amount"
-                      value={formData.amount}
-                      onChange={handleInputChange}
-                      placeholder="0.00"
-                      step="0.01"
-                      min="0"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      value={searchAmount}
+                      onChange={(e) => setSearchAmount(e.target.value)}
+                      placeholder="Search amount..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
-                  {/* Description */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Description
-                    </label>
-                    <textarea
-                      name="description"
-                      value={formData.description}
-                      onChange={handleInputChange}
-                      placeholder="Enter transaction details..."
-                      rows="3"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                  {/* Clear Filters */}
+                  <div className="flex items-end">
+                    <button
+                      onClick={clearFilters}
+                      className="w-full px-3 py-2 bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium rounded-lg transition"
+                    >
+                      Clear Filters
+                    </button>
                   </div>
-
-                  {/* Date */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Date
-                    </label>
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 rounded-lg transition duration-200"
-                  >
-                    {loading ? "Adding..." : "Add Entry"}
-                  </button>
-                </form>
+                </div>
               </div>
-            </div>
 
-            {/* Transactions List Section */}
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                  <h2 className="text-xl font-bold text-gray-900">
-                    Transactions
-                  </h2>
-                  <button
-                    onClick={fetchCashFlows}
-                    disabled={loading}
-                    className="px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm transition"
-                  >
-                    {loading ? "Refreshing..." : "Refresh"}
-                  </button>
+              {filteredCashFlows.length === 0 ? (
+                <div className="px-6 py-12 text-center">
+                  <p className="text-gray-500">
+                    {cashFlows.length === 0
+                      ? "No cash flow entries yet"
+                      : "No matching transactions"}
+                  </p>
                 </div>
-
-                {/* Filter Section */}
-                <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
-                    {/* Type Filter */}
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
-                        Type
-                      </label>
-                      <select
-                        value={filterType}
-                        onChange={(e) => setFilterType(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value="all">All</option>
-                        <option value="In">Cash In</option>
-                        <option value="Out">Cash Out</option>
-                      </select>
-                    </div>
-
-                    {/* Source Search */}
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
-                        Source
-                      </label>
-                      <input
-                        type="text"
-                        value={searchSource}
-                        onChange={(e) => setSearchSource(e.target.value)}
-                        placeholder="Search source..."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    {/* Description Search */}
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
-                        Description
-                      </label>
-                      <input
-                        type="text"
-                        value={searchDescription}
-                        onChange={(e) => setSearchDescription(e.target.value)}
-                        placeholder="Search description..."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    {/* Amount Search */}
-                    <div>
-                      <label className="block text-xs font-medium text-gray-700 mb-1">
-                        Amount
-                      </label>
-                      <input
-                        type="number"
-                        value={searchAmount}
-                        onChange={(e) => setSearchAmount(e.target.value)}
-                        placeholder="Search amount..."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    {/* Clear Filters */}
-                    <div className="flex items-end">
-                      <button
-                        onClick={clearFilters}
-                        className="w-full px-3 py-2 bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium rounded-lg transition"
-                      >
-                        Clear Filters
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {filteredCashFlows.length === 0 ? (
-                  <div className="px-6 py-12 text-center">
-                    <p className="text-gray-500">
-                      {cashFlows.length === 0 ? "No cash flow entries yet" : "No matching transactions"}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead className="bg-gray-50 border-b border-gray-200">
-                        <tr>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                            Type
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                            Source
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                            Amount
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                            Description
-                          </th>
-                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
-                            Date
-                          </th>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50 border-b border-gray-200">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                          Type
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                          Source
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                          Amount
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                          Description
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                          Date
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredCashFlows.map((cashFlow, index) => (
+                        <tr
+                          key={cashFlow._id || index}
+                          className="border-b border-gray-200 hover:bg-gray-50 transition"
+                        >
+                          <td className="px-6 py-4">
+                            <span
+                              className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                                cashFlow.type === "In"
+                                  ? "bg-green-100 text-green-800"
+                                  : "bg-red-100 text-red-800"
+                              }`}
+                            >
+                              {cashFlow.type === "In" ? "▲ In" : "▼ Out"}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-900 font-medium">
+                            {cashFlow.source}
+                          </td>
+                          <td className="px-6 py-4">
+                            <span
+                              className={`text-sm font-semibold ${
+                                cashFlow.type === "In"
+                                  ? "text-green-600"
+                                  : "text-red-600"
+                              }`}
+                            >
+                              {cashFlow.type === "In" ? "+" : "-"}
+                              {formatCurrency(cashFlow.amount)}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-600">
+                            {cashFlow.description}
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-600">
+                            {formatDate(cashFlow.date)}
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {filteredCashFlows.map((cashFlow, index) => (
-                          <tr
-                            key={cashFlow._id || index}
-                            className="border-b border-gray-200 hover:bg-gray-50 transition"
-                          >
-                            <td className="px-6 py-4">
-                              <span
-                                className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                                  cashFlow.type === "In"
-                                    ? "bg-green-100 text-green-800"
-                                    : "bg-red-100 text-red-800"
-                                }`}
-                              >
-                                {cashFlow.type === "In" ? "▲ In" : "▼ Out"}
-                              </span>
-                            </td>
-                            <td className="px-6 py-4 text-sm text-gray-900 font-medium">
-                              {cashFlow.source}
-                            </td>
-                            <td className="px-6 py-4">
-                              <span
-                                className={`text-sm font-semibold ${
-                                  cashFlow.type === "In"
-                                    ? "text-green-600"
-                                    : "text-red-600"
-                                }`}
-                              >
-                                {cashFlow.type === "In" ? "+" : "-"}
-                                {formatCurrency(cashFlow.amount)}
-                              </span>
-                            </td>
-                            <td className="px-6 py-4 text-sm text-gray-600">
-                              {cashFlow.description}
-                            </td>
-                            <td className="px-6 py-4 text-sm text-gray-600">
-                              {formatDate(cashFlow.date)}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-   
+    </div>
   );
 }
