@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function CashFlowPage() {
   const [cashFlows, setCashFlows] = useState([]);
+  const [filteredCashFlows, setFilteredCashFlows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "In",
@@ -18,15 +19,66 @@ export default function CashFlowPage() {
   const [totalIn, setTotalIn] = useState(0);
   const [totalOut, setTotalOut] = useState(0);
 
+  // Filter states
+  const [filterType, setFilterType] = useState("all"); // "all", "In", "Out"
+  const [searchSource, setSearchSource] = useState("");
+  const [searchDescription, setSearchDescription] = useState("");
+  const [searchAmount, setSearchAmount] = useState("");
+
   // Fetch cash flows on component mount
   useEffect(() => {
     fetchCashFlows();
   }, []);
 
+  // Apply filters whenever cashFlows, filterType, or search values change
+  useEffect(() => {
+    applyFilters();
+  }, [cashFlows, filterType, searchSource, searchDescription, searchAmount]);
+
+  const applyFilters = () => {
+    let filtered = cashFlows;
+
+    // Filter by type
+    if (filterType !== "all") {
+      filtered = filtered.filter((item) => item.type === filterType);
+    }
+
+    // Filter by source
+    if (searchSource.trim()) {
+      filtered = filtered.filter((item) =>
+        item.source.toLowerCase().includes(searchSource.toLowerCase())
+      );
+    }
+
+    // Filter by description
+    if (searchDescription.trim()) {
+      filtered = filtered.filter((item) =>
+        item.description.toLowerCase().includes(searchDescription.toLowerCase())
+      );
+    }
+
+    // Filter by amount
+    if (searchAmount.trim()) {
+      const amount = parseFloat(searchAmount);
+      if (!isNaN(amount)) {
+        filtered = filtered.filter((item) => item.amount === amount);
+      }
+    }
+
+    setFilteredCashFlows(filtered);
+  };
+
+  const clearFilters = () => {
+    setFilterType("all");
+    setSearchSource("");
+    setSearchDescription("");
+    setSearchAmount("");
+  };
+
   const fetchCashFlows = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/cashFlow");
+      const response = await fetch("/api/cashFlow/cashFlow.js");
       const data = await response.json();
       setCashFlows(data);
       calculateTotals(data);
@@ -315,7 +367,7 @@ export default function CashFlowPage() {
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                   <h2 className="text-xl font-bold text-gray-900">
-                    Recent Transactions
+                    Transactions
                   </h2>
                   <button
                     onClick={fetchCashFlows}
@@ -326,9 +378,84 @@ export default function CashFlowPage() {
                   </button>
                 </div>
 
-                {cashFlows.length === 0 ? (
+                {/* Filter Section */}
+                <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+                    {/* Type Filter */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                        Type
+                      </label>
+                      <select
+                        value={filterType}
+                        onChange={(e) => setFilterType(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        <option value="all">All</option>
+                        <option value="In">Cash In</option>
+                        <option value="Out">Cash Out</option>
+                      </select>
+                    </div>
+
+                    {/* Source Search */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                        Source
+                      </label>
+                      <input
+                        type="text"
+                        value={searchSource}
+                        onChange={(e) => setSearchSource(e.target.value)}
+                        placeholder="Search source..."
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    {/* Description Search */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                        Description
+                      </label>
+                      <input
+                        type="text"
+                        value={searchDescription}
+                        onChange={(e) => setSearchDescription(e.target.value)}
+                        placeholder="Search description..."
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    {/* Amount Search */}
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
+                        Amount
+                      </label>
+                      <input
+                        type="number"
+                        value={searchAmount}
+                        onChange={(e) => setSearchAmount(e.target.value)}
+                        placeholder="Search amount..."
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    {/* Clear Filters */}
+                    <div className="flex items-end">
+                      <button
+                        onClick={clearFilters}
+                        className="w-full px-3 py-2 bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium rounded-lg transition"
+                      >
+                        Clear Filters
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {filteredCashFlows.length === 0 ? (
                   <div className="px-6 py-12 text-center">
-                    <p className="text-gray-500">No cash flow entries yet</p>
+                    <p className="text-gray-500">
+                      {cashFlows.length === 0 ? "No cash flow entries yet" : "No matching transactions"}
+                    </p>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
@@ -353,7 +480,7 @@ export default function CashFlowPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {cashFlows.map((cashFlow, index) => (
+                        {filteredCashFlows.map((cashFlow, index) => (
                           <tr
                             key={cashFlow._id || index}
                             className="border-b border-gray-200 hover:bg-gray-50 transition"

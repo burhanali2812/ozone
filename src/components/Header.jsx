@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,36 @@ import { MdTrackChanges } from "react-icons/md";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const router = useRouter();
+
+  const headerImages = [
+     "/images/trust.jpeg",
+    "/images/study.jpeg",
+        "/images/hospital.jpeg",
+    "/images/nature.jpeg",
+    "/images/gym.jpeg",
+        "/images/kitchen.jpeg",
+    "/images/running.jpeg",
+    "/images/lunch.jpeg",
+    "/images/sleep.jpeg",
+    "/images/labour.jpeg",
+    "/images/office.jpeg",
+    "/images/child.jpeg",
+    "/images/prayer.jpeg",
+
+  ];
+
+  // Slideshow effect
+  useEffect(() => {
+    const slideShowInterval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === headerImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Change image every 5 seconds
+
+    return () => clearInterval(slideShowInterval);
+  }, []);
 
   const handleLogin = () => {
     const user = localStorage.getItem("user2");
@@ -32,8 +61,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 shadow-lg">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
-        style={{ backgroundImage: "url('/images/eid2.jpg')" }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90 transition-all duration-1000"
+        style={{ backgroundImage: `url('${headerImages[currentImageIndex]}')` }}
       ></div>
       <div className="absolute inset-0 bg-blue-900 bg-opacity-40"></div>
       <nav className="container mx-auto px-4 sm:px-6 py-2 relative z-10">
