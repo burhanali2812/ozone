@@ -8,38 +8,43 @@ export default function TransactionPage() {
   const router = useRouter();
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [currentBalance, setCurrentBalance] = useState(0);
   const [loading, setLoading] = useState(true);
-
   const [showAddModal, setShowAddModal] = useState(false);
   const [userName, setUserName] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
   // Form state
   const [newTransaction, setNewTransaction] = useState({
     doBy: "",
     amount: 0,
     purpose: "",
+    type: "out",
+    category: "other",
   });
 
-  // Fetch transactions
+  // Fetch transactions and balance
   const getTransactions = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/transaction");
-      if (res.data.success) {
-        setTransactions(res.data.data);
-        setFilteredTransactions(res.data.data);
-      } else {
-        setTransactions([]);
-        setFilteredTransactions([]);
+      const [transRes, balanceRes] = await Promise.all([
+        axios.get("/api/transaction"),
+        axios.get("/api/balance"),
+      ]);
+
+      if (transRes.data.success) {
+        setTransactions(transRes.data.data);
+        setFilteredTransactions(transRes.data.data);
+      }
+
+      if (balanceRes.data.success) {
+        setCurrentBalance(balanceRes.data.balance);
       }
     } catch (error) {
-      console.error("Error fetching transactions:", error);
+      console.error("Error fetching data:", error);
       toast.error("Failed to fetch transactions");
       setTransactions([]);
-      setFilteredTransactions([]);
     } finally {
       setLoading(false);
     }
@@ -61,92 +66,37 @@ export default function TransactionPage() {
     getTransactions();
   }, []);
 
-  // Calculate totals for each person
-  const burhanTotal = transactions
-    .filter((t) => t.doBy === "Burhan Ali")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const sharjeelTotal = transactions
-    .filter((t) => t.doBy === "Sharjeel Khan")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const iftikharTotal = transactions
-    .filter((t) => t.doBy === "Iftikhar Ali")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const ozoneTotal = transactions
-    .filter((t) => t.doBy === "Ozone")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  // Calculate difference
-  const difference = Math.abs(burhanTotal - sharjeelTotal);
-  const isBurhanHigher = burhanTotal > sharjeelTotal;
-  const isSharjeelHigher = sharjeelTotal > burhanTotal;
-
-  // Calculate Iftikhar Ali comparisons
-  const iftikharVsBurhan = Math.abs(iftikharTotal - burhanTotal);
-  const iftikharVsSharjeel = Math.abs(iftikharTotal - sharjeelTotal);
-  const isIftikharHigherThanBurhan = iftikharTotal > burhanTotal;
-  const isIftikharHigherThanSharjeel = iftikharTotal > sharjeelTotal;
-  const isIftikharHigher =
-    isIftikharHigherThanBurhan && isIftikharHigherThanSharjeel;
-  const isIftikharLower =
-    iftikharTotal < burhanTotal && iftikharTotal < sharjeelTotal;
-
-  // Filter transactions
-  const handleFilter = (person) => {
-    setActiveFilter(person);
-    applyFilters(person, fromDate, toDate);
-  };
-
-  // Apply all filters (person and date)
-  const applyFilters = (person, from, to) => {
+  // Apply filters
+  useEffect(() => {
     let filtered = transactions;
 
-    // Filter by person
-    if (person !== "all") {
-      filtered = filtered.filter((t) => t.doBy === person);
+    // Filter by type
+    if (activeFilter !== "all") {
+      filtered = filtered.filter((t) => t.type === activeFilter);
     }
 
-    // Filter by date range
-    if (from) {
-      const fromDateTime = new Date(from).setHours(0, 0, 0, 0);
-      filtered = filtered.filter((t) => {
-        const transactionDate = new Date(t.createdAt).setHours(0, 0, 0, 0);
-        return transactionDate >= fromDateTime;
-      });
-    }
-
-    if (to) {
-      const toDateTime = new Date(to).setHours(23, 59, 59, 999);
-      filtered = filtered.filter((t) => {
-        const transactionDate = new Date(t.createdAt).getTime();
-        return transactionDate <= toDateTime;
-      });
+    // Filter by category
+    if (categoryFilter !== "all") {
+      filtered = filtered.filter((t) => t.category === categoryFilter);
     }
 
     setFilteredTransactions(filtered);
+  }, [activeFilter, categoryFilter, transactions]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewTransaction((prev) => ({
+      ...prev,
+      [name]: name === "amount" ? parseFloat(value) || 0 : value,
+    }));
   };
 
-  // Handle date filter change
-  const handleDateFilter = (from, to) => {
-    setFromDate(from);
-    setToDate(to);
-    applyFilters(activeFilter, from, to);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Clear date filters
-  const clearDateFilters = () => {
-    setFromDate("");
-    setToDate("");
-    applyFilters(activeFilter, "", "");
-  };
-
-  // Add transaction
-  const handleAddTransaction = async () => {
     if (
-      !newTransaction.doBy ||
-      !newTransaction.purpose ||
+      !newTransaction.doBy.trim() ||
+      !newTransaction.purpose.trim() ||
       newTransaction.amount <= 0
     ) {
       toast.error("Please fill all fields correctly");
@@ -154,29 +104,42 @@ export default function TransactionPage() {
     }
 
     try {
-      const res = await axios.post("/api/transaction", newTransaction);
-      if (res.data.success) {
-        toast.success("Transaction added successfully!");
-        setTransactions([res.data.data, ...transactions]);
+      const response = await axios.post("/api/transaction", {
+        ...newTransaction,
+        category: newTransaction.category,
+      });
 
-        // Update filtered list if needed
-        if (activeFilter === "all" || activeFilter === newTransaction.doBy) {
-          setFilteredTransactions([res.data.data, ...filteredTransactions]);
-        }
-
+      if (response.data.success) {
+        toast.success("Transaction recorded successfully!");
+        setCurrentBalance(response.data.newBalance);
+        setNewTransaction({
+          doBy: "",
+          amount: 0,
+          purpose: "",
+          type: "out",
+          category: "other",
+        });
         setShowAddModal(false);
-        setNewTransaction({ doBy: "", amount: 0, purpose: "" });
+        await getTransactions();
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
-      console.error("Error adding transaction:", error);
-      toast.error("Failed to add transaction");
+      console.error("Error:", error);
+      toast.error(error.response?.data?.message || "Failed to record transaction");
     }
   };
 
-  // Format date
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "PKR",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -185,985 +148,320 @@ export default function TransactionPage() {
     });
   };
 
+  const getCategoryColor = (category) => {
+    switch (category) {
+      case "sales":
+        return "bg-green-100 text-green-800";
+      case "purchase":
+        return "bg-orange-100 text-orange-800";
+      case "expense":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-blue-100 text-blue-800";
+    }
+  };
+
   return (
-    <section className="w-full min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12">
+    <div className="min-h-screen bg-gray-50">
       <Toaster />
-      <div className="container mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Right - Add Transaction Button */}
+
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="px-6 py-4">
+          <h1 className="text-3xl font-bold text-gray-900">Transaction Management</h1>
+          <p className="text-gray-600 mt-1">Welcome, {userName}</p>
+        </div>
+      </div>
+
+      <div className="p-6 max-w-7xl mx-auto">
+        {/* Balance Card */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg shadow-lg p-8 mb-8 text-white">
+          <p className="text-blue-100 text-sm font-medium">Current Account Balance</p>
+          <h2 className="text-4xl font-bold mt-2">{formatCurrency(currentBalance)}</h2>
+          <p className="text-blue-100 text-sm mt-2">Real-time balance tracking</p>
+        </div>
+
+        {/* Add Transaction Button */}
+        <div className="mb-6">
           <button
             onClick={() => setShowAddModal(true)}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-            Add Transaction
+            + Add Transaction
           </button>
         </div>
 
-        {/* Date Filter Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
-            <div className="flex-1 w-full sm:w-auto">
-              <label className="block text-gray-700 font-medium mb-2 text-sm">
-                From Date
-              </label>
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => handleDateFilter(e.target.value, toDate)}
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
-              />
+        {/* Add Transaction Modal */}
+        {showAddModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Record Transaction</h2>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Type Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Transaction Type
+                  </label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="in"
+                        checked={newTransaction.type === "in"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4"
+                      />
+                      <span className="ml-2 text-sm">Money In (Sales)</span>
+                    </label>
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="out"
+                        checked={newTransaction.type === "out"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4"
+                      />
+                      <span className="ml-2 text-sm">Money Out (Purchase)</span>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Category */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Category
+                  </label>
+                  <select
+                    name="category"
+                    value={newTransaction.category}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="other">Other</option>
+                    <option value="sales">Sales</option>
+                    <option value="purchase">Purchase</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </div>
+
+                {/* Amount */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Amount
+                  </label>
+                  <input
+                    type="number"
+                    name="amount"
+                    value={newTransaction.amount}
+                    onChange={handleInputChange}
+                    placeholder="0.00"
+                    step="0.01"
+                    min="0"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Done By */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Done By
+                  </label>
+                  <input
+                    type="text"
+                    name="doBy"
+                    value={newTransaction.doBy}
+                    onChange={handleInputChange}
+                    placeholder="Person name"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Purpose */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Purpose
+                  </label>
+                  <textarea
+                    name="purpose"
+                    value={newTransaction.purpose}
+                    onChange={handleInputChange}
+                    placeholder="Transaction details..."
+                    rows="3"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Buttons */}
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition"
+                  >
+                    Record Transaction
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowAddModal(false)}
+                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 rounded-lg transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
             </div>
-            <div className="flex-1 w-full sm:w-auto">
-              <label className="block text-gray-700 font-medium mb-2 text-sm">
-                To Date
-              </label>
-              <input
-                type="date"
-                value={toDate}
-                onChange={(e) => handleDateFilter(fromDate, e.target.value)}
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none text-sm"
-              />
-            </div>
-            {(fromDate || toDate) && (
-              <button
-                onClick={clearDateFilters}
-                className="w-full sm:w-auto bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg hover:bg-gray-300 transition-colors font-medium text-sm flex items-center justify-center gap-2"
+          </div>
+        )}
+
+        {/* Filters */}
+        <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+              <select
+                value={activeFilter}
+                onChange={(e) => setActiveFilter(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-                Clear Dates
+                <option value="all">All</option>
+                <option value="in">Money In</option>
+                <option value="out">Money Out</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All</option>
+                <option value="sales">Sales</option>
+                <option value="purchase">Purchase</option>
+                <option value="expense">Expense</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className="flex items-end">
+              <button
+                onClick={() => {
+                  setActiveFilter("all");
+                  setCategoryFilter("all");
+                }}
+                className="w-full px-3 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-lg transition"
+              >
+                Clear Filters
               </button>
-            )}
-            {(fromDate || toDate) && (
-              <div className="w-full sm:w-auto bg-blue-50 border border-blue-200 px-4 py-2.5 rounded-lg">
-                <p className="text-xs text-blue-600 font-medium">
-                  {fromDate && toDate
-                    ? `${new Date(fromDate).toLocaleDateString()} - ${new Date(
-                        toDate,
-                      ).toLocaleDateString()}`
-                    : fromDate
-                      ? `From: ${new Date(fromDate).toLocaleDateString()}`
-                      : `Until: ${new Date(toDate).toLocaleDateString()}`}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {/* Burhan Ali Card */}
-          <div
-            onClick={() => handleFilter("Burhan Ali")}
-            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-              activeFilter === "Burhan Ali" ? "ring-4 ring-purple-500" : ""
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
-                BA
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">
-                  Burhan Ali
-                </h3>
-                <p className="text-sm text-gray-600 mb-2">Total Transactions</p>
-                <p className="text-2xl font-bold text-purple-600">
-                  Rs. {burhanTotal.toLocaleString()}/-
-                </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal > 0 && (
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-500"
-                        style={{
-                          width: `${(
-                            (burhanTotal /
-                              (burhanTotal + sharjeelTotal + iftikharTotal)) *
-                            100
-                          ).toFixed(1)}%`,
-                        }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-bold text-purple-600 whitespace-nowrap">
-                      {(
-                        (burhanTotal /
-                          (burhanTotal + sharjeelTotal + iftikharTotal)) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </span>
-                  </div>
-                )}
-              </div>
             </div>
-
-            {/* Status Badge */}
-            {isBurhanHigher ? (
-              <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-green-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Higher by</p>
-                    <p className="text-lg font-bold">
-                      Rs. {difference.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : isSharjeelHigher ? (
-              <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-red-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Lower by</p>
-                    <p className="text-lg font-bold">
-                      Rs. {difference.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-blue-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.75-8.25a.75.75 0 011.5 0v3.69l2.28 2.28a.75.75 0 11-1.06 1.06l-2.5-2.5a.75.75 0 01-.22-.53V7.75z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <p className="text-sm font-semibold">Equal Balance</p>
-                </div>
-              </div>
-            )}
-
-            {activeFilter === "Burhan Ali" && (
-              <div className="mt-3 text-sm text-purple-600 font-semibold flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Filtered
-              </div>
-            )}
-          </div>
-
-          {/* Sharjeel Khan Card */}
-          <div
-            onClick={() => handleFilter("Sharjeel Khan")}
-            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-              activeFilter === "Sharjeel Khan" ? "ring-4 ring-pink-500" : ""
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-700 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
-                SK
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">
-                  Sharjeel Khan
-                </h3>
-                <p className="text-sm text-gray-600 mb-2">Total Transactions</p>
-                <p className="text-2xl font-bold text-pink-600">
-                  Rs. {sharjeelTotal.toLocaleString()}/-
-                </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal > 0 && (
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-pink-500 to-pink-600 transition-all duration-500"
-                        style={{
-                          width: `${(
-                            (sharjeelTotal /
-                              (burhanTotal + sharjeelTotal + iftikharTotal)) *
-                            100
-                          ).toFixed(1)}%`,
-                        }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-bold text-pink-600 whitespace-nowrap">
-                      {(
-                        (sharjeelTotal /
-                          (burhanTotal + sharjeelTotal + iftikharTotal)) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Status Badge */}
-            {isSharjeelHigher ? (
-              <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-green-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Higher by</p>
-                    <p className="text-lg font-bold">
-                      Rs. {difference.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : isBurhanHigher ? (
-              <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-red-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Lower by</p>
-                    <p className="text-lg font-bold">
-                      Rs. {difference.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-blue-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.75-8.25a.75.75 0 011.5 0v3.69l2.28 2.28a.75.75 0 11-1.06 1.06l-2.5-2.5a.75.75 0 01-.22-.53V7.75z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <p className="text-sm font-semibold">Equal Balance</p>
-                </div>
-              </div>
-            )}
-
-            {activeFilter === "Sharjeel Khan" && (
-              <div className="mt-3 text-sm text-pink-600 font-semibold flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Filtered
-              </div>
-            )}
-          </div>
-
-          {/* Iftikhar Ali Card */}
-          <div
-            onClick={() => handleFilter("Iftikhar Ali")}
-            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-              activeFilter === "Iftikhar Ali" ? "ring-4 ring-orange-500" : ""
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
-                IA
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">
-                  Iftikhar Ali
-                </h3>
-                <p className="text-sm text-gray-600 mb-2">Total Transactions</p>
-                <p className="text-2xl font-bold text-orange-600">
-                  Rs. {iftikharTotal.toLocaleString()}/-
-                </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal > 0 && (
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-500"
-                        style={{
-                          width: `${(
-                            (iftikharTotal /
-                              (burhanTotal + sharjeelTotal + iftikharTotal)) *
-                            100
-                          ).toFixed(1)}%`,
-                        }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-bold text-orange-600 whitespace-nowrap">
-                      {(
-                        (iftikharTotal /
-                          (burhanTotal + sharjeelTotal + iftikharTotal)) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Status Badge */}
-            {isIftikharHigher ? (
-              <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-green-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Highest Partner</p>
-                    <p className="text-xs text-green-600">
-                      Above Burhan by Rs. {iftikharVsBurhan.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : isIftikharLower ? (
-              <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-red-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Lowest Partner</p>
-                    <p className="text-xs text-red-600">Below average</p>
-                  </div>
-                </div>
-              </div>
-            ) : isIftikharHigherThanBurhan ? (
-              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-blue-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">Higher than Burhan</p>
-                    <p className="text-lg font-bold">
-                      Rs. {iftikharVsBurhan.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : isIftikharHigherThanSharjeel ? (
-              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-blue-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-semibold">
-                      Higher than Sharjeel
-                    </p>
-                    <p className="text-lg font-bold">
-                      Rs. {iftikharVsSharjeel.toLocaleString()}/-
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-4 bg-gray-50 border border-gray-200 rounded-lg p-3">
-                <div className="flex items-center gap-2 text-gray-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm-.75-8.25a.75.75 0 011.5 0v3.69l2.28 2.28a.75.75 0 11-1.06 1.06l-2.5-2.5a.75.75 0 01-.22-.53V7.75z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <p className="text-sm font-semibold">Middle Position</p>
-                </div>
-              </div>
-            )}
-
-            {activeFilter === "Iftikhar Ali" && (
-              <div className="mt-3 text-sm text-orange-600 font-semibold flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Filtered
-              </div>
-            )}
-          </div>
-
-          {/* Ozone Card */}
-          <div
-            onClick={() => handleFilter("Ozone")}
-            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-              activeFilter === "Ozone" ? "ring-4 ring-green-500" : ""
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
-                OZ
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">Ozone</h3>
-                <p className="text-sm text-gray-600 mb-2">Total Transactions</p>
-                <p className="text-2xl font-bold text-green-600">
-                  Rs. {ozoneTotal.toLocaleString()}/-
-                </p>
-                {burhanTotal + sharjeelTotal + iftikharTotal + ozoneTotal >
-                  0 && (
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-500"
-                        style={{
-                          width: `${(
-                            (ozoneTotal /
-                              (burhanTotal +
-                                sharjeelTotal +
-                                iftikharTotal +
-                                ozoneTotal)) *
-                            100
-                          ).toFixed(1)}%`,
-                        }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-bold text-green-600 whitespace-nowrap">
-                      {(
-                        (ozoneTotal /
-                          (burhanTotal +
-                            sharjeelTotal +
-                            iftikharTotal +
-                            ozoneTotal)) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {activeFilter === "Ozone" && (
-              <div className="mt-3 text-sm text-green-600 font-semibold flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Filtered
-              </div>
-            )}
-          </div>
-
-          {/* All Transactions Card */}
-          <div
-            onClick={() => handleFilter("all")}
-            className={`bg-white rounded-2xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-              activeFilter === "all" ? "ring-4 ring-blue-500" : ""
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center text-white">
-                <svg
-                  className="w-8 h-8"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">
-                  All Transactions
-                </h3>
-                <p className="text-sm text-gray-600 mb-2">Total Amount</p>
-                <p className="text-2xl font-bold text-blue-600">
-                  Rs.{" "}
-                  {(
-                    burhanTotal +
-                    sharjeelTotal +
-                    iftikharTotal +
-                    ozoneTotal
-                  ).toLocaleString()}
-                  /-
-                </p>
-              </div>
-            </div>
-
-            {/* Summary Badge */}
-            <div className="mt-4 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <p className="text-gray-600">Burhan Ali</p>
-                  <p className="font-bold text-purple-600">
-                    Rs. {burhanTotal.toLocaleString()}/-
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">Sharjeel Khan</p>
-                  <p className="font-bold text-pink-600">
-                    Rs. {sharjeelTotal.toLocaleString()}/-
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">Iftikhar Ali</p>
-                  <p className="font-bold text-orange-600">
-                    Rs. {iftikharTotal.toLocaleString()}/-
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">Ozone</p>
-                  <p className="font-bold text-green-600">
-                    Rs. {ozoneTotal.toLocaleString()}/-
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {activeFilter === "all" && (
-              <div className="mt-3 text-sm text-blue-600 font-semibold flex items-center gap-2">
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Showing All
-              </div>
-            )}
           </div>
         </div>
 
         {/* Transactions Table */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="p-6 bg-gradient-to-r from-purple-50 to-pink-50">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-xl font-bold text-gray-900">
-              {activeFilter === "all"
-                ? "All Transactions"
-                : `${activeFilter}'s Transactions`}
+              Transaction History ({filteredTransactions.length})
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
-              Showing {filteredTransactions.length} transaction
-              {filteredTransactions.length !== 1 ? "s" : ""}
-            </p>
           </div>
 
           {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-600"></div>
+            <div className="px-6 py-12 text-center">
+              <p className="text-gray-500">Loading transactions...</p>
             </div>
-          ) : filteredTransactions.length > 0 ? (
+          ) : filteredTransactions.length === 0 ? (
+            <div className="px-6 py-12 text-center">
+              <p className="text-gray-500">No transactions found</p>
+            </div>
+          ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Date & Time
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                      Date
                     </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                      Type
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                      Category
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
                       Done By
                     </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
                       Purpose
                     </th>
-                    <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
                       Amount
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">
+                      Balance After
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {filteredTransactions.map((transaction) => (
+                <tbody>
+                  {filteredTransactions.map((transaction, index) => (
                     <tr
-                      key={transaction._id}
-                      className="hover:bg-gray-50 transition-colors"
+                      key={transaction._id || index}
+                      className="border-b border-gray-200 hover:bg-gray-50 transition"
                     >
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            />
-                          </svg>
-                          {formatDate(transaction.createdAt)}
-                        </div>
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {formatDate(transaction.createdAt)}
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                              transaction.doBy === "Burhan Ali"
-                                ? "bg-gradient-to-br from-purple-500 to-purple-700"
-                                : transaction.doBy === "Sharjeel Khan"
-                                  ? "bg-gradient-to-br from-pink-500 to-pink-700"
-                                  : transaction.doBy === "Iftikhar Ali"
-                                    ? "bg-gradient-to-br from-orange-500 to-orange-700"
-                                    : "bg-gradient-to-br from-green-500 to-green-700"
-                            }`}
-                          >
-                            {transaction.doBy === "Burhan Ali"
-                              ? "BA"
-                              : transaction.doBy === "Sharjeel Khan"
-                                ? "SK"
-                                : transaction.doBy === "Iftikhar Ali"
-                                  ? "IA"
-                                  : "OZ"}
-                          </div>
-                          <span className="font-medium text-gray-900">
-                            {transaction.doBy}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="text-gray-700">
-                          {transaction.purpose}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
                         <span
-                          className={`text-lg font-bold ${
-                            transaction.doBy === "Burhan Ali"
-                              ? "text-purple-600"
-                              : transaction.doBy === "Sharjeel Khan"
-                                ? "text-pink-600"
-                                : transaction.doBy === "Iftikhar Ali"
-                                  ? "text-orange-600"
-                                  : "text-green-600"
+                          className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            transaction.type === "in"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
                           }`}
                         >
-                          Rs. {transaction.amount.toLocaleString()}/-
+                          {transaction.type === "in" ? "IN" : "OUT"}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(
+                            transaction.category
+                          )}`}
+                        >
+                          {transaction.category.toUpperCase()}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                        {transaction.doBy}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {transaction.purpose}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`text-sm font-semibold ${
+                            transaction.type === "in"
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {transaction.type === "in" ? "+" : "-"}
+                          {formatCurrency(transaction.amount)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-sm font-semibold text-blue-600">
+                          {formatCurrency(transaction.balanceAfter)}
                         </span>
                       </td>
                     </tr>
                   ))}
                 </tbody>
-                <tfoot className="bg-gray-50">
-                  <tr>
-                    <td
-                      colSpan="3"
-                      className="px-6 py-4 text-right font-bold text-gray-900"
-                    >
-                      Total:
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <span className="text-xl font-bold text-blue-600">
-                        Rs.{" "}
-                        {filteredTransactions
-                          .reduce((sum, t) => sum + t.amount, 0)
-                          .toLocaleString()}
-                        /-
-                      </span>
-                    </td>
-                  </tr>
-                </tfoot>
               </table>
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  className="w-10 h-10 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                No Transactions Found
-              </h3>
-              <p className="text-gray-600 mb-6">
-                {activeFilter === "all"
-                  ? "Get started by adding your first transaction"
-                  : `No transactions found for ${activeFilter}`}
-              </p>
-              <button
-                onClick={() => setShowAddModal(true)}
-                className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium"
-              >
-                Add Transaction
-              </button>
             </div>
           )}
         </div>
       </div>
-
-      {/* Add Transaction Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full">
-            <div className="p-8">
-              {/* Modal Header */}
-              <div className="flex justify-between items-center mb-6">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    Add New Transaction
-                  </h2>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Enter transaction details below
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    setShowAddModal(false);
-                    setNewTransaction({ doBy: "", amount: 0, purpose: "" });
-                  }}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-
-              {/* Form */}
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">
-                    Done By *
-                  </label>
-                  <select
-                    value={newTransaction.doBy}
-                    onChange={(e) =>
-                      setNewTransaction({
-                        ...newTransaction,
-                        doBy: e.target.value,
-                      })
-                    }
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none"
-                  >
-                    <option value="">Select Person</option>
-                    <option value="Burhan Ali">Burhan Ali</option>
-                    <option value="Sharjeel Khan">Sharjeel Khan</option>
-                    <option value="Iftikhar Ali">Iftikhar Ali</option>
-                    <option value="Ozone">Ozone</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">
-                    Amount (Rs.) *
-                  </label>
-                  <input
-                    type="number"
-                    value={newTransaction.amount}
-                    onChange={(e) =>
-                      setNewTransaction({
-                        ...newTransaction,
-                        amount: parseFloat(e.target.value) || 0,
-                      })
-                    }
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none"
-                    placeholder="Enter amount"
-                    min="0"
-                    step="0.01"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">
-                    Purpose *
-                  </label>
-                  <textarea
-                    value={newTransaction.purpose}
-                    onChange={(e) =>
-                      setNewTransaction({
-                        ...newTransaction,
-                        purpose: e.target.value,
-                      })
-                    }
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-600 focus:outline-none resize-none"
-                    placeholder="Enter transaction purpose"
-                    rows="4"
-                  />
-                </div>
-
-                {/* Preview */}
-                {newTransaction.doBy && newTransaction.amount > 0 && (
-                  <div className="bg-purple-50 rounded-lg p-4">
-                    <p className="text-sm text-gray-600 mb-2">
-                      Transaction Preview:
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="font-semibold text-gray-900">
-                          {newTransaction.doBy}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {newTransaction.purpose || "No purpose specified"}
-                        </p>
-                      </div>
-                      <p className="text-2xl font-bold text-purple-600">
-                        Rs. {newTransaction.amount.toLocaleString()}/-
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-4 mt-6">
-                <button
-                  onClick={handleAddTransaction}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg hover:shadow-lg transition-all font-medium"
-                >
-                  Add Transaction
-                </button>
-                <button
-                  onClick={() => {
-                    setShowAddModal(false);
-                    setNewTransaction({ doBy: "", amount: 0, purpose: "" });
-                  }}
-                  className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
+    </div>
   );
 }
