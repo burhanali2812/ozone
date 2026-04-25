@@ -142,3 +142,21 @@ Use mongoose.model(name, schema)
 [00:02:54.110] Server  ERROR   Error fetching transactions: MissingSchemaError: Schema hasn't been registered for model "Stock".
 Use mongoose.model(name, schema)
 [00:02:55.011] Browser ERROR   Error fetching data: {"code":"ERR_BAD_RESPONSE","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/api/transaction","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 500","name":"AxiosError","stack":"AxiosError: Request failed with status code 500\n    at settle (http://localhost:3000/_next/static/chunks/6552f_78944bec._.js:3479:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/6552f_78944bec._.js:3994:206)\n    at Axios.request (http://localhost:3000/_next/static/chunks/6552f_78944bec._.js:4798:49)\n    at async Promise.all (index 0)\n    at async getTransactions (http://localhost:3000/_next/static/chunks/OZONE_ozone-water-1_src_app_transaction_page_jsx_d9bb0735._.js:44:44)","status":500}
+[00:04:51.946] Server  LOG     MongoDB already connected
+[00:04:52.280] Server  LOG     MongoDB already connected
+[00:05:17.096] Server  LOG     MongoDB already connected
+[00:05:19.309] Server  LOG     MongoDB already connected
+[00:05:29.318] Server  LOG     MongoDB already connected
+[00:05:53.152] Server  LOG     MongoDB already connected
+[00:05:53.162] Server  LOG     MongoDB already connected
+[00:05:53.218] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:05:53.433] Server  LOG     MongoDB already connected
+[00:05:53.566] Server  LOG     MongoDB already connected
+[00:05:58.498] Server  LOG     MongoDB already connected
+[00:05:58.507] Server  LOG     MongoDB already connected
+[00:05:58.633] Server  LOG     MongoDB already connected
+[00:05:58.773] Server  LOG     MongoDB already connected
+[00:06:04.205] Server  LOG     MongoDB already connected
+[00:06:04.213] Server  LOG     MongoDB already connected
+[00:06:04.481] Server  LOG     MongoDB already connected
+[00:06:04.588] Server  LOG     MongoDB already connected

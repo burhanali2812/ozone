@@ -20,7 +20,7 @@ export async function GET(request) {
         isDeleted: { $ne: true },
       });
 
-      const totalSales = orders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+      const totalSales = orders.reduce((sum, order) => sum + (order.paidAmount || 0), 0);
 
       // Get all transactions with type "out" and doBy "Ozone" (expenses)
       const ozoneTransactions = await Transaction.find({
