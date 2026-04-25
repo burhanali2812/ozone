@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import connectDB from "../../../../lib/db";
 import Transaction from "../../../../models/Transaction";
 import AccountBalance from "../../../../models/AccountBalance";
+import Stock from "../../../../models/Stock";
+import Order from "../../../../models/Order";
 
 export async function POST(request) {
   try {
@@ -82,10 +84,7 @@ export async function POST(request) {
 export async function GET(request) {
   try {
     await connectDB();
-    const transactions = await Transaction.find()
-      .populate("relatedOrderId", "trackingID shopName totalPrice")
-      .populate("relatedStockId", "productSize quantity")
-      .sort({ createdAt: -1 });
+    const transactions = await Transaction.find().sort({ createdAt: -1 });
 
     return NextResponse.json(
       {

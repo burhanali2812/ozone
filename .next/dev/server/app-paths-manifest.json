@@ -7,5 +7,6 @@
   "/balance/page": "app/balance/page.js",
   "/orderDashboard/page": "app/orderDashboard/page.js",
   "/page": "app/page.js",
+  "/stock_transactions/page": "app/stock_transactions/page.js",
   "/transaction/page": "app/transaction/page.js"
 }
