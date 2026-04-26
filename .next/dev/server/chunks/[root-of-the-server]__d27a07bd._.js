@@ -329,7 +329,7 @@ async function GET(request) {
                     $ne: true
                 }
             });
-            const totalSales = orders.reduce((sum, order)=>sum + (order.totalPrice || 0), 0);
+            const totalSales = orders.reduce((sum, order)=>sum + (order.paidAmount || 0), 0);
             // Get all transactions with type "out" and doBy "Ozone" (expenses)
             const ozoneTransactions = await __TURBOPACK__imported__module__$5b$project$5d2f$OZONE$2f$ozone$2d$water$2d$1$2f$models$2f$Transaction$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({
                 type: "out",

@@ -82,7 +82,7 @@ export default function StockTransactionPage() {
         return sum + (order.paidAmount || 0);
       }
       // For paid orders, add the full totalPrice
-      return sum + (order.totalPrice || 0);
+      return sum + (order.paidAmount || 0);
     }, 0);
 
   const totalPurchase = filteredTransactions.reduce(

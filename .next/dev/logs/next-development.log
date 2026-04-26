@@ -160,3 +160,21 @@ Use mongoose.model(name, schema)
 [00:06:04.213] Server  LOG     MongoDB already connected
 [00:06:04.481] Server  LOG     MongoDB already connected
 [00:06:04.588] Server  LOG     MongoDB already connected
+[00:10:31.358] Server  LOG     MongoDB already connected
+[00:10:31.463] Server  LOG     MongoDB already connected
+[00:10:31.644] Server  LOG     MongoDB already connected
+[00:10:31.650] Server  LOG     MongoDB already connected
+[00:11:19.561] Server  LOG     MongoDB already connected
+[00:11:19.568] Server  LOG     MongoDB already connected
+[00:11:30.255] Server  LOG     MongoDB already connected
+[00:11:41.414] Server  LOG     MongoDB already connected
+[00:12:18.715] Server  LOG      ✓ Compiled in 182ms
+[00:12:50.852] Server  LOG     MongoDB already connected
+[00:13:40.553] Server  LOG     MongoDB already connected
+[00:13:40.564] Server  LOG     MongoDB already connected
+[00:13:40.566] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:13:40.852] Server  LOG     MongoDB already connected
+[00:13:40.965] Server  LOG     MongoDB already connected
+[00:22:16.046] Server  LOG      ✓ Compiled in 51ms
+[00:22:48.406] Server  LOG     MongoDB already connected
+[00:22:48.416] Server  LOG     MongoDB already connected
