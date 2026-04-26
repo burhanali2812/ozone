@@ -27,6 +27,7 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
+    console.error("Transaction creation error:", error);
     return NextResponse.json(
       {
         success: false,
