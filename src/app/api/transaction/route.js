@@ -9,7 +9,7 @@ export async function POST(request) {
     if (!amount || !doBy || !purpose) {
       return NextResponse.json(
         { success: false, message: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     const newTransaction = new Transaction({
@@ -24,7 +24,7 @@ export async function POST(request) {
         data: newTransaction,
         success: true,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("Transaction creation error:", error);
@@ -34,7 +34,7 @@ export async function POST(request) {
         message: "Failed to record transaction.",
         error: error.message,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -49,13 +49,13 @@ export async function GET(request) {
         message: "Transactions fetched successfully",
         data: transactions,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error fetching transactions:", error);
     return NextResponse.json(
       { success: false, message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
