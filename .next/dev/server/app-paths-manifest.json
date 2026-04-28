@@ -1,1 +1,14 @@
-{}
+{
+  "/CashFlow/page": "app/CashFlow/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/balance/route": "app/api/balance/route.js",
+  "/api/cashFlow/route": "app/api/cashFlow/route.js",
+  "/api/orders/route": "app/api/orders/route.js",
+  "/api/product/route": "app/api/product/route.js",
+  "/api/transaction/route": "app/api/transaction/route.js",
+  "/balance/page": "app/balance/page.js",
+  "/orderDashboard/page": "app/orderDashboard/page.js",
+  "/page": "app/page.js",
+  "/stock_transactions/page": "app/stock_transactions/page.js",
+  "/transaction/page": "app/transaction/page.js"
+}

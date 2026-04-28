@@ -1,12 +1,50 @@
 {
   "pages": {
-    "/_app": []
+    "/_app": [
+      "static/chunks/6552f_next_dist_compiled_b05ac4e5._.js",
+      "static/chunks/6552f_next_dist_shared_lib_b009e8d3._.js",
+      "static/chunks/6552f_next_dist_client_e333e54f._.js",
+      "static/chunks/6552f_next_dist_3396c64d._.js",
+      "static/chunks/6552f_next_app_17fd3acc.js",
+      "static/chunks/[next]_entry_page-loader_ts_a57fa455._.js",
+      "static/chunks/6552f_react-dom_93a9c88e._.js",
+      "static/chunks/6552f_e4958ce1._.js",
+      "static/chunks/[root-of-the-server]__6d256a72._.js",
+      "static/chunks/OZONE_ozone-water-1_pages__app_2da965e7._.js",
+      "static/chunks/turbopack-OZONE_ozone-water-1_pages__app_229e12b2._.js"
+    ],
+    "/_error": [
+      "static/chunks/6552f_next_dist_compiled_b05ac4e5._.js",
+      "static/chunks/6552f_next_dist_shared_lib_9280d062._.js",
+      "static/chunks/6552f_next_dist_client_e333e54f._.js",
+      "static/chunks/6552f_next_dist_454e256a._.js",
+      "static/chunks/6552f_next_error_52c460e8.js",
+      "static/chunks/[next]_entry_page-loader_ts_7dc3de73._.js",
+      "static/chunks/6552f_react-dom_93a9c88e._.js",
+      "static/chunks/6552f_e4958ce1._.js",
+      "static/chunks/[root-of-the-server]__bed3f586._.js",
+      "static/chunks/OZONE_ozone-water-1_pages__error_2da965e7._.js",
+      "static/chunks/turbopack-OZONE_ozone-water-1_pages__error_f0d62ab6._.js"
+    ]
   },
   "devFiles": [],
-  "polyfillFiles": [],
+  "polyfillFiles": [
+    "static/chunks/6552f_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
   "lowPriorityFiles": [
     "static/development/_ssgManifest.js",
     "static/development/_buildManifest.js"
   ],
-  "rootMainFiles": []
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_526d0df6._.js",
+    "static/chunks/6552f_next_dist_compiled_react-dom_ebd7cae3._.js",
+    "static/chunks/6552f_next_dist_compiled_react-server-dom-turbopack_45af17ad._.js",
+    "static/chunks/6552f_next_dist_compiled_next-devtools_index_b61050d4.js",
+    "static/chunks/6552f_next_dist_compiled_8f326887._.js",
+    "static/chunks/6552f_next_dist_client_923359af._.js",
+    "static/chunks/6552f_next_dist_d338f08e._.js",
+    "static/chunks/6552f_@swc_helpers_cjs_ee8ac6e4._.js",
+    "static/chunks/OZONE_ozone-water-1_a0ff3932._.js",
+    "static/chunks/turbopack-OZONE_ozone-water-1_93acabfd._.js"
+  ]
 }

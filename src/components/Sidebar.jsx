@@ -163,6 +163,25 @@ export default function Sidebar() {
       path: "/CashFlow",
     },
     {
+      name: "PET Calculator",
+      icon: (
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 7h6m0 10v-3m-6 3v-3m-6-4h18V5H3v5zm0 8h18v-3H3v3zm0 6h18v-3H3v3z"
+          />
+        </svg>
+      ),
+      path: "/calculator",
+    },
+    {
       name: "Profit Dashboard",
       icon: (
         <svg
