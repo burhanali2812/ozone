@@ -508,10 +508,10 @@ export default function Receipt() {
                     )}
 
                     <div className="flex justify-between items-center pt-2 border-t border-gray-200">
-                      <span className="font-bold text-gray-900">
+                      <span className="font-bold text-red-600">
                         Current Order Total:
                       </span>
-                      <span className="text-lg font-bold text-blue-600">
+                      <span className="font-bold text-gray-900 ">
                         Rs. {grandTotal.toFixed(2)}/-
                       </span>
                     </div>
@@ -588,7 +588,7 @@ export default function Receipt() {
 
               <div className="flex justify-between text-sm mt-2 pt-2 border-t border-gray-200">
                 <span className="font-semibold text-gray-700">Total Payable:</span>
-                <span className="font-bold text-red-600">
+                <span className="text-lg font-bold text-blue-600">
                   Rs. {totalPayable.toFixed(2)}/-
                 </span>
               </div>
