@@ -7,6 +7,10 @@ export default function Receipt() {
   const router = useRouter();
   const [orderData, setOrderData] = useState(null);
   const [receiptType, setReceiptType] = useState("order-placed");
+  const [customerPartialData, setCustomerPartialData] = useState({
+    orders: [],
+    totalRemaining: 0,
+  });
   const [loading, setLoading] = useState(true);
   const receiptRef = useRef(null);
 
@@ -18,6 +22,53 @@ export default function Receipt() {
       if (storedOrder) {
         try {
           const parsedOrder = JSON.parse(storedOrder);
+
+          // Fetch this customer's previous partially paid orders and total due.
+          if (parsedOrder.shopContact) {
+            try {
+              const ordersResponse = await fetch("/api/orders");
+              const ordersData = await ordersResponse.json();
+
+              if (ordersData.success && Array.isArray(ordersData.data)) {
+                const customerPartialOrders = ordersData.data
+                  .filter((order) => {
+                    const isSameCustomer =
+                      order.shopContact === parsedOrder.shopContact;
+                    const isPartialOrder = order.paymentStatus === "partially-paid";
+                    const hasRemaining = Number(order.remainingAmount || 0) > 0;
+                    const isCurrentOrder =
+                      (parsedOrder._id && order._id === parsedOrder._id) ||
+                      (parsedOrder.trackingID &&
+                        order.trackingID === parsedOrder.trackingID);
+
+                    return (
+                      isSameCustomer &&
+                      isPartialOrder &&
+                      hasRemaining &&
+                      !isCurrentOrder
+                    );
+                  })
+                  .map((order) => ({
+                    _id: order._id,
+                    trackingID: order.trackingID,
+                    remainingAmount: Number(order.remainingAmount || 0),
+                    createdAt: order.createdAt,
+                  }));
+
+                const totalRemaining = customerPartialOrders.reduce(
+                  (sum, order) => sum + order.remainingAmount,
+                  0,
+                );
+
+                setCustomerPartialData({
+                  orders: customerPartialOrders,
+                  totalRemaining,
+                });
+              }
+            } catch (error) {
+              console.error("Error fetching customer partial dues:", error);
+            }
+          }
 
           // Fetch all products
           const productsResponse = await fetch("/api/product");
@@ -188,6 +239,22 @@ export default function Receipt() {
 
   const typeConfig = getTypeConfig(receiptType);
   const paymentBadge = getPaymentBadge(orderData.paymentStatus);
+  const previousPartialDueTotal = Number(customerPartialData.totalRemaining || 0);
+  const currentOrderTotal = orderData.orderItems.reduce((sum, item) => {
+    const discountedPrice = item.discountedPrice || item.price || 0;
+    return sum + discountedPrice * item.quantity;
+  }, 0);
+  const currentOrderPaidAmount = Number(orderData.paidAmount || 0);
+  const currentOrderRemainingAmount =
+    orderData.paymentStatus === "paid"
+      ? 0
+      : orderData.paymentStatus === "partially-paid"
+        ? Number(
+            orderData.remainingAmount ||
+              Math.max(currentOrderTotal - currentOrderPaidAmount, 0),
+          )
+        : currentOrderTotal;
+  const totalPayable = currentOrderRemainingAmount + previousPartialDueTotal;
 
   return (
     <section className="w-full min-h-screen bg-gray-50 py-4">
@@ -442,7 +509,7 @@ export default function Receipt() {
 
                     <div className="flex justify-between items-center pt-2 border-t border-gray-200">
                       <span className="font-bold text-gray-900">
-                        Grand Total (Payable):
+                        Current Order Total:
                       </span>
                       <span className="text-lg font-bold text-blue-600">
                         Rs. {grandTotal.toFixed(2)}/-
@@ -472,52 +539,59 @@ export default function Receipt() {
                 </span>
               </div>
 
-              {orderData.paymentStatus === "paid" && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Paid Amount:</span>
-                  <span className="font-semibold text-green-600">
-                    Rs. {orderData.paidAmount.toFixed(2)}/-
+              <div className="flex justify-between">
+                <span className="text-gray-500">Paid Amount:</span>
+                <span className="font-semibold text-green-600">
+                  Rs. {currentOrderPaidAmount.toFixed(2)}/-
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-gray-500">Remaining Amount:</span>
+                <span className="font-semibold text-red-600">
+                  Rs. {currentOrderRemainingAmount.toFixed(2)}/-
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-3 pt-3 border-t border-gray-200">
+              <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
+                Previous Amount Section
+              </h3>
+
+              {currentOrderRemainingAmount > 0 && (
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-gray-500">Current Order Remaining:</span>
+                  <span className="font-medium text-red-600">
+                    Rs. {currentOrderRemainingAmount.toFixed(2)}/-
                   </span>
                 </div>
               )}
 
-              {orderData.paymentStatus === "partially-paid" && (
-                <>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Paid:</span>
-                    <span className="font-semibold text-green-600">
-                      Rs. {orderData.paidAmount.toFixed(2)}/-
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Remaining:</span>
-                    <span className="font-semibold text-red-600">
-                      Rs. {orderData.remainingAmount.toFixed(2)}/-
-                    </span>
-                  </div>
-                </>
-              )}
-
-              {orderData.paymentStatus === "unpaid" && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Pending:</span>
-                  <span className="font-semibold text-red-600">
-                    Rs.{" "}
-                    {(() => {
-                      const grandTotal = orderData.orderItems.reduce(
-                        (sum, item) => {
-                          const discountedPrice =
-                            item.discountedPrice || item.price || 0;
-                          return sum + discountedPrice * item.quantity;
-                        },
-                        0,
-                      );
-                      return grandTotal.toFixed(2);
-                    })()}
-                    /-
-                  </span>
+              {customerPartialData.orders.length > 0 && (
+                <div className="space-y-1 mb-1">
+                  {customerPartialData.orders.map((dueOrder) => (
+                    <div
+                      key={dueOrder._id || dueOrder.trackingID}
+                      className="flex justify-between text-xs"
+                    >
+                      <span className="text-gray-500">
+                        {dueOrder.trackingID || "Previous Partial Order"}
+                      </span>
+                      <span className="font-medium text-red-600">
+                        Rs. {dueOrder.remainingAmount.toFixed(2)}/-
+                      </span>
+                    </div>
+                  ))}
                 </div>
               )}
+
+              <div className="flex justify-between text-sm mt-2 pt-2 border-t border-gray-200">
+                <span className="font-semibold text-gray-700">Total Payable:</span>
+                <span className="font-bold text-red-600">
+                  Rs. {totalPayable.toFixed(2)}/-
+                </span>
+              </div>
             </div>
           </div>
 
