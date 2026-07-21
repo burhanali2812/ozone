@@ -22,6 +22,7 @@ export default function Order() {
     quantity: "",
     discountedPrice: "",
   });
+  const [deliveryStatus, setDeliveryStatus] = useState("pending");
 
   const [paymentStatus, setPaymentStatus] = useState("unpaid");
   const [paidAmount, setPaidAmount] = useState(0);
@@ -202,7 +203,7 @@ export default function Order() {
       paymentStatus: finalPaymentStatus,
       paidAmount: finalPaidAmount,
       remainingAmount: finalRemainingAmount,
-      status: "pending",
+      status: deliveryStatus,
     };
 
     console.log("Order Submitted:", orderPayload);
@@ -219,7 +220,7 @@ export default function Order() {
       // Success Handling
       toast.success(res.data.message || "Order placed successfully!");
 
-      localStorage.setItem("receiptType", "order-placed");
+      localStorage.setItem("receiptType", deliveryStatus === "completed" ? "order-delivered" : "order-placed");
       localStorage.setItem("currentOrder", JSON.stringify(res.data.order));
 
       setFormData({
@@ -612,6 +613,34 @@ export default function Order() {
                         </p>
                       </div>
                     )}
+                  </div>
+                </div>
+              )}
+
+               {/* Delvery status Details Card - Only show if user is logged in */}
+              {user && (
+                <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 lg:p-8">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+                    Delivery Status
+                  </h2>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div>
+                      <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
+                        Delivery Status
+                      </label>
+                      <select
+                        value={deliveryStatus}
+                        onChange={(e) => {
+                          setDeliveryStatus(e.target.value);
+                        }}
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                      
+                      </select>
+                    </div>
+
                   </div>
                 </div>
               )}

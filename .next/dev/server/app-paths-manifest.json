@@ -3,5 +3,6 @@
   "/api/product/route": "app/api/product/route.js",
   "/order/page": "app/order/page.js",
   "/orderDashboard/page": "app/orderDashboard/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/receipt/page": "app/receipt/page.js"
 }

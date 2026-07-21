@@ -45,7 +45,7 @@ function Receipt() {
                                         const customerPartialOrders = ordersData.data.filter({
                                             "Receipt.useEffect.fetchOrderWithProducts.customerPartialOrders": (order)=>{
                                                 const isSameCustomer = order.shopContact === parsedOrder.shopContact;
-                                                const isPartialOrder = order.paymentStatus === "partially-paid";
+                                                const isPartialOrder = order.paymentStatus === "partially-paid" || order.paymentStatus === "unpaid";
                                                 const hasRemaining = Number(order.remainingAmount || 0) > 0;
                                                 const isCurrentOrder = parsedOrder._id && order._id === parsedOrder._id || parsedOrder.trackingID && order.trackingID === parsedOrder.trackingID;
                                                 return isSameCustomer && isPartialOrder && hasRemaining && !isCurrentOrder;
