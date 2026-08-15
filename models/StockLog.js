@@ -2,24 +2,15 @@ import mongoose from "mongoose";
 
 const StockLogSchema = new mongoose.Schema(
   {
-    productSize: {
-      type: String,
+     product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
       required: true,
-    },
-    producyType: {
-      type: String,
-      required: true,
-      enum: ["bottle", "pet"],
-    },
-    bottleQuality: {
-      type: String,
-      required: true,
-      enum: ["pure", "mix"],
     },
     actionType: {
       type: String,
       required: true,
-      enum: ["add", "reduce", "order_delivered"],
+      enum: ["add", "reduce",],
     },
     quantityChanged: {
       type: Number,

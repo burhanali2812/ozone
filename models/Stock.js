@@ -2,28 +2,20 @@ import mongoose from "mongoose";
 
 const StockSchema = new mongoose.Schema(
   {
-    productSize: {
-      type: String,
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
       required: true,
-    },
-    producyType: {
-      type: String,
-      required: true,
-      enum: ["bottle", "pet"],
-    },
-    bottleQuality: {
-      type: String,
-      required: true,
-      enum: ["pure", "mix"],
-      default: "pure",
+      unique: true, // one stock record per product
     },
     quantity: {
       type: Number,
       required: true,
       default: 0,
+      min: 0,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Stock = mongoose.models.Stock || mongoose.model("Stock", StockSchema);

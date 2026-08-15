@@ -6,17 +6,16 @@ export async function GET(request) {
     await connectionDb();
 
     const { searchParams } = new URL(request.url);
-    const productSize = searchParams.get("productSize");
-    const producyType = searchParams.get("producyType");
+    const productId = searchParams.get("productId");
     const limit = parseInt(searchParams.get("limit")) || 50;
 
     let query = {};
-    if (productSize) query.productSize = productSize;
-    if (producyType) query.producyType = producyType;
+    if (productId) query.product = productId;
 
     const logs = await StockLog.find(query)
       .sort({ createdAt: -1 })
       .limit(limit)
+      .populate("product", "size bottleQuality")
       .populate("orderId", "shopName");
 
     return new Response(JSON.stringify({ success: true, logs }), {

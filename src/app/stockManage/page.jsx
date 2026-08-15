@@ -1,28 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+// Products have no "name" field — build a readable label from size + quality.
+const getProductLabel = (product) => {
+  if (!product) return "—";
+  const parts = [product.size, product.bottleQuality].filter(Boolean);
+  return parts.length ? parts.join(" ") : "Unnamed Product";
+};
+
 function StockManage() {
   const [stocks, setStocks] = useState([]);
-  const [filteredStocks, setFilteredStocks] = useState([]);
-  const [selectedSize, setSelectedSize] = useState("all");
+  const [products, setProducts] = useState([]);
+  const [logs, setLogs] = useState([]);
+  const [logsLoading, setLogsLoading] = useState(true);
+  const [selectedProductId, setSelectedProductId] = useState("all");
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
-    productSize: "500ml",
-    producyType: "pet",
-    bottleQuality: "pure",
-    quantity: "",
-  });
-
-  // Bottle quantities mapping
-  const bottleQuantities = {
-    "500ml": 12,
-    "1500ml": 6,
-    "6liter": 1,
-  };
+  const [formData, setFormData] = useState({ productId: "", quantity: "" });
   const router = useRouter();
+
   useEffect(() => {
     const user = localStorage.getItem("user2");
     if (!user) {
@@ -30,69 +28,96 @@ function StockManage() {
       return;
     }
     fetchStocks();
+    fetchProducts();
+    fetchLogs();
   }, []);
-
-  useEffect(() => {
-    if (selectedSize === "all") {
-      setFilteredStocks(stocks);
-    } else {
-      setFilteredStocks(
-        stocks.filter((stock) => stock.productSize === selectedSize),
-      );
-    }
-  }, [selectedSize, stocks]);
 
   const fetchStocks = async () => {
     try {
       const response = await axios.get("/api/stock");
       setStocks(response.data.stocks);
-      setFilteredStocks(response.data.stocks);
     } catch (error) {
       console.error("Error fetching stocks:", error);
       toast.error("Failed to fetch stocks");
     }
   };
 
-  const getStockBySize = (size) => {
-    return stocks
-      .filter((stock) => stock.productSize === size)
-      .reduce((total, stock) => total + stock.quantity, 0);
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("/api/product");
+      const data = await response.json();
+      if (data.success && data.products) {
+        setProducts(data.products);
+      } else {
+        toast.error("Failed to fetch products");
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      toast.error("Failed to fetch products");
+    }
   };
 
-  const getStockByQuality = (size, quality) => {
-    return stocks
-      .filter(
-        (stock) =>
-          stock.productSize === size && stock.bottleQuality === quality,
-      )
-      .reduce((total, stock) => total + stock.quantity, 0);
+  const fetchLogs = async () => {
+    setLogsLoading(true);
+    try {
+      const response = await axios.get("/api/stock/logs", {
+        params: { limit: 200 },
+      });
+      setLogs(response.data.logs || []);
+    } catch (error) {
+      console.error("Error fetching stock logs:", error);
+      toast.error("Failed to fetch stock logs");
+    } finally {
+      setLogsLoading(false);
+    }
   };
 
-  const getTotalBottles = (size, quantity) => {
-    return quantity * bottleQuantities[size];
+  const getStockQty = (productId) => {
+    const s = stocks.find((s) => s.product?._id === productId);
+    return s ? s.quantity : 0;
+  };
+
+  const selectedProduct = useMemo(
+    () => products.find((p) => p._id === selectedProductId),
+    [products, selectedProductId]
+  );
+
+  const filteredLogs = useMemo(() => {
+    if (selectedProductId === "all") return logs;
+    return logs.filter((log) => {
+      const logProductId =
+        typeof log.product === "object" ? log.product?._id : log.product;
+      return logProductId === selectedProductId;
+    });
+  }, [logs, selectedProductId]);
+  console.log("Filtered Logs:", filteredLogs);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.productId || !formData.quantity) {
+      toast.error("Select a product and enter quantity");
+      return;
+    }
     try {
-      await axios.post("/api/stock", formData);
+      const user = JSON.parse(localStorage.getItem("user2") || "{}");
+      await axios.post("/api/stock", {
+        productId: formData.productId,
+        quantity: Number(formData.quantity),
+        performedBy: user?.name || "Worker",
+      });
       toast.success("Stock added successfully");
       setShowModal(false);
-      setFormData({
-        productSize: "500ml",
-        producyType: "pet",
-        bottleQuality: "pure",
-        quantity: "",
-      });
+      setFormData({ productId: "", quantity: "" });
       fetchStocks();
+      fetchLogs();
     } catch (error) {
       console.error("Error adding stock:", error);
-      toast.error("Failed to add stock");
+      toast.error(error.response?.data?.message || "Failed to add stock");
     }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -100,285 +125,299 @@ function StockManage() {
       <Toaster />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start items-center sm:items-center gap-4 mb-6 sm:mb-8 pt-3 sm:pt-0">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 sm:mb-8 pt-3 sm:pt-0">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
             Stock Management
           </h1>
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <button
-              onClick={() => router.push("/stock_logs")}
-              className="w-full sm:w-auto bg-green-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-green-700 transition-colors font-medium shadow-lg text-sm sm:text-base flex items-center justify-center gap-2"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              View Stock Logs
-            </button>
-            <button
-              onClick={() => setShowModal(true)}
-              className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg text-sm sm:text-base"
-            >
-              + Add Stock
-            </button>
-          </div>
+          <button
+            onClick={() => setShowModal(true)}
+            className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg text-sm sm:text-base"
+          >
+            + Add Stock
+          </button>
         </div>
 
-        {/* Stock Cards */}
+        {/* Product Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          {["500ml", "1500ml", "6liter"].map((size) => {
-            const totalQuantity = getStockBySize(size);
-            const totalBottles = getTotalBottles(size, totalQuantity);
-            const pureQuantity = getStockByQuality(size, "pure");
-            const mixQuantity = getStockByQuality(size, "mix");
+          {/* "All" card */}
+          <div
+            onClick={() => setSelectedProductId("all")}
+            className={`bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 cursor-pointer transition-all transform hover:scale-105 flex flex-col justify-center items-center ${
+              selectedProductId === "all" ? "ring-4 ring-blue-500" : ""
+            }`}
+          >
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2">
+              All Products
+            </h3>
+            <span className="text-xs sm:text-sm text-gray-600">
+              Show combined stock logs
+            </span>
+          </div>
 
+          {products.map((product) => {
+            const qty = getStockQty(product._id);
+            const isSelected = selectedProductId === product._id;
             return (
               <div
-                key={size}
-                onClick={() => setSelectedSize(size)}
+                key={product._id}
+                onClick={() => setSelectedProductId(product._id)}
                 className={`bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 cursor-pointer transition-all transform hover:scale-105 ${
-                  selectedSize === size ? "ring-4 ring-blue-500" : ""
+                  isSelected ? "ring-4 ring-blue-500" : ""
                 }`}
               >
                 <div className="flex justify-between items-start mb-3 sm:mb-4">
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
-                    {size === "500ml" && "500ml Bottle"}
-                    {size === "1500ml" && "1500ml Bottle"}
-                    {size === "6liter" && "6 Liter Bottle"}
-                  </h3>
-                  <span className="bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
-                    {size}
-                  </span>
-                </div>
-                <div className="space-y-2 sm:space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs sm:text-sm text-gray-600">
-                      Total PETs:
-                    </span>
-                    <span className="text-xl sm:text-2xl font-bold text-blue-600">
-                      {totalQuantity}
-                    </span>
+                  <div>
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">
+                      {getProductLabel(product)}
+                    </h3>
+                    {product.packingType && (
+                      <span className="text-xs text-gray-500">
+                        {product.packingType}
+                      </span>
+                    )}
                   </div>
-
-                  {/* Show PETs by quality for 500ml and 1500ml */}
-                  {(size === "500ml" || size === "1500ml") && (
-                    <div className="bg-gray-50 rounded-lg p-2 sm:p-3 space-y-1.5">
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-600">
-                          <b>Pure PETs:</b>
-                        </span>
-                        <span className="text-sm sm:text-base font-semibold text-green-600">
-                          {pureQuantity}
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-600"><b>Mix PETs:</b></span>
-                        <span className="text-sm sm:text-base font-semibold text-orange-600">
-                          {mixQuantity}
-                        </span>
-                      </div>
-                    </div>
+                  {qty <= 5 && (
+                    <span className="bg-red-100 text-red-800 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">
+                      Low
+                    </span>
                   )}
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs sm:text-sm text-gray-600">
-                      Bottles per Pet:
-                    </span>
-                    <span className="text-base sm:text-lg font-semibold text-gray-800">
-                      {bottleQuantities[size]}
-                    </span>
-                  </div>
-                  <div className="border-t pt-2 sm:pt-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs sm:text-sm text-gray-600">
-                        Total Bottles:
-                      </span>
-                      <span className="text-xl sm:text-2xl font-bold text-green-600">
-                        {totalBottles}
-                      </span>
-                    </div>
-                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs sm:text-sm text-gray-600">
+                    Available Stock:
+                  </span>
+                  <span
+                    className={`text-2xl sm:text-3xl font-bold ${
+                      qty <= 5 ? "text-red-600" : "text-blue-600"
+                    }`}
+                  >
+                    {qty}
+                  </span>
                 </div>
               </div>
             );
           })}
-        </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-          <button
-            onClick={() => setSelectedSize("all")}
-            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base ${
-              selectedSize === "all"
-                ? "bg-blue-600 text-white"
-                : "bg-white text-gray-700 hover:bg-gray-100"
-            }`}
-          >
-            All Stocks
-          </button>
-          {["500ml", "1500ml", "6liter"].map((size) => (
-            <button
-              key={size}
-              onClick={() => setSelectedSize(size)}
-              className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base ${
-                selectedSize === size
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              {size}
-            </button>
-          ))}
+          {products.length === 0 && (
+            <div className="col-span-full text-center py-8 text-gray-500 bg-white rounded-xl shadow-xl">
+              No products found
+            </div>
+          )}
         </div>
 
         {/* Stock Logs Table */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
           <div className="p-4 sm:p-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-              Stock Logs
-            </h2>
-            {/* Mobile Card View */}
-            <div className="block lg:hidden space-y-3">
-              {filteredStocks.length > 0 ? (
-                filteredStocks.map((stock) => (
-                  <div
-                    key={stock._id}
-                    className="bg-gray-50 rounded-lg p-4 space-y-2"
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
-                        {stock.productSize}
-                      </span>
-                      <span className="text-xs text-gray-600">
-                        {new Date(stock.createdAt).toLocaleString("en-US", {
-                          dateStyle: "short",
-                          timeStyle: "short",
-                        })}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-gray-600">Type:</span>
-                        <span className="ml-2 font-medium capitalize">
-                          {stock.producyType}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Quality:</span>
-                        <span
-                          className={`ml-2 font-medium capitalize ${stock.bottleQuality === "pure" ? "text-green-600" : "text-orange-600"}`}
-                        >
-                          {stock.bottleQuality}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Quantity:</span>
-                        <span className="ml-2 font-semibold">
-                          {stock.quantity}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Bottles:</span>
-                        <span className="ml-2 font-semibold text-green-600">
-                          {stock.quantity * bottleQuantities[stock.productSize]}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="text-center py-8 text-gray-500">
-                  No stock records found
-                </div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                Stock Logs
+                {selectedProductId !== "all" && selectedProduct && (
+                  <span className="text-blue-600"> — {getProductLabel(selectedProduct)}</span>
+                )}
+              </h2>
+              {selectedProductId !== "all" && (
+                <button
+                  onClick={() => setSelectedProductId("all")}
+                  className="text-sm text-blue-600 hover:text-blue-800 font-medium self-start sm:self-auto"
+                >
+                  Clear filter
+                </button>
               )}
             </div>
-            {/* Desktop Table View */}
-            <div className="hidden lg:block overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-gray-50 border-b-2 border-gray-200">
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Date & Time
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Product Size
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Quality
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Quantity
-                    </th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                      Bottles
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredStocks.length > 0 ? (
-                    filteredStocks.map((stock) => (
-                      <tr
-                        key={stock._id}
-                        className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+
+            {logsLoading ? (
+              <div className="text-center py-8 text-gray-500">Loading logs...</div>
+            ) : (
+              <>
+                {/* Mobile Card View */}
+                <div className="block lg:hidden space-y-3">
+                  {filteredLogs.length > 0 ? (
+                    filteredLogs.map((log) => (
+                      <div
+                        key={log._id}
+                        className="bg-gray-50 rounded-lg p-4 space-y-2"
                       >
-                        <td className="px-6 py-4 text-sm text-gray-700">
-                          {new Date(stock.createdAt).toLocaleString("en-US", {
-                            dateStyle: "short",
-                            timeStyle: "short",
-                          })}
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                            {stock.productSize}
+                        <div className="flex justify-between items-start mb-2">
+                          <span className="text-sm font-semibold text-gray-900">
+                            {getProductLabel(log.product)}
                           </span>
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900 capitalize">
-                          {stock.producyType}
-                        </td>
-                        <td className="px-6 py-4">
+                          <span className="text-xs text-gray-600">
+                            {new Date(log.createdAt).toLocaleString("en-US", {
+                              dateStyle: "short",
+                              timeStyle: "short",
+                            })}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div>
+                            <span className="text-gray-600">Action:</span>
+                            <span
+                              className={`ml-2 font-medium capitalize ${
+                                log.actionType === "add"
+                                  ? "text-green-600"
+                                  : "text-orange-600"
+                              }`}
+                            >
+                              {log.actionType}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Changed:</span>
+                            <span className="ml-2 font-semibold">
+                              {log.actionType === "add" ? "+" : "-"}
+                              {log.quantityChanged}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">Previous:</span>
+                            <span className="ml-2 font-semibold">
+                              {log.previousQuantity}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="text-gray-600">New:</span>
+                            <span className="ml-2 font-semibold text-blue-600">
+                              {log.newQuantity}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between pt-1 border-t text-xs">
+                          <span className="text-gray-600 truncate">
+                            {log.reason || "-"}
+                            {log.orderId?.shopName && (
+                              <span> · {log.orderId.shopName}</span>
+                            )}
+                          </span>
                           <span
-                            className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
-                              stock.bottleQuality === "pure"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-orange-100 text-orange-800"
+                            className={`ml-2 shrink-0 px-2 py-0.5 rounded-full font-medium ${
+                              !log.performedBy || log.performedBy === "System"
+                                ? "bg-gray-100 text-gray-600"
+                                : "bg-blue-100 text-blue-700"
                             }`}
                           >
-                            {stock.bottleQuality}
+                            {log.performedBy || "System"}
                           </span>
-                        </td>
-                        <td className="px-6 py-4 text-sm font-semibold text-gray-900">
-                          {stock.quantity}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-semibold text-green-600">
-                          {stock.quantity * bottleQuantities[stock.productSize]}
-                        </td>
-                      </tr>
+                        </div>
+                      </div>
                     ))
                   ) : (
-                    <tr>
-                      <td
-                        colSpan="6"
-                        className="px-6 py-8 text-center text-gray-500"
-                      >
-                        No stock records found
-                      </td>
-                    </tr>
+                    <div className="text-center py-8 text-gray-500">
+                      No stock logs found
+                    </div>
                   )}
-                </tbody>
-              </table>
-            </div>
+                </div>
+
+                {/* Desktop Table View */}
+                <div className="hidden lg:block overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="bg-gray-50 border-b-2 border-gray-200">
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          Date & Time
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          Product
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          Action
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          Changed
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          Previous
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          New
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          Reason
+                        </th>
+                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                          By
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredLogs.length > 0 ? (
+                        filteredLogs.map((log) => (
+                          <tr
+                            key={log._id}
+                            className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                          >
+                            <td className="px-6 py-4 text-sm text-gray-700">
+                              {new Date(log.createdAt).toLocaleString("en-US", {
+                                dateStyle: "short",
+                                timeStyle: "short",
+                              })}
+                            </td>
+                            <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                              {getProductLabel(log.product)}
+                            </td>
+                            <td className="px-6 py-4">
+                              <span
+                                className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
+                                  log.actionType === "add"
+                                    ? "bg-green-100 text-green-800"
+                                    : "bg-orange-100 text-orange-800"
+                                }`}
+                              >
+                                {log.actionType}
+                              </span>
+                            </td>
+                            <td
+                              className={`px-6 py-4 text-sm font-semibold ${
+                                log.actionType === "add"
+                                  ? "text-green-600"
+                                  : "text-orange-600"
+                              }`}
+                            >
+                              {log.actionType === "add" ? "+" : "-"}
+                              {log.quantityChanged}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-700">
+                              {log.previousQuantity}
+                            </td>
+                            <td className="px-6 py-4 text-sm font-semibold text-blue-600">
+                              {log.newQuantity}
+                            </td>
+                            <td className="px-6 py-4 text-sm text-gray-700">
+                              {log.reason || "-"}
+                              {log.orderId?.shopName && (
+                                <span className="text-gray-500">
+                                  {" "}
+                                  ({log.orderId.shopName})
+                                </span>
+                              )}
+                            </td>
+                            <td className="px-6 py-4 text-sm">
+                              <span
+                                className={`px-3 py-1 rounded-full text-xs font-medium ${
+                                  !log.performedBy || log.performedBy === "System"
+                                    ? "bg-gray-100 text-gray-600"
+                                    : "bg-blue-100 text-blue-700"
+                                }`}
+                              >
+                                {log.performedBy || "System"}
+                              </span>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td
+                            colSpan="8"
+                            className="px-6 py-8 text-center text-gray-500"
+                          >
+                            No stock logs found
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -386,68 +425,41 @@ function StockManage() {
       {/* Add Stock Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8">
+            <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-                Add New Stock
+                Add Stock
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl sm:text-3xl leading-none"
+                className="text-gray-500 hover:text-gray-700 text-2xl leading-none"
               >
                 ×
               </button>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
-                  Product Size *
+                <label className="block text-gray-700 font-medium mb-1.5 text-sm sm:text-base">
+                  Product *
                 </label>
                 <select
-                  name="productSize"
-                  value={formData.productSize}
+                  name="productId"
+                  value={formData.productId}
                   onChange={handleChange}
                   required
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
                 >
-                  <option value="500ml">500ml Bottle</option>
-                  <option value="1500ml">1500ml Bottle</option>
-                  <option value="6liter">6 Liter Bottle</option>
+                  <option value="">Select a product</option>
+                  {products.map((p) => (
+                    <option key={p._id} value={p._id}>
+                      {getProductLabel(p)}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>
-                <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
-                  Type *
-                </label>
-                <select
-                  name="producyType"
-                  value={formData.producyType}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
-                >
-                  <option value="pet">Pet</option>
-                  <option value="bottle">Bottle</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
-                  Bottle Quality *
-                </label>
-                <select
-                  name="bottleQuality"
-                  value={formData.bottleQuality}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
-                >
-                  <option value="pure">Pure</option>
-                  <option value="mix">Mix</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1.5 sm:mb-2 text-sm sm:text-base">
-                  Quantity (Pets) *
+                <label className="block text-gray-700 font-medium mb-1.5 text-sm sm:text-base">
+                  Quantity *
                 </label>
                 <input
                   type="number"
@@ -459,27 +471,18 @@ function StockManage() {
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none text-sm sm:text-base"
                   placeholder="Enter quantity"
                 />
-                {formData.quantity && (
-                  <p className="text-xs sm:text-sm text-gray-600 mt-1.5 sm:mt-2">
-                    Total Bottles:{" "}
-                    <span className="font-semibold text-green-600">
-                      {formData.quantity *
-                        bottleQuantities[formData.productSize]}
-                    </span>
-                  </p>
-                )}
               </div>
-              <div className="flex gap-2 sm:gap-3 pt-2 sm:pt-4">
+              <div className="flex gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 bg-gray-200 text-gray-700 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium text-sm sm:text-base"
+                  className="flex-1 bg-gray-200 text-gray-700 px-4 py-2.5 sm:py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium text-sm sm:text-base"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm sm:text-base"
+                  className="flex-1 bg-blue-600 text-white px-4 py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm sm:text-base"
                 >
                   Add Stock
                 </button>

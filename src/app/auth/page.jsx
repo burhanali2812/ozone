@@ -33,10 +33,15 @@ export default function Auth() {
        
           localStorage.setItem("user2", JSON.stringify(response.data.user));
           console.log("User data:", response.data.user);
+          if(response.data.user.role === "worker") {
+            setTimeout(() => {
+              router.push("/stockManage");
+            }, 1500);
+          } else if(response.data.user.role === "admin") {
           setTimeout(() => {
             router.push("/orderDashboard");
           }, 1500);
-        
+          }
       }
     } catch (error) {
       console.error("Login error:", error);
