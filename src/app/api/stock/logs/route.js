@@ -1,5 +1,7 @@
 import connectionDb from "../../../../../lib/db";
 import StockLog from "../../../../../models/StockLog";
+import Product from "../../../../../models/Product";
+import Order from "../../../../../models/Order";
 
 export async function GET(request) {
   try {
@@ -15,7 +17,7 @@ export async function GET(request) {
     const logs = await StockLog.find(query)
       .sort({ createdAt: -1 })
       .limit(limit)
-      .populate("product", "size bottleQuality")
+      .populate("product", "size bottleQuality packingType")
       .populate("orderId", "shopName");
 
     return new Response(JSON.stringify({ success: true, logs }), {
