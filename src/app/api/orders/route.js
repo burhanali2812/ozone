@@ -10,6 +10,23 @@ const generateTrackingID = () => {
   return `${prefix}-${id}`;
 };
 
+// Ensure orderItems.product is always a plain ObjectId string, even if the
+// client sends back a populated product object (e.g. re-submitting a fetched order).
+const normalizeOrderItems = (items) => {
+  if (!Array.isArray(items)) return items;
+  return items.map((item) => {
+    const rawProduct = item?.product;
+    const productId =
+      rawProduct && typeof rawProduct === "object"
+        ? rawProduct._id || rawProduct.id
+        : rawProduct;
+    return {
+      ...item,
+      product: productId,
+    };
+  });
+};
+
 export async function POST(request) {
   try {
     await connectDB();
@@ -40,7 +57,9 @@ export async function POST(request) {
       );
     }
 
-    for (let item of orderItems) {
+    const normalizedItems = normalizeOrderItems(orderItems);
+
+    for (let item of normalizedItems) {
       if (!item.product || !item.price || !item.quantity || item.discountedPrice === undefined) {
         return NextResponse.json(
           { success: false, message: "Each order item must include product, price, quantity, and discountedPrice" },
@@ -60,7 +79,7 @@ export async function POST(request) {
       shopName,
       shopAddress,
       shopContact,
-      orderItems,
+      orderItems: normalizedItems,
       totalPrice,
       paidAmount,
       paymentStatus,
@@ -77,7 +96,7 @@ export async function POST(request) {
     try {
       await adjustStockForOrder({
         oldItems: [],
-        newItems: orderItems,
+        newItems: normalizedItems,
         orderId: newOrder._id,
         reason: `Order ${newOrder.trackingID} placed`,
       });
@@ -174,6 +193,8 @@ export async function PUT(request) {
     }
 
     let finalUpdate = {};
+    // existingOrder.orderItems comes straight from the DB (unpopulated),
+    // so its .product fields are already plain ObjectIds.
     let oldItems = existingOrder.orderItems;
     let newItems = existingOrder.orderItems;
     let stockReason = `Order ${existingOrder.trackingID} updated`;
@@ -192,7 +213,10 @@ export async function PUT(request) {
     } else if (action === "update") {
       finalUpdate = updateData;
       if (Array.isArray(updateData?.orderItems)) {
-        newItems = updateData.orderItems;
+        // updateData may come from the client re-submitting a populated order,
+        // where .product is a full object instead of an ObjectId string.
+        newItems = normalizeOrderItems(updateData.orderItems);
+        finalUpdate.orderItems = newItems;
       }
     }
 
