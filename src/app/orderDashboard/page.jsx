@@ -350,6 +350,35 @@ Requested: ${stockError.response.data.requested}`,
     }
   };
 
+  const paymentSummary = filteredOrders.reduce(
+  (acc, order) => {
+    if (order.paymentStatus === "paid") {
+      acc.paidCount += 1;
+      acc.paidAmount += order.totalPrice || 0;
+    } else if (order.paymentStatus === "partially-paid") {
+      acc.partialCount += 1;
+      acc.partialPaidAmount += order.paidAmount || 0;
+      acc.partialRemainingAmount += order.remainingAmount || 0;
+    } else if (order.paymentStatus === "unpaid") {
+      acc.unpaidCount += 1;
+      acc.unpaidAmount += order.totalPrice || 0;
+    }
+    return acc;
+  },
+  {
+    paidCount: 0,
+    paidAmount: 0,
+    partialCount: 0,
+    partialPaidAmount: 0,
+    partialRemainingAmount: 0,
+    unpaidCount: 0,
+    unpaidAmount: 0,
+  }
+);
+
+const totalToReceive =
+  paymentSummary.partialRemainingAmount + paymentSummary.unpaidAmount;
+
   // Delete order
   const handleDeleteOrder = async () => {
     try {
@@ -816,6 +845,70 @@ Requested: ${stockError.response.data.requested}`,
             )}
           </button>
         </div>
+        {/* Payment Summary Cards */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+  {/* Paid */}
+  <div className="bg-white rounded-2xl shadow-lg p-5 border-l-4 border-green-500">
+    <div className="flex items-center justify-between mb-2">
+      <p className="text-sm font-medium text-gray-600">Paid</p>
+      <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
+        {paymentSummary.paidCount} order
+        {paymentSummary.paidCount !== 1 ? "s" : ""}
+      </span>
+    </div>
+    <p className="text-2xl font-bold text-green-600">
+      Rs. {paymentSummary.paidAmount.toFixed(2)}/-
+    </p>
+  </div>
+
+  {/* Partially Paid */}
+  <div className="bg-white rounded-2xl shadow-lg p-5 border-l-4 border-yellow-500">
+    <div className="flex items-center justify-between mb-2">
+      <p className="text-sm font-medium text-gray-600">Partially Paid</p>
+      <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-full">
+        {paymentSummary.partialCount} order
+        {paymentSummary.partialCount !== 1 ? "s" : ""}
+      </span>
+    </div>
+    <p className="text-lg font-bold text-yellow-600">
+      Paid: Rs. {paymentSummary.partialPaidAmount.toFixed(2)}/-
+    </p>
+    <p className="text-sm text-gray-500 mt-1">
+      Remaining: Rs. {paymentSummary.partialRemainingAmount.toFixed(2)}/-
+    </p>
+  </div>
+
+  {/* Unpaid */}
+  <div className="bg-white rounded-2xl shadow-lg p-5 border-l-4 border-red-500">
+    <div className="flex items-center justify-between mb-2">
+      <p className="text-sm font-medium text-gray-600">Unpaid</p>
+      <span className="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-semibold rounded-full">
+        {paymentSummary.unpaidCount} order
+        {paymentSummary.unpaidCount !== 1 ? "s" : ""}
+      </span>
+    </div>
+    <p className="text-2xl font-bold text-red-600">
+      Rs. {paymentSummary.unpaidAmount.toFixed(2)}/-
+    </p>
+  </div>
+
+  {/* Total To Receive */}
+  <div className="bg-white rounded-2xl shadow-lg p-5 border-l-4 border-blue-500">
+    <div className="flex items-center justify-between mb-2">
+      <p className="text-sm font-medium text-gray-600">Total To Receive</p>
+      <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
+        {paymentSummary.partialCount + paymentSummary.unpaidCount} order
+        {paymentSummary.partialCount + paymentSummary.unpaidCount !== 1
+          ? "s"
+          : ""}
+      </span>
+    </div>
+    <p className="text-2xl font-bold text-blue-600">
+      Rs. {totalToReceive.toFixed(2)}/-
+    </p>
+    <p className="text-xs text-gray-500 mt-1">Partial remaining + Unpaid</p>
+  </div>
+</div>
 
         {/* Orders Table */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -1252,7 +1345,7 @@ Requested: ${stockError.response.data.requested}`,
                 modalData.paymentStatus === "paid" && (
                   <div className="mb-6 p-4 bg-green-50 rounded-xl border-2 border-green-200">
                     <h3 className="font-semibold text-gray-900 mb-4 text-lg">
-                      📊 Production Cost & Profit Analysis
+                       Production Cost & Profit Analysis
                     </h3>
 
                     {/* Production Costs per Item */}

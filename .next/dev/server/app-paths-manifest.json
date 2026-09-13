@@ -1,7 +1,1 @@
-{
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/product/route": "app/api/product/route.js",
-  "/api/stock/logs/route": "app/api/stock/logs/route.js",
-  "/api/stock/route": "app/api/stock/route.js",
-  "/stockManage/page": "app/stockManage/page.js"
-}
+{}
