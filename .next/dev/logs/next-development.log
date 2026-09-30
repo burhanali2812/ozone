@@ -1,1 +1,56 @@
-[00:00:11.412] Server  LOG      ✓ Ready in 7.5s
+[00:00:12.580] Server  LOG      ✓ Ready in 8s
+[00:03:55.404] Server  LOG      ○ Compiling / ...
+[00:04:18.023] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:18.267] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:18.267] Browser WARN    Image with src "/images/hero3.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:04:27.554] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:27.556] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:49.873] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:49.942] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:49.943] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:50.062] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:50.062] Browser WARN    Image with src "/images/hero3.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:04:51.246] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:51.324] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:51.325] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:51.427] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:51.427] Browser WARN    Image with src "/images/hero3.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:04:52.310] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:52.373] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:52.374] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:52.476] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:52.476] Browser WARN    Image with src "/images/hero3.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:04:53.766] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:53.826] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:53.827] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:04:53.926] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:04:53.926] Browser WARN    Image with src "/images/hero3.jpeg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:05:19.982] Server  LOG      ✓ Compiled in 191ms
+[00:05:20.670] Browser WARN    Image with src "/images/hero3.jpeg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:05:31.065] Server  LOG      ✓ Compiled in 22ms
+[00:05:38.097] Server  LOG      ✓ Compiled in 31ms
+[00:05:47.661] Server  LOG      ✓ Compiled in 43ms
+[00:05:59.297] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:59.377] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:05:59.379] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:05:59.477] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:05:59.477] Browser WARN    Image with src "/images/hero3.jpeg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:06:09.676] Server  LOG      ✓ Compiled in 2.1s
+[00:06:10.224] Server  LOG      ✓ Compiled in 28ms
+[00:06:13.597] Server  LOG      ✓ Compiled in 112ms
+[00:06:13.946] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:14.741] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:06:14.742] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:06:15.658] Server  LOG      ✓ Compiled in 31ms
+[00:06:18.322] Server  LOG      ✓ Compiled in 24ms
+[00:06:21.354] Server  LOG      ✓ Compiled in 63ms
+[00:06:21.367] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:06:21.368] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:06:22.025] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:06:22.025] Browser WARN    Image with src "/images/hero3.jpeg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:06:25.206] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:25.466] Server  ERROR   MongoDB connection failed: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:06:25.467] Server  ERROR   Error fetching products: Error: querySrv EREFUSED _mongodb._tcp.lostandfound.4dhsxwm.mongodb.net
+[00:06:25.586] Browser WARN    Image with src "/images/logo2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:06:25.586] Browser WARN    Image with src "/images/hero3.jpeg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:06:36.964] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
