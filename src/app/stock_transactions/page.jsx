@@ -104,10 +104,10 @@ export default function StockTransactionPage() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [ordersRes, transactionsRes] = await Promise.all([
-        axios.get("/api/orders"),
-        axios.get("/api/transaction"),
-      ]);
+    const [ordersRes, transactionsRes] = await Promise.all([
+  axios.get("/api/orders", { params: { action: "top20" } }),
+  axios.get("/api/transaction"),
+]);
 
       if (ordersRes.data.success) {
         // Filter only paid and partially paid orders
