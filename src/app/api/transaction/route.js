@@ -42,7 +42,7 @@ export async function POST(request) {
 export async function GET(request) {
   try {
     await connectDB();
-    const transactions = await Transaction.find().sort({ createdAt: -1 }).limit(20);
+    const transactions = await Transaction.find().sort({ createdAt: -1 });
     return NextResponse.json(
       {
         success: true,
